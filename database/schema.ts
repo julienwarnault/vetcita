@@ -6,6 +6,7 @@
 
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
+import type { UUID } from '#shared/types'
 
 export class UserSchema extends BaseModel {
   static $columns = ['createdAt', 'email', 'fullName', 'id', 'password', 'updatedAt'] as const
@@ -17,7 +18,7 @@ export class UserSchema extends BaseModel {
   @column()
   declare fullName: string | null
   @column({ isPrimary: true })
-  declare id: number
+  declare id: UUID
   @column({ serializeAs: null })
   declare password: string
   @column.dateTime({ autoCreate: true, autoUpdate: true })
