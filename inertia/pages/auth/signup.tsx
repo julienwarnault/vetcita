@@ -2,7 +2,7 @@ import { Form } from '@adonisjs/inertia/react'
 
 export default function Signup() {
   return (
-    <div className="form-container">
+    <div>
       <div>
         <h1> Signup </h1>
         <p>Enter your details below to create your account</p>
@@ -60,9 +60,7 @@ export default function Signup() {
               </div>
 
               <div>
-                <button type="submit" className="button">
-                  Sign up
-                </button>
+                <button type="submit">Sign up</button>
               </div>
             </>
           )}
