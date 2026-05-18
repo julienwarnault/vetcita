@@ -1,8 +1,9 @@
 import { Toaster } from 'sonner'
 import { ReactElement } from 'react'
-import { Data } from '@generated/data'
 import { usePage } from '@inertiajs/react'
-import { Form, Link } from '@adonisjs/inertia/react'
+import type { Data } from '@generated/data'
+import { AppSidebar } from '~/components/app_sidebar'
+import { AppHeader } from '~/components/app_header'
 import { useFlashToasts } from '~/hooks/use_flash'
 
 export default function Layout({ children }: { children: ReactElement }) {
@@ -12,25 +13,13 @@ export default function Layout({ children }: { children: ReactElement }) {
 
   return (
     <>
-      <header>
-        <nav>
-          {user ? (
-            <>
-              <span>
-                {user.initials} - {user.tenant?.name}
-              </span>
-              <Form route="logout.execute">
-                <button type="submit">Logout</button>
-              </Form>
-            </>
-          ) : (
-            <>
-              <Link route="login.render">Login</Link>
-            </>
-          )}
-        </nav>
-      </header>
-      <main>{children}</main>
+      <div className="flex h-dvh flex-col overflow-hidden">
+        <AppHeader fullName={user?.fullName ?? ''} />
+        <div className="flex flex-1 overflow-hidden">
+          <AppSidebar />
+          <main className="flex flex-1 flex-col overflow-hidden bg-white">{children}</main>
+        </div>
+      </div>
       <Toaster position="top-center" richColors />
     </>
   )

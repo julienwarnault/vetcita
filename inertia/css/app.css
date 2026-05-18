@@ -1,1 +1,30 @@
 @import 'tailwindcss';
+
+@theme inline {
+  --color-background: #f9f9f9;
+  --color-surface: #ffffff;
+  --color-border: #e6e6e6;
+  --color-foreground: #222222;
+  --color-muted: #81817e;
+  --color-primary: #0d0d0d;
+  --color-primary-faded: #1a1a1a;
+  --color-accent: #52c65a;
+  --color-accent-faded: #38af41;
+  --color-destructive: #ea4a5a;
+}
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background antialiased text-foreground;
+  }
+
+  button {
+    cursor: pointer;
+  }
+}

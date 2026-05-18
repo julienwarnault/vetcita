@@ -6,6 +6,18 @@ import type { ApiDefinition } from './tree.d.ts'
 const placeholder: any = {}
 
 const routes = {
+  'dashboard': {
+    methods: ["GET","HEAD"],
+    pattern: '/dashboard',
+    tokens: [{"old":"/dashboard","type":0,"val":"dashboard","end":""}],
+    types: placeholder as Registry['dashboard']['types'],
+  },
+  'calendar': {
+    methods: ["GET","HEAD"],
+    pattern: '/calendar',
+    tokens: [{"old":"/calendar","type":0,"val":"calendar","end":""}],
+    types: placeholder as Registry['calendar']['types'],
+  },
   'login.render': {
     methods: ["GET","HEAD"],
     pattern: '/login',
@@ -23,12 +35,6 @@ const routes = {
     pattern: '/logout',
     tokens: [{"old":"/logout","type":0,"val":"logout","end":""}],
     types: placeholder as Registry['logout.execute']['types'],
-  },
-  'home': {
-    methods: ["GET","HEAD"],
-    pattern: '/',
-    tokens: [{"old":"/","type":0,"val":"/","end":""}],
-    types: placeholder as Registry['home']['types'],
   },
 } as const satisfies Record<string, AdonisEndpoint>
 

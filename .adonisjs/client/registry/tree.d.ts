@@ -2,6 +2,8 @@
 import type { routes } from './index.ts'
 
 export interface ApiDefinition {
+  dashboard: typeof routes['dashboard']
+  calendar: typeof routes['calendar']
   login: {
     render: typeof routes['login.render']
     execute: typeof routes['login.execute']
@@ -9,5 +11,4 @@ export interface ApiDefinition {
   logout: {
     execute: typeof routes['logout.execute']
   }
-  home: typeof routes['home']
 }

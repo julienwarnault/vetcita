@@ -45,3 +45,5 @@ export default function Login() {
     </div>
   )
 }
+
+Login.layout = (page: React.ReactElement) => <>{page}</>

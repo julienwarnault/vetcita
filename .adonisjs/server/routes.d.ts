@@ -4,18 +4,21 @@ type ParamValue = string | number | bigint | boolean
 
 export type ScannedRoutes = {
   ALL: {
+    'dashboard': { paramsTuple?: []; params?: {} }
+    'calendar': { paramsTuple?: []; params?: {} }
     'login.render': { paramsTuple?: []; params?: {} }
     'login.execute': { paramsTuple?: []; params?: {} }
     'logout.execute': { paramsTuple?: []; params?: {} }
-    'home': { paramsTuple?: []; params?: {} }
   }
   GET: {
+    'dashboard': { paramsTuple?: []; params?: {} }
+    'calendar': { paramsTuple?: []; params?: {} }
     'login.render': { paramsTuple?: []; params?: {} }
-    'home': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
+    'dashboard': { paramsTuple?: []; params?: {} }
+    'calendar': { paramsTuple?: []; params?: {} }
     'login.render': { paramsTuple?: []; params?: {} }
-    'home': { paramsTuple?: []; params?: {} }
   }
   POST: {
     'login.execute': { paramsTuple?: []; params?: {} }
