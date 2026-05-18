@@ -16,7 +16,9 @@ export default function Layout({ children }: { children: ReactElement }) {
         <nav>
           {user ? (
             <>
-              <span>{user.initials}</span>
+              <span>
+                {user.initials} - {user.tenant?.name}
+              </span>
               <Form route="logout.execute">
                 <button type="submit">Logout</button>
               </Form>

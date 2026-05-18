@@ -1,7 +1,10 @@
 import hash from '@adonisjs/core/services/hash'
+import { belongsTo } from '@adonisjs/lucid/orm'
 import { compose } from '@adonisjs/core/helpers'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
+import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import { WithPrimaryUuid } from '#app/shared/mixins/with_primary_uuid'
+import Tenant from '#app/tenants/models/tenant'
 import { UserSchema } from '#database/schema'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
@@ -17,4 +20,7 @@ export default class User extends compose(UserSchema, AuthFinder, WithPrimaryUui
     }
     return `${first.slice(0, 2)}`.toUpperCase()
   }
+
+  @belongsTo(() => Tenant)
+  declare tenant: BelongsTo<typeof Tenant>
 }
