@@ -17,6 +17,7 @@
     "typecheck": "tsc --noEmit && tsc --noEmit --project inertia/tsconfig.json"
   },
   "imports": {
+    "#agendas/*": "./app/agendas/*.js",
     "#app/*": "./app/*.js",
     "#identity/*": "./app/identity/*.js",
     "#shared/*": "./app/shared/*.js",

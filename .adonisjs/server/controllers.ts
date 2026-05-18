@@ -8,4 +8,10 @@ export const controllers = {
     Login: () => import('#app/identity/controllers/login_controller'),
     Logout: () => import('#app/identity/controllers/logout_controller'),
   },
+  agendas: {
+    UpdateAgenda: () => import('#app/agendas/controllers/update_agenda_controller'),
+    ListAgendas: () => import('#app/agendas/controllers/list_agendas_controller'),
+    CreateAgenda: () => import('#app/agendas/controllers/create_agenda_controller'),
+    DeleteAgenda: () => import('#app/agendas/controllers/delete_agenda_controller'),
+  },
 }

@@ -36,6 +36,36 @@ const routes = {
     tokens: [{"old":"/logout","type":0,"val":"logout","end":""}],
     types: placeholder as Registry['logout.execute']['types'],
   },
+  'list_agendas.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/agendas',
+    tokens: [{"old":"/agendas","type":0,"val":"agendas","end":""}],
+    types: placeholder as Registry['list_agendas.render']['types'],
+  },
+  'create_agenda.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/agendas/new',
+    tokens: [{"old":"/agendas/new","type":0,"val":"agendas","end":""},{"old":"/agendas/new","type":0,"val":"new","end":""}],
+    types: placeholder as Registry['create_agenda.render']['types'],
+  },
+  'create_agenda.execute': {
+    methods: ["POST"],
+    pattern: '/agendas',
+    tokens: [{"old":"/agendas","type":0,"val":"agendas","end":""}],
+    types: placeholder as Registry['create_agenda.execute']['types'],
+  },
+  'update_agenda.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/agendas/edit/:id',
+    tokens: [{"old":"/agendas/edit/:id","type":0,"val":"agendas","end":""},{"old":"/agendas/edit/:id","type":0,"val":"edit","end":""},{"old":"/agendas/edit/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['update_agenda.render']['types'],
+  },
+  'update_agenda.execute': {
+    methods: ["PUT"],
+    pattern: '/agendas/:id',
+    tokens: [{"old":"/agendas/:id","type":0,"val":"agendas","end":""},{"old":"/agendas/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['update_agenda.execute']['types'],
+  },
 } as const satisfies Record<string, AdonisEndpoint>
 
 export { routes }

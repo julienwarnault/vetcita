@@ -11,4 +11,15 @@ export interface ApiDefinition {
   logout: {
     execute: typeof routes['logout.execute']
   }
+  listAgendas: {
+    render: typeof routes['list_agendas.render']
+  }
+  createAgenda: {
+    render: typeof routes['create_agenda.render']
+    execute: typeof routes['create_agenda.execute']
+  }
+  updateAgenda: {
+    render: typeof routes['update_agenda.render']
+    execute: typeof routes['update_agenda.execute']
+  }
 }

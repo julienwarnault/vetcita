@@ -1,0 +1,31 @@
+import { ReactNode } from 'react'
+import { tv, VariantProps } from 'tailwind-variants'
+
+const badge = tv({
+  base: 'inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full',
+  variants: {
+    variant: {
+      primary: 'bg-primary text-white',
+      secondary: 'border border-border bg-white',
+    },
+    size: {
+      md: 'px-3 min-block-6 text-[13px]/4 font-medium',
+    },
+  },
+  defaultVariants: {
+    variant: 'primary',
+    size: 'md',
+  },
+})
+
+type BadgeVariants = VariantProps<typeof badge>
+
+interface BadgeProps extends BadgeVariants {
+  className?: string
+  children: ReactNode
+}
+
+export function Badge(props: BadgeProps) {
+  const { size, variant, className, ...rest } = props
+  return <div className={badge({ size, variant, className })} {...rest} />
+}

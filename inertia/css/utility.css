@@ -1,0 +1,10 @@
+@utility container {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 1200px;
+}
+
+@utility container-xl {
+  @apply container;
+  max-width: 1440px;
+}

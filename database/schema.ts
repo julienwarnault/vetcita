@@ -8,6 +8,23 @@ import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 import type { UUID } from '#shared/types'
 
+export class AgendaSchema extends BaseModel {
+  static $columns = ['color', 'createdAt', 'id', 'name', 'tenantId', 'updatedAt'] as const
+  $columns = AgendaSchema.$columns
+  @column()
+  declare color: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: UUID
+  @column()
+  declare name: string
+  @column()
+  declare tenantId: UUID | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class TenantSchema extends BaseModel {
   static $columns = ['createdAt', 'id', 'name', 'slug', 'updatedAt'] as const
   $columns = TenantSchema.$columns
@@ -37,7 +54,7 @@ export class UserSchema extends BaseModel {
   @column({ serializeAs: null })
   declare password: string
   @column()
-  declare tenantId: UUID | null
+  declare tenantId: UUID
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
 }
