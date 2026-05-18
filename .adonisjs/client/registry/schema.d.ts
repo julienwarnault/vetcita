@@ -7,31 +7,7 @@ import type { InferInput, SimpleError } from '@vinejs/vine/types'
 export type ParamValue = string | number | bigint | boolean
 
 export interface Registry {
-  'new_account.create': {
-    methods: ["GET","HEAD"]
-    pattern: '/signup'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#app/identity/controllers/new_account_controller').default['create']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/identity/controllers/new_account_controller').default['create']>>>
-    }
-  }
-  'new_account.store': {
-    methods: ["POST"]
-    pattern: '/signup'
-    types: {
-      body: ExtractBody<InferInput<(typeof import('#identity/validators/user').signupValidator)>>
-      paramsTuple: []
-      params: {}
-      query: ExtractQuery<InferInput<(typeof import('#identity/validators/user').signupValidator)>>
-      response: ExtractResponse<Awaited<ReturnType<import('#app/identity/controllers/new_account_controller').default['store']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/identity/controllers/new_account_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
-    }
-  }
-  'session.create': {
+  'login.render': {
     methods: ["GET","HEAD"]
     pattern: '/login'
     types: {
@@ -39,23 +15,23 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#app/identity/controllers/session_controller').default['create']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/identity/controllers/session_controller').default['create']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/identity/controllers/login_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/identity/controllers/login_controller').default['render']>>>
     }
   }
-  'session.store': {
+  'login.execute': {
     methods: ["POST"]
     pattern: '/login'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#app/identity/controllers/login_controller').default)['validator']>>
       paramsTuple: []
       params: {}
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#app/identity/controllers/session_controller').default['store']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/identity/controllers/session_controller').default['store']>>>
+      query: ExtractQuery<InferInput<(typeof import('#app/identity/controllers/login_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/identity/controllers/login_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/identity/controllers/login_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'session.destroy': {
+  'logout.execute': {
     methods: ["POST"]
     pattern: '/logout'
     types: {
@@ -63,8 +39,8 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#app/identity/controllers/session_controller').default['destroy']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/identity/controllers/session_controller').default['destroy']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/identity/controllers/logout_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/identity/controllers/logout_controller').default['execute']>>>
     }
   }
   'home': {

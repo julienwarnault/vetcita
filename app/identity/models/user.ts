@@ -4,7 +4,12 @@ import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { WithPrimaryUuid } from '#app/shared/mixins/with_primary_uuid'
 import { UserSchema } from '#database/schema'
 
-export default class User extends compose(UserSchema, withAuthFinder(hash), WithPrimaryUuid) {
+const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
+  uids: ['email'],
+  passwordColumnName: 'password',
+})
+
+export default class User extends compose(UserSchema, AuthFinder, WithPrimaryUuid) {
   get initials() {
     const [first, last] = this.fullName ? this.fullName.split(' ') : this.email.split('@')
     if (first && last) {

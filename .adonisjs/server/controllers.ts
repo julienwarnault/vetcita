@@ -5,7 +5,7 @@
 
 export const controllers = {
   identity: {
-    NewAccount: () => import('#app/identity/controllers/new_account_controller'),
-    Session: () => import('#app/identity/controllers/session_controller'),
+    Login: () => import('#app/identity/controllers/login_controller'),
+    Logout: () => import('#app/identity/controllers/logout_controller'),
   },
 }

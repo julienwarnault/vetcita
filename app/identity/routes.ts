@@ -4,16 +4,13 @@ import router from '@adonisjs/core/services/router'
 
 router
   .group(() => {
-    router.get('signup', [controllers.identity.NewAccount, 'create'])
-    router.post('signup', [controllers.identity.NewAccount, 'store'])
-
-    router.get('login', [controllers.identity.Session, 'create'])
-    router.post('login', [controllers.identity.Session, 'store'])
+    router.get('login', [controllers.identity.Login, 'render'])
+    router.post('login', [controllers.identity.Login, 'execute'])
   })
   .use(middleware.guest())
 
 router
   .group(() => {
-    router.post('logout', [controllers.identity.Session, 'destroy'])
+    router.post('logout', [controllers.identity.Logout, 'execute'])
   })
   .use(middleware.auth())

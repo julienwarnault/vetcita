@@ -17,14 +17,13 @@ export default function Layout({ children }: { children: ReactElement }) {
           {user ? (
             <>
               <span>{user.initials}</span>
-              <Form route="session.destroy">
+              <Form route="logout.execute">
                 <button type="submit">Logout</button>
               </Form>
             </>
           ) : (
             <>
-              <Link route="new_account.create">Signup</Link>
-              <Link route="session.create">Login</Link>
+              <Link route="login.render">Login</Link>
             </>
           )}
         </nav>
