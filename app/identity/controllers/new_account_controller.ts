@@ -1,6 +1,6 @@
-import User from '#models/user'
-import { signupValidator } from '#validators/user'
 import type { HttpContext } from '@adonisjs/core/http'
+import { signupValidator } from '#identity/validators/user'
+import User from '#identity/models/user'
 
 export default class NewAccountController {
   async create({ inertia }: HttpContext) {

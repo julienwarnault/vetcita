@@ -1,5 +1,5 @@
-import User from '#models/user'
 import type { HttpContext } from '@adonisjs/core/http'
+import User from '#identity/models/user'
 
 export default class SessionController {
   async create({ inertia }: HttpContext) {

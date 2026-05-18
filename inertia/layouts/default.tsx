@@ -1,32 +1,24 @@
+import { Toaster } from 'sonner'
+import { ReactElement } from 'react'
 import { Data } from '@generated/data'
-import { toast, Toaster } from 'sonner'
 import { usePage } from '@inertiajs/react'
-import { ReactElement, useEffect } from 'react'
 import { Form, Link } from '@adonisjs/inertia/react'
+import { useFlashToasts } from '~/hooks/use_flash'
 
-export default function Layout({ children }: { children: ReactElement<Data.SharedProps> }) {
-  useEffect(() => {
-    toast.dismiss()
-  }, [usePage().url])
+export default function Layout({ children }: { children: ReactElement }) {
+  useFlashToasts()
 
-  useEffect(() => {
-    if (children.props.flash.error) {
-      toast.error(children.props.flash.error)
-    }
-    if (children.props.flash.success) {
-      toast.success(children.props.flash.success)
-    }
-  })
+  const { user } = usePage<Data.SharedProps>().props
 
   return (
     <>
       <header>
         <nav>
-          {children.props.user ? (
+          {user ? (
             <>
-              <span>{children.props.user.initials}</span>
+              <span>{user.initials}</span>
               <Form route="session.destroy">
-                <button type="submit"> Logout </button>
+                <button type="submit">Logout</button>
               </Form>
             </>
           ) : (

@@ -128,7 +128,32 @@ export default defineConfig({
   hooks: {
     init: [
       indexEntities({
-        transformers: { enabled: true, withSharedProps: true },
+        controllers: {
+          enabled: true,
+          source: './app',
+          glob: ['**/controllers/**/*.ts'],
+          importAlias: '#app',
+        },
+        transformers: {
+          enabled: true,
+          withSharedProps: true,
+          source: './app',
+          glob: ['**/transformers/**/*.ts'],
+          inertiaMiddlewareImportPath: '#shared/middleware/inertia_middleware',
+          importAlias: '#app',
+        },
+        events: {
+          enabled: true,
+          source: './app',
+          glob: ['**/events/**/*.ts'],
+          importAlias: '#app',
+        },
+        listeners: {
+          enabled: true,
+          source: './app',
+          glob: ['**/listeners/**/*.ts'],
+          importAlias: '#app',
+        },
       }),
       indexPages({ framework: 'react' }),
       generateRegistry(),

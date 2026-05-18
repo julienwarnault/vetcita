@@ -8,8 +8,8 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
     react(),
-    inertia({ ssr: { enabled: false, entrypoint: 'inertia/ssr.tsx' } }),
-    adonisjs({ entrypoints: ['inertia/app.tsx'], reload: ['resources/views/**/*.edge'] }),
+    inertia({ ssr: { enabled: false, entrypoint: 'inertia/app/ssr.tsx' } }),
+    adonisjs({ entrypoints: ['inertia/app/app.tsx'], reload: ['resources/views/**/*.edge'] }),
   ],
 
   /**

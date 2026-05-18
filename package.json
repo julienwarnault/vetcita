@@ -18,20 +18,10 @@
   },
   "imports": {
     "#app/*": "./app/*.js",
-    "#controllers/*": "./app/controllers/*.js",
-    "#exceptions/*": "./app/exceptions/*.js",
-    "#models/*": "./app/models/*.js",
-    "#mails/*": "./app/mails/*.js",
-    "#services/*": "./app/services/*.js",
-    "#listeners/*": "./app/listeners/*.js",
-    "#events/*": "./app/events/*.js",
+    "#identity/*": "./app/identity/*.js",
+    "#shared/*": "./app/shared/*.js",
     "#generated/*": "./.adonisjs/server/*.js",
-    "#middleware/*": "./app/middleware/*.js",
-    "#transformers/*": "./app/transformers/*.js",
-    "#validators/*": "./app/validators/*.js",
     "#providers/*": "./providers/*.js",
-    "#policies/*": "./app/policies/*.js",
-    "#abilities/*": "./app/abilities/*.js",
     "#database/*": "./database/*.js",
     "#tests/*": "./tests/*.js",
     "#start/*": "./start/*.js",
@@ -81,7 +71,8 @@
     "react-dom": "^19.2.5",
     "reflect-metadata": "^0.2.2",
     "sonner": "^2.0.7",
-    "tailwindcss": "^4.3.0"
+    "tailwindcss": "^4.3.0",
+    "uuid": "^14.0.0"
   },
   "hotHook": {
     "boundaries": [
