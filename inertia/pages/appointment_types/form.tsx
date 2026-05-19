@@ -1,9 +1,9 @@
 import { Data } from '@generated/data'
 import { COLORS, ColorSelect } from '~/components/ui/color_select'
+import { InputSelect } from '~/components/ui/input_select'
 import { ButtonLink } from '~/components/ui/button_link'
 import { FormHeader } from '~/components/form_header'
 import { Textarea } from '~/components/ui/textarea'
-import { Select } from '~/components/ui/select'
 import { Button } from '~/components/ui/button'
 import MinimalLayout from '~/layouts/minimal'
 import { Input } from '~/components/ui/input'
@@ -89,7 +89,7 @@ export default function ShowForm(props: PageProps) {
 
               <Field name="duration">
                 <Field.Label>Duración *</Field.Label>
-                <Select
+                <InputSelect
                   items={[
                     { label: '5 min', value: '5' },
                     { label: '10 min', value: '10' },

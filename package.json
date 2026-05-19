@@ -20,6 +20,7 @@
     "#agendas/*": "./app/agendas/*.js",
     "#app/*": "./app/*.js",
     "#appointment_types/*": "./app/appointment_types/*.js",
+    "#calendar/*": "./app/calendar/*.js",
     "#identity/*": "./app/identity/*.js",
     "#patients/*": "./app/patients/*.js",
     "#shared/*": "./app/shared/*.js",

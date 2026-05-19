@@ -25,3 +25,7 @@ export function formatPhoneNumber(phone: string): string {
 
   return parsed.formatInternational()
 }
+
+export function capitalize(text: string) {
+  return text.charAt(0).toUpperCase() + text.slice(1)
+}

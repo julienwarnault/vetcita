@@ -19,18 +19,6 @@ export interface Registry {
       errorResponse: unknown
     }
   }
-  'calendar': {
-    methods: ["GET","HEAD"]
-    pattern: '/calendar'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: {}
-      response: unknown
-      errorResponse: unknown
-    }
-  }
   'login.render': {
     methods: ["GET","HEAD"]
     pattern: '/login'
@@ -257,6 +245,18 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#app/patients/controllers/delete_patient_controller').default['execute']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/patients/controllers/delete_patient_controller').default['execute']>>>
+    }
+  }
+  'show_calendar.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/calendar'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: ExtractQueryForGet<InferInput<(typeof import('#app/calendar/controllers/show_calendar_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/calendar/controllers/show_calendar_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/calendar/controllers/show_calendar_controller').default['render']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
 }

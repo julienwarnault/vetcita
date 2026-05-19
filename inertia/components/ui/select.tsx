@@ -1,60 +1,65 @@
 import { tv } from 'tailwind-variants'
 import { ChevronDownIcon } from 'lucide-react'
+import { isValidElement, JSX, ReactNode } from 'react'
 import { Select as BaseSelect } from '@base-ui/react/select'
-import { baseInput } from './input'
-import { Card } from './card'
 
 const select = tv({
   slots: {
-    trigger: [baseInput(), 'flex items-center justify-between'],
+    trigger: 'text-sm',
+    icon: 'inline-flex data-[popup-open]:rotate-180',
     positioner: 'z-50',
-    icon: 'inline-flex items-center justify-center data-[popup-open]:rotate-180',
-    popup: 'w-[var(--anchor-width)] max-h-72',
-    list: 'overflow-visible',
-    item: 'flex min-h-10 items-center gap-3 rounded-lg px-3 py-2 -mx-3 text-[15px]/5 font-medium cursor-pointer hover:bg-background data-[selected]:bg-background [&_svg]:size-4',
+    popup: 'min-w-50 rounded-xl border bg-surface px-5 py-2 shadow-xl',
+    list: 'overflow-visible!',
+    item: 'mx-[-0.75rem] flex min-h-10 cursor-pointer items-center gap-3 rounded-lg px-3 py-2 text-[15px] font-medium hover:bg-background data-[selected]:bg-accent-faded [&_svg]:size-4',
   },
 })
 
 interface SelectProps {
-  items: { label: string; value: string }[]
-  value?: string | null
-  defaultValue?: string | null
-  onValueChange?: (value: string | null) => void
-  placeholder?: string
-  disabled?: boolean
+  trigger?: ReactNode
+  items: { label: string; value: string; leftElement?: JSX.Element }[]
+  value?: string
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
+  onValueChange: (value: string | null) => void
+  align?: BaseSelect.Positioner.Props['align']
 }
 
 export function Select(props: SelectProps) {
-  const { items, value, defaultValue, onValueChange, placeholder = 'Seleccionar', disabled } = props
+  const { trigger, value, items, open, align = 'end', onOpenChange, onValueChange } = props
 
   const classes = select({})
 
   return (
     <BaseSelect.Root
-      items={items}
+      open={open}
+      onOpenChange={onOpenChange}
       value={value}
-      defaultValue={defaultValue}
+      items={items}
       onValueChange={onValueChange}
-      disabled={disabled}
     >
-      <BaseSelect.Trigger className={classes.trigger()}>
-        <BaseSelect.Value placeholder={placeholder} />
-        <BaseSelect.Icon className={classes.icon()}>
-          <ChevronDownIcon size={16} />
-        </BaseSelect.Icon>
-      </BaseSelect.Trigger>
+      {trigger && isValidElement(trigger) && (
+        <BaseSelect.Trigger render={trigger} className={classes.trigger()}>
+          <BaseSelect.Value />
+          <BaseSelect.Icon className={classes.icon()}>
+            <ChevronDownIcon size={16} />
+          </BaseSelect.Icon>
+        </BaseSelect.Trigger>
+      )}
 
       <BaseSelect.Portal>
         <BaseSelect.Positioner
-          sideOffset={4}
+          side="bottom"
+          sideOffset={8}
+          align={align}
           alignItemWithTrigger={false}
           className={classes.positioner()}
         >
-          <BaseSelect.Popup render={<Card className={classes.popup()} />}>
+          <BaseSelect.Popup className={classes.popup()}>
             <BaseSelect.List className={classes.list()}>
-              {items.map((item) => (
-                <BaseSelect.Item key={item.value} value={item.value} className={classes.item()}>
-                  <span>{item.label}</span>
+              {items.map(({ leftElement: LeftElement, label, value }) => (
+                <BaseSelect.Item key={value} value={value} className={classes.item()}>
+                  {LeftElement}
+                  <span>{label}</span>
                 </BaseSelect.Item>
               ))}
             </BaseSelect.List>

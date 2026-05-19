@@ -11,8 +11,9 @@ const button = tv({
       secondary: 'border border-border bg-white hover:border-input',
     },
     size: {
-      sm: 'h-9 px-4 text-[15px] font-medium',
-      lg: 'h-12 px-5 text-[17px] font-semibold',
+      'sm': 'h-9 px-4 text-[15px] font-medium',
+      'lg': 'h-12 px-5 text-[17px] font-semibold',
+      'icon-sm': 'size-9',
     },
   },
   defaultVariants: {

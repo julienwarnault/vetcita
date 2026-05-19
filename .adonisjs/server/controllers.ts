@@ -16,6 +16,9 @@ export const controllers = {
     ListAppointmentTypes: () => import('#app/appointment_types/controllers/list_appointment_types_controller'),
     UpdateAppointmentType: () => import('#app/appointment_types/controllers/update_appointment_type_controller'),
   },
+  calendar: {
+    ShowCalendar: () => import('#app/calendar/controllers/show_calendar_controller'),
+  },
   identity: {
     Login: () => import('#app/identity/controllers/login_controller'),
     Logout: () => import('#app/identity/controllers/logout_controller'),

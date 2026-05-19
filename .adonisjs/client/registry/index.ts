@@ -12,12 +12,6 @@ const routes = {
     tokens: [{"old":"/dashboard","type":0,"val":"dashboard","end":""}],
     types: placeholder as Registry['dashboard']['types'],
   },
-  'calendar': {
-    methods: ["GET","HEAD"],
-    pattern: '/calendar',
-    tokens: [{"old":"/calendar","type":0,"val":"calendar","end":""}],
-    types: placeholder as Registry['calendar']['types'],
-  },
   'login.render': {
     methods: ["GET","HEAD"],
     pattern: '/login',
@@ -131,6 +125,12 @@ const routes = {
     pattern: '/patients/:id',
     tokens: [{"old":"/patients/:id","type":0,"val":"patients","end":""},{"old":"/patients/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['delete_patient.execute']['types'],
+  },
+  'show_calendar.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/calendar',
+    tokens: [{"old":"/calendar","type":0,"val":"calendar","end":""}],
+    types: placeholder as Registry['show_calendar.render']['types'],
   },
 } as const satisfies Record<string, AdonisEndpoint>
 

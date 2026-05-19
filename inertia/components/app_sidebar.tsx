@@ -14,13 +14,13 @@ const NAVIGATION = [
   },
   {
     name: 'Calendario',
-    route: 'calendar',
+    route: 'show_calendar.render',
     navigationIcon: 'calendar',
   },
   {
     name: 'Pacientes',
     route: 'list_patients.render',
-    navigationIcon: 'smile',
+    navigationIcon: 'contact-round',
   },
   {
     name: 'Tipos de cita',
@@ -54,7 +54,7 @@ export function AppSidebar() {
                     title={item.name}
                     className={cn(
                       'flex h-11 w-11 items-center justify-center rounded-lg text-white',
-                      isActive ? 'bg-accent hover:bg-accent-faded' : 'hover:bg-primary-faded'
+                      isActive ? 'bg-accent hover:bg-accent/80' : 'hover:bg-primary-faded'
                     )}
                   >
                     <DynamicIcon name={item.navigationIcon} size={26} strokeWidth={1.5} />

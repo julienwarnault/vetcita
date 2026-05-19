@@ -5,7 +5,6 @@ type ParamValue = string | number | bigint | boolean
 export type ScannedRoutes = {
   ALL: {
     'dashboard': { paramsTuple?: []; params?: {} }
-    'calendar': { paramsTuple?: []; params?: {} }
     'login.render': { paramsTuple?: []; params?: {} }
     'login.execute': { paramsTuple?: []; params?: {} }
     'logout.execute': { paramsTuple?: []; params?: {} }
@@ -25,10 +24,10 @@ export type ScannedRoutes = {
     'update_patient.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_patient.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'delete_patient.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'show_calendar.render': { paramsTuple?: []; params?: {} }
   }
   GET: {
     'dashboard': { paramsTuple?: []; params?: {} }
-    'calendar': { paramsTuple?: []; params?: {} }
     'login.render': { paramsTuple?: []; params?: {} }
     'list_agendas.render': { paramsTuple?: []; params?: {} }
     'create_agenda.render': { paramsTuple?: []; params?: {} }
@@ -39,10 +38,10 @@ export type ScannedRoutes = {
     'list_patients.render': { paramsTuple?: []; params?: {} }
     'create_patient.render': { paramsTuple?: []; params?: {} }
     'update_patient.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'show_calendar.render': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
     'dashboard': { paramsTuple?: []; params?: {} }
-    'calendar': { paramsTuple?: []; params?: {} }
     'login.render': { paramsTuple?: []; params?: {} }
     'list_agendas.render': { paramsTuple?: []; params?: {} }
     'create_agenda.render': { paramsTuple?: []; params?: {} }
@@ -53,6 +52,7 @@ export type ScannedRoutes = {
     'list_patients.render': { paramsTuple?: []; params?: {} }
     'create_patient.render': { paramsTuple?: []; params?: {} }
     'update_patient.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'show_calendar.render': { paramsTuple?: []; params?: {} }
   }
   POST: {
     'login.execute': { paramsTuple?: []; params?: {} }
