@@ -4,14 +4,20 @@
  */
 
 export const controllers = {
+  agendas: {
+    CreateAgenda: () => import('#app/agendas/controllers/create_agenda_controller'),
+    DeleteAgenda: () => import('#app/agendas/controllers/delete_agenda_controller'),
+    ListAgendas: () => import('#app/agendas/controllers/list_agendas_controller'),
+    UpdateAgenda: () => import('#app/agendas/controllers/update_agenda_controller'),
+  },
+  appointmentTypes: {
+    CreateAppointmentType: () => import('#app/appointment_types/controllers/create_appointment_type_controller'),
+    DeleteAppointmentType: () => import('#app/appointment_types/controllers/delete_appointment_type_controller'),
+    ListAppointmentTypes: () => import('#app/appointment_types/controllers/list_appointment_types_controller'),
+    UpdateAppointmentType: () => import('#app/appointment_types/controllers/update_appointment_type_controller'),
+  },
   identity: {
     Login: () => import('#app/identity/controllers/login_controller'),
     Logout: () => import('#app/identity/controllers/logout_controller'),
-  },
-  agendas: {
-    UpdateAgenda: () => import('#app/agendas/controllers/update_agenda_controller'),
-    ListAgendas: () => import('#app/agendas/controllers/list_agendas_controller'),
-    CreateAgenda: () => import('#app/agendas/controllers/create_agenda_controller'),
-    DeleteAgenda: () => import('#app/agendas/controllers/delete_agenda_controller'),
   },
 }

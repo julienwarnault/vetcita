@@ -18,6 +18,11 @@ const NAVIGATION = [
     navigationIcon: 'calendar',
   },
   {
+    name: 'Tipos de cita',
+    route: 'list_appointment_types.render',
+    navigationIcon: 'book-open',
+  },
+  {
     name: 'Agendas',
     route: 'list_agendas.render',
     navigationIcon: 'users',

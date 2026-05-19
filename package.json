@@ -19,6 +19,7 @@
   "imports": {
     "#agendas/*": "./app/agendas/*.js",
     "#app/*": "./app/*.js",
+    "#appointment_types/*": "./app/appointment_types/*.js",
     "#identity/*": "./app/identity/*.js",
     "#shared/*": "./app/shared/*.js",
     "#tenants/*": "./app/tenants/*.js",

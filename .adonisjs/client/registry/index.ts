@@ -66,6 +66,36 @@ const routes = {
     tokens: [{"old":"/agendas/:id","type":0,"val":"agendas","end":""},{"old":"/agendas/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['update_agenda.execute']['types'],
   },
+  'list_appointment_types.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/appointment-types',
+    tokens: [{"old":"/appointment-types","type":0,"val":"appointment-types","end":""}],
+    types: placeholder as Registry['list_appointment_types.render']['types'],
+  },
+  'create_appointment_type.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/appointment-types/new',
+    tokens: [{"old":"/appointment-types/new","type":0,"val":"appointment-types","end":""},{"old":"/appointment-types/new","type":0,"val":"new","end":""}],
+    types: placeholder as Registry['create_appointment_type.render']['types'],
+  },
+  'create_appointment_type.execute': {
+    methods: ["POST"],
+    pattern: '/appointment-types',
+    tokens: [{"old":"/appointment-types","type":0,"val":"appointment-types","end":""}],
+    types: placeholder as Registry['create_appointment_type.execute']['types'],
+  },
+  'update_appointment_type.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/appointment-types/edit/:id',
+    tokens: [{"old":"/appointment-types/edit/:id","type":0,"val":"appointment-types","end":""},{"old":"/appointment-types/edit/:id","type":0,"val":"edit","end":""},{"old":"/appointment-types/edit/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['update_appointment_type.render']['types'],
+  },
+  'update_appointment_type.execute': {
+    methods: ["PUT"],
+    pattern: '/appointment-types/:id',
+    tokens: [{"old":"/appointment-types/:id","type":0,"val":"appointment-types","end":""},{"old":"/appointment-types/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['update_appointment_type.execute']['types'],
+  },
 } as const satisfies Record<string, AdonisEndpoint>
 
 export { routes }

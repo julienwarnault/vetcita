@@ -25,6 +25,29 @@ export class AgendaSchema extends BaseModel {
   declare updatedAt: DateTime | null
 }
 
+export class AppointmentTypeSchema extends BaseModel {
+  static $columns = ['color', 'createdAt', 'description', 'duration', 'id', 'name', 'price', 'tenantId', 'updatedAt'] as const
+  $columns = AppointmentTypeSchema.$columns
+  @column()
+  declare color: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column()
+  declare description: string | null
+  @column()
+  declare duration: number
+  @column({ isPrimary: true })
+  declare id: UUID
+  @column()
+  declare name: string
+  @column()
+  declare price: number | null
+  @column()
+  declare tenantId: UUID
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class TenantSchema extends BaseModel {
   static $columns = ['createdAt', 'id', 'name', 'slug', 'updatedAt'] as const
   $columns = TenantSchema.$columns

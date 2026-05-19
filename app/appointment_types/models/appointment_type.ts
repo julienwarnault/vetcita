@@ -2,12 +2,10 @@ import { belongsTo } from '@adonisjs/lucid/orm'
 import { compose } from '@adonisjs/core/helpers'
 import { WithPrimaryUuid } from '#app/shared/mixins/with_primary_uuid'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
-import { AgendaSchema } from '#database/schema'
+import { AppointmentTypeSchema } from '#database/schema'
 import Tenant from '#app/tenants/models/tenant'
 
-export default class Agenda extends compose(AgendaSchema, WithPrimaryUuid) {
-  static table = 'agendas'
-
+export default class AppointmentType extends compose(AppointmentTypeSchema, WithPrimaryUuid) {
   @belongsTo(() => Tenant)
   declare tenant: BelongsTo<typeof Tenant>
 }
