@@ -19,6 +19,12 @@ export type ScannedRoutes = {
     'create_appointment_type.execute': { paramsTuple?: []; params?: {} }
     'update_appointment_type.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_appointment_type.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'list_patients.render': { paramsTuple?: []; params?: {} }
+    'create_patient.render': { paramsTuple?: []; params?: {} }
+    'create_patient.execute': { paramsTuple?: []; params?: {} }
+    'update_patient.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'update_patient.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'delete_patient.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   GET: {
     'dashboard': { paramsTuple?: []; params?: {} }
@@ -30,6 +36,9 @@ export type ScannedRoutes = {
     'list_appointment_types.render': { paramsTuple?: []; params?: {} }
     'create_appointment_type.render': { paramsTuple?: []; params?: {} }
     'update_appointment_type.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'list_patients.render': { paramsTuple?: []; params?: {} }
+    'create_patient.render': { paramsTuple?: []; params?: {} }
+    'update_patient.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   HEAD: {
     'dashboard': { paramsTuple?: []; params?: {} }
@@ -41,16 +50,24 @@ export type ScannedRoutes = {
     'list_appointment_types.render': { paramsTuple?: []; params?: {} }
     'create_appointment_type.render': { paramsTuple?: []; params?: {} }
     'update_appointment_type.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'list_patients.render': { paramsTuple?: []; params?: {} }
+    'create_patient.render': { paramsTuple?: []; params?: {} }
+    'update_patient.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   POST: {
     'login.execute': { paramsTuple?: []; params?: {} }
     'logout.execute': { paramsTuple?: []; params?: {} }
     'create_agenda.execute': { paramsTuple?: []; params?: {} }
     'create_appointment_type.execute': { paramsTuple?: []; params?: {} }
+    'create_patient.execute': { paramsTuple?: []; params?: {} }
   }
   PUT: {
     'update_agenda.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_appointment_type.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'update_patient.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+  }
+  DELETE: {
+    'delete_patient.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
 }
 declare module '@adonisjs/core/types/http' {

@@ -1,3 +1,5 @@
+import { parsePhoneNumberFromString } from 'libphonenumber-js'
+
 export function formatDuration(duration: number): string {
   const hours = Math.floor(duration / 60)
   const minutes = duration % 60
@@ -6,4 +8,20 @@ export function formatDuration(duration: number): string {
   if (minutes === 0) return `${hours}h`
 
   return `${hours}h ${minutes}min`
+}
+
+export function formatPhoneNumber(phone: string): string {
+  phone = phone.replace('+', '')
+
+  if (phone.startsWith('521') && phone.length === 13) {
+    phone = '52' + phone.slice(3)
+  }
+
+  const parsed = parsePhoneNumberFromString('+' + phone)
+
+  if (!parsed || !parsed.isValid()) {
+    return phone
+  }
+
+  return parsed.formatInternational()
 }

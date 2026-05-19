@@ -96,6 +96,42 @@ const routes = {
     tokens: [{"old":"/appointment-types/:id","type":0,"val":"appointment-types","end":""},{"old":"/appointment-types/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['update_appointment_type.execute']['types'],
   },
+  'list_patients.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/patients',
+    tokens: [{"old":"/patients","type":0,"val":"patients","end":""}],
+    types: placeholder as Registry['list_patients.render']['types'],
+  },
+  'create_patient.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/patients/new',
+    tokens: [{"old":"/patients/new","type":0,"val":"patients","end":""},{"old":"/patients/new","type":0,"val":"new","end":""}],
+    types: placeholder as Registry['create_patient.render']['types'],
+  },
+  'create_patient.execute': {
+    methods: ["POST"],
+    pattern: '/patients',
+    tokens: [{"old":"/patients","type":0,"val":"patients","end":""}],
+    types: placeholder as Registry['create_patient.execute']['types'],
+  },
+  'update_patient.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/patients/edit/:id',
+    tokens: [{"old":"/patients/edit/:id","type":0,"val":"patients","end":""},{"old":"/patients/edit/:id","type":0,"val":"edit","end":""},{"old":"/patients/edit/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['update_patient.render']['types'],
+  },
+  'update_patient.execute': {
+    methods: ["PUT"],
+    pattern: '/patients/:id',
+    tokens: [{"old":"/patients/:id","type":0,"val":"patients","end":""},{"old":"/patients/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['update_patient.execute']['types'],
+  },
+  'delete_patient.execute': {
+    methods: ["DELETE"],
+    pattern: '/patients/:id',
+    tokens: [{"old":"/patients/:id","type":0,"val":"patients","end":""},{"old":"/patients/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['delete_patient.execute']['types'],
+  },
 } as const satisfies Record<string, AdonisEndpoint>
 
 export { routes }

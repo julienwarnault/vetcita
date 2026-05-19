@@ -33,4 +33,18 @@ export interface ApiDefinition {
     render: typeof routes['update_appointment_type.render']
     execute: typeof routes['update_appointment_type.execute']
   }
+  listPatients: {
+    render: typeof routes['list_patients.render']
+  }
+  createPatient: {
+    render: typeof routes['create_patient.render']
+    execute: typeof routes['create_patient.execute']
+  }
+  updatePatient: {
+    render: typeof routes['update_patient.render']
+    execute: typeof routes['update_patient.execute']
+  }
+  deletePatient: {
+    execute: typeof routes['delete_patient.execute']
+  }
 }

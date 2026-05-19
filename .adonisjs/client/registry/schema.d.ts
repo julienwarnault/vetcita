@@ -187,4 +187,76 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/appointment_types/controllers/update_appointment_type_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
+  'list_patients.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/patients'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/patients/controllers/list_patients_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/patients/controllers/list_patients_controller').default['render']>>>
+    }
+  }
+  'create_patient.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/patients/new'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/patients/controllers/create_patient_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/patients/controllers/create_patient_controller').default['render']>>>
+    }
+  }
+  'create_patient.execute': {
+    methods: ["POST"]
+    pattern: '/patients'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#app/patients/controllers/create_patient_controller').default)['validator']>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#app/patients/controllers/create_patient_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/patients/controllers/create_patient_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/patients/controllers/create_patient_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'update_patient.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/patients/edit/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/patients/controllers/update_patient_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/patients/controllers/update_patient_controller').default['render']>>>
+    }
+  }
+  'update_patient.execute': {
+    methods: ["PUT"]
+    pattern: '/patients/:id'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#app/patients/controllers/update_patient_controller').default)['validator']>>
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#app/patients/controllers/update_patient_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/patients/controllers/update_patient_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/patients/controllers/update_patient_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'delete_patient.execute': {
+    methods: ["DELETE"]
+    pattern: '/patients/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/patients/controllers/delete_patient_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/patients/controllers/delete_patient_controller').default['execute']>>>
+    }
+  }
 }

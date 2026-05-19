@@ -67,3 +67,9 @@ declare module '@adonisjs/core/http' {
     serialize: typeof serialize
   }
 }
+
+declare module '@adonisjs/core/types/transformers' {
+  interface ExtendedJSONTypes {
+    DateTime: import('luxon').DateTime
+  }
+}

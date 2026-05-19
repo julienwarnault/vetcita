@@ -20,4 +20,10 @@ export const controllers = {
     Login: () => import('#app/identity/controllers/login_controller'),
     Logout: () => import('#app/identity/controllers/logout_controller'),
   },
+  patients: {
+    CreatePatient: () => import('#app/patients/controllers/create_patient_controller'),
+    DeletePatient: () => import('#app/patients/controllers/delete_patient_controller'),
+    ListPatients: () => import('#app/patients/controllers/list_patients_controller'),
+    UpdatePatient: () => import('#app/patients/controllers/update_patient_controller'),
+  },
 }

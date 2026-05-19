@@ -6,7 +6,7 @@ const field = tv({
     root: 'flex flex-col col-span-3 gap-1',
     label: 'text-[15px] font-medium text-foreground',
     description: 'text-sm text-muted',
-    error: 'text-sm text-danger',
+    error: 'text-sm text-destructive',
   },
 })
 
