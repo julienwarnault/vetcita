@@ -48,6 +48,29 @@ export class AppointmentTypeSchema extends BaseModel {
   declare updatedAt: DateTime | null
 }
 
+export class AppointmentSchema extends BaseModel {
+  static $columns = ['appointmentTypeId', 'createdAt', 'duration', 'endDate', 'id', 'patientId', 'startDate', 'tenantId', 'updatedAt'] as const
+  $columns = AppointmentSchema.$columns
+  @column()
+  declare appointmentTypeId: UUID
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare duration: number
+  @column.dateTime()
+  declare endDate: DateTime
+  @column({ isPrimary: true })
+  declare id: UUID
+  @column()
+  declare patientId: UUID
+  @column.dateTime()
+  declare startDate: DateTime
+  @column()
+  declare tenantId: UUID
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class PatientSchema extends BaseModel {
   static $columns = ['createdAt', 'email', 'firstName', 'id', 'lastName', 'notes', 'phone', 'tenantId', 'updatedAt'] as const
   $columns = PatientSchema.$columns

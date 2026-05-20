@@ -8,6 +8,7 @@ import type { InferData, InferVariants } from '@adonisjs/core/types/transformers
 import type { InferSharedProps } from '@adonisjs/inertia/types'
 import type AgendasAgendaTransformer from '#app/agendas/transformers/agenda_transformer'
 import type AppointmentTypesAppointmentTypeTransformer from '#app/appointment_types/transformers/appointment_type_transformer'
+import type AppointmentsAppointmentTransformer from '#app/appointments/transformers/appointment_transformer'
 import type IdentityUserTransformer from '#app/identity/transformers/user_transformer'
 import type PatientsPatientTransformer from '#app/patients/transformers/patient_transformer'
 import type TenantsTenantTransformer from '#app/tenants/transformers/tenant_transformer'
@@ -24,6 +25,12 @@ export namespace Data {
     export type AppointmentType = InferData<AppointmentTypesAppointmentTypeTransformer>
     export namespace AppointmentType {
       export type Variants = InferVariants<AppointmentTypesAppointmentTypeTransformer>
+    }
+  }
+  export namespace Appointments {
+    export type Appointment = InferData<AppointmentsAppointmentTransformer>
+    export namespace Appointment {
+      export type Variants = InferVariants<AppointmentsAppointmentTransformer>
     }
   }
   export namespace Identity {

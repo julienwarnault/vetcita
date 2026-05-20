@@ -19,6 +19,7 @@
   "imports": {
     "#agendas/*": "./app/agendas/*.js",
     "#app/*": "./app/*.js",
+    "#appointments/*": "./app/appointments/*.js",
     "#appointment_types/*": "./app/appointment_types/*.js",
     "#calendar/*": "./app/calendar/*.js",
     "#identity/*": "./app/identity/*.js",
