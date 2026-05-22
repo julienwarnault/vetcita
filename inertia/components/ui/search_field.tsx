@@ -25,7 +25,7 @@ export function SearchField(props: SearchFieldProps) {
   }
 
   return (
-    <InputGroup className="rounded-full" inputSize="sm">
+    <InputGroup className="rounded-full outline-0!" inputSize="sm">
       <InputGroup.Input value={search} onChange={handleChange} placeholder={placeholder} />
       <InputGroup.Addon>
         <SearchIcon size={20} />

@@ -13,7 +13,7 @@ const menu = tv({
   variants: {
     type: {
       danger: {
-        item: 'text-danger',
+        item: 'text-destructive',
       },
     },
   },
