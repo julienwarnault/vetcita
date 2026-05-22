@@ -5,6 +5,7 @@ type ParamValue = string | number | bigint | boolean
 export type ScannedRoutes = {
   ALL: {
     'dashboard': { paramsTuple?: []; params?: {} }
+    'settings': { paramsTuple?: []; params?: {} }
     'login.render': { paramsTuple?: []; params?: {} }
     'login.execute': { paramsTuple?: []; params?: {} }
     'logout.execute': { paramsTuple?: []; params?: {} }
@@ -25,9 +26,12 @@ export type ScannedRoutes = {
     'update_patient.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'delete_patient.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'show_calendar.render': { paramsTuple?: []; params?: {} }
+    'update_tenant.render': { paramsTuple?: []; params?: {} }
+    'update_tenant.execute': { paramsTuple?: []; params?: {} }
   }
   GET: {
     'dashboard': { paramsTuple?: []; params?: {} }
+    'settings': { paramsTuple?: []; params?: {} }
     'login.render': { paramsTuple?: []; params?: {} }
     'list_agendas.render': { paramsTuple?: []; params?: {} }
     'create_agenda.render': { paramsTuple?: []; params?: {} }
@@ -39,9 +43,11 @@ export type ScannedRoutes = {
     'create_patient.render': { paramsTuple?: []; params?: {} }
     'update_patient.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'show_calendar.render': { paramsTuple?: []; params?: {} }
+    'update_tenant.render': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
     'dashboard': { paramsTuple?: []; params?: {} }
+    'settings': { paramsTuple?: []; params?: {} }
     'login.render': { paramsTuple?: []; params?: {} }
     'list_agendas.render': { paramsTuple?: []; params?: {} }
     'create_agenda.render': { paramsTuple?: []; params?: {} }
@@ -53,6 +59,7 @@ export type ScannedRoutes = {
     'create_patient.render': { paramsTuple?: []; params?: {} }
     'update_patient.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'show_calendar.render': { paramsTuple?: []; params?: {} }
+    'update_tenant.render': { paramsTuple?: []; params?: {} }
   }
   POST: {
     'login.execute': { paramsTuple?: []; params?: {} }
@@ -65,6 +72,7 @@ export type ScannedRoutes = {
     'update_agenda.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_appointment_type.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_patient.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'update_tenant.execute': { paramsTuple?: []; params?: {} }
   }
   DELETE: {
     'delete_patient.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }

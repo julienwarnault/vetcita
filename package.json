@@ -71,6 +71,7 @@
     "@julienbenac/vine-plugin-phone": "^1.1.0",
     "@tailwindcss/vite": "^4.3.0",
     "@tuyau/core": "^1.2.2",
+    "@uidotdev/usehooks": "^2.4.1",
     "@vinejs/vine": "^4.3.1",
     "edge.js": "^6.5.0",
     "libphonenumber-js": "^1.13.2",
@@ -84,6 +85,7 @@
     "tailwind-merge": "^3.6.0",
     "tailwind-variants": "^3.2.2",
     "tailwindcss": "^4.3.0",
+    "use-debounce": "^10.1.1",
     "uuid": "^14.0.0"
   },
   "hotHook": {

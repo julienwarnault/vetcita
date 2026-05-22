@@ -95,7 +95,7 @@ export class PatientSchema extends BaseModel {
 }
 
 export class TenantSchema extends BaseModel {
-  static $columns = ['createdAt', 'id', 'name', 'slug', 'updatedAt'] as const
+  static $columns = ['createdAt', 'id', 'name', 'phone', 'slug', 'updatedAt', 'website'] as const
   $columns = TenantSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -104,9 +104,13 @@ export class TenantSchema extends BaseModel {
   @column()
   declare name: string
   @column()
+  declare phone: string | null
+  @column()
   declare slug: string
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+  @column()
+  declare website: string | null
 }
 
 export class UserSchema extends BaseModel {

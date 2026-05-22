@@ -6,8 +6,8 @@ import Tenant from '#tenants/models/tenant'
 interface UpdateTenantParams {
   id: UUID
   name: string
-  website?: string
   phone?: string
+  website?: string
 }
 
 export class UpdateTenant {
@@ -19,6 +19,8 @@ export class UpdateTenant {
     tenant.merge({
       name: params.name,
       slug: string.slug(params.name),
+      phone: params.phone || '',
+      website: params.website || '',
     })
 
     await tenant.save()

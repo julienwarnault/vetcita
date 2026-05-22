@@ -5,5 +5,6 @@ import '#agendas/routes'
 import '#appointment_types/routes'
 import '#patients/routes'
 import '#calendar/routes'
+import '#tenants/routes'
 
 router.where('id', router.matchers.uuid())

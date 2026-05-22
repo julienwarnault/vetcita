@@ -48,7 +48,9 @@ export function Popover(props: PopoverProps) {
           className={classes.positioner()}
           collisionAvoidance={{ side: 'none' }}
         >
-          <BasePopover.Popup render={<Card className={classes.popup({ className })} />}>
+          <BasePopover.Popup
+            render={<Card shadow={true} className={classes.popup({ className })} />}
+          >
             {children}
           </BasePopover.Popup>
         </BasePopover.Positioner>

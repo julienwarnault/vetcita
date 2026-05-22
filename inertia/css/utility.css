@@ -2,6 +2,12 @@
   width: 100%;
   margin-inline: auto;
   max-width: 1200px;
+  padding-inline: 16px;
+}
+
+@utility container-sm {
+  @apply container;
+  max-width: 800px;
 }
 
 @utility container-xl {

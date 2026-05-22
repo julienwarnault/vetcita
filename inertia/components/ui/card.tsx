@@ -1,18 +1,30 @@
 import { ComponentProps } from 'react'
-import { cn } from 'tailwind-variants'
+import { tv, VariantProps } from 'tailwind-variants'
 
-interface CardProps {}
+const card = tv({
+  base: 'overflow-y-auto overscroll-none rounded-xl border bg-surface',
+  variants: {
+    size: {
+      md: 'px-5 py-2',
+      lg: 'p-6',
+      xl: 'p-10',
+    },
+    shadow: {
+      true: 'shadow-xl',
+    },
+  },
+  defaultVariants: {
+    shadow: false,
+    size: 'md',
+  },
+})
+
+export type CardVariants = VariantProps<typeof card>
+
+interface CardProps extends CardVariants {}
 
 export function Card(props: ComponentProps<'div'> & CardProps) {
-  const { className, ...rest } = props
+  const { size, shadow, className, ...rest } = props
 
-  return (
-    <div
-      className={cn(
-        'overflow-y-auto overscroll-none rounded-xl border bg-surface px-5 py-2 shadow-xl',
-        className
-      )}
-      {...rest}
-    />
-  )
+  return <div className={card({ size, shadow, className })} {...rest} />
 }

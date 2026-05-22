@@ -5,5 +5,6 @@ router
   .group(() => {
     router.on('/').redirect('dashboard')
     router.on('/dashboard').renderInertia('dashboard', {}).as('dashboard')
+    router.on('/settings').renderInertia('settings', {}).as('settings')
   })
   .use(middleware.auth())

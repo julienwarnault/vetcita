@@ -12,6 +12,12 @@ const routes = {
     tokens: [{"old":"/dashboard","type":0,"val":"dashboard","end":""}],
     types: placeholder as Registry['dashboard']['types'],
   },
+  'settings': {
+    methods: ["GET","HEAD"],
+    pattern: '/settings',
+    tokens: [{"old":"/settings","type":0,"val":"settings","end":""}],
+    types: placeholder as Registry['settings']['types'],
+  },
   'login.render': {
     methods: ["GET","HEAD"],
     pattern: '/login',
@@ -131,6 +137,18 @@ const routes = {
     pattern: '/calendar',
     tokens: [{"old":"/calendar","type":0,"val":"calendar","end":""}],
     types: placeholder as Registry['show_calendar.render']['types'],
+  },
+  'update_tenant.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/tenant/edit',
+    tokens: [{"old":"/tenant/edit","type":0,"val":"tenant","end":""},{"old":"/tenant/edit","type":0,"val":"edit","end":""}],
+    types: placeholder as Registry['update_tenant.render']['types'],
+  },
+  'update_tenant.execute': {
+    methods: ["PUT"],
+    pattern: '/tenant',
+    tokens: [{"old":"/tenant","type":0,"val":"tenant","end":""}],
+    types: placeholder as Registry['update_tenant.execute']['types'],
   },
 } as const satisfies Record<string, AdonisEndpoint>
 

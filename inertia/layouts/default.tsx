@@ -17,7 +17,7 @@ export default function Layout({ children }: { children: ReactElement }) {
         <AppHeader fullName={user?.fullName ?? ''} />
         <div className="flex flex-1 overflow-hidden">
           <AppSidebar />
-          <main className="flex flex-1 flex-col overflow-hidden bg-white">{children}</main>
+          <main className="flex flex-1 flex-col overflow-y-auto bg-white">{children}</main>
         </div>
       </div>
       <Toaster position="top-center" richColors />

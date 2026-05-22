@@ -41,9 +41,7 @@ export default function List(props: PageProps) {
         <ListTable
           columns={columns}
           data={agendas}
-          onRowClick={(row) => {
-            router.visit(urlFor('update_agenda.render', { id: row.id }))
-          }}
+          onRowClick={(row) => router.visit(urlFor('update_agenda.render', { id: row.id }))}
         />
       </div>
     </div>

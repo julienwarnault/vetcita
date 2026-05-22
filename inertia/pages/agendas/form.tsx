@@ -21,16 +21,21 @@ export default function ShowForm(props: PageProps) {
 
   return (
     <>
-      <FormHeader title={title}>
-        <ButtonLink size="lg" variant="secondary" route="list_agendas.render">
-          Cerrar
-        </ButtonLink>
-        <Button type="submit" size="lg" form="form">
-          {isEdit ? 'Guardar' : 'Añadir'}
-        </Button>
-      </FormHeader>
+      <FormHeader
+        title={title}
+        rightElement={
+          <>
+            <ButtonLink size="lg" variant="secondary" route="list_agendas.render">
+              Cerrar
+            </ButtonLink>
+            <Button type="submit" size="lg" form="form">
+              {isEdit ? 'Guardar' : 'Añadir'}
+            </Button>
+          </>
+        }
+      />
 
-      <div className="mx-auto max-w-200 w-full pb-24">
+      <div className="container-sm">
         <div className="pt-9 pb-8">
           <h1 className="text-[40px]/11 font-bold">{title}</h1>
         </div>

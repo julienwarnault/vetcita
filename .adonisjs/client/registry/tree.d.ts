@@ -3,6 +3,7 @@ import type { routes } from './index.ts'
 
 export interface ApiDefinition {
   dashboard: typeof routes['dashboard']
+  settings: typeof routes['settings']
   login: {
     render: typeof routes['login.render']
     execute: typeof routes['login.execute']
@@ -48,5 +49,9 @@ export interface ApiDefinition {
   }
   showCalendar: {
     render: typeof routes['show_calendar.render']
+  }
+  updateTenant: {
+    render: typeof routes['update_tenant.render']
+    execute: typeof routes['update_tenant.execute']
   }
 }

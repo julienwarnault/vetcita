@@ -50,7 +50,7 @@ export function InputSelect(props: InputSelectProps) {
           alignItemWithTrigger={false}
           className={classes.positioner()}
         >
-          <BaseSelect.Popup render={<Card className={classes.popup()} />}>
+          <BaseSelect.Popup render={<Card shadow={true} className={classes.popup()} />}>
             <BaseSelect.List className={classes.list()}>
               {items.map((item) => (
                 <BaseSelect.Item key={item.value} value={item.value} className={classes.item()}>

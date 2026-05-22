@@ -29,4 +29,7 @@ export const controllers = {
     ListPatients: () => import('#app/patients/controllers/list_patients_controller'),
     UpdatePatient: () => import('#app/patients/controllers/update_patient_controller'),
   },
+  tenants: {
+    UpdateTenant: () => import('#app/tenants/controllers/update_tenant_controller'),
+  },
 }

@@ -32,6 +32,11 @@ const NAVIGATION = [
     route: 'list_agendas.render',
     navigationIcon: 'users',
   },
+  {
+    name: 'Ajustes',
+    route: 'settings',
+    navigationIcon: 'settings',
+  },
 ] as const
 
 export function AppSidebar() {

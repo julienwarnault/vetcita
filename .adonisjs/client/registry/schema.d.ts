@@ -19,6 +19,18 @@ export interface Registry {
       errorResponse: unknown
     }
   }
+  'settings': {
+    methods: ["GET","HEAD"]
+    pattern: '/settings'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
   'login.render': {
     methods: ["GET","HEAD"]
     pattern: '/login'
@@ -257,6 +269,30 @@ export interface Registry {
       query: ExtractQueryForGet<InferInput<(typeof import('#app/calendar/controllers/show_calendar_controller').default)['validator']>>
       response: ExtractResponse<Awaited<ReturnType<import('#app/calendar/controllers/show_calendar_controller').default['render']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/calendar/controllers/show_calendar_controller').default['render']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'update_tenant.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/tenant/edit'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/tenants/controllers/update_tenant_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/tenants/controllers/update_tenant_controller').default['render']>>>
+    }
+  }
+  'update_tenant.execute': {
+    methods: ["PUT"]
+    pattern: '/tenant'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#app/tenants/controllers/update_tenant_controller').default)['validator']>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#app/tenants/controllers/update_tenant_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/tenants/controllers/update_tenant_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/tenants/controllers/update_tenant_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
 }

@@ -10,6 +10,7 @@ import { Input } from '~/components/ui/input'
 import { Field } from '~/components/ui/field'
 import { Form } from '~/components/ui/form'
 import { InertiaProps } from '~/types'
+import { InputGroup } from '~/components/ui/input_group'
 
 type PageProps = InertiaProps<{
   appointmentType?: Data.AppointmentTypes.AppointmentType
@@ -23,16 +24,21 @@ export default function ShowForm(props: PageProps) {
 
   return (
     <>
-      <FormHeader title={title}>
-        <ButtonLink size="lg" variant="secondary" route="list_appointment_types.render">
-          Cerrar
-        </ButtonLink>
-        <Button type="submit" size="lg" form="form">
-          Guardar
-        </Button>
-      </FormHeader>
+      <FormHeader
+        title={title}
+        rightElement={
+          <>
+            <ButtonLink size="lg" variant="secondary" route="list_appointment_types.render">
+              Cerrar
+            </ButtonLink>
+            <Button type="submit" size="lg" form="form">
+              {isEdit ? 'Guardar' : 'Añadir'}
+            </Button>
+          </>
+        }
+      />
 
-      <div className="mx-auto max-w-200 w-full">
+      <div className="container-sm">
         <div className="pt-9 pb-8">
           <h1 className="text-[40px]/11 font-bold">{title}</h1>
         </div>
@@ -79,11 +85,15 @@ export default function ShowForm(props: PageProps) {
             <div className="grid grid-cols-6 w-full gap-x-4 gap-y-6 pt-6">
               <Field name="price">
                 <Field.Label>Precio</Field.Label>
-                <Input
-                  type="number"
-                  placeholder="0.00"
-                  defaultValue={appointmentType?.price ?? ''}
-                />
+                <InputGroup>
+                  <InputGroup.Input
+                    type="number"
+                    placeholder="0.00"
+                    defaultValue={appointmentType?.price ?? ''}
+                  />
+                  <InputGroup.Addon>$</InputGroup.Addon>
+                  <InputGroup.Addon align="end">MXN</InputGroup.Addon>
+                </InputGroup>
                 <Field.Error />
               </Field>
 
