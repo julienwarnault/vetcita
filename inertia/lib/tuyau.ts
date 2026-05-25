@@ -1,5 +1,9 @@
 import { registry } from '@generated/registry'
 import { createTuyau } from '@tuyau/core/client'
+import { QueryClient } from '@tanstack/react-query'
+import { createTuyauReactQueryClient } from '@tuyau/react-query'
+
+export const queryClient = new QueryClient()
 
 export const client = createTuyau({
   baseUrl: '/',
@@ -7,3 +11,5 @@ export const client = createTuyau({
 })
 
 export const urlFor = client.urlFor
+
+export const query = createTuyauReactQueryClient({ client })

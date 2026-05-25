@@ -5,8 +5,9 @@ import { Data } from '@generated/data'
 import { createRoot } from 'react-dom/client'
 import { createInertiaApp } from '@inertiajs/react'
 import { TuyauProvider } from '@adonisjs/inertia/react'
+import { QueryClientProvider } from '@tanstack/react-query'
 import { resolvePageComponent } from '@adonisjs/inertia/helpers'
-import { client } from '~/lib/tuyau'
+import { client, queryClient } from '~/lib/tuyau'
 
 export const appName = import.meta.env.VITE_APP_NAME || 'Healthcare'
 
@@ -21,9 +22,11 @@ createInertiaApp({
   },
   setup({ el, App, props }) {
     createRoot(el).render(
-      <TuyauProvider client={client}>
-        <App {...props} />
-      </TuyauProvider>
+      <QueryClientProvider client={queryClient}>
+        <TuyauProvider client={client}>
+          <App {...props} />
+        </TuyauProvider>
+      </QueryClientProvider>
     )
   },
   progress: {
