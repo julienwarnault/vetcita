@@ -1,3 +1,4 @@
+import { cn } from 'tailwind-variants'
 import { isValidElement, ReactNode } from 'react'
 import { Badge } from './ui/badge'
 
@@ -5,14 +6,15 @@ interface ViewHeaderProps {
   title: string
   subtitle?: string
   badge?: ReactNode
+  className?: string
   children?: ReactNode
 }
 
 export function ViewHeader(props: ViewHeaderProps) {
-  const { title, subtitle, badge, children } = props
+  const { title, subtitle, badge, className, children } = props
 
   return (
-    <div className="flex pb-6">
+    <div className={cn('flex pb-6', className)}>
       <div className="flex flex-col flex-1 gap-1">
         <div className="flex items-center flex-1 gap-2">
           <h1 className="text-[28px]/9 font-semibold">{title}</h1>

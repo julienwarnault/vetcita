@@ -150,6 +150,18 @@ const routes = {
     tokens: [{"old":"/tenant","type":0,"val":"tenant","end":""}],
     types: placeholder as Registry['update_tenant.execute']['types'],
   },
+  'patient_booking.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/:tenantId/booking',
+    tokens: [{"old":"/:tenantId/booking","type":1,"val":"tenantId","end":""},{"old":"/:tenantId/booking","type":0,"val":"booking","end":""}],
+    types: placeholder as Registry['patient_booking.render']['types'],
+  },
+  'booking_link.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/settings/booling-link',
+    tokens: [{"old":"/settings/booling-link","type":0,"val":"settings","end":""},{"old":"/settings/booling-link","type":0,"val":"booling-link","end":""}],
+    types: placeholder as Registry['booking_link.render']['types'],
+  },
 } as const satisfies Record<string, AdonisEndpoint>
 
 export { routes }

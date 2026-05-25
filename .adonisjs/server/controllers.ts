@@ -32,4 +32,8 @@ export const controllers = {
   tenants: {
     UpdateTenant: () => import('#app/tenants/controllers/update_tenant_controller'),
   },
+  booking: {
+    BookingLink: () => import('#app/booking/controllers/booking_link_controller'),
+    PatientBooking: () => import('#app/booking/controllers/patient_booking_controller'),
+  },
 }

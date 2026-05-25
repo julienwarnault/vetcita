@@ -29,3 +29,15 @@ export function formatPhoneNumber(phone: string): string {
 export function capitalize(text: string) {
   return text.charAt(0).toUpperCase() + text.slice(1)
 }
+
+export function downloadFile(url: string, filename = 'document') {
+  const link = document.createElement('a')
+
+  link.href = url
+  link.download = filename
+  link.target = '_self'
+
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+}

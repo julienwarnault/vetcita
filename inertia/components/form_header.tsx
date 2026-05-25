@@ -3,7 +3,7 @@ import { cn } from 'tailwind-variants'
 import { useWindowScroll } from '@uidotdev/usehooks'
 
 interface FormHeaderProps {
-  title: string
+  title?: string
   leftElement?: ReactNode
   rightElement?: ReactNode
   className?: string

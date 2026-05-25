@@ -28,6 +28,8 @@ export type ScannedRoutes = {
     'show_calendar.render': { paramsTuple?: []; params?: {} }
     'update_tenant.render': { paramsTuple?: []; params?: {} }
     'update_tenant.execute': { paramsTuple?: []; params?: {} }
+    'patient_booking.render': { paramsTuple: [ParamValue]; params: {'tenantId': ParamValue} }
+    'booking_link.render': { paramsTuple?: []; params?: {} }
   }
   GET: {
     'dashboard': { paramsTuple?: []; params?: {} }
@@ -44,6 +46,8 @@ export type ScannedRoutes = {
     'update_patient.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'show_calendar.render': { paramsTuple?: []; params?: {} }
     'update_tenant.render': { paramsTuple?: []; params?: {} }
+    'patient_booking.render': { paramsTuple: [ParamValue]; params: {'tenantId': ParamValue} }
+    'booking_link.render': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
     'dashboard': { paramsTuple?: []; params?: {} }
@@ -60,6 +64,8 @@ export type ScannedRoutes = {
     'update_patient.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'show_calendar.render': { paramsTuple?: []; params?: {} }
     'update_tenant.render': { paramsTuple?: []; params?: {} }
+    'patient_booking.render': { paramsTuple: [ParamValue]; params: {'tenantId': ParamValue} }
+    'booking_link.render': { paramsTuple?: []; params?: {} }
   }
   POST: {
     'login.execute': { paramsTuple?: []; params?: {} }

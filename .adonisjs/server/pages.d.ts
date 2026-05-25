@@ -25,6 +25,8 @@ declare module '@adonisjs/inertia/types' {
     'patients/form': ExtractProps<(typeof import('../../inertia/pages/patients/form.tsx'))['default']>
     'patients/list': ExtractProps<(typeof import('../../inertia/pages/patients/list.tsx'))['default']>
     'tenants/form': ExtractProps<(typeof import('../../inertia/pages/tenants/form.tsx'))['default']>
-    'settings': ExtractProps<(typeof import('../../inertia/pages/settings.tsx'))['default']>
+    'settings/show': ExtractProps<(typeof import('../../inertia/pages/settings/show.tsx'))['default']>
+    'settings/booking_link': ExtractProps<(typeof import('../../inertia/pages/settings/booking_link.tsx'))['default']>
+    'booking/show': ExtractProps<(typeof import('../../inertia/pages/booking/show.tsx'))['default']>
   }
 }

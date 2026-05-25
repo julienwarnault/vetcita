@@ -5,7 +5,7 @@ const field = tv({
   slots: {
     root: 'flex flex-col col-span-3 gap-1',
     label: 'text-[15px] font-medium text-foreground',
-    description: 'text-sm text-muted',
+    description: 'text-[13px] text-muted',
     error: 'text-sm text-destructive',
   },
 })

@@ -54,4 +54,10 @@ export interface ApiDefinition {
     render: typeof routes['update_tenant.render']
     execute: typeof routes['update_tenant.execute']
   }
+  patientBooking: {
+    render: typeof routes['patient_booking.render']
+  }
+  bookingLink: {
+    render: typeof routes['booking_link.render']
+  }
 }

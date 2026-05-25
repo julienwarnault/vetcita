@@ -14,6 +14,7 @@ const button = tv({
       'sm': 'h-9 px-4 text-[15px] font-medium',
       'lg': 'h-12 px-5 text-[17px] font-semibold',
       'icon-sm': 'size-9',
+      'icon-lg': 'size-12',
     },
   },
   defaultVariants: {

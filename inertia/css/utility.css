@@ -14,3 +14,11 @@
   @apply container;
   max-width: 1440px;
 }
+
+@utility flip-x {
+  transform: scaleX(-1);
+}
+
+@utility flip-y {
+  transform: scaleY(-1);
+}
