@@ -109,8 +109,6 @@ export function DatePicker(props: DatePickerProps) {
     onMonthChange?.(next)
   }
 
-  console.log('start', start?.toString())
-
   return (
     <div
       role="group"

@@ -2,6 +2,7 @@ import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
 import { urlFor } from '@adonisjs/core/services/url_builder'
 import { QrCodeService } from '#app/shared/services/qr_code_service'
+import { appUrl } from '#config/app'
 
 @inject()
 export default class BookingLinkController {
@@ -10,7 +11,11 @@ export default class BookingLinkController {
   async render({ inertia, auth }: HttpContext) {
     const user = auth.getUserOrFail()
 
-    const publicUrl = urlFor('book_appointment.render', { tenantId: user.tenantId })
+    const publicUrl = urlFor(
+      'book_appointment.render',
+      { tenantId: user.tenantId },
+      { prefixUrl: appUrl }
+    )
 
     const qrDataUrl = await this.qrCodeService.generateQRCode(publicUrl)
 

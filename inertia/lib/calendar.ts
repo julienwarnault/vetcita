@@ -11,6 +11,7 @@ export type Event = {
   patientEmail?: string
   typeName: string
   color: string
+  bookingRef: string
 }
 
 export type EventSlot = {

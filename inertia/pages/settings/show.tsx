@@ -1,15 +1,14 @@
 import { cn } from 'tailwind-variants'
-import { usePage } from '@inertiajs/react'
-import type { Data } from '@generated/data'
 import { ArrowRightIcon } from 'lucide-react'
 import { Link } from '@adonisjs/inertia/react'
 import { DynamicIcon, IconName } from 'lucide-react/dynamic'
 import { ViewHeader } from '~/components/view_header'
+import usePageProps from '~/hooks/use_page_props'
 import { Card } from '~/components/ui/card'
 import { urlFor } from '~/lib/tuyau'
 
 export default function Settings() {
-  const { user } = usePage<Data.SharedProps>().props
+  const { user } = usePageProps()
 
   return (
     <div className="h-full bg-background">

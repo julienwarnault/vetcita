@@ -1,6 +1,10 @@
 import { DateTime } from 'luxon'
 import { Data } from '@generated/data'
+import { router } from '@inertiajs/react'
+import { useDebouncedCallback } from 'use-debounce'
 import { CalendarToolbar } from '~/components/calendar/calendar_toolbar'
+import { useSubscribe } from '~/hooks/use_subscribe'
+import usePageProps from '~/hooks/use_page_props'
 import { Calendar } from '~/components/calendar'
 import { DEFAULT_TIMEZONE } from '~/lib/date'
 import { InertiaProps } from '~/types'
@@ -13,6 +17,14 @@ type PageProps = InertiaProps<{
 
 export default function ShowCalendar(props: PageProps) {
   const { date, view, appointments } = props
+
+  const { user } = usePageProps()
+
+  const debounced = useDebouncedCallback(() => {
+    router.reload({ only: ['appointments'] })
+  }, 2_000)
+
+  useSubscribe({ channel: `tenants/${user?.tenantId}/appointments`, onMessage: debounced })
 
   return (
     <div className="flex flex-1 flex-col overflow-hidden">
@@ -32,6 +44,7 @@ export default function ShowCalendar(props: PageProps) {
             patientEmail: appointment.patient!.email ?? undefined,
             typeName: appointment.appointmentType!.name,
             color: appointment.appointmentType!.color,
+            bookingRef: appointment.bookingRef,
           }))}
         />
       </div>

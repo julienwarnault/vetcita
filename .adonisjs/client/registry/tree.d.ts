@@ -73,4 +73,7 @@ export interface ApiDefinition {
   bookingLink: {
     render: typeof routes['booking_link.render']
   }
+  eventStream: typeof routes['event_stream']
+  subscribe: typeof routes['subscribe']
+  unsubscribe: typeof routes['unsubscribe']
 }

@@ -3,4 +3,10 @@
  * DO NOT EDIT manually
  */
 
-export const events = {}
+import BookingAppointmentCreated from '#app/booking/events/appointment_created'
+
+export const events = {
+  booking: {
+    AppointmentCreated: BookingAppointmentCreated,
+  },
+}

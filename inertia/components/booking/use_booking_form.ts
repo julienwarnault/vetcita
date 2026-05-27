@@ -76,7 +76,7 @@ export function useBookingForm(params: UseBookingFormParams) {
 
   function next() {
     if (isLast) {
-      form.post(submitUrl, { replace: true })
+      form.post(submitUrl, { replace: false, preserveState: false })
       return
     }
 

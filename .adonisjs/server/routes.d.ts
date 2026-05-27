@@ -35,6 +35,9 @@ export type ScannedRoutes = {
     'confirm_appointment.render': { paramsTuple: [ParamValue]; params: {'appointmentId': ParamValue} }
     'show_calendar.render': { paramsTuple?: []; params?: {} }
     'booking_link.render': { paramsTuple?: []; params?: {} }
+    'event_stream': { paramsTuple?: []; params?: {} }
+    'subscribe': { paramsTuple?: []; params?: {} }
+    'unsubscribe': { paramsTuple?: []; params?: {} }
   }
   GET: {
     'get_month_availability.render': { paramsTuple?: []; params?: {} }
@@ -57,6 +60,7 @@ export type ScannedRoutes = {
     'confirm_appointment.render': { paramsTuple: [ParamValue]; params: {'appointmentId': ParamValue} }
     'show_calendar.render': { paramsTuple?: []; params?: {} }
     'booking_link.render': { paramsTuple?: []; params?: {} }
+    'event_stream': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
     'get_month_availability.render': { paramsTuple?: []; params?: {} }
@@ -79,6 +83,7 @@ export type ScannedRoutes = {
     'confirm_appointment.render': { paramsTuple: [ParamValue]; params: {'appointmentId': ParamValue} }
     'show_calendar.render': { paramsTuple?: []; params?: {} }
     'booking_link.render': { paramsTuple?: []; params?: {} }
+    'event_stream': { paramsTuple?: []; params?: {} }
   }
   POST: {
     'login.execute': { paramsTuple?: []; params?: {} }
@@ -87,6 +92,8 @@ export type ScannedRoutes = {
     'create_appointment_type.execute': { paramsTuple?: []; params?: {} }
     'create_patient.execute': { paramsTuple?: []; params?: {} }
     'book_appointment.execute': { paramsTuple: [ParamValue]; params: {'tenantId': ParamValue} }
+    'subscribe': { paramsTuple?: []; params?: {} }
+    'unsubscribe': { paramsTuple?: []; params?: {} }
   }
   PUT: {
     'update_agenda.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }

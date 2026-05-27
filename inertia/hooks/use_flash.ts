@@ -1,10 +1,10 @@
 import { toast } from 'sonner'
 import { useEffect } from 'react'
 import { usePage } from '@inertiajs/react'
-import { type Data } from '@generated/data'
+import usePageProps from './use_page_props'
 
 export function useFlashToasts() {
-  const { flash } = usePage<Data.SharedProps>().props
+  const { flash } = usePageProps()
 
   useEffect(() => {
     toast.dismiss()

@@ -36,8 +36,9 @@ export function CalendarEventDrawer(props: CalendarEventDrawerProps) {
                   <h1 className="text-[28px]/9 font-semibold text-white">
                     {capitalize(event.start.setLocale(DEFAULT_LOCALE).toFormat('ccc. d LLL'))}
                   </h1>
+
                   <div className="text-sm font-normal text-white">
-                    {event.start.toFormat('h:mma').toLowerCase()}
+                    {event.start.toFormat('h:mma').toLowerCase()} • {event.bookingRef}
                   </div>
                 </div>
                 <div>
@@ -57,6 +58,7 @@ export function CalendarEventDrawer(props: CalendarEventDrawerProps) {
                   />
                   <div className="flex flex-col gap-1 py-2">
                     <div className="text-[17px]/6 font-medium">{event.typeName}</div>
+
                     <div className="text-[15px]/5 text-foreground">
                       {`${event.start.toFormat('h:mma')} - ${event.end.toFormat('h:mma')}`.toLowerCase()}
                     </div>

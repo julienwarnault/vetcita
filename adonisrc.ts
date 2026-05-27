@@ -59,6 +59,7 @@ export default defineConfig({
     () => import('@adonisjs/inertia/inertia_provider'),
     () => import('@adonisjs/auth/auth_provider'),
     () => import('#providers/api_provider'),
+    () => import('@adonisjs/transmit/transmit_provider'),
   ],
 
   /*
@@ -74,6 +75,8 @@ export default defineConfig({
     () => import('#start/kernel'),
     () => import('#start/validator'),
     () => import('#start/vine'),
+    () => import('#start/events'),
+    () => import('#start/transmit'),
   ],
 
   /*

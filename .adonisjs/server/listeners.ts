@@ -3,4 +3,8 @@
  * DO NOT EDIT manually
  */
 
-export const listeners = {}
+export const listeners = {
+  booking: {
+    BroadcastAppointmentCreated: () => import('#app/booking/listeners/broadcast_appointment_created'),
+  },
+}

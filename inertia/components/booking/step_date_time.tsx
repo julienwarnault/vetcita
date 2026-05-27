@@ -24,9 +24,6 @@ export function StepDateTime({ form }: StepDateTimeProps) {
     return null
   }
 
-  console.log('value', data.startDate)
-  console.log('startDate', data.startDate || nextAvailable?.date)
-
   return (
     <TimeSlotPicker
       tenantId={data.tenantId}

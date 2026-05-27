@@ -1,11 +1,13 @@
 import { DateTime } from 'luxon'
 import { inject } from '@adonisjs/core'
+import { dispatchAfterCommit } from '#app/shared/utils/dispatch_after_commit'
 import { transactionContext } from '#app/shared/contexts/transaction_context'
 import { BookingRefService } from '#booking/services/booking_ref_service'
 import AppointmentType from '#appointment_types/models/appointment_type'
 import { DEFAULT_TIMEZONE } from '#app/shared/services/time_service'
 import Appointment from '#booking/models/appointment'
 import type { UUID } from '#app/shared/types'
+import { events } from '#generated/events'
 
 interface CreateAppointmentParams {
   appointmentTypeId: UUID
@@ -43,6 +45,10 @@ export class CreateAppointment {
       },
       { client: trx }
     )
+
+    dispatchAfterCommit(async () => {
+      await events.booking.AppointmentCreated.dispatch(appointment)
+    })
 
     return { appointment }
   }

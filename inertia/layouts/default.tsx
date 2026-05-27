@@ -1,15 +1,14 @@
 import { Toaster } from 'sonner'
 import { ReactElement } from 'react'
-import { usePage } from '@inertiajs/react'
-import type { Data } from '@generated/data'
 import { AppSidebar } from '~/components/app_sidebar'
 import { AppHeader } from '~/components/app_header'
 import { useFlashToasts } from '~/hooks/use_flash'
+import usePageProps from '~/hooks/use_page_props'
 
 export default function Layout({ children }: { children: ReactElement }) {
   useFlashToasts()
 
-  const { user } = usePage<Data.SharedProps>().props
+  const { user } = usePageProps()
 
   return (
     <>
