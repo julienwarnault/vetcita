@@ -17,12 +17,13 @@
     "typecheck": "tsc --noEmit && tsc --noEmit --project inertia/tsconfig.json"
   },
   "imports": {
-    "#agendas/*": "./app/agendas/*.js",
     "#app/*": "./app/*.js",
+    "#agendas/*": "./app/agendas/*.js",
     "#appointment_types/*": "./app/appointment_types/*.js",
     "#booking/*": "./app/booking/*.js",
     "#calendar/*": "./app/calendar/*.js",
     "#identity/*": "./app/identity/*.js",
+    "#notifications/*": "./app/notifications/*.js",
     "#patients/*": "./app/patients/*.js",
     "#scheduling/*": "./app/scheduling/*.js",
     "#shared/*": "./app/shared/*.js",
@@ -64,6 +65,7 @@
     "@adonisjs/cors": "^3.0.0",
     "@adonisjs/inertia": "^4.2.0",
     "@adonisjs/lucid": "^22.4.2",
+    "@adonisjs/mail": "^10.2.1",
     "@adonisjs/session": "^8.1.0",
     "@adonisjs/shield": "^9.0.0",
     "@adonisjs/static": "^2.0.1",
