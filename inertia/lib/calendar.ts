@@ -1,5 +1,5 @@
 import { DateTime, type Interval } from 'luxon'
-import { DEFAULT_LOCALE, eachDayOfInterval } from './date'
+import { DEFAULT_LOCALE, DEFAULT_TIMEZONE, eachDayOfInterval } from './date'
 
 export const SLOT_IN_MINUTES = 15
 export const SLOT_HEIGHT = 24
@@ -13,7 +13,7 @@ const formatter = new Intl.DateTimeFormat(DEFAULT_LOCALE, {
 })
 
 export function getMonthDays(date: string) {
-  const dt = DateTime.fromISO(date)
+  const dt = DateTime.fromISO(date, { zone: DEFAULT_TIMEZONE })
   const montStartAt = dt.startOf('month')
   const start = montStartAt.startOf('week')
   const end = montStartAt.endOf('month').endOf('week')
@@ -21,7 +21,7 @@ export function getMonthDays(date: string) {
 }
 
 export function getDaysFromView(date: string, view: ViewType): DateTime[] {
-  const dt = DateTime.fromISO(date).setLocale(DEFAULT_LOCALE)
+  const dt = DateTime.fromISO(date, { zone: DEFAULT_TIMEZONE }).setLocale(DEFAULT_LOCALE)
 
   switch (view) {
     case 'day':
@@ -40,7 +40,7 @@ export function getRatio() {
 }
 
 export function getRangeForView(date: string, view: ViewType) {
-  const dt = DateTime.fromISO(date)
+  const dt = DateTime.fromISO(date, { zone: DEFAULT_TIMEZONE })
 
   switch (view) {
     case 'day':

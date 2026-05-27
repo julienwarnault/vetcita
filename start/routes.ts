@@ -7,5 +7,6 @@ import '#patients/routes'
 import '#calendar/routes'
 import '#tenants/routes'
 import '#booking/routes'
+import '#scheduling/routes'
 
 router.where('id', router.matchers.uuid())

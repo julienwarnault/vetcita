@@ -1,4 +1,4 @@
-import { DateTime } from 'luxon'
+import { DateTime, Interval } from 'luxon'
 
 export const DEFAULT_TIMEZONE = 'America/Mexico_City'
 export const DEFAULT_LOCALE = 'es-MX'
@@ -27,4 +27,14 @@ export function eachDayOfInterval({ start, end }: { start: DateTime; end: DateTi
   }
 
   return days
+}
+
+export function toInterval(value: Interval | DateTime | undefined): Interval | undefined {
+  if (!value) return undefined
+
+  if (value instanceof DateTime) {
+    return Interval.fromDateTimes(value.startOf('day'), value.endOf('day'))
+  }
+
+  return value
 }

@@ -2,6 +2,15 @@
 import type { routes } from './index.ts'
 
 export interface ApiDefinition {
+  getMonthAvailability: {
+    render: typeof routes['get_month_availability.render']
+  }
+  getAvailableSlots: {
+    render: typeof routes['get_available_slots.render']
+  }
+  getNextAvailableSlot: {
+    render: typeof routes['get_next_available_slot.render']
+  }
   dashboard: typeof routes['dashboard']
   settings: typeof routes['settings']
   login: {
@@ -54,8 +63,12 @@ export interface ApiDefinition {
     render: typeof routes['update_tenant.render']
     execute: typeof routes['update_tenant.execute']
   }
-  patientBooking: {
-    render: typeof routes['patient_booking.render']
+  bookAppointment: {
+    render: typeof routes['book_appointment.render']
+    execute: typeof routes['book_appointment.execute']
+  }
+  confirmAppointment: {
+    render: typeof routes['confirm_appointment.render']
   }
   bookingLink: {
     render: typeof routes['booking_link.render']

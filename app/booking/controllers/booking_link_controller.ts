@@ -10,7 +10,7 @@ export default class BookingLinkController {
   async render({ inertia, auth }: HttpContext) {
     const user = auth.getUserOrFail()
 
-    const publicUrl = urlFor('patient_booking.render', { tenantId: user.tenantId })
+    const publicUrl = urlFor('book_appointment.render', { tenantId: user.tenantId })
 
     const qrDataUrl = await this.qrCodeService.generateQRCode(publicUrl)
 

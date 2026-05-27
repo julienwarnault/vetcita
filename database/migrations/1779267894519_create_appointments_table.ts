@@ -14,7 +14,9 @@ export default class extends BaseSchema {
       table.timestamp('start_date').notNullable()
       table.timestamp('end_date').notNullable()
       table.integer('duration').notNullable()
+      table.string('booking_ref', 8).notNullable().unique()
       table.index(['start_date', 'created_at'])
+      table.index(['booking_ref'])
     })
   }
 

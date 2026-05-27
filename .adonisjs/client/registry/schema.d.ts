@@ -7,6 +7,42 @@ import type { InferInput, SimpleError } from '@vinejs/vine/types'
 export type ParamValue = string | number | bigint | boolean
 
 export interface Registry {
+  'get_month_availability.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/availability'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: ExtractQueryForGet<InferInput<(typeof import('#app/scheduling/controllers/get_month_availability_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/scheduling/controllers/get_month_availability_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/get_month_availability_controller').default['render']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'get_available_slots.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/slots'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: ExtractQueryForGet<InferInput<(typeof import('#app/scheduling/controllers/get_available_slots_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/scheduling/controllers/get_available_slots_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/get_available_slots_controller').default['render']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'get_next_available_slot.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/next-slot'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: ExtractQueryForGet<InferInput<(typeof import('#app/scheduling/controllers/get_next_available_slot_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/scheduling/controllers/get_next_available_slot_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/get_next_available_slot_controller').default['render']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
   'dashboard': {
     methods: ["GET","HEAD"]
     pattern: '/dashboard'
@@ -295,7 +331,7 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/tenants/controllers/update_tenant_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'patient_booking.render': {
+  'book_appointment.render': {
     methods: ["GET","HEAD"]
     pattern: '/:tenantId/booking'
     types: {
@@ -303,13 +339,37 @@ export interface Registry {
       paramsTuple: [ParamValue]
       params: { tenantId: ParamValue }
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#app/booking/controllers/patient_booking_controller').default['render']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/booking/controllers/patient_booking_controller').default['render']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/booking/controllers/book_appointment_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/booking/controllers/book_appointment_controller').default['render']>>>
+    }
+  }
+  'book_appointment.execute': {
+    methods: ["POST"]
+    pattern: '/:tenantId/booking'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#app/booking/controllers/book_appointment_controller').default)['validator']>>
+      paramsTuple: [ParamValue]
+      params: { tenantId: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#app/booking/controllers/book_appointment_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/booking/controllers/book_appointment_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/booking/controllers/book_appointment_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'confirm_appointment.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/booking/:appointmentId/confirm'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { appointmentId: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/booking/controllers/confirm_appointment_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/booking/controllers/confirm_appointment_controller').default['render']>>>
     }
   }
   'booking_link.render': {
     methods: ["GET","HEAD"]
-    pattern: '/settings/booling-link'
+    pattern: '/settings/booking-link'
     types: {
       body: {}
       paramsTuple: []

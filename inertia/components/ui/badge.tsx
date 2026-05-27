@@ -7,9 +7,11 @@ const badge = tv({
     variant: {
       primary: 'bg-primary text-white',
       secondary: 'border border-border bg-white',
+      accent: 'bg-accent text-white',
     },
     size: {
-      md: 'px-3 min-block-6 text-[13px]/4 font-medium',
+      md: 'px-3 min-block-6 text-[13px]/4 font-medium [&_svg]:size-3',
+      lg: 'px-3 min-block-8 text-[14px]/4 font-medium [&_svg]:size-4',
     },
   },
   defaultVariants: {

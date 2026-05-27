@@ -19,12 +19,12 @@
   "imports": {
     "#agendas/*": "./app/agendas/*.js",
     "#app/*": "./app/*.js",
-    "#appointments/*": "./app/appointments/*.js",
     "#appointment_types/*": "./app/appointment_types/*.js",
     "#booking/*": "./app/booking/*.js",
     "#calendar/*": "./app/calendar/*.js",
     "#identity/*": "./app/identity/*.js",
     "#patients/*": "./app/patients/*.js",
+    "#scheduling/*": "./app/scheduling/*.js",
     "#shared/*": "./app/shared/*.js",
     "#tenants/*": "./app/tenants/*.js",
     "#generated/*": "./.adonisjs/server/*.js",

@@ -1,7 +1,8 @@
 import { BaseTransformer } from '@adonisjs/core/transformers'
-import AppointmentTypeTransformer from '#app/appointment_types/transformers/appointment_type_transformer'
-import PatientTransformer from '#app/patients/transformers/patient_transformer'
-import type Appointment from '#appointments/models/appointment'
+import AppointmentTypeTransformer from '#appointment_types/transformers/appointment_type_transformer'
+import TenantTransformer from '#tenants/transformers/tenant_transformer'
+import PatientTransformer from '#patients/transformers/patient_transformer'
+import type Appointment from '#booking/models/appointment'
 
 export default class AppointmentTransformer extends BaseTransformer<Appointment> {
   toObject() {
@@ -13,6 +14,7 @@ export default class AppointmentTransformer extends BaseTransformer<Appointment>
         'appointmentTypeId',
         'patientId',
         'duration',
+        'bookingRef',
         'createdAt',
         'updatedAt',
       ]),
@@ -20,6 +22,7 @@ export default class AppointmentTransformer extends BaseTransformer<Appointment>
         this.whenLoaded(this.resource.appointmentType)
       ),
       patient: PatientTransformer.transform(this.whenLoaded(this.resource.patient)),
+      tenant: TenantTransformer.transform(this.whenLoaded(this.resource.tenant)),
     }
   }
 }

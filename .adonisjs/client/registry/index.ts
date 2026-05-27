@@ -6,6 +6,24 @@ import type { ApiDefinition } from './tree.d.ts'
 const placeholder: any = {}
 
 const routes = {
+  'get_month_availability.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/availability',
+    tokens: [{"old":"/api/availability","type":0,"val":"api","end":""},{"old":"/api/availability","type":0,"val":"availability","end":""}],
+    types: placeholder as Registry['get_month_availability.render']['types'],
+  },
+  'get_available_slots.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/slots',
+    tokens: [{"old":"/api/slots","type":0,"val":"api","end":""},{"old":"/api/slots","type":0,"val":"slots","end":""}],
+    types: placeholder as Registry['get_available_slots.render']['types'],
+  },
+  'get_next_available_slot.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/next-slot',
+    tokens: [{"old":"/api/next-slot","type":0,"val":"api","end":""},{"old":"/api/next-slot","type":0,"val":"next-slot","end":""}],
+    types: placeholder as Registry['get_next_available_slot.render']['types'],
+  },
   'dashboard': {
     methods: ["GET","HEAD"],
     pattern: '/dashboard',
@@ -150,16 +168,28 @@ const routes = {
     tokens: [{"old":"/tenant","type":0,"val":"tenant","end":""}],
     types: placeholder as Registry['update_tenant.execute']['types'],
   },
-  'patient_booking.render': {
+  'book_appointment.render': {
     methods: ["GET","HEAD"],
     pattern: '/:tenantId/booking',
     tokens: [{"old":"/:tenantId/booking","type":1,"val":"tenantId","end":""},{"old":"/:tenantId/booking","type":0,"val":"booking","end":""}],
-    types: placeholder as Registry['patient_booking.render']['types'],
+    types: placeholder as Registry['book_appointment.render']['types'],
+  },
+  'book_appointment.execute': {
+    methods: ["POST"],
+    pattern: '/:tenantId/booking',
+    tokens: [{"old":"/:tenantId/booking","type":1,"val":"tenantId","end":""},{"old":"/:tenantId/booking","type":0,"val":"booking","end":""}],
+    types: placeholder as Registry['book_appointment.execute']['types'],
+  },
+  'confirm_appointment.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/booking/:appointmentId/confirm',
+    tokens: [{"old":"/booking/:appointmentId/confirm","type":0,"val":"booking","end":""},{"old":"/booking/:appointmentId/confirm","type":1,"val":"appointmentId","end":""},{"old":"/booking/:appointmentId/confirm","type":0,"val":"confirm","end":""}],
+    types: placeholder as Registry['confirm_appointment.render']['types'],
   },
   'booking_link.render': {
     methods: ["GET","HEAD"],
-    pattern: '/settings/booling-link',
-    tokens: [{"old":"/settings/booling-link","type":0,"val":"settings","end":""},{"old":"/settings/booling-link","type":0,"val":"booling-link","end":""}],
+    pattern: '/settings/booking-link',
+    tokens: [{"old":"/settings/booking-link","type":0,"val":"settings","end":""},{"old":"/settings/booking-link","type":0,"val":"booking-link","end":""}],
     types: placeholder as Registry['booking_link.render']['types'],
   },
 } as const satisfies Record<string, AdonisEndpoint>

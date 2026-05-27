@@ -49,10 +49,12 @@ export class AppointmentTypeSchema extends BaseModel {
 }
 
 export class AppointmentSchema extends BaseModel {
-  static $columns = ['appointmentTypeId', 'createdAt', 'duration', 'endDate', 'id', 'patientId', 'startDate', 'tenantId', 'updatedAt'] as const
+  static $columns = ['appointmentTypeId', 'bookingRef', 'createdAt', 'duration', 'endDate', 'id', 'patientId', 'startDate', 'tenantId', 'updatedAt'] as const
   $columns = AppointmentSchema.$columns
   @column()
   declare appointmentTypeId: UUID
+  @column()
+  declare bookingRef: string
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
   @column()

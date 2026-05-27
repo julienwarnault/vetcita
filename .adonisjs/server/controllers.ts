@@ -16,6 +16,11 @@ export const controllers = {
     ListAppointmentTypes: () => import('#app/appointment_types/controllers/list_appointment_types_controller'),
     UpdateAppointmentType: () => import('#app/appointment_types/controllers/update_appointment_type_controller'),
   },
+  booking: {
+    BookAppointment: () => import('#app/booking/controllers/book_appointment_controller'),
+    BookingLink: () => import('#app/booking/controllers/booking_link_controller'),
+    ConfirmAppointment: () => import('#app/booking/controllers/confirm_appointment_controller'),
+  },
   calendar: {
     ShowCalendar: () => import('#app/calendar/controllers/show_calendar_controller'),
   },
@@ -29,11 +34,12 @@ export const controllers = {
     ListPatients: () => import('#app/patients/controllers/list_patients_controller'),
     UpdatePatient: () => import('#app/patients/controllers/update_patient_controller'),
   },
+  scheduling: {
+    GetAvailableSlots: () => import('#app/scheduling/controllers/get_available_slots_controller'),
+    GetMonthAvailability: () => import('#app/scheduling/controllers/get_month_availability_controller'),
+    GetNextAvailableSlot: () => import('#app/scheduling/controllers/get_next_available_slot_controller'),
+  },
   tenants: {
     UpdateTenant: () => import('#app/tenants/controllers/update_tenant_controller'),
-  },
-  booking: {
-    BookingLink: () => import('#app/booking/controllers/booking_link_controller'),
-    PatientBooking: () => import('#app/booking/controllers/patient_booking_controller'),
   },
 }

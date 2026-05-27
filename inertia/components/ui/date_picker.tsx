@@ -2,7 +2,7 @@ import { DateTime, Info, Interval } from 'luxon'
 import { CSSProperties, useMemo, useState } from 'react'
 import { tv, type VariantProps } from 'tailwind-variants'
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
-import { DEFAULT_LOCALE, today } from '~/lib/date'
+import { DEFAULT_LOCALE, today, toInterval } from '~/lib/date'
 import { getMonthDays } from '~/lib/calendar'
 import { capitalize } from '~/lib/utils'
 
@@ -11,7 +11,7 @@ const datePicker = tv({
     container: 'relative min-h-94 min-w-[calc(7*var(--months)*44px)]',
     navigation: 'pointer-events-none absolute inset-x-0 top-0 z-10 flex justify-between',
     navigationButton:
-      'pointer-events-auto flex size-10 items-center justify-center rounded-full hover:bg-background focus-visible:ring-2 focus-visible:ring-accent',
+      'pointer-events-auto flex size-10 items-center justify-center rounded-full hover:bg-background focus-visible:ring-2 focus-visible:ring-accent disabled:pointer-events-none disabled:opacity-30',
     monthList: 'flex flex-row gap-8',
     monthPanel: 'flex grow flex-col gap-1',
     monthTitle: 'flex h-10 items-center justify-center text-base font-semibold',
@@ -19,7 +19,7 @@ const datePicker = tv({
     weekdayCell: 'flex h-11 items-center justify-center',
     weekdayText: 'text-[15px] no-underline text-foreground',
     dayGrid: 'grid grid-cols-7 gap-1',
-    dayButton: 'relative flex size-11 items-center justify-center rounded-full',
+    dayButton: 'relative flex size-11 items-center justify-center rounded-full mx-auto',
     rangeFill: 'absolute inset-y-0 w-[calc(50%+2px)] bg-accent-faded',
     dayContent:
       'relative z-10 flex size-11 items-center justify-center rounded-full border border-transparent',
@@ -29,6 +29,12 @@ const datePicker = tv({
     visible: {
       true: { dayButton: 'hover:bg-background focus-visible:ring-2 focus-visible:ring-accent' },
       false: { dayButton: 'invisible cursor-default' },
+    },
+    disabled: {
+      true: {
+        dayButton: 'cursor-not-allowed',
+        dayText: 'opacity-30',
+      },
     },
     state: {
       default: {},
@@ -40,6 +46,13 @@ const datePicker = tv({
       right: { rangeFill: '-right-0.5' },
     },
   },
+  compoundVariants: [
+    {
+      visible: true,
+      disabled: true,
+      class: { dayButton: 'hover:bg-transparent focus-visible:ring-0' },
+    },
+  ],
 })
 
 type DayState = NonNullable<VariantProps<typeof datePicker>['state']>
@@ -47,9 +60,13 @@ type DayState = NonNullable<VariantProps<typeof datePicker>['state']>
 interface DatePickerProps {
   initialMonth?: DateTime
   numberOfMonths?: number
-  selectedDays?: Interval
+  selectedDays?: Interval | DateTime
   locale?: string
+  minValue?: DateTime
+  maxValue?: DateTime
+  isDateUnavailable?: (date: DateTime) => boolean
   onDayClick?: (day: DateTime) => void
+  onMonthChange?: (month: DateTime) => void
 }
 
 export function DatePicker(props: DatePickerProps) {
@@ -58,7 +75,11 @@ export function DatePicker(props: DatePickerProps) {
     numberOfMonths = 1,
     selectedDays,
     locale = DEFAULT_LOCALE,
+    minValue,
+    maxValue,
+    isDateUnavailable,
     onDayClick,
+    onMonthChange,
   } = props
 
   const styles = datePicker()
@@ -67,10 +88,28 @@ export function DatePicker(props: DatePickerProps) {
 
   const todayDate = useMemo(() => today(), [])
 
-  const start = selectedDays?.start ?? undefined
-  const end = selectedDays?.end ?? undefined
+  const selectedInterval = toInterval(selectedDays)
+
+  const start = selectedInterval?.start ?? undefined
+  const end = selectedInterval?.end ?? undefined
 
   const weekdays = Info.weekdays('short', { locale: DEFAULT_LOCALE })
+
+  const minMonth = minValue?.startOf('month')
+  const maxMonth = maxValue?.startOf('month')
+
+  const lastVisibleMonth = currentMonth.plus({ months: numberOfMonths - 1 })
+
+  const canGoPrevious = !minMonth || currentMonth > minMonth
+  const canGoNext = !maxMonth || lastVisibleMonth < maxMonth
+
+  const goToMonth = (updater: (m: DateTime) => DateTime) => {
+    const next = updater(currentMonth)
+    setCurrentMonth(next)
+    onMonthChange?.(next)
+  }
+
+  console.log('start', start?.toString())
 
   return (
     <div
@@ -81,14 +120,16 @@ export function DatePicker(props: DatePickerProps) {
       <div className={styles.navigation()}>
         <button
           type="button"
-          onClick={() => setCurrentMonth((m) => m.minus({ months: 1 }))}
+          onClick={() => canGoPrevious && goToMonth((m) => m.minus({ months: 1 }))}
+          disabled={!canGoPrevious}
           className={styles.navigationButton()}
         >
           <ChevronLeftIcon />
         </button>
         <button
           type="button"
-          onClick={() => setCurrentMonth((m) => m.plus({ months: 1 }))}
+          onClick={() => canGoNext && goToMonth((m) => m.plus({ months: 1 }))}
+          disabled={!canGoNext}
           className={styles.navigationButton()}
         >
           <ChevronRightIcon />
@@ -123,7 +164,12 @@ export function DatePicker(props: DatePickerProps) {
                   const isFrom = !!start?.hasSame(day, 'day')
                   const isTo = !!end?.hasSame(day, 'day')
                   const isSelected = isFrom || isTo
-                  const isInRange = isFrom || isTo || !!selectedDays?.contains(day)
+                  const isInRange = isFrom || isTo || !!selectedInterval?.contains(day)
+
+                  const isBeforeMin = !!minValue && day.startOf('day') < minValue.startOf('day')
+                  const isAfterMax = !!maxValue && day.startOf('day') > maxValue.startOf('day')
+                  const isUnavailable = !!isDateUnavailable?.(day)
+                  const isDisabled = isBeforeMin || isAfterMax || isUnavailable
 
                   const dayState: DayState = isSelected ? 'selected' : isToday ? 'today' : 'default'
 
@@ -135,14 +181,24 @@ export function DatePicker(props: DatePickerProps) {
                       key={day.toISODate()}
                       type="button"
                       role="gridcell"
-                      disabled={!inMonth}
-                      onClick={() => onDayClick?.(day)}
-                      className={styles.dayButton({ visible: inMonth })}
+                      disabled={!inMonth || isDisabled}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        e.currentTarget.blur()
+                        !isDisabled && onDayClick?.(day)
+                      }}
+                      className={styles.dayButton({ visible: inMonth, disabled: isDisabled })}
                     >
                       {showLeftBar && <span className={styles.rangeFill({ side: 'left' })} />}
                       {showRightBar && <span className={styles.rangeFill({ side: 'right' })} />}
                       <span className={styles.dayContent({ state: dayState })}>
-                        <span className={styles.dayText()}>{day.toFormat('d')}</span>
+                        <span
+                          className={styles.dayText({
+                            disabled: isDisabled,
+                          })}
+                        >
+                          {day.toFormat('d')}
+                        </span>
                       </span>
                     </button>
                   )
