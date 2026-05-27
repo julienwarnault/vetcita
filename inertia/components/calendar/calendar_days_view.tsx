@@ -1,18 +1,22 @@
 import { CSSProperties } from 'react'
 import { cn } from 'tailwind-variants'
-import { isPastDate, isToday } from '~/lib/date'
-import { getDaysFromView } from '~/lib/calendar'
+import { buildDaySlots, type Event, getDaysFromView, getRatio, mapEvents } from '~/lib/calendar'
+import { dayId, isPastDate, isToday } from '~/lib/date'
+import { CalendarEvent } from './calendar_event'
 import { capitalize } from '~/lib/utils'
 
 interface CalendarDaysViewProps {
   date: string
   view: 'day' | '3_day' | 'week'
+  events: Event[]
+  onEventClick?: (event: Event) => void
 }
 
 export function CalendarDaysView(props: CalendarDaysViewProps) {
-  const { date, view } = props
+  const { date, view, events, onEventClick } = props
 
   const days = getDaysFromView(date, view)
+  const eventsMap = mapEvents(events)
 
   return (
     <div className="relative" style={{ '--days': days.length } as CSSProperties}>
@@ -71,9 +75,25 @@ export function CalendarDaysView(props: CalendarDaysViewProps) {
           ))}
         </div>
 
-        {days.map((_, index) => (
-          <div key={index} className="relative border-l border-input" />
-        ))}
+        {days.map((day, index) => {
+          const id = dayId(day)
+          const dayEvents = eventsMap.get(id) ?? []
+          const daySlots = buildDaySlots(dayEvents)
+
+          return (
+            <div key={index} className="relative border-l border-input">
+              {dayEvents.map((event) => (
+                <CalendarEvent
+                  key={event.id}
+                  ratio={getRatio()}
+                  slot={daySlots.get(event.id) ?? ({ index: 0, columns: 1 } as any)}
+                  event={event}
+                  onClick={onEventClick}
+                />
+              ))}
+            </div>
+          )
+        })}
       </div>
     </div>
   )

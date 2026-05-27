@@ -150,12 +150,6 @@ const routes = {
     tokens: [{"old":"/patients/:id","type":0,"val":"patients","end":""},{"old":"/patients/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['delete_patient.execute']['types'],
   },
-  'show_calendar.render': {
-    methods: ["GET","HEAD"],
-    pattern: '/calendar',
-    tokens: [{"old":"/calendar","type":0,"val":"calendar","end":""}],
-    types: placeholder as Registry['show_calendar.render']['types'],
-  },
   'update_tenant.render': {
     methods: ["GET","HEAD"],
     pattern: '/tenant/edit',
@@ -185,6 +179,12 @@ const routes = {
     pattern: '/booking/:appointmentId/confirm',
     tokens: [{"old":"/booking/:appointmentId/confirm","type":0,"val":"booking","end":""},{"old":"/booking/:appointmentId/confirm","type":1,"val":"appointmentId","end":""},{"old":"/booking/:appointmentId/confirm","type":0,"val":"confirm","end":""}],
     types: placeholder as Registry['confirm_appointment.render']['types'],
+  },
+  'show_calendar.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/calendar',
+    tokens: [{"old":"/calendar","type":0,"val":"calendar","end":""}],
+    types: placeholder as Registry['show_calendar.render']['types'],
   },
   'booking_link.render': {
     methods: ["GET","HEAD"],

@@ -28,12 +28,12 @@ export type ScannedRoutes = {
     'update_patient.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_patient.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'delete_patient.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'show_calendar.render': { paramsTuple?: []; params?: {} }
     'update_tenant.render': { paramsTuple?: []; params?: {} }
     'update_tenant.execute': { paramsTuple?: []; params?: {} }
     'book_appointment.render': { paramsTuple: [ParamValue]; params: {'tenantId': ParamValue} }
     'book_appointment.execute': { paramsTuple: [ParamValue]; params: {'tenantId': ParamValue} }
     'confirm_appointment.render': { paramsTuple: [ParamValue]; params: {'appointmentId': ParamValue} }
+    'show_calendar.render': { paramsTuple?: []; params?: {} }
     'booking_link.render': { paramsTuple?: []; params?: {} }
   }
   GET: {
@@ -52,10 +52,10 @@ export type ScannedRoutes = {
     'list_patients.render': { paramsTuple?: []; params?: {} }
     'create_patient.render': { paramsTuple?: []; params?: {} }
     'update_patient.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'show_calendar.render': { paramsTuple?: []; params?: {} }
     'update_tenant.render': { paramsTuple?: []; params?: {} }
     'book_appointment.render': { paramsTuple: [ParamValue]; params: {'tenantId': ParamValue} }
     'confirm_appointment.render': { paramsTuple: [ParamValue]; params: {'appointmentId': ParamValue} }
+    'show_calendar.render': { paramsTuple?: []; params?: {} }
     'booking_link.render': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
@@ -74,10 +74,10 @@ export type ScannedRoutes = {
     'list_patients.render': { paramsTuple?: []; params?: {} }
     'create_patient.render': { paramsTuple?: []; params?: {} }
     'update_patient.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'show_calendar.render': { paramsTuple?: []; params?: {} }
     'update_tenant.render': { paramsTuple?: []; params?: {} }
     'book_appointment.render': { paramsTuple: [ParamValue]; params: {'tenantId': ParamValue} }
     'confirm_appointment.render': { paramsTuple: [ParamValue]; params: {'appointmentId': ParamValue} }
+    'show_calendar.render': { paramsTuple?: []; params?: {} }
     'booking_link.render': { paramsTuple?: []; params?: {} }
   }
   POST: {

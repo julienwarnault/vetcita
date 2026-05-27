@@ -3,6 +3,10 @@ import { DateTime, Interval } from 'luxon'
 export const DEFAULT_TIMEZONE = 'America/Mexico_City'
 export const DEFAULT_LOCALE = 'es-MX'
 
+export function dayId(date: DateTime): string {
+  return date.toFormat('yyyy-MM-dd')
+}
+
 export function today() {
   return DateTime.now().setZone(DEFAULT_TIMEZONE)
 }
@@ -14,6 +18,10 @@ export function isPastDate(date: DateTime) {
 export function isToday(date: DateTime) {
   const now = DateTime.now()
   return date.hasSame(now, 'day')
+}
+
+export function getMinutesInDay(date: DateTime) {
+  return date.hour * 60 + date.minute
 }
 
 export function eachDayOfInterval({ start, end }: { start: DateTime; end: DateTime }) {

@@ -56,9 +56,6 @@ export interface ApiDefinition {
   deletePatient: {
     execute: typeof routes['delete_patient.execute']
   }
-  showCalendar: {
-    render: typeof routes['show_calendar.render']
-  }
   updateTenant: {
     render: typeof routes['update_tenant.render']
     execute: typeof routes['update_tenant.execute']
@@ -69,6 +66,9 @@ export interface ApiDefinition {
   }
   confirmAppointment: {
     render: typeof routes['confirm_appointment.render']
+  }
+  showCalendar: {
+    render: typeof routes['show_calendar.render']
   }
   bookingLink: {
     render: typeof routes['booking_link.render']

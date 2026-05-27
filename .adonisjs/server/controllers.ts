@@ -20,9 +20,7 @@ export const controllers = {
     BookAppointment: () => import('#app/booking/controllers/book_appointment_controller'),
     BookingLink: () => import('#app/booking/controllers/booking_link_controller'),
     ConfirmAppointment: () => import('#app/booking/controllers/confirm_appointment_controller'),
-  },
-  calendar: {
-    ShowCalendar: () => import('#app/calendar/controllers/show_calendar_controller'),
+    ShowCalendar: () => import('#app/booking/controllers/show_calendar_controller'),
   },
   identity: {
     Login: () => import('#app/identity/controllers/login_controller'),

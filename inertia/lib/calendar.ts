@@ -1,5 +1,24 @@
 import { DateTime, type Interval } from 'luxon'
-import { DEFAULT_LOCALE, DEFAULT_TIMEZONE, eachDayOfInterval } from './date'
+import { DEFAULT_LOCALE, DEFAULT_TIMEZONE, eachDayOfInterval, dayId } from './date'
+
+export type Event = {
+  id: string
+  start: DateTime
+  end: DateTime
+  duration: number
+  patientFullName: string
+  patientPhone: string
+  patientEmail?: string
+  typeName: string
+  color: string
+}
+
+export type EventSlot = {
+  index: number
+  columns: number
+  intersects: string[]
+  isLast: boolean
+}
 
 export const SLOT_IN_MINUTES = 15
 export const SLOT_HEIGHT = 24
@@ -18,6 +37,17 @@ export function getMonthDays(date: string) {
   const start = montStartAt.startOf('week')
   const end = montStartAt.endOf('month').endOf('week')
   return eachDayOfInterval({ start, end })
+}
+
+export function mapEvents(events: Event[]): Map<string, Event[]> {
+  const map = new Map<string, Event[]>()
+
+  for (const event of events) {
+    const id = dayId(event.start)
+    map.set(id, [...(map.get(id) ?? []), event])
+  }
+
+  return map
 }
 
 export function getDaysFromView(date: string, view: ViewType): DateTime[] {
@@ -64,4 +94,56 @@ export function formatDisplayedRange(range: Interval, view: ViewType) {
     .formatRange(range.start!.toJSDate(), range.end!.toJSDate())
     .replaceAll(' de ', ' ')
     .replace('–', '-')
+}
+
+export function buildDaySlots(events: Event[]) {
+  const sorted = [...events].map((event) => ({
+    id: event.id,
+    start: event.start.toJSDate().getTime(),
+    end: event.end.toJSDate().getTime(),
+  }))
+
+  const result: Map<string, EventSlot> = new Map()
+  let active: { id: string; index: number; start: any; end: any }[] = []
+  let cluster: { id: string; index: number; start: any; end: any }[] = []
+
+  const finalizeCluster = () => {
+    if (!cluster.length) return
+
+    const columns = Math.max(...cluster.map((e) => e.index)) + 1
+
+    for (const item of cluster) {
+      const intersects = cluster
+        .filter((o) => o.id !== item.id && o.start < item.end && o.end > item.start)
+        .map((o) => o.id)
+
+      const isLast =
+        cluster
+          .filter((o) => o.index === item.index)
+          .sort((a, b) => a.start - b.start)
+          .at(-1)?.id === item.id
+
+      result.set(item.id, { index: item.index, columns, intersects, isLast })
+    }
+
+    cluster = []
+  }
+
+  for (const event of sorted) {
+    active = active.filter((e) => e.end > event.start)
+
+    if (!active.length) finalizeCluster()
+
+    const used = new Set(active.map((e) => e.index))
+    let index = 0
+    while (used.has(index)) index++
+
+    const entry = { ...event, index }
+    active.push(entry)
+    cluster.push(entry)
+  }
+
+  finalizeCluster()
+
+  return result
 }

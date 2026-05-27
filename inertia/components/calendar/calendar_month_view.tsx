@@ -1,17 +1,20 @@
 import { Info } from 'luxon'
+import { type Event, getMonthDays, mapEvents } from '~/lib/calendar'
 import { CalendarDayCell } from './calendar_day_cell'
-import { getMonthDays } from '~/lib/calendar'
-import { DEFAULT_LOCALE } from '~/lib/date'
+import { dayId, DEFAULT_LOCALE } from '~/lib/date'
 import { capitalize } from '~/lib/utils'
 
 interface CalendarMonthViewProps {
   date: string
+  events: Event[]
+  onEventClick?: (event: Event) => void
 }
 
 export function CalendarMonthView(props: CalendarMonthViewProps) {
-  const { date } = props
+  const { date, events, onEventClick } = props
 
   const days = getMonthDays(date)
+  const eventsMap = mapEvents(events)
 
   const weekdays = Info.weekdays('long', { locale: DEFAULT_LOCALE })
 
@@ -26,7 +29,13 @@ export function CalendarMonthView(props: CalendarMonthViewProps) {
       </div>
       <div className="grid grid-cols-7">
         {days.map((day, index) => (
-          <CalendarDayCell key={index} day={day} />
+          <CalendarDayCell
+            key={index}
+            day={day}
+            events={eventsMap.get(dayId(day)) ?? []}
+            maxVisible={3}
+            onEventClick={onEventClick}
+          />
         ))}
       </div>
     </div>

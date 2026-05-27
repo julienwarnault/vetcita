@@ -295,18 +295,6 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/patients/controllers/delete_patient_controller').default['execute']>>>
     }
   }
-  'show_calendar.render': {
-    methods: ["GET","HEAD"]
-    pattern: '/calendar'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: ExtractQueryForGet<InferInput<(typeof import('#app/calendar/controllers/show_calendar_controller').default)['validator']>>
-      response: ExtractResponse<Awaited<ReturnType<import('#app/calendar/controllers/show_calendar_controller').default['render']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/calendar/controllers/show_calendar_controller').default['render']>>> | { status: 422; response: { errors: SimpleError[] } }
-    }
-  }
   'update_tenant.render': {
     methods: ["GET","HEAD"]
     pattern: '/tenant/edit'
@@ -365,6 +353,18 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#app/booking/controllers/confirm_appointment_controller').default['render']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/booking/controllers/confirm_appointment_controller').default['render']>>>
+    }
+  }
+  'show_calendar.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/calendar'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: ExtractQueryForGet<InferInput<(typeof import('#app/booking/controllers/show_calendar_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/booking/controllers/show_calendar_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/booking/controllers/show_calendar_controller').default['render']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'booking_link.render': {

@@ -8,6 +8,7 @@ router.get('booking/:appointmentId/confirm', [controllers.booking.ConfirmAppoint
 
 router
   .group(() => {
+    router.get('/calendar', [controllers.booking.ShowCalendar, 'render'])
     router.get('settings/booking-link', [controllers.booking.BookingLink, 'render'])
   })
   .use([middleware.auth()])
