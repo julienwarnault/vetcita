@@ -17,7 +17,7 @@ export default function Confirm(props: PageProps) {
   const { appointment } = props
   const { appointmentType } = appointment
 
-  const startDateTime = DateTime.fromISO(appointment.startDate?.toString(), {
+  const startDateTime = DateTime.fromISO(appointment.startDate!.toString(), {
     zone: DEFAULT_TIMEZONE,
   })
   const formattedDate = startDateTime

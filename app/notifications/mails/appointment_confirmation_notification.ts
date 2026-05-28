@@ -1,20 +1,23 @@
 import { BaseMail } from '@adonisjs/mail'
 import { DEFAULT_TIMEZONE } from '#app/shared/services/time_service'
+import { urlFor } from '@adonisjs/core/services/url_builder'
 import type Appointment from '#booking/models/appointment'
+import { appUrl } from '#config/app'
 
 export default class AppointmentConfirmationNotification extends BaseMail {
   subject = 'Confirmación de su cita'
 
   constructor(
     private appointment: Appointment,
-    private to: string,
-    private confirmUrl: string
+    private to: string
   ) {
     super()
   }
 
   prepare() {
-    const { patient, appointmentType, startDate, bookingRef } = this.appointment
+    const { id, patient, appointmentType, startDate, bookingRef } = this.appointment
+
+    const url = urlFor('confirm_appointment.render', { appointmentId: id }, { prefixUrl: appUrl })
 
     this.message
       .to(this.to)
@@ -24,7 +27,7 @@ export default class AppointmentConfirmationNotification extends BaseMail {
         appointmentType: appointmentType.name,
         startDate: startDate.setZone(DEFAULT_TIMEZONE).toFormat('dd/MM/yyyy HH:mma'),
         bookingRef,
-        confirmUrl: this.confirmUrl,
+        confirmUrl: url,
       })
   }
 }
