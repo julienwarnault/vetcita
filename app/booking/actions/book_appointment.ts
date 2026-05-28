@@ -1,5 +1,5 @@
 import { inject } from '@adonisjs/core'
-import { FindOrCreatePatient } from '#patients/actions/find_or_create_patient'
+import { FindOrUpdatePatient } from '#patients/actions/find_or_update_patient'
 import { CreateAppointment } from '#booking/actions/create_appointment'
 import type { UUID } from '#app/shared/types'
 
@@ -16,12 +16,12 @@ interface BookAppointmentParams {
 @inject()
 export class BookAppointment {
   constructor(
-    private findOrCreatePatient: FindOrCreatePatient,
+    private findOrUpdatePatient: FindOrUpdatePatient,
     private createAppointment: CreateAppointment
   ) {}
 
   async execute(params: BookAppointmentParams) {
-    const patient = await this.findOrCreatePatient.handle({
+    const patient = await this.findOrUpdatePatient.handle({
       tenantId: params.tenantId,
       firstName: params.firstName,
       lastName: params.lastName,

@@ -23,7 +23,10 @@ export function CalendarEventDrawer(props: CalendarEventDrawerProps) {
               <div className="flex flex-col items-center">
                 <Avatar size="4xl" className="mb-3" fullName={event.patientFullName} />
                 <div className="text-[17px]/6 font-medium pb-1">{event.patientFullName}</div>
-                <div className="text-sm/5 text-foreground">
+                {event.patientEmail && (
+                  <div className="text-[15px]/5 text-muted">{event.patientEmail}</div>
+                )}
+                <div className="text-[15px]/5 text-muted">
                   {formatPhoneNumber(event.patientPhone)}
                 </div>
               </div>
