@@ -26,7 +26,17 @@ export class AgendaSchema extends BaseModel {
 }
 
 export class AppointmentTypeSchema extends BaseModel {
-  static $columns = ['color', 'createdAt', 'description', 'duration', 'id', 'name', 'price', 'tenantId', 'updatedAt'] as const
+  static $columns = [
+    'color',
+    'createdAt',
+    'description',
+    'duration',
+    'id',
+    'name',
+    'price',
+    'tenantId',
+    'updatedAt',
+  ] as const
   $columns = AppointmentTypeSchema.$columns
   @column()
   declare color: string
@@ -49,7 +59,19 @@ export class AppointmentTypeSchema extends BaseModel {
 }
 
 export class AppointmentSchema extends BaseModel {
-  static $columns = ['appointmentTypeId', 'bookingRef', 'createdAt', 'duration', 'endDate', 'id', 'patientId', 'startDate', 'tenantId', 'updatedAt'] as const
+  static $columns = [
+    'appointmentTypeId',
+    'bookingRef',
+    'createdAt',
+    'duration',
+    'endDate',
+    'id',
+    'patientId',
+    'reminderSentAt',
+    'startDate',
+    'tenantId',
+    'updatedAt',
+  ] as const
   $columns = AppointmentSchema.$columns
   @column()
   declare appointmentTypeId: UUID
@@ -66,6 +88,8 @@ export class AppointmentSchema extends BaseModel {
   @column()
   declare patientId: UUID
   @column.dateTime()
+  declare reminderSentAt: DateTime | null
+  @column.dateTime()
   declare startDate: DateTime
   @column()
   declare tenantId: UUID
@@ -74,7 +98,17 @@ export class AppointmentSchema extends BaseModel {
 }
 
 export class PatientSchema extends BaseModel {
-  static $columns = ['createdAt', 'email', 'firstName', 'id', 'lastName', 'notes', 'phone', 'tenantId', 'updatedAt'] as const
+  static $columns = [
+    'createdAt',
+    'email',
+    'firstName',
+    'id',
+    'lastName',
+    'notes',
+    'phone',
+    'tenantId',
+    'updatedAt',
+  ] as const
   $columns = PatientSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -116,7 +150,15 @@ export class TenantSchema extends BaseModel {
 }
 
 export class UserSchema extends BaseModel {
-  static $columns = ['createdAt', 'email', 'fullName', 'id', 'password', 'tenantId', 'updatedAt'] as const
+  static $columns = [
+    'createdAt',
+    'email',
+    'fullName',
+    'id',
+    'password',
+    'tenantId',
+    'updatedAt',
+  ] as const
   $columns = UserSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

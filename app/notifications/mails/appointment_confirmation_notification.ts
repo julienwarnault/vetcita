@@ -25,7 +25,7 @@ export default class AppointmentConfirmationNotification extends BaseMail {
       .htmlView('emails/appointment_confirmation', {
         patient,
         appointmentType: appointmentType.name,
-        startDate: startDate.setZone(DEFAULT_TIMEZONE).toFormat('dd/MM/yyyy HH:mma'),
+        startDate: startDate.setZone(DEFAULT_TIMEZONE).toFormat('dd/MM/yyyy h:mma'),
         bookingRef,
         confirmUrl: url,
       })

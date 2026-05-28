@@ -1,0 +1,31 @@
+<h1>
+  Recordatorio de su cita
+</h1>
+
+<p>
+  Hola {{ patient.firstName }} {{ patient.lastName }},
+</p>
+
+<p>
+  Le recordamos que tiene una cita programada para mañana en {{ companyName }}.
+</p>
+
+<ul>
+  <li>
+    Tipo de cita: {{ appointmentType }}
+  </li>
+  <li>
+    Fecha y hora: {{ startDate }}
+  </li>
+  <li>
+    Referencia: {{ bookingRef }}
+  </li>
+</ul>
+
+<p>
+  Si no puede asistir, le agradecemos que nos avise lo antes posible.
+</p>
+
+<p>
+  Hasta pronto.
+</p>
