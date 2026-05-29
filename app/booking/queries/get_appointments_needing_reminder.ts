@@ -12,7 +12,9 @@ export class GetAppointmentsNeedingReminder {
       .where('start_date', '>=', tomorrowStart.toUTC().toISO()!)
       .where('start_date', '<', tomorrowEnd.toUTC().toISO()!)
       .whereNull('reminder_sent_at')
-      .select('id')
+      .preload('tenant')
+      .preload('appointmentType')
+      .preload('patient')
 
     return { appointments }
   }

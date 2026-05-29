@@ -46,7 +46,7 @@ export class CreateAppointment {
       { client: trx }
     )
 
-    dispatchAfterCommit(async () => {
+    await dispatchAfterCommit(async () => {
       await events.booking.AppointmentCreated.dispatch(appointment)
     })
 

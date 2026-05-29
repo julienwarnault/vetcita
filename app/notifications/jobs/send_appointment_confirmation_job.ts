@@ -1,18 +1,23 @@
 import { Job } from '@adonisjs/queue'
-import mail from '@adonisjs/mail/services/main'
+import { inject } from '@adonisjs/core'
 import type { JobOptions } from '@adonisjs/queue/types'
-import AppointmentConfirmationNotification from '#notifications/mails/appointment_confirmation_notification'
+import { SendAppointmentConfirmation } from '#notifications/actions/send_appointment_confirmation'
 import Appointment from '#booking/models/appointment'
 import type { UUID } from '#app/shared/types'
 
-interface SendAppointmentConfirmationMailPayload {
+interface SendAppointmentConfirmationPayload {
   appointmentId: UUID
 }
 
-export default class SendAppointmentConfirmationMail extends Job<SendAppointmentConfirmationMailPayload> {
+@inject()
+export default class SendAppointmentConfirmationJob extends Job<SendAppointmentConfirmationPayload> {
   static options: JobOptions = {
     queue: 'default',
     maxRetries: 3,
+  }
+
+  constructor(private readonly sendConfirmation: SendAppointmentConfirmation) {
+    super()
   }
 
   async execute() {
@@ -23,12 +28,8 @@ export default class SendAppointmentConfirmationMail extends Job<SendAppointment
       .preload('patient')
       .preload('appointmentType')
       .preload('tenant')
-      .first()
+      .firstOrFail()
 
-    if (!appointment) return
-
-    if (!appointment.patient.email) return
-
-    await mail.send(new AppointmentConfirmationNotification(appointment, appointment.patient.email))
+    await this.sendConfirmation.execute({ appointment })
   }
 }

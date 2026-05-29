@@ -19,15 +19,12 @@ export default class AppointmentConfirmationNotification extends BaseMail {
 
     const url = urlFor('confirm_appointment.render', { appointmentId: id }, { prefixUrl: appUrl })
 
-    this.message
-      .to(this.to)
-      .subject('Confirmación de su cita')
-      .htmlView('emails/appointment_confirmation', {
-        patient,
-        appointmentType: appointmentType.name,
-        startDate: startDate.setZone(DEFAULT_TIMEZONE).toFormat('dd/MM/yyyy h:mma'),
-        bookingRef,
-        confirmUrl: url,
-      })
+    this.message.to(this.to).htmlView('emails/appointment_confirmation', {
+      patient,
+      appointmentType: appointmentType.name,
+      startDate: startDate.setZone(DEFAULT_TIMEZONE).toFormat('dd/MM/yyyy h:mma'),
+      bookingRef,
+      confirmUrl: url,
+    })
   }
 }

@@ -5,9 +5,9 @@
 
 export const listeners = {
   booking: {
-    BroadcastAppointmentCreated: () => import('#app/booking/listeners/broadcast_appointment_created'),
+    TransmitAppointmentListener: () => import('#app/booking/listeners/transmit_appointment_listener'),
   },
   notifications: {
-    SendAppointmentConfirmation: () => import('#app/notifications/listeners/send_appointment_confirmation'),
+    SendConfirmationListener: () => import('#app/notifications/listeners/send_confirmation_listener'),
   },
 }

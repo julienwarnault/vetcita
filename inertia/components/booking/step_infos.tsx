@@ -30,7 +30,7 @@ export function StepInfos({ form }: StepInfosProps) {
       </Field>
 
       <Field name="email" className="col-span-6">
-        <Field.Label>Correo</Field.Label>
+        <Field.Label>Correo *</Field.Label>
         <Input value={data.email} onChange={(e) => setData('email', e.target.value)} />
         <Field.Error />
       </Field>

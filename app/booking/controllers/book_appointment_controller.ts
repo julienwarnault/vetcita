@@ -19,7 +19,7 @@ export default class BookAppointmentController {
       firstName: vine.string(),
       lastName: vine.string(),
       phone: vine.string().phone(),
-      email: vine.string().email().optional(),
+      email: vine.string().email(),
     })
   )
 

@@ -15,15 +15,12 @@ export default class AppointmentReminderNotification extends BaseMail {
   prepare() {
     const { patient, tenant, appointmentType, startDate, bookingRef } = this.appointment
 
-    this.message
-      .to(this.to)
-      .subject('Recordatorio de su cita')
-      .htmlView('emails/appointment_reminder', {
-        patient,
-        companyName: tenant.name,
-        appointmentType: appointmentType.name,
-        startDate: startDate.setZone(DEFAULT_TIMEZONE).toFormat('dd/MM/yyyy h:mma'),
-        bookingRef,
-      })
+    this.message.to(this.to).htmlView('emails/appointment_reminder', {
+      patient,
+      companyName: tenant.name,
+      appointmentType: appointmentType.name,
+      startDate: startDate.setZone(DEFAULT_TIMEZONE).toFormat('dd/MM/yyyy h:mma'),
+      bookingRef,
+    })
   }
 }

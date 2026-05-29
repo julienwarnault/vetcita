@@ -18,10 +18,10 @@ export class FindOrUpdatePatient {
       { phone: params.phone, tenantId: params.tenantId },
       {
         tenantId: params.tenantId,
-        firstName: params.firstName,
+        firstName: params.firstName?.toUpperCase().trim(),
         lastName: params.lastName,
-        email: params.email?.toLowerCase().trim() || null,
         phone: params.phone,
+        email: params.email?.toLowerCase().trim() || null,
       },
       {
         client: trx,

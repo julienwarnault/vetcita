@@ -30,7 +30,7 @@ export const STEPS = [
     key: 'infos',
     title: 'Datos personales',
     fields: ['firstName', 'lastName', 'phone', 'email'],
-    canContinue: (d: BookingData) => Boolean(d.firstName && d.lastName && d.phone),
+    canContinue: (d: BookingData) => Boolean(d.firstName && d.lastName && d.phone && d.email),
   },
   {
     key: 'review',
