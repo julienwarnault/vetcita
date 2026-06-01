@@ -82,6 +82,10 @@ export default defineConfig({
     () => import('#start/vine'),
     () => import('#start/events'),
     () => import('#start/transmit'),
+    {
+      file: () => import('#start/scheduler'),
+      environment: ['web'],
+    },
   ],
 
   /*
