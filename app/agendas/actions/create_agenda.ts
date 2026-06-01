@@ -5,6 +5,7 @@ import Agenda from '#agendas/models/agenda'
 interface CreateAgendaParams {
   name: string
   color: string
+  appointmentTypeIds?: UUID[]
   tenantId: UUID
 }
 
@@ -20,6 +21,8 @@ export class CreateAgenda {
       },
       { client: trx }
     )
+
+    await agenda.related('appointmentTypes').sync(params.appointmentTypeIds || [], true, trx)
 
     return { agenda }
   }

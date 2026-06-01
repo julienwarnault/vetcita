@@ -1,4 +1,5 @@
 import { Data } from '@generated/data'
+import { CheckboxFieldArray } from '~/components/ui/checkbox_field_array'
 import { COLORS, ColorSelect } from '~/components/ui/color_select'
 import { ButtonLink } from '~/components/ui/button_link'
 import { FormHeader } from '~/components/form_header'
@@ -6,15 +7,17 @@ import { Button } from '~/components/ui/button'
 import MinimalLayout from '~/layouts/minimal'
 import { Input } from '~/components/ui/input'
 import { Field } from '~/components/ui/field'
+import { formatDuration } from '~/lib/utils'
 import { Form } from '~/components/ui/form'
 import { InertiaProps } from '~/types'
 
 type PageProps = InertiaProps<{
   agenda?: Data.Agendas.Agenda
+  appointmentTypes: Data.AppointmentTypes.AppointmentType[]
 }>
 
 export default function ShowForm(props: PageProps) {
-  const { agenda } = props
+  const { agenda, appointmentTypes } = props
 
   const isEdit = !!agenda
   const title = agenda ? `Editar ${agenda.name}` : 'Añadir un agenda'
@@ -62,6 +65,36 @@ export default function ShowForm(props: PageProps) {
                 <ColorSelect defaultValue={agenda?.color ?? COLORS[0]} />
                 <Field.Error />
               </Field>
+            </div>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-semibold">Servicios</h2>
+            <p className="text-[15px]/5 text-muted">Indica los servicios que presta este agenda</p>
+
+            <div className="grid grid-cols-6 w-full gap-x-4 gap-y-6 pt-6">
+              <CheckboxFieldArray
+                name="appointmentTypeIds[]"
+                className="col-span-6"
+                items={appointmentTypes}
+                getValue={(type) => type.id}
+                renderItem={(type) => (
+                  <div className="flex flex-1 justify-between items-center">
+                    <div>
+                      <div className="text-[17px]/6 font-medium">{type.name}</div>
+                      <div className="text-muted">{formatDuration(type.duration)}</div>
+                    </div>
+                    {type.price && (
+                      <div className="text-[17px]/6 font-medium">{type.price} MXN</div>
+                    )}
+                  </div>
+                )}
+                defaultValue={
+                  agenda
+                    ? agenda.appointmentTypes!.map((type) => type.id)
+                    : appointmentTypes.map(({ id }) => id)
+                }
+              />
             </div>
           </div>
         </Form>

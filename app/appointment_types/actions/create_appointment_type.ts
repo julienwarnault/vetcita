@@ -8,6 +8,7 @@ interface CreateAppointmentTypeParams {
   duration: number
   price?: number
   description?: string
+  agendaIds?: UUID[]
   tenantId: UUID
 }
 
@@ -26,6 +27,8 @@ export class CreateAppointmentType {
       },
       { client: trx }
     )
+
+    await appointmentType.related('agendas').sync(params.agendaIds || [], true, trx)
 
     return { appointmentType }
   }

@@ -7,7 +7,10 @@ interface GetAppointmentTypeParams {
 
 export class GetAppointmentType {
   async execute(params: GetAppointmentTypeParams) {
-    const appointmentType = await AppointmentType.findOrFail(params.id)
+    const appointmentType = await AppointmentType.query()
+      .where('id', params.id)
+      .preload('agendas')
+      .firstOrFail()
 
     return { appointmentType }
   }

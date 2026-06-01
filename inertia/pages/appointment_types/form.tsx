@@ -1,23 +1,26 @@
 import { Data } from '@generated/data'
+import { CheckboxFieldArray } from '~/components/ui/checkbox_field_array'
 import { COLORS, ColorSelect } from '~/components/ui/color_select'
 import { InputSelect } from '~/components/ui/input_select'
 import { ButtonLink } from '~/components/ui/button_link'
+import { InputGroup } from '~/components/ui/input_group'
 import { FormHeader } from '~/components/form_header'
 import { Textarea } from '~/components/ui/textarea'
+import { Avatar } from '~/components/ui/avatar'
 import { Button } from '~/components/ui/button'
 import MinimalLayout from '~/layouts/minimal'
 import { Input } from '~/components/ui/input'
 import { Field } from '~/components/ui/field'
 import { Form } from '~/components/ui/form'
 import { InertiaProps } from '~/types'
-import { InputGroup } from '~/components/ui/input_group'
 
 type PageProps = InertiaProps<{
   appointmentType?: Data.AppointmentTypes.AppointmentType
+  agendas: Data.Agendas.Agenda[]
 }>
 
 export default function ShowForm(props: PageProps) {
-  const { appointmentType } = props
+  const { appointmentType, agendas } = props
 
   const isEdit = !!appointmentType
   const title = appointmentType ? `Editar ${appointmentType.name}` : 'Añadir un tipo de cita'
@@ -105,7 +108,7 @@ export default function ShowForm(props: PageProps) {
                     { label: '10 min', value: '10' },
                     { label: '15 min', value: '15' },
                     { label: '20 min', value: '20' },
-                    { label: '35 min', value: '25' },
+                    { label: '25 min', value: '25' },
                     { label: '30 min', value: '30' },
                     { label: '35 min', value: '35' },
                     { label: '40 min', value: '40' },
@@ -124,6 +127,31 @@ export default function ShowForm(props: PageProps) {
                 />
                 <Field.Error />
               </Field>
+            </div>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-semibold">Agendas necesarios</h2>
+            <p className="text-[15px]/5 text-muted">Elige qué agenda realizarán este servicio</p>
+
+            <div className="grid grid-cols-6 w-full gap-x-4 gap-y-6 pt-6">
+              <CheckboxFieldArray
+                name="agendaIds[]"
+                className="col-span-6"
+                items={agendas}
+                getValue={(agenda) => agenda.id}
+                renderItem={(agenda) => (
+                  <div className="flex items-center gap-3">
+                    <Avatar fullName={agenda.name} color={agenda.color} />
+                    <div className="text-[17px]/6 font-medium">{agenda.name}</div>
+                  </div>
+                )}
+                defaultValue={
+                  appointmentType
+                    ? appointmentType.agendas!.map((type) => type.id)
+                    : agendas.map(({ id }) => id)
+                }
+              />
             </div>
           </div>
         </Form>

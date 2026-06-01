@@ -9,6 +9,7 @@ interface UpdateAppointmentTypeParams {
   duration: number
   price?: number
   description?: string
+  agendaIds?: UUID[]
 }
 
 export class UpdateAppointmentType {
@@ -25,7 +26,9 @@ export class UpdateAppointmentType {
       description: params.description,
     })
 
-    await appointmentType.save()
+    await appointmentType.useTransaction(trx!).save()
+
+    await appointmentType.related('agendas').sync(params.agendaIds || [], true, trx)
 
     return { appointmentType }
   }
