@@ -148,3 +148,24 @@ export class UserSchema extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
 }
+
+export class WorkingHourSchema extends BaseModel {
+  static $columns = ['agendaId', 'createdAt', 'dayOfWeek', 'endTime', 'id', 'startTime', 'tenantId', 'updatedAt'] as const
+  $columns = WorkingHourSchema.$columns
+  @column()
+  declare agendaId: UUID
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare dayOfWeek: number
+  @column()
+  declare endTime: string
+  @column({ isPrimary: true })
+  declare id: UUID
+  @column()
+  declare startTime: string
+  @column()
+  declare tenantId: UUID
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}

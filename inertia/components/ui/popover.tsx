@@ -6,7 +6,7 @@ import { Card } from './card'
 const popover = tv({
   slots: {
     positioner: 'z-50',
-    popup: 'max-h-[var(--available-height)]',
+    popup: 'max-h-[var(--available-height)] overscroll-none',
   },
 })
 

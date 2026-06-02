@@ -11,7 +11,7 @@ export default function Settings() {
   const { user } = usePageProps()
 
   return (
-    <div className="h-full bg-background">
+    <div className="flex-1 h-auto bg-background">
       <div className="container pb-24 h-full">
         <ViewHeader
           title="Ajustes del workspace"

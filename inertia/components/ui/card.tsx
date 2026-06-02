@@ -2,7 +2,7 @@ import { ComponentProps } from 'react'
 import { tv, VariantProps } from 'tailwind-variants'
 
 const card = tv({
-  base: 'overflow-y-auto overscroll-none rounded-xl border bg-surface',
+  base: 'overflow-y-auto rounded-xl border bg-surface',
   variants: {
     size: {
       md: 'px-5 py-2',

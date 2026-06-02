@@ -8,7 +8,7 @@ export function dayId(date: DateTime): string {
 }
 
 export function today() {
-  return DateTime.now().setZone(DEFAULT_TIMEZONE)
+  return DateTime.now().setZone(DEFAULT_TIMEZONE).startOf('day')
 }
 
 export function isPastDate(date: DateTime) {

@@ -9,7 +9,7 @@ const select = tv({
     trigger: [baseInput(), 'flex items-center justify-between'],
     positioner: 'z-50',
     icon: 'inline-flex items-center justify-center data-[popup-open]:rotate-180',
-    popup: 'w-[var(--anchor-width)] max-h-72',
+    popup: 'w-[var(--anchor-width)] max-h-72 overscroll-none',
     list: 'overflow-visible',
     item: 'flex min-h-10 items-center gap-3 rounded-lg px-3 py-2 -mx-3 text-[15px]/5 font-medium cursor-pointer hover:bg-background data-[selected]:bg-background [&_svg]:size-4',
   },
