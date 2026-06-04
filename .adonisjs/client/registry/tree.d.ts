@@ -2,14 +2,11 @@
 import type { routes } from './index.ts'
 
 export interface ApiDefinition {
-  getMonthAvailability: {
-    render: typeof routes['get_month_availability.render']
+  getBookableDays: {
+    render: typeof routes['get_bookable_days.render']
   }
-  getAvailableSlots: {
-    render: typeof routes['get_available_slots.render']
-  }
-  getNextAvailableSlot: {
-    render: typeof routes['get_next_available_slot.render']
+  getBookableSlots: {
+    render: typeof routes['get_bookable_slots.render']
   }
   dashboard: typeof routes['dashboard']
   settings: typeof routes['settings']

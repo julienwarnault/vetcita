@@ -1,26 +1,36 @@
 import type { DateTime } from 'luxon'
 import Appointment from '#booking/models/appointment'
+import type { UUID } from '#app/shared/types'
 
 interface GetAppointmentsParams {
-  tenantId: string
-  start: DateTime
-  end: DateTime
+  tenantId: UUID
+  agendaIds?: UUID[]
+  from: DateTime
+  to: DateTime
 }
 
 export class GetAppointments {
   async execute(params: GetAppointmentsParams) {
-    const startUtc = params.start.toUTC().toISO()!
-    const endUtc = params.end.toUTC().toISO()!
+    const from = params.from.toUTC().toISO()!
+    const to = params.to.endOf('day').toUTC().toISO()!
 
-    const appointments = await Appointment.query()
-      .where('start_date', '<=', endUtc)
-      .where('end_date', '>=', startUtc)
+    const query = Appointment.query()
+      .where('tenant_id', params.tenantId)
+      .where('start_date', '<=', to)
+      .where('end_date', '>=', from)
       .orderBy([
         { column: 'start_date', order: 'asc' },
         { column: 'duration', order: 'desc' },
       ])
       .preload('appointmentType')
       .preload('patient')
+      .preload('agenda')
+
+    if (params.agendaIds?.length) {
+      query.whereIn('agenda_id', params.agendaIds)
+    }
+
+    const appointments = await query
 
     return { appointments }
   }

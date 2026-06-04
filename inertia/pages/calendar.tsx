@@ -45,6 +45,7 @@ export default function ShowCalendar(props: PageProps) {
             typeName: appointment.appointmentType!.name,
             color: appointment.appointmentType!.color,
             bookingRef: appointment.bookingRef,
+            agenda: appointment.agenda!.name,
           }))}
         />
       </div>

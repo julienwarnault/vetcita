@@ -12,6 +12,7 @@ export type Event = {
   typeName: string
   color: string
   bookingRef: string
+  agenda: string
 }
 
 export type EventSlot = {

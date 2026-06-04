@@ -6,23 +6,17 @@ import type { ApiDefinition } from './tree.d.ts'
 const placeholder: any = {}
 
 const routes = {
-  'get_month_availability.render': {
+  'get_bookable_days.render': {
     methods: ["GET","HEAD"],
-    pattern: '/api/availability',
-    tokens: [{"old":"/api/availability","type":0,"val":"api","end":""},{"old":"/api/availability","type":0,"val":"availability","end":""}],
-    types: placeholder as Registry['get_month_availability.render']['types'],
+    pattern: '/api/bookable-days',
+    tokens: [{"old":"/api/bookable-days","type":0,"val":"api","end":""},{"old":"/api/bookable-days","type":0,"val":"bookable-days","end":""}],
+    types: placeholder as Registry['get_bookable_days.render']['types'],
   },
-  'get_available_slots.render': {
+  'get_bookable_slots.render': {
     methods: ["GET","HEAD"],
-    pattern: '/api/slots',
-    tokens: [{"old":"/api/slots","type":0,"val":"api","end":""},{"old":"/api/slots","type":0,"val":"slots","end":""}],
-    types: placeholder as Registry['get_available_slots.render']['types'],
-  },
-  'get_next_available_slot.render': {
-    methods: ["GET","HEAD"],
-    pattern: '/api/next-slot',
-    tokens: [{"old":"/api/next-slot","type":0,"val":"api","end":""},{"old":"/api/next-slot","type":0,"val":"next-slot","end":""}],
-    types: placeholder as Registry['get_next_available_slot.render']['types'],
+    pattern: '/api/bookable-slots',
+    tokens: [{"old":"/api/bookable-slots","type":0,"val":"api","end":""},{"old":"/api/bookable-slots","type":0,"val":"bookable-slots","end":""}],
+    types: placeholder as Registry['get_bookable_slots.render']['types'],
   },
   'dashboard': {
     methods: ["GET","HEAD"],

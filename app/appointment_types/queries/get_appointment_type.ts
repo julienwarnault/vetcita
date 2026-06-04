@@ -3,14 +3,18 @@ import type { UUID } from '#app/shared/types'
 
 interface GetAppointmentTypeParams {
   id: UUID
+  tenantId?: UUID
 }
 
 export class GetAppointmentType {
   async execute(params: GetAppointmentTypeParams) {
-    const appointmentType = await AppointmentType.query()
-      .where('id', params.id)
-      .preload('agendas')
-      .firstOrFail()
+    const query = AppointmentType.query().where('id', params.id).preload('agendas')
+
+    if (params.tenantId) {
+      query.where('tenant_id', params.tenantId)
+    }
+
+    const appointmentType = await query.firstOrFail()
 
     return { appointmentType }
   }

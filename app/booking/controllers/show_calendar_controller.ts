@@ -35,8 +35,8 @@ export default class ShowCalendarController {
     const range = this.#getRangeDates(view, date)
 
     const { appointments } = await this.getAppointments.execute({
-      start: range.start,
-      end: range.end,
+      from: range.start,
+      to: range.end,
       tenantId: user.tenantId,
     })
 

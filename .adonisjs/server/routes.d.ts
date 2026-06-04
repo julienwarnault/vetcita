@@ -4,9 +4,8 @@ type ParamValue = string | number | bigint | boolean
 
 export type ScannedRoutes = {
   ALL: {
-    'get_month_availability.render': { paramsTuple?: []; params?: {} }
-    'get_available_slots.render': { paramsTuple?: []; params?: {} }
-    'get_next_available_slot.render': { paramsTuple?: []; params?: {} }
+    'get_bookable_days.render': { paramsTuple?: []; params?: {} }
+    'get_bookable_slots.render': { paramsTuple?: []; params?: {} }
     'dashboard': { paramsTuple?: []; params?: {} }
     'settings': { paramsTuple?: []; params?: {} }
     'login.render': { paramsTuple?: []; params?: {} }
@@ -40,9 +39,8 @@ export type ScannedRoutes = {
     'unsubscribe': { paramsTuple?: []; params?: {} }
   }
   GET: {
-    'get_month_availability.render': { paramsTuple?: []; params?: {} }
-    'get_available_slots.render': { paramsTuple?: []; params?: {} }
-    'get_next_available_slot.render': { paramsTuple?: []; params?: {} }
+    'get_bookable_days.render': { paramsTuple?: []; params?: {} }
+    'get_bookable_slots.render': { paramsTuple?: []; params?: {} }
     'dashboard': { paramsTuple?: []; params?: {} }
     'settings': { paramsTuple?: []; params?: {} }
     'login.render': { paramsTuple?: []; params?: {} }
@@ -63,9 +61,8 @@ export type ScannedRoutes = {
     'event_stream': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
-    'get_month_availability.render': { paramsTuple?: []; params?: {} }
-    'get_available_slots.render': { paramsTuple?: []; params?: {} }
-    'get_next_available_slot.render': { paramsTuple?: []; params?: {} }
+    'get_bookable_days.render': { paramsTuple?: []; params?: {} }
+    'get_bookable_slots.render': { paramsTuple?: []; params?: {} }
     'dashboard': { paramsTuple?: []; params?: {} }
     'settings': { paramsTuple?: []; params?: {} }
     'login.render': { paramsTuple?: []; params?: {} }

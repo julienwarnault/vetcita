@@ -15,6 +15,7 @@ export default class BookAppointmentController {
   static validator = vine.create(
     vine.object({
       appointmentTypeId: uuidSchema(),
+      agendaId: uuidSchema(),
       startDate: vine.string(),
       firstName: vine.string(),
       lastName: vine.string(),

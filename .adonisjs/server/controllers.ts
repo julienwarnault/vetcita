@@ -33,9 +33,8 @@ export const controllers = {
     UpdatePatient: () => import('#app/patients/controllers/update_patient_controller'),
   },
   scheduling: {
-    GetAvailableSlots: () => import('#app/scheduling/controllers/get_available_slots_controller'),
-    GetMonthAvailability: () => import('#app/scheduling/controllers/get_month_availability_controller'),
-    GetNextAvailableSlot: () => import('#app/scheduling/controllers/get_next_available_slot_controller'),
+    GetBookableDays: () => import('#app/scheduling/controllers/get_bookable_days_controller'),
+    GetBookableSlots: () => import('#app/scheduling/controllers/get_bookable_slots_controller'),
   },
   tenants: {
     UpdateTenant: () => import('#app/tenants/controllers/update_tenant_controller'),

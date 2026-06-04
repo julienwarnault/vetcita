@@ -1,23 +1,22 @@
 import { query } from '~/lib/tuyau'
 
-interface NextAvailableSlotParams {
+interface BookableDaysParams {
   tenantId: string
-  from?: string
+  appointmentTypeId: string
+  from: string
+  to: string
 }
 
-interface SlotsParams {
+interface BookableSlotsParams {
   tenantId: string
+  appointmentTypeId: string
   date: string
 }
 
-export function nextAvailableSlotQueryOptions(params: NextAvailableSlotParams) {
-  return query.getNextAvailableSlot.render.queryOptions({ query: params })
+export function bookableDaysQueryOptions(params: BookableDaysParams) {
+  return query.getBookableDays.render.queryOptions({ query: params })
 }
 
-export function monthAvailabilityQueryOptions(params: SlotsParams) {
-  return query.getMonthAvailability.render.queryOptions({ query: params })
-}
-
-export function availableSlotsQueryOptions(params: SlotsParams) {
-  return query.getAvailableSlots.render.queryOptions({ query: params })
+export function bookableSlotsQueryOptions(params: BookableSlotsParams) {
+  return query.getBookableSlots.render.queryOptions({ query: params })
 }

@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { useForm, type InertiaPrecognitiveFormProps } from '@inertiajs/react'
+import { query, queryClient } from '~/lib/tuyau'
 
 type BookingData = {
   tenantId: string
   appointmentTypeId: string
+  agendaId: string
   startDate: string
   firstName: string
   lastName: string
@@ -23,8 +25,8 @@ export const STEPS = [
   {
     key: 'datetime',
     title: 'Seleccionar fecha y hora',
-    fields: ['startDate'],
-    canContinue: (d: BookingData) => Boolean(d.startDate),
+    fields: ['startDate', 'agendaId'],
+    canContinue: (d: BookingData) => Boolean(d.startDate && d.agendaId),
   },
   {
     key: 'infos',
@@ -53,6 +55,7 @@ export function useBookingForm(params: UseBookingFormParams) {
   const form = useForm({
     tenantId: tenantId,
     appointmentTypeId: '',
+    agendaId: '',
     startDate: '',
     firstName: '',
     lastName: '',
@@ -76,7 +79,20 @@ export function useBookingForm(params: UseBookingFormParams) {
 
   function next() {
     if (isLast) {
-      form.post(submitUrl, { replace: false, preserveState: false })
+      form.post(submitUrl, {
+        replace: false,
+        preserveState: false,
+        onSuccess() {
+          queryClient.invalidateQueries({
+            queryKey: query.getBookableDays.render.pathKey(),
+            exact: false,
+          })
+          queryClient.invalidateQueries({
+            queryKey: query.getBookableSlots.render.pathKey(),
+            exact: false,
+          })
+        },
+      })
       return
     }
 

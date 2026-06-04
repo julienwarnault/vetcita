@@ -7,40 +7,28 @@ import type { InferInput, SimpleError } from '@vinejs/vine/types'
 export type ParamValue = string | number | bigint | boolean
 
 export interface Registry {
-  'get_month_availability.render': {
+  'get_bookable_days.render': {
     methods: ["GET","HEAD"]
-    pattern: '/api/availability'
+    pattern: '/api/bookable-days'
     types: {
       body: {}
       paramsTuple: []
       params: {}
-      query: ExtractQueryForGet<InferInput<(typeof import('#app/scheduling/controllers/get_month_availability_controller').default)['validator']>>
-      response: ExtractResponse<Awaited<ReturnType<import('#app/scheduling/controllers/get_month_availability_controller').default['render']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/get_month_availability_controller').default['render']>>> | { status: 422; response: { errors: SimpleError[] } }
+      query: ExtractQueryForGet<InferInput<(typeof import('#app/scheduling/controllers/get_bookable_days_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/scheduling/controllers/get_bookable_days_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/get_bookable_days_controller').default['render']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'get_available_slots.render': {
+  'get_bookable_slots.render': {
     methods: ["GET","HEAD"]
-    pattern: '/api/slots'
+    pattern: '/api/bookable-slots'
     types: {
       body: {}
       paramsTuple: []
       params: {}
-      query: ExtractQueryForGet<InferInput<(typeof import('#app/scheduling/controllers/get_available_slots_controller').default)['validator']>>
-      response: ExtractResponse<Awaited<ReturnType<import('#app/scheduling/controllers/get_available_slots_controller').default['render']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/get_available_slots_controller').default['render']>>> | { status: 422; response: { errors: SimpleError[] } }
-    }
-  }
-  'get_next_available_slot.render': {
-    methods: ["GET","HEAD"]
-    pattern: '/api/next-slot'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: ExtractQueryForGet<InferInput<(typeof import('#app/scheduling/controllers/get_next_available_slot_controller').default)['validator']>>
-      response: ExtractResponse<Awaited<ReturnType<import('#app/scheduling/controllers/get_next_available_slot_controller').default['render']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/get_next_available_slot_controller').default['render']>>> | { status: 422; response: { errors: SimpleError[] } }
+      query: ExtractQueryForGet<InferInput<(typeof import('#app/scheduling/controllers/get_bookable_slots_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/scheduling/controllers/get_bookable_slots_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/get_bookable_slots_controller').default['render']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'dashboard': {

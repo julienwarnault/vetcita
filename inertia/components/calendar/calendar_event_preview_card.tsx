@@ -79,7 +79,7 @@ export function CalendarEventPreviewCard(props: CalendarEventPreviewCardProps) {
                   <div className="flex flex-col gap-0.5">
                     <div className="text-[15px]/5 font-medium">{event.typeName}</div>
                     <div className="text-[13px]/4 text-foreground">
-                      {formatDuration(event.duration)}
+                      {formatDuration(event.duration)} • {event.agenda}
                     </div>
                   </div>
                 </div>

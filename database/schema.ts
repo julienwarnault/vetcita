@@ -62,8 +62,10 @@ export class AppointmentTypeSchema extends BaseModel {
 }
 
 export class AppointmentSchema extends BaseModel {
-  static $columns = ['appointmentTypeId', 'bookingRef', 'createdAt', 'duration', 'endDate', 'id', 'patientId', 'reminderSentAt', 'startDate', 'tenantId', 'updatedAt'] as const
+  static $columns = ['agendaId', 'appointmentTypeId', 'bookingRef', 'createdAt', 'duration', 'endDate', 'id', 'patientId', 'reminderSentAt', 'startDate', 'tenantId', 'updatedAt'] as const
   $columns = AppointmentSchema.$columns
+  @column()
+  declare agendaId: UUID
   @column()
   declare appointmentTypeId: UUID
   @column()

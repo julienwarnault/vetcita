@@ -7,7 +7,7 @@ export const ISO_DATE = 'yyyy-MM-dd'
 
 export class TimeService {
   now() {
-    return DateTime.now()
+    return DateTime.now().setZone(DEFAULT_TIMEZONE)
   }
 
   roundToNearestMinutes(dt: DateTime, nearestTo = 30) {
