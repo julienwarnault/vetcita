@@ -1,6 +1,7 @@
 import { CSSProperties } from 'react'
 import { cn } from 'tailwind-variants'
 import { buildDaySlots, type Event, getDaysFromView, getRatio, mapEvents } from '~/lib/calendar'
+import { CalendarCurrentTime } from './calendar_current_time'
 import { dayId, isPastDate, isToday } from '~/lib/date'
 import { CalendarEvent } from './calendar_event'
 import { capitalize } from '~/lib/utils'
@@ -79,6 +80,7 @@ export function CalendarDaysView(props: CalendarDaysViewProps) {
           const id = dayId(day)
           const dayEvents = eventsMap.get(id) ?? []
           const daySlots = buildDaySlots(dayEvents)
+          const isCurrentDay = isToday(day)
 
           return (
             <div key={index} className="relative border-l border-input">
@@ -91,6 +93,7 @@ export function CalendarDaysView(props: CalendarDaysViewProps) {
                   onClick={onEventClick}
                 />
               ))}
+              {isCurrentDay && <CalendarCurrentTime ratio={getRatio()} />}
             </div>
           )
         })}

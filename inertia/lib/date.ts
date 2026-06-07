@@ -11,13 +11,16 @@ export function today() {
   return DateTime.now().setZone(DEFAULT_TIMEZONE).startOf('day')
 }
 
+export function now() {
+  return DateTime.now().setZone(DEFAULT_TIMEZONE)
+}
+
 export function isPastDate(date: DateTime) {
   return date.startOf('day') < DateTime.now().startOf('day')
 }
 
 export function isToday(date: DateTime) {
-  const now = DateTime.now()
-  return date.hasSame(now, 'day')
+  return date.hasSame(DateTime.now(), 'day')
 }
 
 export function getMinutesInDay(date: DateTime) {
