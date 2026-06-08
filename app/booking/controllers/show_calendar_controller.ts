@@ -3,8 +3,11 @@ import { DateTime } from 'luxon'
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
 import AppointmentTransformer from '#booking/transformers/appointment_transformer'
+import AgendaTransformer from '#agendas/transformers/agenda_transformer'
 import { DEFAULT_TIMEZONE } from '#app/shared/services/time_service'
 import { GetAppointments } from '#booking/queries/get_appointments'
+import { GetAgendas } from '#agendas/queries/get_agendas'
+import { uuidListSchema } from '#app/shared/validators'
 
 @inject()
 export default class ShowCalendarController {
@@ -12,10 +15,14 @@ export default class ShowCalendarController {
     vine.object({
       date: vine.string().optional(),
       view: vine.enum(['month', 'week', '3_day', 'day']).optional(),
+      agendaIds: uuidListSchema().optional(),
     })
   )
 
-  constructor(private readonly getAppointments: GetAppointments) {}
+  constructor(
+    private readonly getAgendas: GetAgendas,
+    private readonly getAppointments: GetAppointments
+  ) {}
 
   async render({ inertia, request, response, auth }: HttpContext) {
     const params = await request.validateUsing(ShowCalendarController.validator)
@@ -34,16 +41,22 @@ export default class ShowCalendarController {
 
     const range = this.#getRangeDates(view, date)
 
-    const { appointments } = await this.getAppointments.execute({
-      from: range.start,
-      to: range.end,
-      tenantId: user.tenantId,
-    })
+    const [{ appointments }, { agendas }] = await Promise.all([
+      this.getAppointments.execute({
+        from: range.start,
+        to: range.end,
+        tenantId: user.tenantId,
+        agendaIds: params.agendaIds,
+      }),
+      this.getAgendas.execute({ tenantId: user.tenantId }),
+    ])
 
     return inertia.render('calendar', {
       date,
       view,
       appointments: AppointmentTransformer.transform(appointments),
+      agendas: AgendaTransformer.transform(agendas),
+      agendaIds: params.agendaIds,
     })
   }
 

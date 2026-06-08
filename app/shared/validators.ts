@@ -9,3 +9,11 @@ export const uuidSchema = () =>
     .string()
     .uuid()
     .transform((value) => value as UUID)
+
+export const uuidListSchema = () =>
+  vine.array(uuidSchema()).parse((value) => {
+    if (typeof value === 'string') {
+      return value.split(',').filter(Boolean)
+    }
+    return value
+  })

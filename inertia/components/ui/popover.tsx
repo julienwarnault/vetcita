@@ -1,4 +1,5 @@
 import { tv } from 'tailwind-variants'
+import { ChevronDownIcon } from 'lucide-react'
 import { isValidElement, ReactNode } from 'react'
 import { Popover as BasePopover } from '@base-ui/react/popover'
 import { Card } from './card'
@@ -7,6 +8,7 @@ const popover = tv({
   slots: {
     positioner: 'z-50',
     popup: 'max-h-[var(--available-height)] overscroll-none',
+    icon: 'group-data-[popup-open]:rotate-180',
   },
 })
 
@@ -58,3 +60,9 @@ export function Popover(props: PopoverProps) {
     </BasePopover.Root>
   )
 }
+
+function PopoverTriggerIcon() {
+  return <ChevronDownIcon className={popover().icon()} size={16} />
+}
+
+Popover.TriggerIcon = PopoverTriggerIcon

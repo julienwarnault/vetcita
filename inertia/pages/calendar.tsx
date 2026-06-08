@@ -13,10 +13,12 @@ type PageProps = InertiaProps<{
   date: string
   view: 'day' | '3_day' | 'week' | 'month'
   appointments: Data.Booking.Appointment[]
+  agendas: Data.Agendas.Agenda[]
+  agendaIds?: string[]
 }>
 
 export default function ShowCalendar(props: PageProps) {
-  const { date, view, appointments } = props
+  const { date, view, appointments, agendas, agendaIds } = props
 
   const { user } = usePageProps()
 
@@ -28,7 +30,7 @@ export default function ShowCalendar(props: PageProps) {
 
   return (
     <div className="flex flex-1 flex-col overflow-hidden">
-      <CalendarToolbar date={date} view={view} />
+      <CalendarToolbar date={date} view={view} agendas={agendas} agendaIds={agendaIds} />
 
       <div className="flex flex-1 overflow-hidden">
         <Calendar

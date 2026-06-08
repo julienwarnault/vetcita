@@ -7,7 +7,9 @@ import {
   RotateCwIcon,
 } from 'lucide-react'
 import { DateTime } from 'luxon'
+import { Data } from '@generated/data'
 import { router } from '@inertiajs/react'
+import { CalendarAgendaSelector } from './calendar_agenda_selector'
 import { CalendarDatePicker } from './calendar_date_picker'
 import { ButtonGroup } from '~/components/ui/button_group'
 import { Tooltip } from '~/components/ui/tooltip'
@@ -21,29 +23,37 @@ import { today } from '~/lib/date'
 interface CalendarToolbarProps {
   date: string
   view: ViewType
+  agendas: Data.Agendas.Agenda[]
+  agendaIds?: string[]
 }
 
 export function CalendarToolbar(props: CalendarToolbarProps) {
-  const { date, view } = props
+  const { date, view, agendas, agendaIds } = props
 
-  function navigate(newDate: string, newView: ViewType) {
-    router.get(
-      urlFor('show_calendar.render', {}, { qs: { date: newDate, view: newView } }),
-      {},
-      { preserveState: true }
-    )
+  function navigate(newDate: string, newView: ViewType, newAgendaIds?: string[]) {
+    const qs: Record<string, any> = { date: newDate, view: newView }
+
+    if (newAgendaIds !== undefined) {
+      qs.agendaIds = newAgendaIds.join(',')
+    }
+
+    router.get(urlFor('show_calendar.render', {}, { qs }), {}, { preserveState: true })
   }
 
   function onChangeView(newView: ViewType) {
-    navigate(date, newView)
+    navigate(date, newView, agendaIds)
   }
 
   function onChangeDate(newDate: DateTime) {
-    navigate(newDate.toFormat('yyyy-MM-dd'), view)
+    navigate(newDate.toFormat('yyyy-MM-dd'), view, agendaIds)
   }
 
   function onResetView() {
-    navigate(today().toFormat('yyyy-MM-dd'), 'day')
+    navigate(today().toFormat('yyyy-MM-dd'), 'day', agendaIds)
+  }
+
+  function onChangeAgendas(newAgendaIds: string[] | undefined) {
+    navigate(date, view, newAgendaIds)
   }
 
   return (
@@ -55,6 +65,12 @@ export function CalendarToolbar(props: CalendarToolbarProps) {
           </Button>
 
           <CalendarDatePicker date={date} view={view} onDateChange={onChangeDate} />
+
+          <CalendarAgendaSelector
+            agendas={agendas}
+            selectedAgendaIds={agendaIds}
+            onChange={onChangeAgendas}
+          />
         </div>
 
         <div className="flex items-center gap-2">
