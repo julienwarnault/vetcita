@@ -1,17 +1,19 @@
 import { DateTime } from 'luxon'
 import { Data } from '@generated/data'
 import { formatDuration, formatPhoneNumber } from '~/lib/utils'
-import { BookingForm } from './use_booking_form'
+import { BookingForm, StepKey } from './use_booking_form'
 import { DEFAULT_TIMEZONE } from '~/lib/date'
 import { Card } from '../ui/card'
 
 interface StepReviewProps {
   form: BookingForm
-  appointmentType: Data.AppointmentTypes.AppointmentType
+  appointmentType?: Data.AppointmentTypes.AppointmentType
   tenant: Data.Tenants.Tenant
+  stepKey: StepKey
 }
 
-export function StepReview({ appointmentType, tenant, form }: StepReviewProps) {
+export function StepReview(props: StepReviewProps) {
+  const { appointmentType, tenant, form, stepKey } = props
   const { data } = form
 
   const startDateTime = data.startDate
@@ -27,35 +29,39 @@ export function StepReview({ appointmentType, tenant, form }: StepReviewProps) {
         <div className="font-semibold text-lg">{tenant.name}</div>
       </div>
 
-      <div className="flex flex-col gap-4 p-4">
-        <div>
-          <div className="font-semibold text-lg">{appointmentType.name}</div>
+      {['datetime', 'infos', 'review'].includes(stepKey) && (
+        <div className="flex flex-col p-4">
+          <div className="font-semibold text-lg">{appointmentType?.name}</div>
           <div className="text-sm text-muted-foreground mt-1">
-            Duración: {formatDuration(appointmentType.duration)}
+            Duración: {formatDuration(appointmentType?.duration || 0)}
           </div>
         </div>
+      )}
 
-        <div>
+      {['infos', 'review'].includes(stepKey) && (
+        <div className="flex flex-col p-4">
           <div className="font-semibold text-lg capitalize">{formattedDate}</div>
           <div className="text-sm text-muted-foreground mt-1">{formattedTime}</div>
         </div>
-      </div>
+      )}
 
-      <div className="p-4">
-        <div className="font-semibold text-lg">
-          {data.firstName} {data.lastName}
-        </div>
-        <div className="flex flex-col gap-1 mt-2 text-sm">
-          <div className="text-muted-foreground">
-            <span className="font-medium">Teléfono:</span> {formatPhoneNumber(data.phone)}
+      {['review'].includes(stepKey) && (
+        <div className="p-4">
+          <div className="font-semibold text-lg">
+            {data.firstName} {data.lastName}
           </div>
-          {data.email && (
+          <div className="flex flex-col gap-1 mt-2 text-sm">
             <div className="text-muted-foreground">
-              <span className="font-medium">Email:</span> {data.email}
+              <span className="font-medium">Teléfono:</span> {formatPhoneNumber(data.phone)}
             </div>
-          )}
+            {data.email && (
+              <div className="text-muted-foreground">
+                <span className="font-medium">Email:</span> {data.email}
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </Card>
   )
 }

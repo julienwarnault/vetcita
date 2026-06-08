@@ -49,24 +49,43 @@ export default function Show(props: PageProps) {
       />
 
       <div className="flex-1 flex flex-col bg-background">
-        <div className="container-sm flex-1 pb-3">
-          <div className="pt-9 pb-8">
-            <h1 className="text-[28px]/9 md:text-[40px]/11 font-bold">{step.title}</h1>
-          </div>
+        <div className="container flex-1 grid lg:grid-cols-[1fr_auto] gap-x-24 pb-3">
+          <div className="min-inline-0">
+            <div className="pt-9 pb-8">
+              <h1 className="text-[28px]/9 md:text-[40px]/11 font-bold">{step.title}</h1>
+            </div>
 
-          <Form
-            id="form"
-            onSubmit={handleSubmit}
-            className="flex w-full flex-col gap-4"
-            errors={form.errors}
-          >
-            {step.key == 'type' && <StepAppointmentType form={form} appointmentTypes={types} />}
-            {step.key == 'datetime' && <StepDateTime form={form} />}
-            {step.key == 'infos' && <StepInfos form={form} />}
-            {step.key == 'review' && (
-              <StepReview form={form} appointmentType={selectedType!} tenant={tenant} />
-            )}
-          </Form>
+            <Form
+              id="form"
+              onSubmit={handleSubmit}
+              className="flex w-full flex-col gap-4"
+              errors={form.errors}
+            >
+              {step.key == 'type' && <StepAppointmentType form={form} appointmentTypes={types} />}
+              {step.key == 'datetime' && <StepDateTime form={form} />}
+              {step.key == 'infos' && <StepInfos form={form} />}
+              {step.key == 'review' && (
+                <StepReview
+                  form={form}
+                  appointmentType={selectedType!}
+                  tenant={tenant}
+                  stepKey="review"
+                />
+              )}
+            </Form>
+          </div>
+          {step.key !== 'review' && (
+            <aside className="hidden lg:block lg:w-111">
+              <div className="sticky top-27 mt-9">
+                <StepReview
+                  form={form}
+                  appointmentType={selectedType}
+                  tenant={tenant}
+                  stepKey={step.key}
+                />
+              </div>
+            </aside>
+          )}
         </div>
 
         {canContinue && (

@@ -42,6 +42,8 @@ export const STEPS = [
   },
 ] as const
 
+export type StepKey = (typeof STEPS)[number]['key']
+
 type UseBookingFormParams = {
   tenantId: string
   submitUrl: string
