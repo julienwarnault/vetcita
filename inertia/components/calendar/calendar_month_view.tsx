@@ -19,24 +19,26 @@ export function CalendarMonthView(props: CalendarMonthViewProps) {
   const weekdays = Info.weekdays('long', { locale: DEFAULT_LOCALE })
 
   return (
-    <div className="flex flex-col">
-      <div className="sticky top-0 z-10 grid grid-cols-7 bg-surface shadow-sm">
-        {weekdays.map((day, index) => (
-          <div key={index} className="p-3">
-            <span className="text-[15px] font-medium leading-5">{capitalize(day)}</span>
-          </div>
-        ))}
-      </div>
-      <div className="grid grid-cols-7">
-        {days.map((day, index) => (
-          <CalendarDayCell
-            key={index}
-            day={day}
-            events={eventsMap.get(dayId(day)) ?? []}
-            maxVisible={3}
-            onEventClick={onEventClick}
-          />
-        ))}
+    <div className="flex-1 overflow-x-hidden overflow-y-scroll bg-white overscroll-none">
+      <div className="flex flex-col">
+        <div className="sticky top-0 z-10 grid grid-cols-7 bg-surface shadow-sm">
+          {weekdays.map((day, index) => (
+            <div key={index} className="p-3">
+              <span className="text-[15px] font-medium leading-5">{capitalize(day)}</span>
+            </div>
+          ))}
+        </div>
+        <div className="grid grid-cols-7">
+          {days.map((day, index) => (
+            <CalendarDayCell
+              key={index}
+              day={day}
+              events={eventsMap.get(dayId(day)) ?? []}
+              maxVisible={3}
+              onEventClick={onEventClick}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )

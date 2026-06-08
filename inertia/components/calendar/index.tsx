@@ -28,19 +28,12 @@ export function Calendar(props: CalendarViewProps) {
 
   return (
     <>
-      <div className="flex-1 overflow-x-hidden overflow-y-scroll bg-white overscroll-none">
-        {view !== 'month' && (
-          <CalendarDaysView
-            date={date}
-            view={view}
-            events={events}
-            onEventClick={handleEventClick}
-          />
-        )}
-        {view === 'month' && (
-          <CalendarMonthView date={props.date} events={events} onEventClick={handleEventClick} />
-        )}
-      </div>
+      {view !== 'month' && (
+        <CalendarDaysView date={date} view={view} events={events} onEventClick={handleEventClick} />
+      )}
+      {view === 'month' && (
+        <CalendarMonthView date={props.date} events={events} onEventClick={handleEventClick} />
+      )}
 
       <CalendarEventDrawer open={isOpen} event={event} onClose={handleDrawerClose} />
     </>
