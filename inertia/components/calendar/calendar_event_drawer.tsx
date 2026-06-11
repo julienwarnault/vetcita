@@ -18,20 +18,23 @@ export function CalendarEventDrawer(props: CalendarEventDrawerProps) {
     <Drawer open={open} onOpenChange={(state) => !state && onClose?.()}>
       {event && (
         <>
-          <Drawer.LeftPanel>
-            <Drawer.Body>
-              <div className="flex flex-col items-center">
-                <Avatar size="4xl" className="mb-3" fullName={event.patientFullName} />
-                <div className="text-[17px]/6 font-medium pb-1">{event.patientFullName}</div>
-                {event.patientEmail && (
-                  <div className="text-[15px]/5 text-muted">{event.patientEmail}</div>
-                )}
-                <div className="text-[15px]/5 text-muted">
-                  {formatPhoneNumber(event.patientPhone)}
+          {event.patient && (
+            <Drawer.LeftPanel>
+              <Drawer.Body>
+                <div className="flex flex-col items-center">
+                  <Avatar size="4xl" className="mb-3" fullName={event.patient.fullName} />
+                  <div className="text-[17px]/6 font-medium pb-1">{event.patient.fullName}</div>
+                  {event.patient.email && (
+                    <div className="text-[15px]/5 text-muted">{event.patient.email}</div>
+                  )}
+                  <div className="text-[15px]/5 text-muted">
+                    {formatPhoneNumber(event.patient.phone)}
+                  </div>
                 </div>
-              </div>
-            </Drawer.Body>
-          </Drawer.LeftPanel>
+              </Drawer.Body>
+            </Drawer.LeftPanel>
+          )}
+
           <Drawer.MainPanel className="grid grid-rows-[auto_1fr_auto]">
             <Drawer.Header>
               <div className="flex justify-between gap-4 p-8 bg-[#208901]">

@@ -6,9 +6,11 @@ export type Event = {
   start: DateTime
   end: DateTime
   duration: number
-  patientFullName: string
-  patientPhone: string
-  patientEmail?: string
+  patient?: {
+    fullName: string
+    phone: string
+    email?: string
+  }
   typeName: string
   color: string
   bookingRef: string

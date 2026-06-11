@@ -79,7 +79,7 @@ export class AppointmentSchema extends BaseModel {
   @column({ isPrimary: true })
   declare id: UUID
   @column()
-  declare patientId: UUID
+  declare patientId: UUID | null
   @column.dateTime()
   declare reminderSentAt: DateTime | null
   @column.dateTime()

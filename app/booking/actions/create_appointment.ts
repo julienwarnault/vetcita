@@ -14,7 +14,7 @@ import { events } from '#generated/events'
 interface CreateAppointmentParams {
   appointmentTypeId: UUID
   agendaId: UUID
-  patientId: UUID
+  patientId?: UUID
   startDate: string
   tenantId: UUID
 }

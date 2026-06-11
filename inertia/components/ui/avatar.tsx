@@ -1,3 +1,4 @@
+import { PersonStandingIcon } from 'lucide-react'
 import { tv, VariantProps } from 'tailwind-variants'
 import { Avatar as BaseAvatar } from '@base-ui/react/avatar'
 
@@ -31,7 +32,7 @@ export function Avatar(props: BaseAvatar.Root.Props & AvatarProps) {
       style={color ? { backgroundColor: color, ...style } : style}
       {...rest}
     >
-      {!children ? fullName?.charAt(0).toUpperCase() : children}
+      {!children ? fullName?.charAt(0).toUpperCase() || <PersonStandingIcon /> : children}
     </BaseAvatar.Root>
   )
 }

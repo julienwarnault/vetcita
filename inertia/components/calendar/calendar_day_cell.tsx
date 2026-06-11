@@ -54,7 +54,9 @@ export function CalendarDayCell(props: CalendarDayCellProps) {
             >
               <div className="flex gap-1 overflow-hidden whitespace-nowrap">
                 <div className="text-[13px]/4 font-normal">{event.start.toFormat('h:mm')}</div>
-                <div className="text-[13px]/4 font-semibold">{event.patientFullName}</div>
+                <div className="text-[13px]/4 font-semibold">
+                  {event.patient?.fullName ?? 'Sin cita'}
+                </div>
               </div>
             </div>
           </CalendarEventPreviewCard>
