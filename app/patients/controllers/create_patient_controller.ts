@@ -22,14 +22,16 @@ export default class CreatePatientController {
     return inertia.render('patients/form', {})
   }
 
-  async execute({ request, response, auth }: HttpContext) {
+  async execute({ request, response, auth, session }: HttpContext) {
     const payload = await request.validateUsing(CreatePatientController.validator)
 
     const user = auth.getUserOrFail()
 
-    await withTransaction(() => {
+    const { patient } = await withTransaction(() => {
       return this.createPatient.execute({ ...payload, tenantId: user.tenantId })
     })
+
+    session.flash('patientId', patient.id)
 
     return response.redirect().back()
   }

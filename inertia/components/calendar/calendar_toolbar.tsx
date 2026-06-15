@@ -9,6 +9,7 @@ import {
 import { DateTime } from 'luxon'
 import { Data } from '@generated/data'
 import { router } from '@inertiajs/react'
+import { useModalStack } from '@inertiaui/modal-react'
 import { CalendarAgendaSelector } from './calendar_agenda_selector'
 import { CalendarDatePicker } from './calendar_date_picker'
 import { ButtonGroup } from '~/components/ui/button_group'
@@ -29,6 +30,8 @@ interface CalendarToolbarProps {
 
 export function CalendarToolbar(props: CalendarToolbarProps) {
   const { date, view, agendas, agendaIds } = props
+
+  const { visitModal } = useModalStack()
 
   function navigate(newDate: string, newView: ViewType, newAgendaIds?: string[]) {
     const qs: Record<string, any> = { date: newDate, view: newView }
@@ -78,7 +81,7 @@ export function CalendarToolbar(props: CalendarToolbarProps) {
             <Tooltip
               trigger={
                 <Button onClick={onResetView} variant="secondary" size="icon-sm">
-                  <RotateCwIcon size={16} />
+                  <RotateCwIcon />
                 </Button>
               }
             >
@@ -105,7 +108,11 @@ export function CalendarToolbar(props: CalendarToolbarProps) {
               </Button>
             }
           >
-            <Menu.Item disabled={true}>
+            <Menu.Item
+              onClick={() => {
+                visitModal(urlFor('create_appointment.render'))
+              }}
+            >
               <CalendarPlusIcon />
               Cita
             </Menu.Item>

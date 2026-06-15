@@ -7,13 +7,27 @@ import { GetPatient } from '#patients/queries/get_patient'
 export default class ShowPatientController {
   constructor(private readonly getPatient: GetPatient) {}
 
-  async render({ inertia, params }: HttpContext) {
+  async render({ inertia, params, auth }: HttpContext) {
+    const user = auth.getUserOrFail()
+
     const { patient } = await this.getPatient.execute({
       id: params.id,
+      tenantId: user.tenantId,
     })
 
     return inertia.render('patients/show', {
       patient: PatientTransformer.transform(patient),
     })
+  }
+
+  async api({ serialize, params, auth }: HttpContext) {
+    const user = auth.getUserOrFail()
+
+    const { patient } = await this.getPatient.execute({
+      id: params.id,
+      tenantId: user.tenantId,
+    })
+
+    return await serialize.withoutWrapping(PatientTransformer.transform(patient))
   }
 }

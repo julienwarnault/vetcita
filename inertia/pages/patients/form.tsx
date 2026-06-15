@@ -21,7 +21,7 @@ export default function ShowForm(props: PageProps) {
 
   return (
     <InertiaModal>
-      {({ close }) => (
+      {({ close, emit }) => (
         <>
           <FormHeader
             title={title}
@@ -47,7 +47,10 @@ export default function ShowForm(props: PageProps) {
               route={isEdit ? 'update_patient.execute' : 'create_patient.execute'}
               routeParams={isEdit ? { id: patient.id } : undefined}
               className="gap-16 pb-24"
-              onSuccess={close}
+              onSuccess={(data: any) => {
+                !isEdit && emit('onCreate', data.props.flash.patientId)
+                close()
+              }}
             >
               <div>
                 <h2 className="text-2xl font-semibold">Perfil</h2>

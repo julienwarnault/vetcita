@@ -41,17 +41,19 @@ export interface ApiDefinition {
   }
   listPatients: {
     render: typeof routes['list_patients.render']
+    api: typeof routes['list_patients.api']
   }
   createPatient: {
     render: typeof routes['create_patient.render']
     execute: typeof routes['create_patient.execute']
   }
-  getPatient: {
-    render: typeof routes['get_patient.render']
-  }
   updatePatient: {
     render: typeof routes['update_patient.render']
     execute: typeof routes['update_patient.execute']
+  }
+  getPatient: {
+    render: typeof routes['get_patient.render']
+    api: typeof routes['get_patient.api']
   }
   deletePatient: {
     execute: typeof routes['delete_patient.execute']
@@ -73,8 +75,13 @@ export interface ApiDefinition {
   bookingLink: {
     render: typeof routes['booking_link.render']
   }
-  getAppointment: {
-    render: typeof routes['get_appointment.render']
+  createAppointment: {
+    render: typeof routes['create_appointment.render']
+    execute: typeof routes['create_appointment.execute']
+  }
+  updateAppointment: {
+    render: typeof routes['update_appointment.render']
+    execute: typeof routes['update_appointment.execute']
   }
   eventStream: typeof routes['event_stream']
   subscribe: typeof routes['subscribe']

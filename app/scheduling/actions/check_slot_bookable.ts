@@ -11,6 +11,7 @@ interface CheckSlotBookableParams {
   appointmentTypeId: UUID
   agendaId: UUID
   start: DateTime
+  appointmentId?: UUID
 }
 
 @inject()
@@ -47,7 +48,7 @@ export class CheckSlotBookable {
       start: params.start,
       duration: appointmentType.duration,
       workingHours,
-      appointments,
+      appointments: appointments.filter(({ id }) => id !== params.appointmentId),
     })
 
     return isBookable

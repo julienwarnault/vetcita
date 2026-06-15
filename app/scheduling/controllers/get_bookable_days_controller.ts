@@ -10,6 +10,7 @@ export default class GetBookableDaysController {
     vine.object({
       tenantId: uuidSchema(),
       appointmentTypeId: uuidSchema(),
+      appointmentId: uuidSchema().optional(),
       from: vine.string(),
       to: vine.string(),
     })

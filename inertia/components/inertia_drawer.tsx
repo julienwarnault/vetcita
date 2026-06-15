@@ -1,20 +1,27 @@
 import { XIcon } from 'lucide-react'
 import { HeadlessModal, ModalInstance } from '@inertiaui/modal-react'
-import { useEffect, useState, ReactNode, useCallback, useRef } from 'react'
+import { useEffect, useState, ReactNode, useCallback, useRef, Ref } from 'react'
 import { animate, cancelAnimations } from '~/lib/animate'
 import { useKeyPress } from '~/hooks/use_key_press'
 import { Portal } from './ui/portal'
 import { Button } from './ui/button'
 
 interface InertiaDrawerProps {
+  ref?: Ref<InertiaDrawerRef>
   children: ReactNode | ((props: ModalInstance) => ReactNode)
 }
 
+export interface InertiaDrawerRef {
+  afterLeave: () => void
+  close: () => void
+  emit: (event: string, ...args: unknown[]) => void
+}
+
 export function InertiaDrawer(props: InertiaDrawerProps) {
-  const { children } = props
+  const { ref, children } = props
 
   return (
-    <HeadlessModal>
+    <HeadlessModal ref={ref as any}>
       {({ isOpen, shouldRender, close, afterLeave, onTopOfStack, modalContext, ...rest }: any) => {
         if (!shouldRender) return null
 

@@ -10,6 +10,7 @@ export default class GetBookableSlotsController {
     vine.object({
       tenantId: uuidSchema(),
       appointmentTypeId: uuidSchema(),
+      appointmentId: uuidSchema().optional(),
       date: vine.string(),
     })
   )

@@ -126,17 +126,17 @@ const routes = {
     tokens: [{"old":"/patients","type":0,"val":"patients","end":""}],
     types: placeholder as Registry['create_patient.execute']['types'],
   },
-  'get_patient.render': {
-    methods: ["GET","HEAD"],
-    pattern: '/patients/:id',
-    tokens: [{"old":"/patients/:id","type":0,"val":"patients","end":""},{"old":"/patients/:id","type":1,"val":"id","end":""}],
-    types: placeholder as Registry['get_patient.render']['types'],
-  },
   'update_patient.render': {
     methods: ["GET","HEAD"],
     pattern: '/patients/edit/:id',
     tokens: [{"old":"/patients/edit/:id","type":0,"val":"patients","end":""},{"old":"/patients/edit/:id","type":0,"val":"edit","end":""},{"old":"/patients/edit/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['update_patient.render']['types'],
+  },
+  'get_patient.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/patients/:id',
+    tokens: [{"old":"/patients/:id","type":0,"val":"patients","end":""},{"old":"/patients/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['get_patient.render']['types'],
   },
   'update_patient.execute': {
     methods: ["PUT"],
@@ -149,6 +149,18 @@ const routes = {
     pattern: '/patients/:id',
     tokens: [{"old":"/patients/:id","type":0,"val":"patients","end":""},{"old":"/patients/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['delete_patient.execute']['types'],
+  },
+  'list_patients.api': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/patients',
+    tokens: [{"old":"/api/patients","type":0,"val":"api","end":""},{"old":"/api/patients","type":0,"val":"patients","end":""}],
+    types: placeholder as Registry['list_patients.api']['types'],
+  },
+  'get_patient.api': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/patients/:id',
+    tokens: [{"old":"/api/patients/:id","type":0,"val":"api","end":""},{"old":"/api/patients/:id","type":0,"val":"patients","end":""},{"old":"/api/patients/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['get_patient.api']['types'],
   },
   'update_tenant.render': {
     methods: ["GET","HEAD"],
@@ -176,8 +188,8 @@ const routes = {
   },
   'confirm_appointment.render': {
     methods: ["GET","HEAD"],
-    pattern: '/booking/:appointmentId/confirm',
-    tokens: [{"old":"/booking/:appointmentId/confirm","type":0,"val":"booking","end":""},{"old":"/booking/:appointmentId/confirm","type":1,"val":"appointmentId","end":""},{"old":"/booking/:appointmentId/confirm","type":0,"val":"confirm","end":""}],
+    pattern: '/:tenantId/booking/:appointmentId/confirm',
+    tokens: [{"old":"/:tenantId/booking/:appointmentId/confirm","type":1,"val":"tenantId","end":""},{"old":"/:tenantId/booking/:appointmentId/confirm","type":0,"val":"booking","end":""},{"old":"/:tenantId/booking/:appointmentId/confirm","type":1,"val":"appointmentId","end":""},{"old":"/:tenantId/booking/:appointmentId/confirm","type":0,"val":"confirm","end":""}],
     types: placeholder as Registry['confirm_appointment.render']['types'],
   },
   'show_calendar.render': {
@@ -192,11 +204,29 @@ const routes = {
     tokens: [{"old":"/settings/booking-link","type":0,"val":"settings","end":""},{"old":"/settings/booking-link","type":0,"val":"booking-link","end":""}],
     types: placeholder as Registry['booking_link.render']['types'],
   },
-  'get_appointment.render': {
+  'create_appointment.render': {
     methods: ["GET","HEAD"],
+    pattern: '/appointments/new',
+    tokens: [{"old":"/appointments/new","type":0,"val":"appointments","end":""},{"old":"/appointments/new","type":0,"val":"new","end":""}],
+    types: placeholder as Registry['create_appointment.render']['types'],
+  },
+  'create_appointment.execute': {
+    methods: ["POST"],
+    pattern: '/appointments',
+    tokens: [{"old":"/appointments","type":0,"val":"appointments","end":""}],
+    types: placeholder as Registry['create_appointment.execute']['types'],
+  },
+  'update_appointment.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/appointments/edit/:id',
+    tokens: [{"old":"/appointments/edit/:id","type":0,"val":"appointments","end":""},{"old":"/appointments/edit/:id","type":0,"val":"edit","end":""},{"old":"/appointments/edit/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['update_appointment.render']['types'],
+  },
+  'update_appointment.execute': {
+    methods: ["PUT"],
     pattern: '/appointments/:id',
     tokens: [{"old":"/appointments/:id","type":0,"val":"appointments","end":""},{"old":"/appointments/:id","type":1,"val":"id","end":""}],
-    types: placeholder as Registry['get_appointment.render']['types'],
+    types: placeholder as Registry['update_appointment.execute']['types'],
   },
   'event_stream': {
     methods: ["GET","HEAD"],

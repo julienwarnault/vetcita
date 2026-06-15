@@ -16,6 +16,7 @@ export default class AppointmentTransformer extends BaseTransformer<Appointment>
         'localEndDate',
         'appointmentTypeId',
         'patientId',
+        'agendaId',
         'duration',
         'bookingRef',
         'createdAt',

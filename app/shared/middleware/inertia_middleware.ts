@@ -16,21 +16,12 @@ export default class InertiaMiddleware extends BaseInertiaMiddleware {
     const { session, auth } = ctx as Partial<HttpContext>
 
     /**
-     * Fetching the first error from the flash messages
-     */
-    const error = session?.flashMessages.get('error') as string
-    const success = session?.flashMessages.get('success') as string
-
-    /**
      * Data shared with all Inertia pages. Make sure you are using
      * transformers for rich data-types like Models.
      */
     return {
       errors: ctx.inertia.always(this.getValidationErrors(ctx)),
-      flash: ctx.inertia.always({
-        error,
-        success,
-      }),
+      flash: ctx.inertia.always(session?.flashMessages.all()),
       user: ctx.inertia.always(auth?.user ? UserTransformer.transform(auth.user) : undefined),
       qs: ctx.inertia.always(ctx.request.qs()),
     }

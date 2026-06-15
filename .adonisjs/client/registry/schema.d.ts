@@ -247,18 +247,6 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/patients/controllers/create_patient_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'get_patient.render': {
-    methods: ["GET","HEAD"]
-    pattern: '/patients/:id'
-    types: {
-      body: {}
-      paramsTuple: [ParamValue]
-      params: { id: ParamValue }
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#app/patients/controllers/get_patient_controller').default['render']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/patients/controllers/get_patient_controller').default['render']>>>
-    }
-  }
   'update_patient.render': {
     methods: ["GET","HEAD"]
     pattern: '/patients/edit/:id'
@@ -269,6 +257,18 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#app/patients/controllers/update_patient_controller').default['render']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/patients/controllers/update_patient_controller').default['render']>>>
+    }
+  }
+  'get_patient.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/patients/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/patients/controllers/get_patient_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/patients/controllers/get_patient_controller').default['render']>>>
     }
   }
   'update_patient.execute': {
@@ -293,6 +293,30 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#app/patients/controllers/delete_patient_controller').default['execute']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/patients/controllers/delete_patient_controller').default['execute']>>>
+    }
+  }
+  'list_patients.api': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/patients'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/patients/controllers/list_patients_controller').default['api']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/patients/controllers/list_patients_controller').default['api']>>>
+    }
+  }
+  'get_patient.api': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/patients/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/patients/controllers/get_patient_controller').default['api']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/patients/controllers/get_patient_controller').default['api']>>>
     }
   }
   'update_tenant.render': {
@@ -345,11 +369,11 @@ export interface Registry {
   }
   'confirm_appointment.render': {
     methods: ["GET","HEAD"]
-    pattern: '/booking/:appointmentId/confirm'
+    pattern: '/:tenantId/booking/:appointmentId/confirm'
     types: {
       body: {}
-      paramsTuple: [ParamValue]
-      params: { appointmentId: ParamValue }
+      paramsTuple: [ParamValue, ParamValue]
+      params: { tenantId: ParamValue; appointmentId: ParamValue }
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#app/booking/controllers/confirm_appointment_controller').default['render']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/booking/controllers/confirm_appointment_controller').default['render']>>>
@@ -379,16 +403,52 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/booking/controllers/booking_link_controller').default['render']>>>
     }
   }
-  'get_appointment.render': {
+  'create_appointment.render': {
     methods: ["GET","HEAD"]
-    pattern: '/appointments/:id'
+    pattern: '/appointments/new'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/booking/controllers/create_appointment_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/booking/controllers/create_appointment_controller').default['render']>>>
+    }
+  }
+  'create_appointment.execute': {
+    methods: ["POST"]
+    pattern: '/appointments'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#app/booking/controllers/create_appointment_controller').default)['validator']>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#app/booking/controllers/create_appointment_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/booking/controllers/create_appointment_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/booking/controllers/create_appointment_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'update_appointment.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/appointments/edit/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#app/booking/controllers/get_appointment_controller').default['render']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/booking/controllers/get_appointment_controller').default['render']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/booking/controllers/update_appointment_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/booking/controllers/update_appointment_controller').default['render']>>>
+    }
+  }
+  'update_appointment.execute': {
+    methods: ["PUT"]
+    pattern: '/appointments/:id'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#app/booking/controllers/update_appointment_controller').default)['validator']>>
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#app/booking/controllers/update_appointment_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/booking/controllers/update_appointment_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/booking/controllers/update_appointment_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'event_stream': {

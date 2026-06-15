@@ -27,7 +27,7 @@ export function Calendar(props: CalendarViewProps) {
         closeAll(true)
       }
     }
-    visitModal(urlFor('get_appointment.render', { id: event.id }))
+    visitModal(urlFor('update_appointment.render', { id: event.id }))
   }
 
   return (

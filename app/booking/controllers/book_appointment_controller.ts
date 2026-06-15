@@ -51,8 +51,9 @@ export default class BookAppointmentController {
       return this.bookAppointment.execute({ ...payload, tenantId: id })
     })
 
-    return response
-      .redirect()
-      .toRoute('confirm_appointment.render', { appointmentId: appointment.id })
+    return response.redirect().toRoute('confirm_appointment.render', {
+      appointmentId: appointment.id,
+      tenantId: appointment.tenantId,
+    })
   }
 }

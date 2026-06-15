@@ -23,19 +23,22 @@ export default class UpdatePatientController {
     private readonly updatePatient: UpdatePatient
   ) {}
 
-  async render({ inertia, params }: HttpContext) {
-    const { patient } = await this.getPatient.execute({ id: params.id })
+  async render({ inertia, params, auth }: HttpContext) {
+    const user = auth.getUserOrFail()
+
+    const { patient } = await this.getPatient.execute({ id: params.id, tenantId: user.tenantId })
 
     return inertia.render('patients/form', {
       patient: PatientTransformer.transform(patient),
     })
   }
 
-  async execute({ request, params, response }: HttpContext) {
+  async execute({ request, params, response, auth }: HttpContext) {
     const payload = await request.validateUsing(UpdatePatientController.validator)
+    const user = auth.getUserOrFail()
 
     await withTransaction(() => {
-      return this.updatePatient.execute({ id: params.id, ...payload })
+      return this.updatePatient.execute({ id: params.id, tenantId: user.tenantId, ...payload })
     })
 
     return response.redirect().back()

@@ -8,7 +8,10 @@ export default class ConfirmAppointmentController {
   constructor(private readonly getAppointment: GetAppointment) {}
 
   async render({ params, inertia }: HttpContext) {
-    const { appointment } = await this.getAppointment.execute({ id: params.appointmentId })
+    const { appointment } = await this.getAppointment.execute({
+      id: params.appointmentId,
+      tenantId: params.tenantId,
+    })
 
     return inertia.render('booking/confirm', {
       appointment: AppointmentTransformer.transform(appointment),

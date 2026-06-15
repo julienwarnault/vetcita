@@ -4,9 +4,11 @@
  */
 
 import BookingAppointmentCreated from '#app/booking/events/appointment_created'
+import BookingAppointmentRescheduled from '#app/booking/events/appointment_rescheduled'
 
 export const events = {
   booking: {
     AppointmentCreated: BookingAppointmentCreated,
+    AppointmentRescheduled: BookingAppointmentRescheduled,
   },
 }

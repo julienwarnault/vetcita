@@ -12,6 +12,7 @@ interface GetBookableDaysParams {
   appointmentTypeId: UUID
   from: string
   to: string
+  appointmentId?: UUID
 }
 
 @inject()
@@ -46,7 +47,7 @@ export class GetBookableDays {
       duration: appointmentType.duration,
       agendaIds,
       workingHours,
-      appointments,
+      appointments: appointments.filter(({ id }) => id !== params.appointmentId),
     })
 
     const slots: Record<string, { available: boolean }> = Object.fromEntries(

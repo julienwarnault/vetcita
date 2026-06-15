@@ -5,9 +5,9 @@ import { CalendarIcon, CircleCheckIcon } from 'lucide-react'
 import { useQuery, useQueries } from '@tanstack/react-query'
 import { UIEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { DEFAULT_LOCALE, DEFAULT_TIMEZONE, eachDayOfInterval, today } from '~/lib/date'
-import { bookableDaysQueryOptions, bookableSlotsQueryOptions } from '~/lib/queries'
 import { Skeleton } from '../ui/skeleton'
 import { range } from '~/lib/utils'
+import { query } from '~/lib/tuyau'
 
 const GROUP_SIZE = 7
 
@@ -24,6 +24,7 @@ function getGroupInterval(groupIndex: number, origin: DateTime): Interval {
 interface StartDatePickerProps {
   tenantId: string
   appointmentTypeId: string
+  appointmentId?: string
   value?: string
   startDate?: string
   maxDays?: number
@@ -34,6 +35,7 @@ export function StartDatePicker(props: StartDatePickerProps) {
   const {
     tenantId,
     appointmentTypeId,
+    appointmentId,
     value,
     startDate = today().toFormat('yyyy-MM-dd'),
     maxDays = 90,
@@ -99,16 +101,18 @@ export function StartDatePicker(props: StartDatePickerProps) {
   const mergedDates = useQueries({
     queries: [...visitedGroups].map((groupIndex) => {
       const interval = getGroupInterval(groupIndex, minValue)
-      return {
-        ...bookableDaysQueryOptions({
-          tenantId,
-          appointmentTypeId,
-          from: interval.start!.toFormat('yyyy-MM-dd'),
-          to: interval.end!.toFormat('yyyy-MM-dd'),
-        }),
-        enabled: Boolean(tenantId && appointmentTypeId),
-        staleTime: Infinity,
-      }
+      return query.getBookableDays.render.queryOptions(
+        {
+          query: {
+            tenantId,
+            appointmentTypeId,
+            appointmentId,
+            from: interval.start!.toFormat('yyyy-MM-dd'),
+            to: interval.end!.toFormat('yyyy-MM-dd'),
+          },
+        },
+        { enabled: Boolean(tenantId && appointmentTypeId), staleTime: Infinity }
+      )
     }),
     combine: (results) =>
       results.reduce(
@@ -119,14 +123,19 @@ export function StartDatePicker(props: StartDatePickerProps) {
 
   const isDateAvailable = mergedDates[internalDate.toFormat('yyyy-MM-dd')]?.available ?? false
 
-  const { data: slots, isLoading } = useQuery({
-    ...bookableSlotsQueryOptions({
-      tenantId,
-      appointmentTypeId,
-      date: internalDate.toFormat('yyyy-MM-dd'),
-    }),
-    enabled: Boolean(tenantId && appointmentTypeId && isDateAvailable),
-  })
+  const { data: slots, isLoading } = useQuery(
+    query.getBookableSlots.render.queryOptions(
+      {
+        query: {
+          tenantId,
+          appointmentTypeId,
+          appointmentId,
+          date: internalDate.toFormat('yyyy-MM-dd'),
+        },
+      },
+      { enabled: Boolean(tenantId && appointmentTypeId && isDateAvailable) }
+    )
+  )
 
   const availableSlots = slots?.slots ?? []
 

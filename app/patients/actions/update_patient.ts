@@ -4,6 +4,7 @@ import type { UUID } from '#app/shared/types'
 
 interface UpdatePatientParams {
   id: UUID
+  tenantId: UUID
   firstName: string
   lastName: string
   email?: string
@@ -15,7 +16,10 @@ export class UpdatePatient {
   async execute(params: UpdatePatientParams) {
     const trx = transactionContext.get()
 
-    const patient = await Patient.findOrFail(params.id, { client: trx })
+    const patient = await Patient.query({ client: trx })
+      .where('id', params.id)
+      .where('tenantId', params.tenantId)
+      .firstOrFail()
 
     patient.merge({
       firstName: params.firstName,

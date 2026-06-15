@@ -21,4 +21,17 @@ export default class ListPatientsController {
       patients: PatientTransformer.transform(patients),
     })
   }
+
+  async api({ request, serialize, auth }: HttpContext) {
+    const search = request.input('search', undefined)
+
+    const user = auth.getUserOrFail()
+
+    const { patients } = await this.getPatients.execute({
+      tenantId: user.tenantId,
+      search,
+    })
+
+    return serialize.withoutWrapping(PatientTransformer.transform(patients))
+  }
 }

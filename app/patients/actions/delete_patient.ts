@@ -4,13 +4,17 @@ import type { UUID } from '#app/shared/types'
 
 interface DeletePatientParams {
   id: UUID
+  tenantId: UUID
 }
 
 export class DeletePatient {
   async execute(params: DeletePatientParams) {
     const trx = transactionContext.get()
 
-    const patient = await Patient.findOrFail(params.id, { client: trx })
+    const patient = await Patient.query({ client: trx })
+      .where('id', params.id)
+      .where('tenantId', params.tenantId)
+      .firstOrFail()
 
     await patient.delete()
   }

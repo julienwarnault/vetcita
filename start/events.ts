@@ -6,3 +6,8 @@ emitter.listen(events.booking.AppointmentCreated, [
   listeners.booking.TransmitAppointmentListener,
   listeners.notifications.SendConfirmationListener,
 ])
+
+emitter.listen(events.booking.AppointmentRescheduled, [
+  listeners.booking.TransmitAppointmentListener,
+  listeners.notifications.SendRescheduledListener,
+])

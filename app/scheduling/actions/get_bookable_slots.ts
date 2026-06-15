@@ -11,6 +11,7 @@ interface GetBookableSlotsParams {
   tenantId: UUID
   appointmentTypeId: UUID
   date: string
+  appointmentId?: UUID
 }
 
 @inject()
@@ -44,7 +45,7 @@ export class GetBookableSlots {
       duration: appointmentType.duration,
       agendaIds,
       workingHours,
-      appointments,
+      appointments: appointments.filter(({ id }) => id !== params.appointmentId),
     })
 
     const slots = (availability.get(params.date) ?? []).map((slot) => ({

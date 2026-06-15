@@ -9,5 +9,6 @@ export const listeners = {
   },
   notifications: {
     SendConfirmationListener: () => import('#app/notifications/listeners/send_confirmation_listener'),
+    SendRescheduledListener: () => import('#app/notifications/listeners/send_rescheduled_listener'),
   },
 }
