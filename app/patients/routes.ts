@@ -7,6 +7,7 @@ router
     router.get('patients', [controllers.patients.ListPatients, 'render'])
     router.get('patients/new', [controllers.patients.CreatePatient, 'render'])
     router.post('patients', [controllers.patients.CreatePatient, 'execute'])
+    router.get('patients/:id', [controllers.patients.GetPatient, 'render'])
     router.get('patients/edit/:id', [controllers.patients.UpdatePatient, 'render'])
     router.put('patients/:id', [controllers.patients.UpdatePatient, 'execute'])
     router.delete('patients/:id', [controllers.patients.DeletePatient, 'execute'])

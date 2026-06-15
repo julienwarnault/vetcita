@@ -1,8 +1,8 @@
-import { useState } from 'react'
-import { CalendarEventDrawer } from './calendar_event_drawer'
+import { useModalStack } from '@inertiaui/modal-react'
 import { CalendarMonthView } from './calendar_month_view'
 import { CalendarDaysView } from './calendar_days_view'
 import { Event } from '~/lib/calendar'
+import { urlFor } from '~/lib/tuyau'
 
 interface CalendarViewProps {
   date: string
@@ -13,17 +13,21 @@ interface CalendarViewProps {
 export function Calendar(props: CalendarViewProps) {
   const { date, view, events } = props
 
-  const [event, setEvent] = useState<Event | null>(null)
-  const [isOpen, setIsOpen] = useState(false)
+  const { visitModal, stack, closeAll } = useModalStack()
 
   const handleEventClick = (event: Event) => {
-    setEvent(event)
-    setIsOpen(true)
-  }
+    const topModal = stack.find((s) => s.onTopOfStack)
 
-  const handleDrawerClose = () => {
-    setIsOpen(false)
-    setTimeout(() => setEvent(null), 300)
+    if (topModal) {
+      if (topModal.response?.component === 'appointments/show') {
+        topModal.response.url = `/appointments/${event.id}`
+        topModal.reload()
+        return
+      } else {
+        closeAll(true)
+      }
+    }
+    visitModal(urlFor('get_appointment.render', { id: event.id }))
   }
 
   return (
@@ -34,8 +38,6 @@ export function Calendar(props: CalendarViewProps) {
       {view === 'month' && (
         <CalendarMonthView date={props.date} events={events} onEventClick={handleEventClick} />
       )}
-
-      <CalendarEventDrawer open={isOpen} event={event} onClose={handleDrawerClose} />
     </>
   )
 }

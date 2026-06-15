@@ -21,6 +21,7 @@ export const controllers = {
     BookingLink: () => import('#app/booking/controllers/booking_link_controller'),
     ConfirmAppointment: () => import('#app/booking/controllers/confirm_appointment_controller'),
     ShowCalendar: () => import('#app/booking/controllers/show_calendar_controller'),
+    GetAppointment: () => import('#app/booking/controllers/get_appointment_controller'),
   },
   identity: {
     Login: () => import('#app/identity/controllers/login_controller'),
@@ -31,6 +32,7 @@ export const controllers = {
     DeletePatient: () => import('#app/patients/controllers/delete_patient_controller'),
     ListPatients: () => import('#app/patients/controllers/list_patients_controller'),
     UpdatePatient: () => import('#app/patients/controllers/update_patient_controller'),
+    GetPatient: () => import('#app/patients/controllers/get_patient_controller'),
   },
   scheduling: {
     GetBookableDays: () => import('#app/scheduling/controllers/get_bookable_days_controller'),

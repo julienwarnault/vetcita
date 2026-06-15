@@ -31,6 +31,6 @@ export default class CreatePatientController {
       return this.createPatient.execute({ ...payload, tenantId: user.tenantId })
     })
 
-    return response.redirect().toRoute('list_patients.render')
+    return response.redirect().back()
   }
 }

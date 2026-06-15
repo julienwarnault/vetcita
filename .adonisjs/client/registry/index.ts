@@ -126,6 +126,12 @@ const routes = {
     tokens: [{"old":"/patients","type":0,"val":"patients","end":""}],
     types: placeholder as Registry['create_patient.execute']['types'],
   },
+  'get_patient.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/patients/:id',
+    tokens: [{"old":"/patients/:id","type":0,"val":"patients","end":""},{"old":"/patients/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['get_patient.render']['types'],
+  },
   'update_patient.render': {
     methods: ["GET","HEAD"],
     pattern: '/patients/edit/:id',
@@ -185,6 +191,12 @@ const routes = {
     pattern: '/settings/booking-link',
     tokens: [{"old":"/settings/booking-link","type":0,"val":"settings","end":""},{"old":"/settings/booking-link","type":0,"val":"booking-link","end":""}],
     types: placeholder as Registry['booking_link.render']['types'],
+  },
+  'get_appointment.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/appointments/:id',
+    tokens: [{"old":"/appointments/:id","type":0,"val":"appointments","end":""},{"old":"/appointments/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['get_appointment.render']['types'],
   },
   'event_stream': {
     methods: ["GET","HEAD"],

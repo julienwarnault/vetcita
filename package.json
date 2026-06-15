@@ -76,6 +76,7 @@
     "@adonisjs/vite": "^5.1.0",
     "@base-ui/react": "^1.4.1",
     "@inertiajs/react": "^2.3.18",
+    "@inertiaui/modal-react": "^2.1.2",
     "@julienbenac/vine-plugin-phone": "^1.1.0",
     "@tailwindcss/vite": "^4.3.0",
     "@tanstack/react-query": "^5.100.14",

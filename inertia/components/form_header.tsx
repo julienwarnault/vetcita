@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { cn } from 'tailwind-variants'
-import { useWindowScroll } from '@uidotdev/usehooks'
+import { useWindowScroll } from '~/hooks/use_window_scroll'
 
 interface FormHeaderProps {
   title?: string
@@ -12,12 +12,13 @@ interface FormHeaderProps {
 export function FormHeader(props: FormHeaderProps) {
   const { title, leftElement, rightElement, className } = props
 
-  const [{ y }] = useWindowScroll()
+  const [{ y }, anchorRef] = useWindowScroll()
 
   const isScrolled = y && y > 10
 
   return (
     <header
+      ref={anchorRef}
       className={cn(
         `sticky top-0 flex h-18 items-center justify-between bg-white transition-shadow z-100`,
         isScrolled && 'border-b shadow-xs',

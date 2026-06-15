@@ -56,7 +56,7 @@ interface MenuItemProps extends ComponentProps<typeof BaseMenu.Item> {
 }
 
 function MenuItem(props: MenuItemProps) {
-  const { className, type, onClick, ...rest } = props
+  const { className, type, ...rest } = props
 
   return <BaseMenu.Item className={menu({ type }).item({ className })} {...rest} />
 }

@@ -1,11 +1,11 @@
 import { DateTime } from 'luxon'
 import { Data } from '@generated/data'
-import { router } from '@inertiajs/react'
+import { useModalStack } from '@inertiaui/modal-react'
 import { Column, ListTable } from '~/components/ui/list_table'
 import { DEFAULT_LOCALE, DEFAULT_TIMEZONE } from '~/lib/date'
-import { ButtonLink } from '~/components/ui/button_link'
 import { ViewHeader } from '~/components/view_header'
 import { formatPhoneNumber } from '~/lib/utils'
+import { Button } from '~/components/ui/button'
 import { InertiaProps } from '~/types'
 import { urlFor } from '~/lib/tuyau'
 
@@ -15,6 +15,8 @@ type PageProps = InertiaProps<{
 
 export default function List(props: PageProps) {
   const { patients } = props
+
+  const { visitModal } = useModalStack()
 
   const columns: Column<Data.Patients.Patient>[] = [
     {
@@ -45,16 +47,16 @@ export default function List(props: PageProps) {
     <div className="flex">
       <div className="container-xl p-10">
         <ViewHeader title="Pacientes" badge={patients.length.toString()}>
-          <ButtonLink route="create_patient.render" size="lg">
+          <Button onClick={() => visitModal(urlFor('create_patient.render'))} size="lg">
             Añadir
-          </ButtonLink>
+          </Button>
         </ViewHeader>
 
         <ListTable
           columns={columns}
           data={patients}
           onRowClick={(row) => {
-            router.visit(urlFor('update_patient.render', { id: row.id }))
+            visitModal(urlFor('get_patient.render', { id: row.id }))
           }}
         />
       </div>

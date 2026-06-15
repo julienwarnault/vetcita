@@ -51,7 +51,12 @@ export function Drawer(props: DrawerProps) {
 }
 
 function LeftPanel({ className, ...props }: ComponentProps<'div'>) {
-  return <div className={cn('w-full h-full min-w-[320px] border-r', className)} {...props} />
+  return (
+    <div
+      className={cn('w-full h-full min-w-[320px] border-r duration-300', className)}
+      {...props}
+    />
+  )
 }
 
 function MainPanel({ className, ...props }: ComponentProps<'div'>) {
@@ -72,7 +77,12 @@ function DrawerBody({ className, ...props }: ComponentProps<'div'>) {
 }
 
 function DrawerFooter({ className, ...props }: ComponentProps<'div'>) {
-  return <div className={cn('sticky z-10 bg-surface bottom-0 border-t', className)} {...props} />
+  return (
+    <div
+      className={cn('px-8 py-4 sticky z-10 bg-surface bottom-0 border-t', className)}
+      {...props}
+    />
+  )
 }
 
 Drawer.LeftPanel = LeftPanel

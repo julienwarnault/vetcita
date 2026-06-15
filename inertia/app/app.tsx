@@ -3,6 +3,7 @@ import { ReactElement } from 'react'
 import Layout from '~/layouts/default'
 import { Data } from '@generated/data'
 import { createRoot } from 'react-dom/client'
+import { renderApp } from '@inertiaui/modal-react'
 import { createInertiaApp } from '@inertiajs/react'
 import { TuyauProvider } from '@adonisjs/inertia/react'
 import { QueryClientProvider } from '@tanstack/react-query'
@@ -23,13 +24,11 @@ createInertiaApp({
   setup({ el, App, props }) {
     createRoot(el).render(
       <QueryClientProvider client={queryClient}>
-        <TuyauProvider client={client}>
-          <App {...props} />
-        </TuyauProvider>
+        <TuyauProvider client={client}>{renderApp(App as any, props as any)}</TuyauProvider>
       </QueryClientProvider>
     )
   },
   progress: {
-    color: '#4B5563',
+    color: '#6950f3',
   },
 })

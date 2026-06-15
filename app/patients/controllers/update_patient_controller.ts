@@ -38,6 +38,6 @@ export default class UpdatePatientController {
       return this.updatePatient.execute({ id: params.id, ...payload })
     })
 
-    return response.redirect().toRoute('list_patients.render')
+    return response.redirect().back()
   }
 }

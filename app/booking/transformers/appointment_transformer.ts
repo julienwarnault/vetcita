@@ -11,7 +11,9 @@ export default class AppointmentTransformer extends BaseTransformer<Appointment>
       ...this.pick(this.resource, [
         'id',
         'startDate',
+        'localStartDate',
         'endDate',
+        'localEndDate',
         'appointmentTypeId',
         'patientId',
         'duration',

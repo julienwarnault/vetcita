@@ -46,6 +46,9 @@ export interface ApiDefinition {
     render: typeof routes['create_patient.render']
     execute: typeof routes['create_patient.execute']
   }
+  getPatient: {
+    render: typeof routes['get_patient.render']
+  }
   updatePatient: {
     render: typeof routes['update_patient.render']
     execute: typeof routes['update_patient.execute']
@@ -69,6 +72,9 @@ export interface ApiDefinition {
   }
   bookingLink: {
     render: typeof routes['booking_link.render']
+  }
+  getAppointment: {
+    render: typeof routes['get_appointment.render']
   }
   eventStream: typeof routes['event_stream']
   subscribe: typeof routes['subscribe']
