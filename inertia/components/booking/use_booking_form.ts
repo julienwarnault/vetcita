@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useLocalStorage } from '@uidotdev/usehooks'
 import { useForm, type InertiaPrecognitiveFormProps } from '@inertiajs/react'
 import { query, queryClient } from '~/lib/tuyau'
 
@@ -14,6 +15,15 @@ type BookingData = {
 }
 
 export type BookingForm = InertiaPrecognitiveFormProps<BookingData>
+
+type PatientInfo = Pick<BookingData, 'firstName' | 'lastName' | 'email' | 'phone'>
+
+const DEFAULT_PATIENT_INFO: PatientInfo = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  phone: '',
+}
 
 export const STEPS = [
   {
@@ -54,15 +64,20 @@ export function useBookingForm(params: UseBookingFormParams) {
 
   const [stepIndex, setStepIndex] = useState(0)
 
+  const [patientInfo, setPatientInfo] = useLocalStorage<PatientInfo>(
+    'booking_patient_info',
+    DEFAULT_PATIENT_INFO
+  )
+
   const form = useForm({
     tenantId: tenantId,
     appointmentTypeId: '',
     agendaId: '',
     startDate: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
+    firstName: patientInfo.firstName,
+    lastName: patientInfo.lastName,
+    email: patientInfo.email,
+    phone: patientInfo.phone,
   }).withPrecognition('post', submitUrl)
 
   const step = STEPS[stepIndex]
@@ -85,6 +100,12 @@ export function useBookingForm(params: UseBookingFormParams) {
         replace: false,
         preserveState: false,
         onSuccess() {
+          setPatientInfo({
+            firstName: form.data.firstName,
+            lastName: form.data.lastName,
+            email: form.data.email,
+            phone: form.data.phone,
+          })
           queryClient.invalidateQueries({
             queryKey: query.getBookableDays.render.pathKey(),
             exact: false,
