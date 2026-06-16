@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { Data } from '@generated/data'
 import { useForm, type InertiaPrecognitiveFormProps } from '@inertiajs/react'
+import { query, queryClient } from '~/lib/tuyau'
 
 type AppointmentData = {
   id: string
@@ -77,7 +78,19 @@ export function useAppointmentForm(params: UseAppointmentFormParams) {
 
   function next() {
     if (isLast) {
-      form[method](submitUrl, { onSuccess })
+      form[method](submitUrl, {
+        onSuccess() {
+          queryClient.invalidateQueries({
+            queryKey: query.getBookableDays.render.pathKey(),
+            exact: false,
+          })
+          queryClient.invalidateQueries({
+            queryKey: query.getBookableSlots.render.pathKey(),
+            exact: false,
+          })
+          onSuccess()
+        },
+      })
       return
     }
 
@@ -96,6 +109,18 @@ export function useAppointmentForm(params: UseAppointmentFormParams) {
       },
     })
   }
+
+  useEffect(() => {
+    form.setData((old) => ({
+      ...old,
+      id: appointment?.id ?? '',
+      tenantId: tenantId,
+      patientId: appointment?.patientId ?? '',
+      appointmentTypeId: appointment?.appointmentTypeId ?? '',
+      agendaId: appointment?.agendaId ?? '',
+      startDate: appointment?.localStartDate ?? '',
+    }))
+  }, [appointment])
 
   return {
     step,

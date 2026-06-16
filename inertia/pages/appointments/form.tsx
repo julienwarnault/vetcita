@@ -44,6 +44,7 @@ export default function ShowForm(props: PageProps) {
   return (
     <InertiaDrawer ref={drawerRef}>
       <PanelPatient
+        appointmentId={form.data.id}
         selectedPatientId={form.data.patientId}
         onChange={(patientId) => form.setData('patientId', patientId)}
       />

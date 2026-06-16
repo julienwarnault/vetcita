@@ -18,16 +18,18 @@ export function Calendar(props: CalendarViewProps) {
   const handleEventClick = (event: Event) => {
     const topModal = stack.find((s) => s.onTopOfStack)
 
+    const url = urlFor('update_appointment.render', { id: event.id })
+
     if (topModal) {
-      if (topModal.response?.component === 'appointments/show') {
-        topModal.response.url = `/appointments/${event.id}`
-        topModal.reload()
+      if (topModal.response?.component === 'appointments/form') {
+        topModal.response.url = url
+        topModal.reload({ only: ['appointment'] })
         return
       } else {
         closeAll(true)
       }
     }
-    visitModal(urlFor('update_appointment.render', { id: event.id }))
+    visitModal(url)
   }
 
   return (

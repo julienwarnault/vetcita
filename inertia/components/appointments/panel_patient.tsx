@@ -1,6 +1,6 @@
-import { useState } from 'react'
 import { cn } from 'tailwind-variants'
 import { useDebounce } from 'use-debounce'
+import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { useModalStack } from '@inertiaui/modal-react'
 import { SearchIcon, UserRoundPlusIcon } from 'lucide-react'
@@ -13,12 +13,13 @@ import { Input } from '../ui/input'
 import { Menu } from '../ui/menu'
 
 interface PanelPatientProps {
+  appointmentId?: string
   selectedPatientId?: string
   onChange?: (patientId: string) => void
 }
 
 export function PanelPatient(props: PanelPatientProps) {
-  const { selectedPatientId, onChange } = props
+  const { appointmentId, selectedPatientId, onChange } = props
 
   const { visitModal } = useModalStack()
 
@@ -36,6 +37,10 @@ export function PanelPatient(props: PanelPatientProps) {
       { enabled: Boolean(selectedPatientId) }
     )
   )
+
+  useEffect(() => {
+    setSelectionView(!!selectedPatientId)
+  }, [appointmentId])
 
   const patients = data || []
 
