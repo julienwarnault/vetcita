@@ -3,6 +3,7 @@ import { Data } from '@generated/data'
 import { usePage } from '@inertiajs/react'
 import { Link } from '@adonisjs/inertia/react'
 import { DynamicIcon } from 'lucide-react/dynamic'
+import { useLocalStorage } from '@uidotdev/usehooks'
 import { Tooltip } from './ui/tooltip'
 import { urlFor } from '~/lib/tuyau'
 
@@ -42,11 +43,14 @@ const NAVIGATION = [
 export function AppSidebar() {
   const { url } = usePage<Data.SharedProps>()
 
+  const [calendarView] = useLocalStorage<Record<string, any>>('calendar_view', {})
+
   return (
     <aside className="flex h-full w-18 shrink-0 flex-col bg-primary">
       <div className="flex flex-1 flex-col items-center overflow-x-hidden overflow-y-auto py-2">
         {NAVIGATION.map((item, index) => {
           const isActive = url.startsWith(urlFor(item.route))
+          const isCalendar = item.route == 'show_calendar.render'
 
           return (
             <div key={index} className="py-1">
@@ -54,7 +58,7 @@ export function AppSidebar() {
                 placement="left"
                 trigger={
                   <Link
-                    route={item.route}
+                    href={urlFor(item.route, {}, isCalendar ? { qs: calendarView } : {})}
                     aria-label={item.name}
                     title={item.name}
                     className={cn(

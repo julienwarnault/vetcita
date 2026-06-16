@@ -9,6 +9,7 @@ import {
 import { DateTime } from 'luxon'
 import { Data } from '@generated/data'
 import { router } from '@inertiajs/react'
+import { useLocalStorage } from '@uidotdev/usehooks'
 import { useModalStack } from '@inertiaui/modal-react'
 import { CalendarAgendaSelector } from './calendar_agenda_selector'
 import { CalendarDatePicker } from './calendar_date_picker'
@@ -33,12 +34,16 @@ export function CalendarToolbar(props: CalendarToolbarProps) {
 
   const { visitModal } = useModalStack()
 
+  const [_, setCalendarView] = useLocalStorage<Record<string, any>>('calendar_view', {})
+
   function navigate(newDate: string, newView: ViewType, newAgendaIds?: string[]) {
     const qs: Record<string, any> = { date: newDate, view: newView }
 
     if (newAgendaIds !== undefined) {
       qs.agendaIds = newAgendaIds.join(',')
     }
+
+    setCalendarView(qs)
 
     router.get(urlFor('show_calendar.render', {}, { qs }), {}, { preserveState: true })
   }
