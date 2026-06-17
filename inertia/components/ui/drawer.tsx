@@ -62,7 +62,7 @@ function LeftPanel({ className, ...props }: ComponentProps<'div'>) {
 function MainPanel({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
-      className={cn('w-full h-full min-w-120 overflow-y-auto overflow-x-hidden', className)}
+      className={cn('h-full min-w-120 w-120 overflow-y-auto overflow-x-hidden', className)}
       {...props}
     />
   )
@@ -85,8 +85,13 @@ function DrawerFooter({ className, ...props }: ComponentProps<'div'>) {
   )
 }
 
+function DrawerMenu({ className, ...props }: ComponentProps<'div'>) {
+  return <div className={cn('h-full w-54 border-l-12 px-6 py-8', className)} {...props} />
+}
+
 Drawer.LeftPanel = LeftPanel
 Drawer.MainPanel = MainPanel
 Drawer.Header = DrawerHeader
 Drawer.Body = DrawerBody
 Drawer.Footer = DrawerFooter
+Drawer.Menu = DrawerMenu

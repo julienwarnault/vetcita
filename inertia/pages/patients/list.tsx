@@ -16,7 +16,7 @@ type PageProps = InertiaProps<{
 export default function List(props: PageProps) {
   const { patients } = props
 
-  const { visitModal } = useModalStack()
+  const { visitModal, closeAll } = useModalStack()
 
   const columns: Column<Data.Patients.Patient>[] = [
     {
@@ -47,7 +47,13 @@ export default function List(props: PageProps) {
     <div className="flex">
       <div className="container-xl p-10">
         <ViewHeader title="Pacientes" badge={patients.length.toString()}>
-          <Button onClick={() => visitModal(urlFor('create_patient.render'))} size="lg">
+          <Button
+            onClick={() => {
+              closeAll()
+              visitModal(urlFor('create_patient.render'))
+            }}
+            size="lg"
+          >
             Añadir
           </Button>
         </ViewHeader>
@@ -56,6 +62,7 @@ export default function List(props: PageProps) {
           columns={columns}
           data={patients}
           onRowClick={(row) => {
+            closeAll(true)
             visitModal(urlFor('get_patient.render', { id: row.id }))
           }}
         />

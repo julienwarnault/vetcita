@@ -54,7 +54,7 @@ export function PanelPatient(props: PanelPatientProps) {
                 <div className="flex flex-col items-center px-8 pt-8 gap-6">
                   <div className="flex flex-col items-center">
                     <Avatar size="4xl" className="mb-3" fullName={patient.fullName} />
-                    <div className="text-[17px]/6 font-medium pb-1">{patient.fullName}</div>
+                    <div className="text-[17px]/6 font-semibold pb-1">{patient.fullName}</div>
                     {patient.email && (
                       <div className="text-[15px]/5 text-muted">{patient.email}</div>
                     )}

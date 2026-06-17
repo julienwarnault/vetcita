@@ -19,7 +19,7 @@ type PageProps = InertiaProps<{
   appointmentTypes: Data.AppointmentTypes.AppointmentType[]
 }>
 
-export default function Show(props: PageProps) {
+export default function ShowForm(props: PageProps) {
   const { tenant, appointmentTypes: types } = props
 
   const { form, step, isFirst, isLast, canContinue, actions } = useBookingForm({
@@ -103,6 +103,6 @@ export default function Show(props: PageProps) {
   )
 }
 
-Show.layout = (page: React.ReactElement) => (
+ShowForm.layout = (page: React.ReactElement) => (
   <MinimalLayout className="bg-background">{page}</MinimalLayout>
 )

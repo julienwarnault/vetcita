@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { CSSProperties, ReactNode } from 'react'
 import { tv, VariantProps } from 'tailwind-variants'
 
 const badge = tv({
@@ -25,9 +25,22 @@ type BadgeVariants = VariantProps<typeof badge>
 interface BadgeProps extends BadgeVariants {
   className?: string
   children: ReactNode
+  color?: string
+  style?: CSSProperties
 }
 
 export function Badge(props: BadgeProps) {
-  const { size, variant, className, ...rest } = props
-  return <div className={badge({ size, variant, className })} {...rest} />
+  const { size, variant, className, color, style, ...rest } = props
+
+  return (
+    <div
+      className={badge({
+        size,
+        variant,
+        className: color ? `${className ?? ''} text-white` : className,
+      })}
+      style={color ? { ...style, backgroundColor: color } : style}
+      {...rest}
+    />
+  )
 }

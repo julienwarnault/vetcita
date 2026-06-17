@@ -6,6 +6,7 @@ import { GetAppointmentTypes } from '#appointment_types/queries/get_appointment_
 import { CreateAppointment } from '#booking/actions/create_appointment'
 import { withTransaction } from '#app/shared/utils/with_transaction'
 import { uuidSchema } from '#app/shared/validators'
+import { UUID } from '#app/shared/types'
 
 @inject()
 export default class CreateAppointmentController {
@@ -23,12 +24,15 @@ export default class CreateAppointmentController {
     private readonly createAppointment: CreateAppointment
   ) {}
 
-  async render({ auth, inertia }: HttpContext) {
+  async render({ auth, inertia, request }: HttpContext) {
     const user = auth.getUserOrFail()
+
+    const patientId: UUID | undefined = request.qs().patientId
 
     const { appointmentTypes } = await this.getAppointmentTypes.execute({ tenantId: user.tenantId })
 
     return inertia.render('appointments/form', {
+      patientId,
       appointmentTypes: AppointmentTypeTransformer.transform(appointmentTypes),
     })
   }

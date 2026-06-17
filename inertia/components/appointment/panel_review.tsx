@@ -25,9 +25,7 @@ export function PanelReview(props: PanelReviewProps) {
   return (
     <Drawer.MainPanel className="grid grid-rows-[auto_1fr_auto]">
       <Drawer.Header>
-        <div
-          className={cn('flex justify-between gap-4 p-8', data.id && 'bg-[#208901]  text-white')}
-        >
+        <div className={cn('flex justify-between gap-4 p-8', data.id && 'bg-[#208901] text-white')}>
           <div className="flex flex-col">
             <h1 className="text-[28px]/9 font-semibold">
               {capitalize(startDate.setLocale(DEFAULT_LOCALE).toFormat('ccc. d LLL'))}

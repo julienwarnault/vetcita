@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { Data } from '@generated/data'
+import { useModalStack } from '@inertiaui/modal-react'
 import { useForm, type InertiaPrecognitiveFormProps } from '@inertiajs/react'
 import { query, queryClient } from '~/lib/tuyau'
 
@@ -34,21 +35,23 @@ export const STEPS = [
 
 type UseAppointmentFormParams = {
   tenantId: string
+  patientId?: string
   appointment?: Data.Booking.Appointment
   submitUrl: string
   method: 'post' | 'put'
-  onSuccess(): void
 }
 
 export function useAppointmentForm(params: UseAppointmentFormParams) {
-  const { method, submitUrl, appointment, tenantId, onSuccess } = params
+  const { method, submitUrl, appointment, tenantId, patientId } = params
+
+  const { closeAll } = useModalStack()
 
   const [stepIndex, setStepIndex] = useState(appointment ? 2 : 0)
 
   const form = useForm({
     id: appointment?.id ?? '',
     tenantId: tenantId,
-    patientId: appointment?.patientId ?? '',
+    patientId: appointment?.patientId ?? patientId ?? '',
     appointmentTypeId: appointment?.appointmentTypeId ?? '',
     agendaId: appointment?.agendaId ?? '',
     startDate: appointment?.localStartDate ?? '',
@@ -88,7 +91,7 @@ export function useAppointmentForm(params: UseAppointmentFormParams) {
             queryKey: query.getBookableSlots.render.pathKey(),
             exact: false,
           })
-          onSuccess()
+          closeAll()
         },
       })
       return
@@ -115,12 +118,12 @@ export function useAppointmentForm(params: UseAppointmentFormParams) {
       ...old,
       id: appointment?.id ?? '',
       tenantId: tenantId,
-      patientId: appointment?.patientId ?? '',
+      patientId: appointment?.patientId ?? patientId ?? '',
       appointmentTypeId: appointment?.appointmentTypeId ?? '',
       agendaId: appointment?.agendaId ?? '',
       startDate: appointment?.localStartDate ?? '',
     }))
-  }, [appointment])
+  }, [appointment, patientId])
 
   return {
     step,

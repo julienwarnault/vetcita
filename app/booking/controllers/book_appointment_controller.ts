@@ -36,7 +36,7 @@ export default class BookAppointmentController {
     const { tenant } = await this.getTenant.execute({ id })
     const { appointmentTypes } = await this.getAppointmentTypes.execute({ tenantId: id })
 
-    return inertia.render('booking/create', {
+    return inertia.render('booking/form', {
       tenant: TenantTransformer.transform(tenant),
       appointmentTypes: AppointmentTypeTransformer.transform(appointmentTypes),
     })
