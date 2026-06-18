@@ -25,6 +25,7 @@ export class GetAppointments {
       .preload('appointmentType')
       .preload('patient')
       .preload('agenda')
+      .preload('status')
 
     if (params.agendaIds?.length) {
       query.whereIn('agenda_id', params.agendaIds)

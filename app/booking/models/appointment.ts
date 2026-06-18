@@ -1,6 +1,7 @@
 import { compose } from '@adonisjs/core/helpers'
 import { belongsTo } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import AppointmentStatus from '#appointment_statuses/models/appointment_status'
 import AppointmentType from '#appointment_types/models/appointment_type'
 import { DEFAULT_TIMEZONE } from '#app/shared/services/time_service'
 import { WithPrimaryUuid } from '#shared/mixins/with_primary_uuid'
@@ -21,6 +22,9 @@ export default class Appointment extends compose(AppointmentSchema, WithPrimaryU
 
   @belongsTo(() => Agenda)
   declare agenda: BelongsTo<typeof Agenda>
+
+  @belongsTo(() => AppointmentStatus, { foreignKey: 'statusId' })
+  declare status: BelongsTo<typeof AppointmentStatus>
 
   get localStartDate() {
     return this.startDate.setZone(DEFAULT_TIMEZONE)

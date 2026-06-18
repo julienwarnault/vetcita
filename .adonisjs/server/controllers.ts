@@ -10,6 +10,13 @@ export const controllers = {
     ListAgendas: () => import('#app/agendas/controllers/list_agendas_controller'),
     UpdateAgenda: () => import('#app/agendas/controllers/update_agenda_controller'),
   },
+  appointmentStatuses: {
+    CreateAppointmentStatus: () => import('#app/appointment_statuses/controllers/create_appointment_status_controller'),
+    DeleteAppointmentStatus: () => import('#app/appointment_statuses/controllers/delete_appointment_status_controller'),
+    ListAppointmentStatuses: () => import('#app/appointment_statuses/controllers/list_appointment_statuses_controller'),
+    MoveAppointmentStatus: () => import('#app/appointment_statuses/controllers/move_appointment_status_controller'),
+    UpdateAppointmentStatus: () => import('#app/appointment_statuses/controllers/update_appointment_status_controller'),
+  },
   appointmentTypes: {
     CreateAppointmentType: () => import('#app/appointment_types/controllers/create_appointment_type_controller'),
     DeleteAppointmentType: () => import('#app/appointment_types/controllers/delete_appointment_type_controller'),
@@ -19,6 +26,7 @@ export const controllers = {
   booking: {
     BookAppointment: () => import('#app/booking/controllers/book_appointment_controller'),
     BookingLink: () => import('#app/booking/controllers/booking_link_controller'),
+    ChangeAppointmentStatus: () => import('#app/booking/controllers/change_appointment_status_controller'),
     ConfirmAppointment: () => import('#app/booking/controllers/confirm_appointment_controller'),
     CreateAppointment: () => import('#app/booking/controllers/create_appointment_controller'),
     ShowCalendar: () => import('#app/booking/controllers/show_calendar_controller'),

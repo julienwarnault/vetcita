@@ -108,6 +108,48 @@ const routes = {
     tokens: [{"old":"/appointment-types/:id","type":0,"val":"appointment-types","end":""},{"old":"/appointment-types/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['update_appointment_type.execute']['types'],
   },
+  'list_appointment_statuses.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/settings/appointment-statuses',
+    tokens: [{"old":"/settings/appointment-statuses","type":0,"val":"settings","end":""},{"old":"/settings/appointment-statuses","type":0,"val":"appointment-statuses","end":""}],
+    types: placeholder as Registry['list_appointment_statuses.render']['types'],
+  },
+  'create_appointment_status.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/settings/appointment-statuses/new',
+    tokens: [{"old":"/settings/appointment-statuses/new","type":0,"val":"settings","end":""},{"old":"/settings/appointment-statuses/new","type":0,"val":"appointment-statuses","end":""},{"old":"/settings/appointment-statuses/new","type":0,"val":"new","end":""}],
+    types: placeholder as Registry['create_appointment_status.render']['types'],
+  },
+  'create_appointment_status.execute': {
+    methods: ["POST"],
+    pattern: '/settings/appointment-statuses',
+    tokens: [{"old":"/settings/appointment-statuses","type":0,"val":"settings","end":""},{"old":"/settings/appointment-statuses","type":0,"val":"appointment-statuses","end":""}],
+    types: placeholder as Registry['create_appointment_status.execute']['types'],
+  },
+  'update_appointment_status.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/settings/appointment-statuses/:id/edit',
+    tokens: [{"old":"/settings/appointment-statuses/:id/edit","type":0,"val":"settings","end":""},{"old":"/settings/appointment-statuses/:id/edit","type":0,"val":"appointment-statuses","end":""},{"old":"/settings/appointment-statuses/:id/edit","type":1,"val":"id","end":""},{"old":"/settings/appointment-statuses/:id/edit","type":0,"val":"edit","end":""}],
+    types: placeholder as Registry['update_appointment_status.render']['types'],
+  },
+  'update_appointment_status.execute': {
+    methods: ["PUT"],
+    pattern: '/settings/appointment-statuses/:id',
+    tokens: [{"old":"/settings/appointment-statuses/:id","type":0,"val":"settings","end":""},{"old":"/settings/appointment-statuses/:id","type":0,"val":"appointment-statuses","end":""},{"old":"/settings/appointment-statuses/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['update_appointment_status.execute']['types'],
+  },
+  'move_appointment_status.execute': {
+    methods: ["POST"],
+    pattern: '/settings/appointment-statuses/:id/move',
+    tokens: [{"old":"/settings/appointment-statuses/:id/move","type":0,"val":"settings","end":""},{"old":"/settings/appointment-statuses/:id/move","type":0,"val":"appointment-statuses","end":""},{"old":"/settings/appointment-statuses/:id/move","type":1,"val":"id","end":""},{"old":"/settings/appointment-statuses/:id/move","type":0,"val":"move","end":""}],
+    types: placeholder as Registry['move_appointment_status.execute']['types'],
+  },
+  'delete_appointment_status.execute': {
+    methods: ["DELETE"],
+    pattern: '/settings/appointment-statuses/:id',
+    tokens: [{"old":"/settings/appointment-statuses/:id","type":0,"val":"settings","end":""},{"old":"/settings/appointment-statuses/:id","type":0,"val":"appointment-statuses","end":""},{"old":"/settings/appointment-statuses/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['delete_appointment_status.execute']['types'],
+  },
   'list_patients.render': {
     methods: ["GET","HEAD"],
     pattern: '/patients',
@@ -227,6 +269,12 @@ const routes = {
     pattern: '/appointments/:id',
     tokens: [{"old":"/appointments/:id","type":0,"val":"appointments","end":""},{"old":"/appointments/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['update_appointment.execute']['types'],
+  },
+  'change_appointment_status.execute': {
+    methods: ["PATCH"],
+    pattern: '/appointments/:id/status',
+    tokens: [{"old":"/appointments/:id/status","type":0,"val":"appointments","end":""},{"old":"/appointments/:id/status","type":1,"val":"id","end":""},{"old":"/appointments/:id/status","type":0,"val":"status","end":""}],
+    types: placeholder as Registry['change_appointment_status.execute']['types'],
   },
   'event_stream': {
     methods: ["GET","HEAD"],

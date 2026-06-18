@@ -40,7 +40,7 @@ export function PanelAppointments(props: PanelAppointmentsProps) {
                 <div>
                   <div className="flex justify-between">
                     <div className="text-[17px]/6 font-semibold">Cita</div>
-                    <Badge color="#208901">Reservada</Badge>
+                    <Badge color={appointment.status?.color}>{appointment.status?.name}</Badge>
                   </div>
                   <div className="text-[13px]/4 font-normal text-muted">
                     {startDate.setLocale(DEFAULT_LOCALE).toFormat('ccc. d LLL')}

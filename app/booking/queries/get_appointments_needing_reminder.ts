@@ -1,4 +1,5 @@
 import { DateTime } from 'luxon'
+import { AppointmentStatus } from '#appointment_statuses/enums/appointment_status'
 import { DEFAULT_TIMEZONE } from '#app/shared/services/time_service'
 import Appointment from '#booking/models/appointment'
 
@@ -11,6 +12,7 @@ export class GetAppointmentsNeedingReminder {
     const appointments = await Appointment.query()
       .where('start_date', '>=', tomorrowStart.toUTC().toISO()!)
       .where('start_date', '<', tomorrowEnd.toUTC().toISO()!)
+      .where('status_id', AppointmentStatus.BOOKED)
       .whereNull('reminder_sent_at')
       .preload('tenant')
       .preload('appointmentType')

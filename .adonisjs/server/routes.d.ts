@@ -21,6 +21,13 @@ export type ScannedRoutes = {
     'create_appointment_type.execute': { paramsTuple?: []; params?: {} }
     'update_appointment_type.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_appointment_type.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'list_appointment_statuses.render': { paramsTuple?: []; params?: {} }
+    'create_appointment_status.render': { paramsTuple?: []; params?: {} }
+    'create_appointment_status.execute': { paramsTuple?: []; params?: {} }
+    'update_appointment_status.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'update_appointment_status.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'move_appointment_status.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'delete_appointment_status.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'list_patients.render': { paramsTuple?: []; params?: {} }
     'create_patient.render': { paramsTuple?: []; params?: {} }
     'create_patient.execute': { paramsTuple?: []; params?: {} }
@@ -41,6 +48,7 @@ export type ScannedRoutes = {
     'create_appointment.execute': { paramsTuple?: []; params?: {} }
     'update_appointment.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_appointment.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'change_appointment_status.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'event_stream': { paramsTuple?: []; params?: {} }
     'subscribe': { paramsTuple?: []; params?: {} }
     'unsubscribe': { paramsTuple?: []; params?: {} }
@@ -57,6 +65,9 @@ export type ScannedRoutes = {
     'list_appointment_types.render': { paramsTuple?: []; params?: {} }
     'create_appointment_type.render': { paramsTuple?: []; params?: {} }
     'update_appointment_type.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'list_appointment_statuses.render': { paramsTuple?: []; params?: {} }
+    'create_appointment_status.render': { paramsTuple?: []; params?: {} }
+    'update_appointment_status.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'list_patients.render': { paramsTuple?: []; params?: {} }
     'create_patient.render': { paramsTuple?: []; params?: {} }
     'update_patient.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -84,6 +95,9 @@ export type ScannedRoutes = {
     'list_appointment_types.render': { paramsTuple?: []; params?: {} }
     'create_appointment_type.render': { paramsTuple?: []; params?: {} }
     'update_appointment_type.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'list_appointment_statuses.render': { paramsTuple?: []; params?: {} }
+    'create_appointment_status.render': { paramsTuple?: []; params?: {} }
+    'update_appointment_status.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'list_patients.render': { paramsTuple?: []; params?: {} }
     'create_patient.render': { paramsTuple?: []; params?: {} }
     'update_patient.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -104,6 +118,8 @@ export type ScannedRoutes = {
     'logout.execute': { paramsTuple?: []; params?: {} }
     'create_agenda.execute': { paramsTuple?: []; params?: {} }
     'create_appointment_type.execute': { paramsTuple?: []; params?: {} }
+    'create_appointment_status.execute': { paramsTuple?: []; params?: {} }
+    'move_appointment_status.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'create_patient.execute': { paramsTuple?: []; params?: {} }
     'book_appointment.execute': { paramsTuple: [ParamValue]; params: {'tenantId': ParamValue} }
     'create_appointment.execute': { paramsTuple?: []; params?: {} }
@@ -113,12 +129,17 @@ export type ScannedRoutes = {
   PUT: {
     'update_agenda.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_appointment_type.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'update_appointment_status.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_patient.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_tenant.execute': { paramsTuple?: []; params?: {} }
     'update_appointment.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   DELETE: {
+    'delete_appointment_status.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'delete_patient.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+  }
+  PATCH: {
+    'change_appointment_status.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
 }
 declare module '@adonisjs/core/types/http' {

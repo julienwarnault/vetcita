@@ -11,6 +11,10 @@ export type Event = {
     phone: string
     email?: string
   }
+  status: {
+    name: string
+    color: string
+  }
   typeName: string
   color: string
   bookingRef: string

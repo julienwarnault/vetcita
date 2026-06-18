@@ -14,6 +14,7 @@ export class GetPatientAppointments {
       .orderBy('start_date')
       .preload('appointmentType')
       .preload('agenda')
+      .preload('status')
       .orderBy('start_date', 'desc')
 
     return { appointments }

@@ -46,6 +46,10 @@ export default function ShowCalendar(props: PageProps) {
               phone: appointment.patient!.phone,
               email: appointment.patient!.email ?? undefined,
             },
+            status: {
+              name: appointment.status!.name,
+              color: appointment.status!.color,
+            },
             typeName: appointment.appointmentType!.name,
             color: appointment.appointmentType!.color,
             bookingRef: appointment.bookingRef,

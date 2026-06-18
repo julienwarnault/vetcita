@@ -38,6 +38,36 @@ export class AgendaSchema extends BaseModel {
   declare updatedAt: DateTime | null
 }
 
+export class AppointmentStatusSchema extends BaseModel {
+  static $columns = [
+    'color',
+    'createdAt',
+    'id',
+    'isCustom',
+    'name',
+    'sortOrder',
+    'tenantId',
+    'updatedAt',
+  ] as const
+  $columns = AppointmentStatusSchema.$columns
+  @column()
+  declare color: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare id: string
+  @column()
+  declare isCustom: boolean
+  @column()
+  declare name: string
+  @column()
+  declare sortOrder: number
+  @column()
+  declare tenantId: UUID | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class AppointmentTypeSchema extends BaseModel {
   static $columns = [
     'color',
@@ -83,6 +113,7 @@ export class AppointmentSchema extends BaseModel {
     'patientId',
     'reminderSentAt',
     'startDate',
+    'statusId',
     'tenantId',
     'updatedAt',
   ] as const
@@ -107,6 +138,8 @@ export class AppointmentSchema extends BaseModel {
   declare reminderSentAt: DateTime | null
   @column.dateTime()
   declare startDate: DateTime
+  @column()
+  declare statusId: string
   @column()
   declare tenantId: UUID
   @column.dateTime({ autoCreate: true, autoUpdate: true })

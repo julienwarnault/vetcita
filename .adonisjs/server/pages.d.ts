@@ -14,11 +14,14 @@ declare module '@adonisjs/inertia/types' {
   export interface InertiaPages {
     'agendas/form': ExtractProps<(typeof import('../../inertia/pages/agendas/form.tsx'))['default']>
     'agendas/list': ExtractProps<(typeof import('../../inertia/pages/agendas/list.tsx'))['default']>
+    'appointment_statuses/form': ExtractProps<(typeof import('../../inertia/pages/appointment_statuses/form.tsx'))['default']>
+    'appointment_statuses/list': ExtractProps<(typeof import('../../inertia/pages/appointment_statuses/list.tsx'))['default']>
     'appointment_types/form': ExtractProps<(typeof import('../../inertia/pages/appointment_types/form.tsx'))['default']>
     'appointment_types/list': ExtractProps<(typeof import('../../inertia/pages/appointment_types/list.tsx'))['default']>
     'appointments/form': ExtractProps<(typeof import('../../inertia/pages/appointments/form.tsx'))['default']>
     'auth/login': ExtractProps<(typeof import('../../inertia/pages/auth/login.tsx'))['default']>
     'booking/confirm': ExtractProps<(typeof import('../../inertia/pages/booking/confirm.tsx'))['default']>
+    'booking/form': ExtractProps<(typeof import('../../inertia/pages/booking/form.tsx'))['default']>
     'calendar': ExtractProps<(typeof import('../../inertia/pages/calendar.tsx'))['default']>
     'dashboard': ExtractProps<(typeof import('../../inertia/pages/dashboard.tsx'))['default']>
     'errors/not_found': ExtractProps<(typeof import('../../inertia/pages/errors/not_found.tsx'))['default']>
@@ -30,6 +33,5 @@ declare module '@adonisjs/inertia/types' {
     'settings/booking_link': ExtractProps<(typeof import('../../inertia/pages/settings/booking_link.tsx'))['default']>
     'settings/show': ExtractProps<(typeof import('../../inertia/pages/settings/show.tsx'))['default']>
     'tenants/form': ExtractProps<(typeof import('../../inertia/pages/tenants/form.tsx'))['default']>
-    'booking/form': ExtractProps<(typeof import('../../inertia/pages/booking/form.tsx'))['default']>
   }
 }

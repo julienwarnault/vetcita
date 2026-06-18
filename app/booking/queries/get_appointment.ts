@@ -14,6 +14,7 @@ export class GetAppointment {
       .preload('appointmentType')
       .preload('patient')
       .preload('tenant')
+      .preload('status')
       .firstOrFail()
 
     return { appointment }

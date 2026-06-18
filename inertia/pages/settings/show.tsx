@@ -20,18 +20,24 @@ export default function Settings() {
         />
 
         <div className="flex flex-col gap-16">
-          <div className="grid grid-cols-3">
+          <div className="grid grid-cols-3 gap-6">
             <CardItem
               icon="building-2"
               title="Configuración del negocio"
               description="Personaliza los datos del negocio."
               href={urlFor('update_tenant.render')}
             />
+            <CardItem
+              icon="calendar"
+              title="Gestión de citas"
+              description="Configura tu estados de las citas."
+              href={urlFor('list_appointment_statuses.render')}
+            />
           </div>
 
           <div className="flex flex-col gap-4">
             <h2 className="text-2xl/8 font-semibold">Presencia online</h2>
-            <div className="grid grid-cols-3">
+            <div className="grid grid-cols-3 gap-6">
               <CardItem
                 title="Generador de enlaces"
                 description="Crea enlaces de reserva y códigos QR que se puedan compartir."

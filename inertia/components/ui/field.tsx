@@ -4,7 +4,7 @@ import { Field as FieldPrimitive } from '@base-ui/react/field'
 const field = tv({
   slots: {
     root: 'flex flex-col col-span-3 gap-1',
-    label: 'text-[15px] font-medium text-foreground',
+    label: 'text-[15px] font-semibold text-foreground',
     item: '',
     description: 'text-[13px] text-muted',
     error: 'text-sm text-destructive',

@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
 import { inject } from '@adonisjs/core'
 import { SlotNotBookableException } from '#scheduling/exceptions/slot_not_bookable_exception'
+import { AppointmentStatus } from '#appointment_statuses/enums/appointment_status'
 import { dispatchAfterCommit } from '#app/shared/utils/dispatch_after_commit'
 import { transactionContext } from '#app/shared/contexts/transaction_context'
 import { CheckSlotBookable } from '#scheduling/actions/check_slot_bookable'
@@ -60,6 +61,7 @@ export class CreateAppointment {
         duration: appointmentType.duration,
         tenantId: params.tenantId,
         bookingRef: bookingRef,
+        statusId: AppointmentStatus.BOOKED,
       },
       { client: trx }
     )

@@ -1,22 +1,28 @@
 import { DateTime } from 'luxon'
 import { Data } from '@generated/data'
 import { cn } from 'tailwind-variants'
-import { TrashIcon } from 'lucide-react'
+import { router } from '@inertiajs/react'
+import { CheckIcon, TrashIcon } from 'lucide-react'
 import { AppointmentForm } from './use_appointment_form'
 import { DEFAULT_LOCALE } from '~/lib/date'
 import { capitalize } from '~/lib/utils'
 import { Drawer } from '../ui/drawer'
 import { Button } from '../ui/button'
+import { urlFor } from '~/lib/tuyau'
+import { Menu } from '../ui/menu'
 
 interface PanelReviewProps {
   form: AppointmentForm
   appointmentType?: Data.AppointmentTypes.AppointmentType
+  status?: Data.AppointmentStatuses.AppointmentStatus
+  statuses: Data.AppointmentStatuses.AppointmentStatus[]
   goToStep(step: number): void
   next(): void
+  close(): void
 }
 
 export function PanelReview(props: PanelReviewProps) {
-  const { form, appointmentType, next, goToStep } = props
+  const { form, appointmentType, statuses, status, next, goToStep, close } = props
   const { data, setData, isDirty } = form
 
   const startDate = DateTime.fromISO(data.startDate)
@@ -25,7 +31,10 @@ export function PanelReview(props: PanelReviewProps) {
   return (
     <Drawer.MainPanel className="grid grid-rows-[auto_1fr_auto]">
       <Drawer.Header>
-        <div className={cn('flex justify-between gap-4 p-8', data.id && 'bg-[#208901] text-white')}>
+        <div
+          className={cn('flex justify-between gap-4 p-8', data.id && 'text-white')}
+          style={{ backgroundColor: data.id && status ? status.color : '#fff' }}
+        >
           <div className="flex flex-col">
             <h1 className="text-[28px]/9 font-semibold">
               {capitalize(startDate.setLocale(DEFAULT_LOCALE).toFormat('ccc. d LLL'))}
@@ -33,11 +42,33 @@ export function PanelReview(props: PanelReviewProps) {
 
             <div className="text-sm font-normal">{startDate.toFormat('h:mma').toLowerCase()}</div>
           </div>
-          {data.id && (
+          {data.id && status && (
             <div>
-              <Button variant="secondary" className="text-white border-white bg-transparent">
-                Reservada
-              </Button>
+              <Menu
+                trigger={
+                  <Button variant="secondary" className="text-white border-white bg-transparent">
+                    {status.name} <Menu.TriggerIcon />
+                  </Button>
+                }
+                align="end"
+              >
+                {statuses.map((s) => (
+                  <Menu.Item
+                    className="flex justify-between"
+                    key={s.id}
+                    onClick={() => {
+                      router.patch(
+                        urlFor('change_appointment_status.execute', { id: data.id }),
+                        { statusId: s.id },
+                        { onFinish: close }
+                      )
+                    }}
+                  >
+                    {s.name}
+                    {status.id == s.id && <CheckIcon className="size-5!" />}
+                  </Menu.Item>
+                ))}
+              </Menu>
             </div>
           )}
         </div>

@@ -2,7 +2,7 @@ import { cn } from 'tailwind-variants'
 import { Radio } from '@base-ui/react/radio'
 import { RadioGroup } from '@base-ui/react/radio-group'
 
-export const COLORS = [
+export const COLORS_LIGHT = [
   '#97c6f0',
   '#a9b3fe',
   '#b8adff',
@@ -22,17 +22,43 @@ export const COLORS = [
   '#91e8ee',
 ]
 
+export const COLORS_DARK = [
+  '#56bcf3',
+  '#3b75e3',
+  '#2c64f7',
+  '#445df3',
+  '#624df0',
+  '#8146f6',
+  '#a839da',
+  '#be3ba4',
+  '#c82e5b',
+  '#c12740',
+  '#e8773b',
+  '#e0ac4e',
+  '#ffc549',
+  '#f7dd5a',
+  '#e4f25c',
+  '#4aa918',
+  '#5ecdbb',
+  '#66cbd7',
+]
+
 interface ColorSelectProps {
   name?: string
   value?: string
   defaultValue?: string
   onValueChange?(value: string): void
+  mode?: 'light' | 'dark'
 }
 
 export function ColorSelect(props: ColorSelectProps) {
+  const { mode = 'light', ...rest } = props
+
+  const colors = mode === 'dark' ? COLORS_DARK : COLORS_LIGHT
+
   return (
-    <RadioGroup {...props} className="flex flex-wrap gap-1 max-w-md">
-      {COLORS.map((color) => (
+    <RadioGroup {...rest} className="flex flex-wrap gap-1 max-w-lg">
+      {colors.map((color) => (
         <Radio.Root
           key={color}
           value={color}

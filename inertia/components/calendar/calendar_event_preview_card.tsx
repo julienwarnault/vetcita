@@ -59,11 +59,14 @@ export function CalendarEventPreviewCard(props: CalendarEventPreviewCardProps) {
             )}
           >
             <div className="flex flex-col">
-              <div className="flex items-center justify-between py-3 px-5 h-11 bg-[#208901]">
+              <div
+                className="flex items-center justify-between py-3 px-5 h-11 bg-[#208901]"
+                style={{ backgroundColor: event.status.color }}
+              >
                 <div className="text-sm font-medium text-white">
                   {`${event.start.toFormat('h:mma')} - ${event.end.toFormat('h:mma')}`.toLowerCase()}
                 </div>
-                <div className="text-sm font-medium text-white">Reservada</div>
+                <div className="text-sm font-medium text-white">{event.status.name}</div>
               </div>
               <div className="flex flex-col gap-4 p-5">
                 <div className="flex items-center gap-4">

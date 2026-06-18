@@ -211,6 +211,90 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/appointment_types/controllers/update_appointment_type_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
+  'list_appointment_statuses.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/settings/appointment-statuses'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/appointment_statuses/controllers/list_appointment_statuses_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/appointment_statuses/controllers/list_appointment_statuses_controller').default['render']>>>
+    }
+  }
+  'create_appointment_status.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/settings/appointment-statuses/new'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/appointment_statuses/controllers/create_appointment_status_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/appointment_statuses/controllers/create_appointment_status_controller').default['render']>>>
+    }
+  }
+  'create_appointment_status.execute': {
+    methods: ["POST"]
+    pattern: '/settings/appointment-statuses'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#app/appointment_statuses/controllers/create_appointment_status_controller').default)['validator']>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#app/appointment_statuses/controllers/create_appointment_status_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/appointment_statuses/controllers/create_appointment_status_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/appointment_statuses/controllers/create_appointment_status_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'update_appointment_status.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/settings/appointment-statuses/:id/edit'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/appointment_statuses/controllers/update_appointment_status_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/appointment_statuses/controllers/update_appointment_status_controller').default['render']>>>
+    }
+  }
+  'update_appointment_status.execute': {
+    methods: ["PUT"]
+    pattern: '/settings/appointment-statuses/:id'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#app/appointment_statuses/controllers/update_appointment_status_controller').default)['validator']>>
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#app/appointment_statuses/controllers/update_appointment_status_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/appointment_statuses/controllers/update_appointment_status_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/appointment_statuses/controllers/update_appointment_status_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'move_appointment_status.execute': {
+    methods: ["POST"]
+    pattern: '/settings/appointment-statuses/:id/move'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#app/appointment_statuses/controllers/move_appointment_status_controller').default)['validator']>>
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#app/appointment_statuses/controllers/move_appointment_status_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/appointment_statuses/controllers/move_appointment_status_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/appointment_statuses/controllers/move_appointment_status_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'delete_appointment_status.execute': {
+    methods: ["DELETE"]
+    pattern: '/settings/appointment-statuses/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/appointment_statuses/controllers/delete_appointment_status_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/appointment_statuses/controllers/delete_appointment_status_controller').default['execute']>>>
+    }
+  }
   'list_patients.render': {
     methods: ["GET","HEAD"]
     pattern: '/patients'
@@ -449,6 +533,18 @@ export interface Registry {
       query: ExtractQuery<InferInput<(typeof import('#app/booking/controllers/update_appointment_controller').default)['validator']>>
       response: ExtractResponse<Awaited<ReturnType<import('#app/booking/controllers/update_appointment_controller').default['execute']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/booking/controllers/update_appointment_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'change_appointment_status.execute': {
+    methods: ["PATCH"]
+    pattern: '/appointments/:id/status'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#app/booking/controllers/change_appointment_status_controller').default)['validator']>>
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#app/booking/controllers/change_appointment_status_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/booking/controllers/change_appointment_status_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/booking/controllers/change_appointment_status_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'event_stream': {

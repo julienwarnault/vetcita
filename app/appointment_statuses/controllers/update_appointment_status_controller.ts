@@ -1,0 +1,51 @@
+import vine from '@vinejs/vine'
+import { inject } from '@adonisjs/core'
+import type { HttpContext } from '@adonisjs/core/http'
+import AppointmentStatusTransformer from '#appointment_statuses/transformers/appointment_status_transformer'
+import { UpdateAppointmentStatus } from '#appointment_statuses/actions/update_appointment_status'
+import { GetAppointmentStatus } from '#appointment_statuses/queries/get_appointment_status'
+import { withTransaction } from '#app/shared/utils/with_transaction'
+
+@inject()
+export default class UpdateAppointmentStatusController {
+  static validator = vine.create(
+    vine.object({
+      name: vine.string(),
+      color: vine.string(),
+    })
+  )
+
+  constructor(
+    private readonly getAppointmentStatus: GetAppointmentStatus,
+    private readonly updateAppointmentStatus: UpdateAppointmentStatus
+  ) {}
+
+  async render({ inertia, params, auth }: HttpContext) {
+    const user = auth.getUserOrFail()
+
+    const { status } = await this.getAppointmentStatus.execute({
+      id: params.id,
+      tenantId: user.tenantId,
+    })
+
+    return inertia.render('appointment_statuses/form', {
+      status: AppointmentStatusTransformer.transform(status),
+    })
+  }
+
+  async execute({ request, params, response, auth }: HttpContext) {
+    const payload = await request.validateUsing(UpdateAppointmentStatusController.validator)
+
+    const user = auth.getUserOrFail()
+
+    await withTransaction(() => {
+      return this.updateAppointmentStatus.execute({
+        id: params.id,
+        tenantId: user.tenantId,
+        ...payload,
+      })
+    })
+
+    return response.redirect().toRoute('list_appointment_statuses.render')
+  }
+}

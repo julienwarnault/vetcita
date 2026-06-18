@@ -1,0 +1,32 @@
+import vine from '@vinejs/vine'
+import { inject } from '@adonisjs/core'
+import type { HttpContext } from '@adonisjs/core/http'
+import { MoveAppointmentStatus } from '#appointment_statuses/actions/move_appointment_status'
+import { withTransaction } from '#app/shared/utils/with_transaction'
+
+@inject()
+export default class MoveAppointmentStatusController {
+  static validator = vine.create(
+    vine.object({
+      direction: vine.enum(['up', 'down'] as const),
+    })
+  )
+
+  constructor(private readonly moveAppointmentStatus: MoveAppointmentStatus) {}
+
+  async execute({ params, request, response, auth }: HttpContext) {
+    const payload = await request.validateUsing(MoveAppointmentStatusController.validator)
+
+    const user = auth.getUserOrFail()
+
+    await withTransaction(() => {
+      return this.moveAppointmentStatus.execute({
+        id: params.id,
+        direction: payload.direction,
+        tenantId: user.tenantId,
+      })
+    })
+
+    return response.redirect().back()
+  }
+}

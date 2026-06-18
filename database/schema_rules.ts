@@ -12,7 +12,16 @@ export default {
       tsType: 'number',
     },
   },
-  tables: {},
+  tables: {
+    appointment_statuses: {
+      columns: {
+        id: {
+          tsType: 'string',
+          decorators: [{ name: '@column' }],
+        },
+      },
+    },
+  },
   columns: {
     id: {
       tsType: 'UUID',

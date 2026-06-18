@@ -14,10 +14,11 @@ type PageProps = InertiaProps<{
   patientId?: string
   appointment?: Data.Booking.Appointment
   appointmentTypes: Data.AppointmentTypes.AppointmentType[]
+  statuses: Data.AppointmentStatuses.AppointmentStatus[]
 }>
 
 export default function ShowForm(props: PageProps) {
-  const { patientId, appointment, appointmentTypes: types } = props
+  const { patientId, appointment, appointmentTypes: types, statuses } = props
 
   const isEdit = !!appointment
 
@@ -36,7 +37,8 @@ export default function ShowForm(props: PageProps) {
     method: isEdit ? 'put' : 'post',
   })
 
-  const selectedType = types.find((type) => type.id === form.data.appointmentTypeId)
+  const selectedType = types.find(({ id }) => id === form.data.appointmentTypeId)
+  const selectedStatus = statuses.find(({ id }) => id === appointment?.statusId)
 
   return (
     <InertiaDrawer ref={drawerRef}>
@@ -67,6 +69,9 @@ export default function ShowForm(props: PageProps) {
           next={actions.next}
           goToStep={actions.goToStep}
           appointmentType={selectedType!}
+          status={selectedStatus}
+          statuses={statuses}
+          close={() => drawerRef.current?.close()}
         />
       )}
     </InertiaDrawer>

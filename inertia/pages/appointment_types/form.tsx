@@ -1,6 +1,6 @@
 import { Data } from '@generated/data'
 import { CheckboxFieldArray } from '~/components/ui/checkbox_field_array'
-import { COLORS, ColorSelect } from '~/components/ui/color_select'
+import { COLORS_LIGHT, ColorSelect } from '~/components/ui/color_select'
 import { InputSelect } from '~/components/ui/input_select'
 import { ButtonLink } from '~/components/ui/button_link'
 import { InputGroup } from '~/components/ui/input_group'
@@ -67,7 +67,7 @@ export default function ShowForm(props: PageProps) {
 
               <Field name="color" className="col-span-6">
                 <Field.Label>Color del calendario *</Field.Label>
-                <ColorSelect defaultValue={appointmentType?.color ?? COLORS[0]} />
+                <ColorSelect defaultValue={appointmentType?.color ?? COLORS_LIGHT[0]} />
                 <Field.Error />
               </Field>
 

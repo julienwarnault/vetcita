@@ -39,6 +39,23 @@ export interface ApiDefinition {
     render: typeof routes['update_appointment_type.render']
     execute: typeof routes['update_appointment_type.execute']
   }
+  listAppointmentStatuses: {
+    render: typeof routes['list_appointment_statuses.render']
+  }
+  createAppointmentStatus: {
+    render: typeof routes['create_appointment_status.render']
+    execute: typeof routes['create_appointment_status.execute']
+  }
+  updateAppointmentStatus: {
+    render: typeof routes['update_appointment_status.render']
+    execute: typeof routes['update_appointment_status.execute']
+  }
+  moveAppointmentStatus: {
+    execute: typeof routes['move_appointment_status.execute']
+  }
+  deleteAppointmentStatus: {
+    execute: typeof routes['delete_appointment_status.execute']
+  }
   listPatients: {
     render: typeof routes['list_patients.render']
     api: typeof routes['list_patients.api']
@@ -82,6 +99,9 @@ export interface ApiDefinition {
   updateAppointment: {
     render: typeof routes['update_appointment.render']
     execute: typeof routes['update_appointment.execute']
+  }
+  changeAppointmentStatus: {
+    execute: typeof routes['change_appointment_status.execute']
   }
   eventStream: typeof routes['event_stream']
   subscribe: typeof routes['subscribe']
