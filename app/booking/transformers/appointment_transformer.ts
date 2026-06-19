@@ -1,5 +1,5 @@
 import { BaseTransformer } from '@adonisjs/core/transformers'
-import AppointmentStatusTransformer from '#appointment_statuses/transformers/appointment_status_transformer'
+import AppointmentStatusTransformer from '#appointment_workflow/transformers/appointment_status_transformer'
 import AppointmentTypeTransformer from '#appointment_types/transformers/appointment_type_transformer'
 import AgendaTransformer from '#app/agendas/transformers/agenda_transformer'
 import PatientTransformer from '#patients/transformers/patient_transformer'

@@ -14,8 +14,8 @@ import { Menu } from '../ui/menu'
 interface PanelReviewProps {
   form: AppointmentForm
   appointmentType?: Data.AppointmentTypes.AppointmentType
-  status?: Data.AppointmentStatuses.AppointmentStatus
-  statuses: Data.AppointmentStatuses.AppointmentStatus[]
+  status?: Data.AppointmentWorkflow.AppointmentStatus
+  statuses: Data.AppointmentWorkflow.AppointmentStatus[]
   goToStep(step: number): void
   next(): void
   close(): void

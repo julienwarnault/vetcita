@@ -14,7 +14,7 @@ type PageProps = InertiaProps<{
   patientId?: string
   appointment?: Data.Booking.Appointment
   appointmentTypes: Data.AppointmentTypes.AppointmentType[]
-  statuses: Data.AppointmentStatuses.AppointmentStatus[]
+  statuses: Data.AppointmentWorkflow.AppointmentStatus[]
 }>
 
 export default function ShowForm(props: PageProps) {

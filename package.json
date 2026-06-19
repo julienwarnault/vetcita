@@ -19,8 +19,8 @@
   "imports": {
     "#app/*": "./app/*.js",
     "#agendas/*": "./app/agendas/*.js",
-    "#appointment_statuses/*": "./app/appointment_statuses/*.js",
     "#appointment_types/*": "./app/appointment_types/*.js",
+    "#appointment_workflow/*": "./app/appointment_workflow/*.js",
     "#booking/*": "./app/booking/*.js",
     "#identity/*": "./app/identity/*.js",
     "#notifications/*": "./app/notifications/*.js",

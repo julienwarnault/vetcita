@@ -10,7 +10,7 @@ import { InertiaProps } from '~/types'
 import { urlFor } from '~/lib/tuyau'
 
 type PageProps = InertiaProps<{
-  statuses: Data.AppointmentStatuses.AppointmentStatus[]
+  statuses: Data.AppointmentWorkflow.AppointmentStatus[]
 }>
 
 export default function List(props: PageProps) {

@@ -10,7 +10,7 @@ import { Form } from '~/components/ui/form'
 import { InertiaProps } from '~/types'
 
 type PageProps = InertiaProps<{
-  status?: Data.AppointmentStatuses.AppointmentStatus
+  status?: Data.AppointmentWorkflow.AppointmentStatus
 }>
 
 export default function ShowForm(props: PageProps) {

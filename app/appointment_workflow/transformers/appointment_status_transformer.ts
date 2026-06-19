@@ -1,5 +1,5 @@
 import { BaseTransformer } from '@adonisjs/core/transformers'
-import type AppointmentStatus from '#appointment_statuses/models/appointment_status'
+import type AppointmentStatus from '#appointment_workflow/models/appointment_status'
 
 export default class AppointmentStatusTransformer extends BaseTransformer<AppointmentStatus> {
   toObject() {

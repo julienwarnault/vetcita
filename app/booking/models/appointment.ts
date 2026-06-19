@@ -1,7 +1,7 @@
 import { compose } from '@adonisjs/core/helpers'
 import { belongsTo } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
-import AppointmentStatus from '#appointment_statuses/models/appointment_status'
+import AppointmentStatus from '#appointment_workflow/models/appointment_status'
 import AppointmentType from '#appointment_types/models/appointment_type'
 import { DEFAULT_TIMEZONE } from '#app/shared/services/time_service'
 import { WithPrimaryUuid } from '#shared/mixins/with_primary_uuid'

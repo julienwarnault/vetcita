@@ -1,9 +1,9 @@
 import vine from '@vinejs/vine'
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
-import AppointmentStatusTransformer from '#appointment_statuses/transformers/appointment_status_transformer'
-import { UpdateAppointmentStatus } from '#appointment_statuses/actions/update_appointment_status'
-import { GetAppointmentStatus } from '#appointment_statuses/queries/get_appointment_status'
+import AppointmentStatusTransformer from '#appointment_workflow/transformers/appointment_status_transformer'
+import { UpdateAppointmentStatus } from '#appointment_workflow/actions/update_appointment_status'
+import { GetAppointmentStatus } from '#appointment_workflow/queries/get_appointment_status'
 import { withTransaction } from '#app/shared/utils/with_transaction'
 
 @inject()

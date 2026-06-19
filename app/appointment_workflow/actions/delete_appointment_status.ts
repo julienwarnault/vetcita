@@ -1,4 +1,4 @@
-import AppointmentStatus from '#appointment_statuses/models/appointment_status'
+import AppointmentStatus from '#appointment_workflow/models/appointment_status'
 import { transactionContext } from '#app/shared/contexts/transaction_context'
 import type { UUID } from '#app/shared/types'
 

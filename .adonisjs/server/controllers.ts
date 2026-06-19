@@ -10,18 +10,18 @@ export const controllers = {
     ListAgendas: () => import('#app/agendas/controllers/list_agendas_controller'),
     UpdateAgenda: () => import('#app/agendas/controllers/update_agenda_controller'),
   },
-  appointmentStatuses: {
-    CreateAppointmentStatus: () => import('#app/appointment_statuses/controllers/create_appointment_status_controller'),
-    DeleteAppointmentStatus: () => import('#app/appointment_statuses/controllers/delete_appointment_status_controller'),
-    ListAppointmentStatuses: () => import('#app/appointment_statuses/controllers/list_appointment_statuses_controller'),
-    MoveAppointmentStatus: () => import('#app/appointment_statuses/controllers/move_appointment_status_controller'),
-    UpdateAppointmentStatus: () => import('#app/appointment_statuses/controllers/update_appointment_status_controller'),
-  },
   appointmentTypes: {
     CreateAppointmentType: () => import('#app/appointment_types/controllers/create_appointment_type_controller'),
     DeleteAppointmentType: () => import('#app/appointment_types/controllers/delete_appointment_type_controller'),
     ListAppointmentTypes: () => import('#app/appointment_types/controllers/list_appointment_types_controller'),
     UpdateAppointmentType: () => import('#app/appointment_types/controllers/update_appointment_type_controller'),
+  },
+  appointmentWorkflow: {
+    CreateAppointmentStatus: () => import('#app/appointment_workflow/controllers/create_appointment_status_controller'),
+    DeleteAppointmentStatus: () => import('#app/appointment_workflow/controllers/delete_appointment_status_controller'),
+    ListAppointmentStatuses: () => import('#app/appointment_workflow/controllers/list_appointment_statuses_controller'),
+    MoveAppointmentStatus: () => import('#app/appointment_workflow/controllers/move_appointment_status_controller'),
+    UpdateAppointmentStatus: () => import('#app/appointment_workflow/controllers/update_appointment_status_controller'),
   },
   booking: {
     BookAppointment: () => import('#app/booking/controllers/book_appointment_controller'),

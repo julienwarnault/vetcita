@@ -1,5 +1,5 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
-import { AppointmentStatus } from '#appointment_statuses/enums/appointment_status'
+import { AppointmentStatus } from '#appointment_workflow/enums/appointment_status'
 
 export default class extends BaseSchema {
   protected tableName = 'appointments'
