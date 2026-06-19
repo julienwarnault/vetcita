@@ -3,9 +3,9 @@ import { inject } from '@adonisjs/core'
 import { GetAppointmentType } from '#appointment_types/queries/get_appointment_type'
 import { ScheduleService } from '#scheduling/services/schedule_service'
 import { GetWorkingHours } from '#scheduling/queries/get_working_hours'
-import { DEFAULT_TIMEZONE } from '#app/shared/services/time_service'
 import { GetAppointments } from '#booking/queries/get_appointments'
-import type { UUID } from '#app/shared/types'
+import { DEFAULT_TIMEZONE } from '#shared/services/time_service'
+import type { UUID } from '#shared/types'
 
 interface GetBookableDaysParams {
   tenantId: UUID

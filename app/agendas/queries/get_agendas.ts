@@ -1,5 +1,5 @@
-import type { UUID } from '#app/shared/types'
 import Agenda from '#agendas/models/agenda'
+import type { UUID } from '#shared/types'
 
 interface GetAgendasParams {
   tenantId: UUID

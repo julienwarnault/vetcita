@@ -1,7 +1,7 @@
 import { inject } from '@adonisjs/core'
 import { FindOrUpdatePatient } from '#patients/actions/find_or_update_patient'
 import { CreateAppointment } from '#booking/actions/create_appointment'
-import type { UUID } from '#app/shared/types'
+import type { UUID } from '#shared/types'
 
 interface BookAppointmentParams {
   tenantId: UUID

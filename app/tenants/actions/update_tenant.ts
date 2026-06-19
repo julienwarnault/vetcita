@@ -1,7 +1,7 @@
 import string from '@adonisjs/core/helpers/string'
-import { transactionContext } from '#app/shared/contexts/transaction_context'
-import type { UUID } from '#app/shared/types'
+import { transactionContext } from '#shared/contexts/transaction_context'
 import Tenant from '#tenants/models/tenant'
+import type { UUID } from '#shared/types'
 
 interface UpdateTenantParams {
   id: UUID

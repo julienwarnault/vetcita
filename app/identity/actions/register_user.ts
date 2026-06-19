@@ -1,6 +1,6 @@
 import { inject } from '@adonisjs/core'
 import { transactionContext } from '#shared/contexts/transaction_context'
-import { CreateTenant } from '#app/tenants/actions/create_tenant'
+import { CreateTenant } from '#tenants/actions/create_tenant'
 import { CreateAgenda } from '#agendas/actions/create_agenda'
 import User from '#identity/models/user'
 

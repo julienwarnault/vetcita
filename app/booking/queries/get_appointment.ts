@@ -1,5 +1,5 @@
 import Appointment from '#booking/models/appointment'
-import type { UUID } from '#app/shared/types'
+import type { UUID } from '#shared/types'
 
 interface GetAppointmentParams {
   id: UUID

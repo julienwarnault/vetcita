@@ -7,9 +7,9 @@ import { GetAppointmentStatuses } from '#appointment_workflow/queries/get_appoin
 import { GetAppointmentTypes } from '#appointment_types/queries/get_appointment_types'
 import AppointmentTransformer from '#booking/transformers/appointment_transformer'
 import { UpdateAppointment } from '#booking/actions/update_appointment'
-import { withTransaction } from '#app/shared/utils/with_transaction'
 import { GetAppointment } from '#booking/queries/get_appointment'
-import { uuidSchema } from '#app/shared/validators'
+import { withTransaction } from '#shared/utils/with_transaction'
+import { uuidSchema } from '#shared/validators'
 
 @inject()
 export default class UpdateAppointmentController {

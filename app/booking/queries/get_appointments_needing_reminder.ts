@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon'
 import { AppointmentStatus } from '#appointment_workflow/enums/appointment_status'
-import { DEFAULT_TIMEZONE } from '#app/shared/services/time_service'
+import { DEFAULT_TIMEZONE } from '#shared/services/time_service'
 import Appointment from '#booking/models/appointment'
 
 export class GetAppointmentsNeedingReminder {

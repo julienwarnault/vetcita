@@ -1,6 +1,6 @@
 import { BaseCommand } from '@adonisjs/core/ace'
 import type { CommandOptions } from '@adonisjs/core/types/ace'
-import SendAppointmentRemindersJob from '#app/notifications/jobs/send_appointment_reminders_job'
+import SendAppointmentRemindersJob from '#notifications/jobs/send_appointment_reminders_job'
 
 export default class SendReminders extends BaseCommand {
   static commandName = 'reminders:send'

@@ -1,6 +1,6 @@
-import { transactionContext } from '#app/shared/contexts/transaction_context'
+import { transactionContext } from '#shared/contexts/transaction_context'
 import AppointmentType from '#appointment_types/models/appointment_type'
-import type { UUID } from '#app/shared/types'
+import type { UUID } from '#shared/types'
 
 interface DeleteAppointmentTypeParams {
   id: UUID

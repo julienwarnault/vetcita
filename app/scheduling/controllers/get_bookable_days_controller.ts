@@ -2,7 +2,7 @@ import vine from '@vinejs/vine'
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
 import { GetBookableDays } from '#scheduling/actions/get_bookable_days'
-import { uuidSchema } from '#app/shared/validators'
+import { uuidSchema } from '#shared/validators'
 
 @inject()
 export default class GetBookableDaysController {

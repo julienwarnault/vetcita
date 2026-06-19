@@ -2,7 +2,7 @@ import vine from '@vinejs/vine'
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
 import TenantTransformer from '#tenants/transformers/tenant_transformer'
-import { withTransaction } from '#app/shared/utils/with_transaction'
+import { withTransaction } from '#shared/utils/with_transaction'
 import { UpdateTenant } from '#tenants/actions/update_tenant'
 import { GetTenant } from '#tenants/queries/get_tenant'
 

@@ -3,9 +3,9 @@ import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
 import { CreateAppointmentType } from '#appointment_types/actions/create_appointment_type'
 import AgendaTransformer from '#agendas/transformers/agenda_transformer'
-import { withTransaction } from '#app/shared/utils/with_transaction'
+import { withTransaction } from '#shared/utils/with_transaction'
 import { GetAgendas } from '#agendas/queries/get_agendas'
-import { uuidSchema } from '#app/shared/validators'
+import { uuidSchema } from '#shared/validators'
 
 @inject()
 export default class CreateAppointmentTypeController {

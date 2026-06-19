@@ -3,7 +3,7 @@ import { inject } from '@adonisjs/core'
 import type { JobOptions } from '@adonisjs/queue/types'
 import { SendAppointmentConfirmation } from '#notifications/actions/send_appointment_confirmation'
 import Appointment from '#booking/models/appointment'
-import type { UUID } from '#app/shared/types'
+import type { UUID } from '#shared/types'
 
 interface SendAppointmentConfirmationPayload {
   appointmentId: UUID

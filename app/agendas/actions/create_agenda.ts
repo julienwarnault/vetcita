@@ -1,7 +1,7 @@
-import { transactionContext } from '#app/shared/contexts/transaction_context'
+import { transactionContext } from '#shared/contexts/transaction_context'
 import WorkingHour from '#scheduling/models/working_hour'
-import type { UUID } from '#app/shared/types'
 import Agenda from '#agendas/models/agenda'
+import type { UUID } from '#shared/types'
 
 interface CreateAgendaParams {
   name: string

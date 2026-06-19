@@ -1,6 +1,6 @@
 import vine from '@vinejs/vine'
 import type { HttpContext } from '@adonisjs/core/http'
-import { emailSchema, passwordSchema } from '#app/shared/validators'
+import { emailSchema, passwordSchema } from '#shared/validators'
 import User from '#identity/models/user'
 
 export default class LoginController {

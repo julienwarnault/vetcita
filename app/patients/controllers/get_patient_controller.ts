@@ -1,6 +1,6 @@
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
-import AppointmentTransformer from '#app/booking/transformers/appointment_transformer'
+import AppointmentTransformer from '#booking/transformers/appointment_transformer'
 import { GetPatientAppointments } from '#booking/queries/get_patient_appointments'
 import PatientTransformer from '#patients/transformers/patient_transformer'
 import { GetPatient } from '#patients/queries/get_patient'

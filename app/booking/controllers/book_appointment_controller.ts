@@ -4,11 +4,11 @@ import type { HttpContext } from '@adonisjs/core/http'
 import AppointmentTypeTransformer from '#appointment_types/transformers/appointment_type_transformer'
 import { GetAppointmentTypes } from '#appointment_types/queries/get_appointment_types'
 import TenantTransformer from '#tenants/transformers/tenant_transformer'
-import { withTransaction } from '#app/shared/utils/with_transaction'
 import { BookAppointment } from '#booking/actions/book_appointment'
+import { withTransaction } from '#shared/utils/with_transaction'
 import { GetTenant } from '#tenants/queries/get_tenant'
-import { uuidSchema } from '#app/shared/validators'
-import { UUID } from '#app/shared/types'
+import { uuidSchema } from '#shared/validators'
+import { UUID } from '#shared/types'
 
 @inject()
 export default class BookAppointmentController {

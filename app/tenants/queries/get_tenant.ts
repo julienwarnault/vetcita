@@ -1,4 +1,4 @@
-import type { UUID } from '#app/shared/types'
+import type { UUID } from '#shared/types'
 import Tenant from '#tenants/models/tenant'
 
 interface GetTenantParams {

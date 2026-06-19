@@ -1,5 +1,5 @@
 import Patient from '#patients/models/patient'
-import type { UUID } from '#app/shared/types'
+import type { UUID } from '#shared/types'
 
 interface GetPatientsParams {
   tenantId: UUID

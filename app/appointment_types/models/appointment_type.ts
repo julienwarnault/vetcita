@@ -1,7 +1,7 @@
 import { compose } from '@adonisjs/core/helpers'
 import { belongsTo, manyToMany } from '@adonisjs/lucid/orm'
 import type { BelongsTo, ManyToMany } from '@adonisjs/lucid/types/relations'
-import { WithPrimaryUuid } from '#app/shared/mixins/with_primary_uuid'
+import { WithPrimaryUuid } from '#shared/mixins/with_primary_uuid'
 import { AppointmentTypeSchema } from '#database/schema'
 import Tenant from '#tenants/models/tenant'
 import Agenda from '#agendas/models/agenda'

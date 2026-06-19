@@ -1,6 +1,6 @@
-import { transactionContext } from '#app/shared/contexts/transaction_context'
+import { transactionContext } from '#shared/contexts/transaction_context'
 import Appointment from '#booking/models/appointment'
-import type { UUID } from '#app/shared/types'
+import type { UUID } from '#shared/types'
 
 interface ChangeAppointmentStatusParams {
   id: UUID

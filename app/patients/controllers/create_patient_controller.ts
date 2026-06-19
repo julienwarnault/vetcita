@@ -1,7 +1,7 @@
 import vine from '@vinejs/vine'
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
-import { withTransaction } from '#app/shared/utils/with_transaction'
+import { withTransaction } from '#shared/utils/with_transaction'
 import { CreatePatient } from '#patients/actions/create_patient'
 
 @inject()

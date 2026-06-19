@@ -1,5 +1,5 @@
 import WorkingHour from '#scheduling/models/working_hour'
-import type { UUID } from '#app/shared/types'
+import type { UUID } from '#shared/types'
 
 interface GetWorkingHoursParams {
   tenantId: UUID

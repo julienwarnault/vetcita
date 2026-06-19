@@ -4,7 +4,7 @@ import { GetAppointmentType } from '#appointment_types/queries/get_appointment_t
 import { ScheduleService } from '#scheduling/services/schedule_service'
 import { GetWorkingHours } from '#scheduling/queries/get_working_hours'
 import { GetAppointments } from '#booking/queries/get_appointments'
-import type { UUID } from '#app/shared/types'
+import type { UUID } from '#shared/types'
 
 interface CheckSlotBookableParams {
   tenantId: UUID

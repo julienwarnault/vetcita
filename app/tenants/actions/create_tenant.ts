@@ -1,5 +1,5 @@
 import string from '@adonisjs/core/helpers/string'
-import { transactionContext } from '#app/shared/contexts/transaction_context'
+import { transactionContext } from '#shared/contexts/transaction_context'
 import Tenant from '#tenants/models/tenant'
 
 interface CreateTenantParams {

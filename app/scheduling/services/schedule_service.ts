@@ -1,9 +1,9 @@
 import { DateTime } from 'luxon'
 import { inject } from '@adonisjs/core'
-import { TimeService } from '#app/shared/services/time_service'
+import { TimeService } from '#shared/services/time_service'
 import WorkingHour from '#scheduling/models/working_hour'
 import Appointment from '#booking/models/appointment'
-import type { UUID } from '#app/shared/types'
+import type { UUID } from '#shared/types'
 
 const SLOT_GRID_MINUTES = 15
 

@@ -1,6 +1,6 @@
-import { transactionContext } from '#app/shared/contexts/transaction_context'
+import { transactionContext } from '#shared/contexts/transaction_context'
 import Patient from '#patients/models/patient'
-import type { UUID } from '#app/shared/types'
+import type { UUID } from '#shared/types'
 
 interface DeletePatientParams {
   id: UUID

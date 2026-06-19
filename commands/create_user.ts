@@ -1,7 +1,7 @@
 import { BaseCommand } from '@adonisjs/core/ace'
 import type { CommandOptions } from '@adonisjs/core/types/ace'
-import { withTransaction } from '#app/shared/utils/with_transaction'
-import { RegisterUser } from '#app/identity/actions/register_user'
+import { withTransaction } from '#shared/utils/with_transaction'
+import { RegisterUser } from '#identity/actions/register_user'
 
 export default class CreateUser extends BaseCommand {
   static commandName = 'create:user'

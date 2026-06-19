@@ -1,7 +1,7 @@
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
 import { urlFor } from '@adonisjs/core/services/url_builder'
-import { QrCodeService } from '#app/shared/services/qr_code_service'
+import { QrCodeService } from '#shared/services/qr_code_service'
 import { appUrl } from '#config/app'
 
 @inject()

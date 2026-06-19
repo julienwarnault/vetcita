@@ -1,5 +1,5 @@
 import { BaseTransformer } from '@adonisjs/core/transformers'
-import TenantTransformer from '#app/tenants/transformers/tenant_transformer'
+import TenantTransformer from '#tenants/transformers/tenant_transformer'
 import type User from '#identity/models/user'
 
 export default class UserTransformer extends BaseTransformer<User> {

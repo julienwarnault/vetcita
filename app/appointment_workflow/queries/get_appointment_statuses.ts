@@ -1,5 +1,5 @@
 import AppointmentStatus from '#appointment_workflow/models/appointment_status'
-import type { UUID } from '#app/shared/types'
+import type { UUID } from '#shared/types'
 
 interface GetAppointmentStatusesParams {
   tenantId: UUID

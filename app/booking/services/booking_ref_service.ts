@@ -1,6 +1,6 @@
 import { inject } from '@adonisjs/core'
 import { randomBytes } from 'node:crypto'
-import { transactionContext } from '#app/shared/contexts/transaction_context'
+import { transactionContext } from '#shared/contexts/transaction_context'
 import Appointment from '#booking/models/appointment'
 
 const MAX_ATTEMPTS = 5

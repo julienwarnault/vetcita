@@ -5,9 +5,9 @@ import AppointmentTypeTransformer from '#appointment_types/transformers/appointm
 import { UpdateAppointmentType } from '#appointment_types/actions/update_appointment_type'
 import { GetAppointmentType } from '#appointment_types/queries/get_appointment_type'
 import AgendaTransformer from '#agendas/transformers/agenda_transformer'
-import { withTransaction } from '#app/shared/utils/with_transaction'
+import { withTransaction } from '#shared/utils/with_transaction'
 import { GetAgendas } from '#agendas/queries/get_agendas'
-import { uuidSchema } from '#app/shared/validators'
+import { uuidSchema } from '#shared/validators'
 
 @inject()
 export default class UpdateAppointmentTypeController {

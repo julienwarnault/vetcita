@@ -1,6 +1,6 @@
-import { transactionContext } from '#app/shared/contexts/transaction_context'
-import type { UUID } from '#app/shared/types'
+import { transactionContext } from '#shared/contexts/transaction_context'
 import Agenda from '#agendas/models/agenda'
+import type { UUID } from '#shared/types'
 
 interface DeleteAgendaParams {
   id: UUID

@@ -4,10 +4,10 @@ import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
 import AppointmentTransformer from '#booking/transformers/appointment_transformer'
 import AgendaTransformer from '#agendas/transformers/agenda_transformer'
-import { DEFAULT_TIMEZONE } from '#app/shared/services/time_service'
 import { GetAppointments } from '#booking/queries/get_appointments'
+import { DEFAULT_TIMEZONE } from '#shared/services/time_service'
 import { GetAgendas } from '#agendas/queries/get_agendas'
-import { uuidListSchema } from '#app/shared/validators'
+import { uuidListSchema } from '#shared/validators'
 
 @inject()
 export default class ShowCalendarController {

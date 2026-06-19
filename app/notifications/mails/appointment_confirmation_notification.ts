@@ -1,5 +1,5 @@
 import { BaseMail } from '@adonisjs/mail'
-import { DEFAULT_TIMEZONE } from '#app/shared/services/time_service'
+import { DEFAULT_TIMEZONE } from '#shared/services/time_service'
 import { urlFor } from '@adonisjs/core/services/url_builder'
 import type Appointment from '#booking/models/appointment'
 import { appUrl } from '#config/app'

@@ -3,9 +3,9 @@ import { belongsTo } from '@adonisjs/lucid/orm'
 import { compose } from '@adonisjs/core/helpers'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
-import { WithPrimaryUuid } from '#app/shared/mixins/with_primary_uuid'
-import Tenant from '#app/tenants/models/tenant'
+import { WithPrimaryUuid } from '#shared/mixins/with_primary_uuid'
 import { UserSchema } from '#database/schema'
+import Tenant from '#tenants/models/tenant'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],

@@ -1,14 +1,14 @@
 import { DateTime } from 'luxon'
 import { inject } from '@adonisjs/core'
 import { SlotNotBookableException } from '#scheduling/exceptions/slot_not_bookable_exception'
-import { dispatchAfterCommit } from '#app/shared/utils/dispatch_after_commit'
-import { transactionContext } from '#app/shared/contexts/transaction_context'
 import { CheckSlotBookable } from '#scheduling/actions/check_slot_bookable'
+import { dispatchAfterCommit } from '#shared/utils/dispatch_after_commit'
+import { transactionContext } from '#shared/contexts/transaction_context'
 import AppointmentType from '#appointment_types/models/appointment_type'
-import { DEFAULT_TIMEZONE } from '#app/shared/services/time_service'
+import { DEFAULT_TIMEZONE } from '#shared/services/time_service'
 import Appointment from '#booking/models/appointment'
-import type { UUID } from '#app/shared/types'
 import { events } from '#generated/events'
+import type { UUID } from '#shared/types'
 
 interface UpdateAppointmentParams {
   id: UUID
