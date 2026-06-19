@@ -45,11 +45,7 @@ export function InputSelect(props: InputSelectProps) {
       </BaseSelect.Trigger>
 
       <BaseSelect.Portal>
-        <BaseSelect.Positioner
-          sideOffset={4}
-          alignItemWithTrigger={false}
-          className={classes.positioner()}
-        >
+        <BaseSelect.Positioner sideOffset={4} alignItemWithTrigger={false} className={classes.positioner()}>
           <BaseSelect.Popup render={<Card shadow={true} className={classes.popup()} />}>
             <BaseSelect.List className={classes.list()}>
               {items.map((item) => (

@@ -45,11 +45,7 @@ export class ScheduleService {
   getBookableSlots(params: GetBookableSlotsParams): BookableSlotsByDate {
     if (params.duration <= 0 || params.agendaIds.length === 0) return new Map()
 
-    const availabilityPeriods = this.#getAvailabilityPeriods(
-      params.workingHours,
-      params.from,
-      params.to
-    )
+    const availabilityPeriods = this.#getAvailabilityPeriods(params.workingHours, params.from, params.to)
 
     if (availabilityPeriods.length === 0) return new Map()
 
@@ -60,10 +56,7 @@ export class ScheduleService {
     )
 
     return this.#groupByDate(
-      this.#deduplicateByBestAgenda(
-        allSlots,
-        this.#buildLoadMap(params.agendaIds, params.appointments)
-      )
+      this.#deduplicateByBestAgenda(allSlots, this.#buildLoadMap(params.agendaIds, params.appointments))
     )
   }
 
@@ -74,8 +67,7 @@ export class ScheduleService {
 
     const periods = this.#getAvailabilityPeriods(params.workingHours, params.start, params.start)
     const withinWorkingHours = periods.some(
-      (period) =>
-        period.agendaId === params.agendaId && params.start >= period.start && end <= period.end
+      (period) => period.agendaId === params.agendaId && params.start >= period.start && end <= period.end
     )
 
     if (!withinWorkingHours) return false

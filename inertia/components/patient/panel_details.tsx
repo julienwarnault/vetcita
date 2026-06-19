@@ -30,16 +30,12 @@ export function PanelDetails(props: PanelDetailsProps) {
             </div>
             <div>
               <div className="text-[15px]/5 font-medium">Teléfono</div>
-              <div className="text-[15px]/5 font-normal text-muted">
-                {formatPhoneNumber(patient.phone)}
-              </div>
+              <div className="text-[15px]/5 font-normal text-muted">{formatPhoneNumber(patient.phone)}</div>
             </div>
             <div>
               <div className="text-[15px]/5 font-medium">Se unió</div>
               <div className="text-[15px]/5 font-normal text-muted">
-                {DateTime.fromISO(patient.createdAt!)
-                  .setLocale(DEFAULT_LOCALE)
-                  .toFormat('d ccc. yyyy')}
+                {DateTime.fromISO(patient.createdAt!).setLocale(DEFAULT_LOCALE).toFormat('d ccc. yyyy')}
               </div>
             </div>
           </div>

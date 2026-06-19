@@ -7,10 +7,7 @@ interface GetAgendaParams {
 
 export class GetAgenda {
   async execute(params: GetAgendaParams) {
-    const agenda = await Agenda.query()
-      .where('id', params.id)
-      .preload('appointmentTypes')
-      .firstOrFail()
+    const agenda = await Agenda.query().where('id', params.id).preload('appointmentTypes').firstOrFail()
 
     return { agenda }
   }

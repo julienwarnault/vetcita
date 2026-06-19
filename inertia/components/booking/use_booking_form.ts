@@ -64,10 +64,7 @@ export function useBookingForm(params: UseBookingFormParams) {
 
   const [stepIndex, setStepIndex] = useState(0)
 
-  const [patientInfo, setPatientInfo] = useLocalStorage<PatientInfo>(
-    'booking_patient_info',
-    DEFAULT_PATIENT_INFO
-  )
+  const [patientInfo, setPatientInfo] = useLocalStorage<PatientInfo>('booking_patient_info', DEFAULT_PATIENT_INFO)
 
   const form = useForm({
     tenantId: tenantId,

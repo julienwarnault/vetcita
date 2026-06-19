@@ -74,11 +74,7 @@ export function CalendarToolbar(props: CalendarToolbarProps) {
 
           <CalendarDatePicker date={date} view={view} onDateChange={onChangeDate} />
 
-          <CalendarAgendaSelector
-            agendas={agendas}
-            selectedAgendaIds={agendaIds}
-            onChange={onChangeAgendas}
-          />
+          <CalendarAgendaSelector agendas={agendas} selectedAgendaIds={agendaIds} onChange={onChangeAgendas} />
         </div>
 
         <div className="flex items-center gap-2">

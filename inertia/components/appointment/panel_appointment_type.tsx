@@ -46,14 +46,11 @@ export function PanelAppointmentType(props: PanelAppointmentTypeProps) {
                   }}
                   className={cn(
                     'flex items-center justify-between bg-white border rounded-2xl p-4 w-full hover:bg-background',
-                    data.appointmentTypeId === type.id &&
-                      'outline-2 -outline-offset-1 outline-accent'
+                    data.appointmentTypeId === type.id && 'outline-2 -outline-offset-1 outline-accent'
                   )}
                 >
                   <div className="font-medium text-base">{type.name}</div>
-                  <div className="text-sm text-muted-foreground">
-                    {formatDuration(type.duration)}
-                  </div>
+                  <div className="text-sm text-muted-foreground">{formatDuration(type.duration)}</div>
                 </button>
               </li>
             ))}
@@ -61,14 +58,7 @@ export function PanelAppointmentType(props: PanelAppointmentTypeProps) {
         </div>
       </Drawer.Body>
       <Drawer.Footer className="px-8 py-4">
-        <Button
-          type="button"
-          disabled={!canContinue}
-          onClick={next}
-          className="w-full"
-          variant="primary"
-          size="lg"
-        >
+        <Button type="button" disabled={!canContinue} onClick={next} className="w-full" variant="primary" size="lg">
           Continuar
         </Button>
       </Drawer.Footer>

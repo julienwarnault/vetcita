@@ -17,11 +17,7 @@ const tabs = tv({
   },
 })
 
-export function Tabs({
-  className,
-  orientation = 'horizontal',
-  ...props
-}: TabsPrimitive.Root.Props) {
+export function Tabs({ className, orientation = 'horizontal', ...props }: TabsPrimitive.Root.Props) {
   return (
     <TabsPrimitive.Root
       data-slot="tabs"
@@ -35,12 +31,7 @@ export function Tabs({
 
 function TabsList({ className, ...props }: TabsPrimitive.List.Props) {
   return (
-    <TabsPrimitive.List
-      data-slot="tabs-list"
-      render={<ul />}
-      className={cn(tabs().list(), className)}
-      {...props}
-    />
+    <TabsPrimitive.List data-slot="tabs-list" render={<ul />} className={cn(tabs().list(), className)} {...props} />
   )
 }
 

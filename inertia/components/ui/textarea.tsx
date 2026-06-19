@@ -15,9 +15,6 @@ const textarea = tv({
 
 type TextareaVariants = VariantProps<typeof textarea>
 
-export function Textarea({
-  className,
-  ...props
-}: React.ComponentProps<'textarea'> & TextareaVariants) {
+export function Textarea({ className, ...props }: React.ComponentProps<'textarea'> & TextareaVariants) {
   return <BaseField.Control render={<textarea className={textarea({ className })} {...props} />} />
 }

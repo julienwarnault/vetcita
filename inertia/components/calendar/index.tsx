@@ -34,12 +34,8 @@ export function Calendar(props: CalendarViewProps) {
 
   return (
     <>
-      {view !== 'month' && (
-        <CalendarDaysView date={date} view={view} events={events} onEventClick={handleEventClick} />
-      )}
-      {view === 'month' && (
-        <CalendarMonthView date={props.date} events={events} onEventClick={handleEventClick} />
-      )}
+      {view !== 'month' && <CalendarDaysView date={date} view={view} events={events} onEventClick={handleEventClick} />}
+      {view === 'month' && <CalendarMonthView date={props.date} events={events} onEventClick={handleEventClick} />}
     </>
   )
 }

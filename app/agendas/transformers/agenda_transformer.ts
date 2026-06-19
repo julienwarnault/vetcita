@@ -6,9 +6,7 @@ export default class AgendaTransformer extends BaseTransformer<Agenda> {
   toObject() {
     return {
       ...this.pick(this.resource, ['id', 'name', 'color', 'tenantId', 'createdAt', 'updatedAt']),
-      appointmentTypes: AppointmentTypeTransformer.transform(
-        this.whenLoaded(this.resource.appointmentTypes)
-      ),
+      appointmentTypes: AppointmentTypeTransformer.transform(this.whenLoaded(this.resource.appointmentTypes)),
     }
   }
 }

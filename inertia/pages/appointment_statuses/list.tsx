@@ -17,11 +17,7 @@ export default function List(props: PageProps) {
   const { statuses } = props
 
   const handleMove = (statusId: string, direction: 'up' | 'down') => {
-    router.post(
-      urlFor('move_appointment_status.execute', { id: statusId }),
-      { direction },
-      { preserveState: false }
-    )
+    router.post(urlFor('move_appointment_status.execute', { id: statusId }), { direction }, { preserveState: false })
   }
 
   const handleDelete = (statusId: string) => {
@@ -46,10 +42,7 @@ export default function List(props: PageProps) {
   return (
     <div className="flex-1 h-auto bg-background">
       <div className="container-sm p-10">
-        <ViewHeader
-          title="Estados de las citas"
-          subtitle="Crea y gestiona estados de cita personalizados"
-        >
+        <ViewHeader title="Estados de las citas" subtitle="Crea y gestiona estados de cita personalizados">
           <ButtonLink route="create_appointment_status.render" size="lg">
             Añadir
           </ButtonLink>
@@ -76,10 +69,7 @@ export default function List(props: PageProps) {
                 />
               )}
               <div>
-                <div
-                  className="absolute w-1.5 inset-0 rounded-full"
-                  style={{ backgroundColor: status.color }}
-                />
+                <div className="absolute w-1.5 inset-0 rounded-full" style={{ backgroundColor: status.color }} />
                 <div className="flex-1 text-[17px]/6 font-semibold">{status.name}</div>
               </div>
 
@@ -108,17 +98,11 @@ export default function List(props: PageProps) {
                       Eliminar
                     </Menu.Item>
                     <div className="border-t my-1" />
-                    <Menu.Item
-                      disabled={!canMoveUp(index)}
-                      onClick={() => handleMove(status.id, 'up')}
-                    >
+                    <Menu.Item disabled={!canMoveUp(index)} onClick={() => handleMove(status.id, 'up')}>
                       <ChevronUpIcon size={16} />
                       Subir
                     </Menu.Item>
-                    <Menu.Item
-                      disabled={!canMoveDown(index)}
-                      onClick={() => handleMove(status.id, 'down')}
-                    >
+                    <Menu.Item disabled={!canMoveDown(index)} onClick={() => handleMove(status.id, 'down')}>
                       <ChevronDownIcon size={16} />
                       Bajar
                     </Menu.Item>

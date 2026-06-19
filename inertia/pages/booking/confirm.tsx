@@ -20,9 +20,7 @@ export default function Confirm(props: PageProps) {
   const startDateTime = DateTime.fromISO(appointment.startDate!.toString(), {
     zone: DEFAULT_TIMEZONE,
   })
-  const formattedDate = startDateTime
-    ?.setLocale('es-MX')
-    .toFormat("cccc, dd LLLL yyyy 'a las' h:mma")
+  const formattedDate = startDateTime?.setLocale('es-MX').toFormat("cccc, dd LLLL yyyy 'a las' h:mma")
 
   return (
     <>
@@ -40,9 +38,7 @@ export default function Confirm(props: PageProps) {
                   </Badge>
                 </div>
                 <h1 className="text-[28px]/9 font-bold">{capitalize(formattedDate)}</h1>
-                <div className="text-muted text-[14px]/4 font-normal">
-                  N°{appointment.bookingRef}
-                </div>
+                <div className="text-muted text-[14px]/4 font-normal">N°{appointment.bookingRef}</div>
               </div>
 
               <hr />
@@ -52,9 +48,7 @@ export default function Confirm(props: PageProps) {
                 <div className="flex justify-between items-center pt-4">
                   <div>
                     <div className="text-[16px]">{appointmentType?.name}</div>
-                    <div className="text-sm/5 text-muted">
-                      {formatDuration(appointment?.duration)}
-                    </div>
+                    <div className="text-sm/5 text-muted">{formatDuration(appointment?.duration)}</div>
                   </div>
                   {appointmentType?.price && (
                     <div className="text-[16px] font-semibold">{appointmentType?.price} MXN</div>

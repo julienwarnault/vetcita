@@ -4,10 +4,7 @@ import { middleware } from '#start/kernel'
 
 router.get(':tenantId/booking', [controllers.booking.BookAppointment, 'render'])
 router.post(':tenantId/booking', [controllers.booking.BookAppointment, 'execute'])
-router.get(':tenantId/booking/:appointmentId/confirm', [
-  controllers.booking.ConfirmAppointment,
-  'render',
-])
+router.get(':tenantId/booking/:appointmentId/confirm', [controllers.booking.ConfirmAppointment, 'render'])
 
 router
   .group(() => {
@@ -17,9 +14,6 @@ router
     router.post('appointments', [controllers.booking.CreateAppointment, 'execute'])
     router.get('appointments/edit/:id', [controllers.booking.UpdateAppointment, 'render'])
     router.put('appointments/:id', [controllers.booking.UpdateAppointment, 'execute'])
-    router.patch('appointments/:id/status', [
-      controllers.booking.ChangeAppointmentStatus,
-      'execute',
-    ])
+    router.patch('appointments/:id/status', [controllers.booking.ChangeAppointmentStatus, 'execute'])
   })
   .use([middleware.auth()])

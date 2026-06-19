@@ -63,10 +63,7 @@ function CardItem(props: CardItemProps) {
 
   return (
     <Link href={href}>
-      <Card
-        size="lg"
-        className={cn('flex flex-col gap-4 hover:bg-background', !icon && 'justify-between')}
-      >
+      <Card size="lg" className={cn('flex flex-col gap-4 hover:bg-background', !icon && 'justify-between')}>
         {icon && <DynamicIcon name={icon} size={26} strokeWidth={1.5} className="text-accent" />}
 
         <div>

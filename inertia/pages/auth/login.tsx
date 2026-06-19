@@ -26,12 +26,7 @@ export default function Login() {
 
               <div>
                 <label htmlFor="password">Password</label>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  autoComplete="current-password"
-                />
+                <input type="password" name="password" id="password" autoComplete="current-password" />
                 {errors.password ? <span>{errors.password}</span> : ''}
               </div>
 

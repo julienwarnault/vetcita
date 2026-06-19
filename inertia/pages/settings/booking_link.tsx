@@ -33,15 +33,11 @@ export default function BookingLink(props: PageProps) {
       <div className="container-sm">
         <div className="flex flex-col gap-8 mx-auto max-w-110 w-full py-12">
           <div className="flex flex-col items-center text-center">
-            <CheckCircleIcon
-              size={90}
-              strokeWidth={1.5}
-              className="inline-flex mb-5 text-success"
-            />
+            <CheckCircleIcon size={90} strokeWidth={1.5} className="inline-flex mb-5 text-success" />
             <h3 className="text-2xl/8 font-semibold mb-4">Tu enlace está listo</h3>
             <p className="text-[15px]/5 text-muted">
-              Has creado un enlace de reserva. Ahora puedes compartirlo con tus pacientes para que
-              puedan reservar sus citas fácilmente.
+              Has creado un enlace de reserva. Ahora puedes compartirlo con tus pacientes para que puedan reservar sus
+              citas fácilmente.
             </p>
           </div>
           <Card size="lg">
@@ -68,11 +64,7 @@ export default function BookingLink(props: PageProps) {
                 </div>
               </div>
 
-              <a
-                href={publicUrl}
-                target="_blank"
-                className="block pl-5 hover:bg-background cursor-pointer"
-              >
+              <a href={publicUrl} target="_blank" className="block pl-5 hover:bg-background cursor-pointer">
                 <div className="flex items-center justify-between pr-5 py-4 cursor-pointer">
                   <div className="text-base/6 font-semibold">Previsualizar enlace</div>
                   <ExternalLinkIcon size={20} />

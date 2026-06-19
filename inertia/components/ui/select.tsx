@@ -30,13 +30,7 @@ export function Select(props: SelectProps) {
   const classes = select({})
 
   return (
-    <BaseSelect.Root
-      open={open}
-      onOpenChange={onOpenChange}
-      value={value}
-      items={items}
-      onValueChange={onValueChange}
-    >
+    <BaseSelect.Root open={open} onOpenChange={onOpenChange} value={value} items={items} onValueChange={onValueChange}>
       {trigger && isValidElement(trigger) && (
         <BaseSelect.Trigger render={trigger} className={classes.trigger()}>
           <BaseSelect.Value />

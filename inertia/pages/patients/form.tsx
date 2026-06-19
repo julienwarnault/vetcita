@@ -54,9 +54,7 @@ export default function ShowForm(props: PageProps) {
             >
               <div>
                 <h2 className="text-2xl font-semibold">Perfil</h2>
-                <p className="text-[15px]/5 text-muted">
-                  Gestiona el perfil personal de tu paciente
-                </p>
+                <p className="text-[15px]/5 text-muted">Gestiona el perfil personal de tu paciente</p>
 
                 <div className="grid grid-cols-6 w-full gap-x-4 gap-y-6 pt-6">
                   <Field name="firstName">
@@ -85,10 +83,7 @@ export default function ShowForm(props: PageProps) {
 
                   <Field name="notes" className="col-span-6">
                     <Field.Label>Comentarios</Field.Label>
-                    <Textarea
-                      placeholder="Añadir un comentario privado"
-                      defaultValue={patient?.notes ?? ''}
-                    />
+                    <Textarea placeholder="Añadir un comentario privado" defaultValue={patient?.notes ?? ''} />
                     <Field.Error />
                   </Field>
                 </div>

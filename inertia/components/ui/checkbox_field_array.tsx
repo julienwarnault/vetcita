@@ -44,12 +44,7 @@ export function CheckboxFieldArray<T>(props: CheckboxFieldArrayProps<T>) {
 
   return (
     <Field name={name} className={className}>
-      <CheckboxGroup
-        allValues={values}
-        defaultValue={defaultValue}
-        disabled={disabled}
-        className={classes.container()}
-      >
+      <CheckboxGroup allValues={values} defaultValue={defaultValue} disabled={disabled} className={classes.container()}>
         {items.length > 0 && (
           <Field.Item>
             <Field.Label className={classes.item()}>

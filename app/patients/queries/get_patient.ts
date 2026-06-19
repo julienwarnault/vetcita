@@ -8,10 +8,7 @@ interface GetPatientParams {
 
 export class GetPatient {
   async execute(params: GetPatientParams) {
-    const patient = await Patient.query()
-      .where('id', params.id)
-      .where('tenantId', params.tenantId)
-      .firstOrFail()
+    const patient = await Patient.query().where('id', params.id).where('tenantId', params.tenantId).firstOrFail()
 
     return { patient }
   }

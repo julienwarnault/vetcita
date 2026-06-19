@@ -52,10 +52,7 @@ export default function ShowForm(props: PageProps) {
             <div className="grid grid-cols-6 w-full gap-x-4 gap-y-6 pt-6">
               <Field name="name" className="col-span-6">
                 <Field.Label>Nombre del estado *</Field.Label>
-                <Input
-                  placeholder="Añade un nombre para el estado"
-                  defaultValue={status?.name ?? ''}
-                />
+                <Input placeholder="Añade un nombre para el estado" defaultValue={status?.name ?? ''} />
                 <Field.Error />
               </Field>
 

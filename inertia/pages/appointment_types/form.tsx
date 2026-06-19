@@ -58,10 +58,7 @@ export default function ShowForm(props: PageProps) {
             <div className="grid grid-cols-6 w-full gap-x-4 gap-y-6 pt-6">
               <Field name="name" className="col-span-6">
                 <Field.Label>Nombre del tipo de cita *</Field.Label>
-                <Input
-                  placeholder="Añade un nombre de tipo de cita"
-                  defaultValue={appointmentType?.name ?? ''}
-                />
+                <Input placeholder="Añade un nombre de tipo de cita" defaultValue={appointmentType?.name ?? ''} />
                 <Field.Error />
               </Field>
 
@@ -89,11 +86,7 @@ export default function ShowForm(props: PageProps) {
               <Field name="price">
                 <Field.Label>Precio</Field.Label>
                 <InputGroup>
-                  <InputGroup.Input
-                    type="number"
-                    placeholder="0.00"
-                    defaultValue={appointmentType?.price ?? ''}
-                  />
+                  <InputGroup.Input type="number" placeholder="0.00" defaultValue={appointmentType?.price ?? ''} />
                   <InputGroup.Addon>$</InputGroup.Addon>
                   <InputGroup.Addon align="end">MXN</InputGroup.Addon>
                 </InputGroup>
@@ -147,9 +140,7 @@ export default function ShowForm(props: PageProps) {
                   </div>
                 )}
                 defaultValue={
-                  appointmentType
-                    ? appointmentType.agendas!.map((type) => type.id)
-                    : agendas.map(({ id }) => id)
+                  appointmentType ? appointmentType.agendas!.map((type) => type.id) : agendas.map(({ id }) => id)
                 }
               />
             </div>

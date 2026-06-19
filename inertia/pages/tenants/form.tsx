@@ -50,10 +50,7 @@ export default function ShowForm(props: PageProps) {
             <div className="grid grid-cols-6 w-full gap-x-4 gap-y-6 pt-6">
               <Field name="name" className="col-span-6">
                 <Field.Label>Nombre del negocio *</Field.Label>
-                <Input
-                  placeholder="Introducir el nombre del negocio"
-                  defaultValue={tenant?.name ?? ''}
-                />
+                <Input placeholder="Introducir el nombre del negocio" defaultValue={tenant?.name ?? ''} />
                 <Field.Error />
               </Field>
 
@@ -70,18 +67,15 @@ export default function ShowForm(props: PageProps) {
           <div>
             <h2 className="text-2xl font-semibold">Enlaces externos</h2>
             <p className="text-[15px]/5 text-muted">
-              Añade el sitio web de tu empresa y los enlaces a tus perfiles de redes sociales para
-              compartirlos con los patientes.
+              Añade el sitio web de tu empresa y los enlaces a tus perfiles de redes sociales para compartirlos con los
+              patientes.
             </p>
 
             <div className="grid w-full gap-y-6 pt-6">
               <Field name="website">
                 <Field.Label>Sitio web</Field.Label>
                 <InputGroup>
-                  <InputGroup.Input
-                    placeholder="sitioweb.mx"
-                    defaultValue={tenant?.website ?? ''}
-                  />
+                  <InputGroup.Input placeholder="sitioweb.mx" defaultValue={tenant?.website ?? ''} />
                   <InputGroup.Addon>
                     <EarthIcon />
                   </InputGroup.Addon>

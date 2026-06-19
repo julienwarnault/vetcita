@@ -84,15 +84,11 @@ export default function ShowForm(props: PageProps) {
                       <div className="text-[17px]/6 font-medium">{type.name}</div>
                       <div className="text-muted">{formatDuration(type.duration)}</div>
                     </div>
-                    {type.price && (
-                      <div className="text-[17px]/6 font-medium">{type.price} MXN</div>
-                    )}
+                    {type.price && <div className="text-[17px]/6 font-medium">{type.price} MXN</div>}
                   </div>
                 )}
                 defaultValue={
-                  agenda
-                    ? agenda.appointmentTypes!.map((type) => type.id)
-                    : appointmentTypes.map(({ id }) => id)
+                  agenda ? agenda.appointmentTypes!.map((type) => type.id) : appointmentTypes.map(({ id }) => id)
                 }
               />
             </div>

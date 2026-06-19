@@ -28,10 +28,7 @@ export class MoveAppointmentStatus {
     const targetIndex = params.direction === 'up' ? index - 1 : index + 1
 
     if (targetIndex >= 0 && targetIndex < customStatuses.length) {
-      ;[customStatuses[index], customStatuses[targetIndex]] = [
-        customStatuses[targetIndex],
-        customStatuses[index],
-      ]
+      ;[customStatuses[index], customStatuses[targetIndex]] = [customStatuses[targetIndex], customStatuses[index]]
     }
 
     for (const [i, customStatus] of customStatuses.entries()) {

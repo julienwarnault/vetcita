@@ -56,11 +56,7 @@ export function InputGroup({
   )
 }
 
-function InputGroupAddon({
-  className,
-  align = 'start',
-  ...props
-}: React.ComponentProps<'div'> & { align?: Align }) {
+function InputGroupAddon({ className, align = 'start', ...props }: React.ComponentProps<'div'> & { align?: Align }) {
   const { inputSize } = useInputGroup()
   const { addon } = inputGroup({ inputSize, align })
   return <div data-align={align} className={cn(addon(), className)} {...props} />
@@ -69,13 +65,7 @@ function InputGroupAddon({
 function InputGroupInput({ className, ...props }: React.ComponentProps<'input'>) {
   const { inputSize } = useInputGroup()
   const { input } = inputGroup({ inputSize })
-  return (
-    <Input
-      data-slot="input-group-control"
-      className={cn(input({ inputSize }), className)}
-      {...props}
-    />
-  )
+  return <Input data-slot="input-group-control" className={cn(input({ inputSize }), className)} {...props} />
 }
 
 function useInputGroup() {

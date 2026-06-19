@@ -47,20 +47,14 @@ export function StartDatePicker(props: StartDatePickerProps) {
 
   const minValue = useMemo(() => today().startOf('day'), [])
   const maxValue = useMemo(() => today().plus({ days: maxDays }).endOf('day'), [])
-  const days = useMemo(
-    () => eachDayOfInterval({ start: minValue, end: maxValue }),
-    [minValue, maxValue]
-  )
+  const days = useMemo(() => eachDayOfInterval({ start: minValue, end: maxValue }), [minValue, maxValue])
 
   const [internalDate, setInternalDate] = useState(() =>
     DateTime.fromISO(startDate, { zone: DEFAULT_TIMEZONE }).startOf('day')
   )
 
   const [visitedGroups, setVisitedGroups] = useState<Set<number>>(() => {
-    const initialGroup = getGroupIndex(
-      DateTime.fromISO(startDate, { zone: DEFAULT_TIMEZONE }),
-      minValue
-    )
+    const initialGroup = getGroupIndex(DateTime.fromISO(startDate, { zone: DEFAULT_TIMEZONE }), minValue)
     return new Set([...range(Math.max(0, initialGroup - 1), initialGroup + 1)])
   })
 
@@ -115,10 +109,7 @@ export function StartDatePicker(props: StartDatePickerProps) {
       )
     }),
     combine: (results) =>
-      results.reduce(
-        (acc, result) => ({ ...acc, ...result.data?.days }),
-        {} as Record<string, { available: boolean }>
-      ),
+      results.reduce((acc, result) => ({ ...acc, ...result.data?.days }), {} as Record<string, { available: boolean }>),
   })
 
   const isDateAvailable = mergedDates[internalDate.toFormat('yyyy-MM-dd')]?.available ?? false
@@ -157,19 +148,13 @@ export function StartDatePicker(props: StartDatePickerProps) {
               const isSelected = day.hasSame(internalDate, 'day')
 
               return (
-                <div
-                  key={key}
-                  ref={isSelected ? activeDayRef : undefined}
-                  className="snap-start not-last:pr-4"
-                >
+                <div key={key} ref={isSelected ? activeDayRef : undefined} className="snap-start not-last:pr-4">
                   <button
                     type="button"
                     disabled={!isAvailable}
                     className={cn(
                       'flex flex-col items-center justify-center bg-white border rounded-2xl py-3 inline-16',
-                      isSelected
-                        ? 'bg-accent text-white'
-                        : 'hover:bg-background [&_span]:text-muted',
+                      isSelected ? 'bg-accent text-white' : 'hover:bg-background [&_span]:text-muted',
                       !isAvailable && 'opacity-30'
                     )}
                     onClick={() => setInternalDate(day)}
@@ -193,10 +178,7 @@ export function StartDatePicker(props: StartDatePickerProps) {
           <div className="flex flex-col gap-3">
             {isLoading &&
               Array.from({ length: 12 }).map((_, index) => (
-                <Skeleton
-                  key={index}
-                  className="flex items-center py-5 px-6 h-16.5 bg-white border rounded-2xl"
-                >
+                <Skeleton key={index} className="flex items-center py-5 px-6 h-16.5 bg-white border rounded-2xl">
                   <div className="bg-border h-2 rounded-full w-12" />
                 </Skeleton>
               ))}

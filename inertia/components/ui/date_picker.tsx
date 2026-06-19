@@ -21,8 +21,7 @@ const datePicker = tv({
     dayGrid: 'grid grid-cols-7 gap-1',
     dayButton: 'relative flex size-11 items-center justify-center rounded-full mx-auto',
     rangeFill: 'absolute inset-y-0 w-[calc(50%+2px)] bg-accent-faded',
-    dayContent:
-      'relative z-10 flex size-11 items-center justify-center rounded-full border border-transparent',
+    dayContent: 'relative z-10 flex size-11 items-center justify-center rounded-full border border-transparent',
     dayText: 'font-medium text-[15px]',
   },
   variants: {
@@ -110,11 +109,7 @@ export function DatePicker(props: DatePickerProps) {
   }
 
   return (
-    <div
-      role="group"
-      className={styles.container()}
-      style={{ '--months': numberOfMonths } as CSSProperties}
-    >
+    <div role="group" className={styles.container()} style={{ '--months': numberOfMonths } as CSSProperties}>
       <div className={styles.navigation()}>
         <button
           type="button"
@@ -141,9 +136,7 @@ export function DatePicker(props: DatePickerProps) {
 
           return (
             <div key={i} className={styles.monthPanel()}>
-              <h2 className={styles.monthTitle()}>
-                {capitalize(month.setLocale(locale).toFormat('LLLL yyyy'))}
-              </h2>
+              <h2 className={styles.monthTitle()}>{capitalize(month.setLocale(locale).toFormat('LLLL yyyy'))}</h2>
 
               <div role="row" className={styles.weekdayRow()}>
                 {weekdays.map((day, j) => (

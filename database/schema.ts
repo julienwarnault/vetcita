@@ -39,16 +39,7 @@ export class AgendaSchema extends BaseModel {
 }
 
 export class AppointmentStatusSchema extends BaseModel {
-  static $columns = [
-    'color',
-    'createdAt',
-    'id',
-    'isCustom',
-    'name',
-    'sortOrder',
-    'tenantId',
-    'updatedAt',
-  ] as const
+  static $columns = ['color', 'createdAt', 'id', 'isCustom', 'name', 'sortOrder', 'tenantId', 'updatedAt'] as const
   $columns = AppointmentStatusSchema.$columns
   @column()
   declare color: string
@@ -199,15 +190,7 @@ export class TenantSchema extends BaseModel {
 }
 
 export class UserSchema extends BaseModel {
-  static $columns = [
-    'createdAt',
-    'email',
-    'fullName',
-    'id',
-    'password',
-    'tenantId',
-    'updatedAt',
-  ] as const
+  static $columns = ['createdAt', 'email', 'fullName', 'id', 'password', 'tenantId', 'updatedAt'] as const
   $columns = UserSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

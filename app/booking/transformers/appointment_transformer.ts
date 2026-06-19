@@ -24,9 +24,7 @@ export default class AppointmentTransformer extends BaseTransformer<Appointment>
         'createdAt',
         'updatedAt',
       ]),
-      appointmentType: AppointmentTypeTransformer.transform(
-        this.whenLoaded(this.resource.appointmentType)
-      ),
+      appointmentType: AppointmentTypeTransformer.transform(this.whenLoaded(this.resource.appointmentType)),
       patient: PatientTransformer.transform(this.whenLoaded(this.resource.patient)),
       tenant: TenantTransformer.transform(this.whenLoaded(this.resource.tenant)),
       agenda: AgendaTransformer.transform(this.whenLoaded(this.resource.agenda)),

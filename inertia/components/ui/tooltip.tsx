@@ -42,15 +42,7 @@ interface TooltipProps extends TooltipVariants {
 }
 
 export function Tooltip(props: TooltipProps) {
-  const {
-    trigger,
-    variant,
-    size,
-    sideOffset = 8,
-    placement = 'bottom',
-    hideArrow = true,
-    children,
-  } = props
+  const { trigger, variant, size, sideOffset = 8, placement = 'bottom', hideArrow = true, children } = props
 
   const classes = tooltip({ variant, size })
 
@@ -60,11 +52,7 @@ export function Tooltip(props: TooltipProps) {
         {isValidElement(trigger) && <BaseTooltip.Trigger render={trigger} />}
 
         <BaseTooltip.Portal>
-          <BaseTooltip.Positioner
-            side={placement}
-            sideOffset={sideOffset}
-            className={classes.positioner()}
-          >
+          <BaseTooltip.Positioner side={placement} sideOffset={sideOffset} className={classes.positioner()}>
             <BaseTooltip.Popup className={classes.popup()}>
               {!hideArrow && <BaseTooltip.Arrow className={classes.arrow()} />}
               {children}

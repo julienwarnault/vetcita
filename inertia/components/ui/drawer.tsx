@@ -35,9 +35,7 @@ export function Drawer(props: DrawerProps) {
           >
             <BaseDrawer.Content className="flex flex-row w-full h-full">
               <div className="flex items-start p-3">
-                <BaseDrawer.Close
-                  render={<Button variant="secondary" size="icon-lg" className="shadow-lg" />}
-                >
+                <BaseDrawer.Close render={<Button variant="secondary" size="icon-lg" className="shadow-lg" />}>
                   <XIcon />
                 </BaseDrawer.Close>
               </div>
@@ -51,21 +49,11 @@ export function Drawer(props: DrawerProps) {
 }
 
 function LeftPanel({ className, ...props }: ComponentProps<'div'>) {
-  return (
-    <div
-      className={cn('w-full h-full min-w-[320px] border-r duration-300', className)}
-      {...props}
-    />
-  )
+  return <div className={cn('w-full h-full min-w-[320px] border-r duration-300', className)} {...props} />
 }
 
 function MainPanel({ className, ...props }: ComponentProps<'div'>) {
-  return (
-    <div
-      className={cn('h-full min-w-120 w-120 overflow-y-auto overflow-x-hidden', className)}
-      {...props}
-    />
-  )
+  return <div className={cn('h-full min-w-120 w-120 overflow-y-auto overflow-x-hidden', className)} {...props} />
 }
 
 function DrawerHeader({ className, ...props }: ComponentProps<'div'>) {
@@ -77,12 +65,7 @@ function DrawerBody({ className, ...props }: ComponentProps<'div'>) {
 }
 
 function DrawerFooter({ className, ...props }: ComponentProps<'div'>) {
-  return (
-    <div
-      className={cn('px-8 py-4 sticky z-10 bg-surface bottom-0 border-t', className)}
-      {...props}
-    />
-  )
+  return <div className={cn('px-8 py-4 sticky z-10 bg-surface bottom-0 border-t', className)} {...props} />
 }
 
 function DrawerMenu({ className, ...props }: ComponentProps<'div'>) {

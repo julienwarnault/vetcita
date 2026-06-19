@@ -35,12 +35,8 @@ export default function ShowPatient(props: PageProps) {
                       <div className="flex flex-col items-center">
                         <Avatar size="4xl" className="mb-3" fullName={patient.fullName} />
                         <div className="text-[17px]/6 font-semibold pb-1">{patient.fullName}</div>
-                        {patient.email && (
-                          <div className="text-[15px]/5 text-muted">{patient.email}</div>
-                        )}
-                        <div className="text-[15px]/5 text-muted">
-                          {formatPhoneNumber(patient.phone)}
-                        </div>
+                        {patient.email && <div className="text-[15px]/5 text-muted">{patient.email}</div>}
+                        <div className="text-[15px]/5 text-muted">{formatPhoneNumber(patient.phone)}</div>
                       </div>
                       <div className="flex gap-3">
                         <Menu
@@ -64,16 +60,9 @@ export default function ShowPatient(props: PageProps) {
                         <Button
                           onClick={() => {
                             closeAll(true)
-                            visitModal(
-                              urlFor(
-                                'create_appointment.render',
-                                {},
-                                { qs: { patientId: patient.id } }
-                              ),
-                              {
-                                onClose: reload,
-                              }
-                            )
+                            visitModal(urlFor('create_appointment.render', {}, { qs: { patientId: patient.id } }), {
+                              onClose: reload,
+                            })
                           }}
                         >
                           Reservar ahora
@@ -91,9 +80,7 @@ export default function ShowPatient(props: PageProps) {
                   <Tabs.Trigger value="appointments">
                     Citas
                     <div className="flex items-center justify-center bg-white h-5 px-1.5 rounded-full border">
-                      <span className="text-[13px]/4 text-muted font-medium">
-                        {appointments?.length ?? 0}
-                      </span>
+                      <span className="text-[13px]/4 text-muted font-medium">{appointments?.length ?? 0}</span>
                     </div>
                   </Tabs.Trigger>
                 </Tabs.List>

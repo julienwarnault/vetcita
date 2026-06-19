@@ -48,20 +48,10 @@ export default function ShowForm(props: PageProps) {
         onChange={(patientId) => form.setData('patientId', patientId)}
       />
       {step.key == 'type' && (
-        <PanelAppointmentType
-          form={form}
-          next={actions.next}
-          canContinue={canContinue}
-          appointmentTypes={types}
-        />
+        <PanelAppointmentType form={form} next={actions.next} canContinue={canContinue} appointmentTypes={types} />
       )}
       {step.key == 'datetime' && (
-        <PanelDate
-          form={form}
-          next={actions.next}
-          goToStep={actions.goToStep}
-          canContinue={canContinue}
-        />
+        <PanelDate form={form} next={actions.next} goToStep={actions.goToStep} canContinue={canContinue} />
       )}
       {step.key == 'review' && (
         <PanelReview

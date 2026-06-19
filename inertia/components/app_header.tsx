@@ -35,10 +35,7 @@ export function AppHeader(props: AppHeaderProps) {
             </div>
           </div>
           <hr className="my-4" />
-          <Link
-            route="logout.execute"
-            className="w-full text-left py-2 px-4 rounded-md hover:bg-background"
-          >
+          <Link route="logout.execute" className="w-full text-left py-2 px-4 rounded-md hover:bg-background">
             Cerrar sesión
           </Link>
         </Popover>

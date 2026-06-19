@@ -33,9 +33,7 @@ export default class PrecognitionMiddleware {
 
   #validationFailed(ctx: HttpContext, allMessages: ValidationMessage[]) {
     const validateOnly = this.#validateOnlyFields(ctx)
-    const messages = validateOnly.length
-      ? allMessages.filter((m) => validateOnly.includes(m.field))
-      : allMessages
+    const messages = validateOnly.length ? allMessages.filter((m) => validateOnly.includes(m.field)) : allMessages
 
     if (validateOnly.length && messages.length === 0) {
       return this.#validationPassed(ctx)

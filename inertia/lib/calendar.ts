@@ -98,10 +98,7 @@ export function formatDisplayedRange(range: Interval, view: ViewType) {
     return range.start!.setLocale(DEFAULT_LOCALE).toFormat('LLL yyyy')
   }
 
-  return formatter
-    .formatRange(range.start!.toJSDate(), range.end!.toJSDate())
-    .replaceAll(' de ', ' ')
-    .replace('–', '-')
+  return formatter.formatRange(range.start!.toJSDate(), range.end!.toJSDate()).replaceAll(' de ', ' ').replace('–', '-')
 }
 
 export function buildDaySlots(events: Event[]) {

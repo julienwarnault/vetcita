@@ -55,34 +55,19 @@ export default function ShowForm(props: PageProps) {
               <h1 className="text-[28px]/9 md:text-[40px]/11 font-bold">{step.title}</h1>
             </div>
 
-            <Form
-              id="form"
-              onSubmit={handleSubmit}
-              className="flex w-full flex-col gap-4"
-              errors={form.errors}
-            >
+            <Form id="form" onSubmit={handleSubmit} className="flex w-full flex-col gap-4" errors={form.errors}>
               {step.key == 'type' && <StepAppointmentType form={form} appointmentTypes={types} />}
               {step.key == 'datetime' && <StepDateTime form={form} />}
               {step.key == 'infos' && <StepInfos form={form} />}
               {step.key == 'review' && (
-                <StepReview
-                  form={form}
-                  appointmentType={selectedType!}
-                  tenant={tenant}
-                  stepKey="review"
-                />
+                <StepReview form={form} appointmentType={selectedType!} tenant={tenant} stepKey="review" />
               )}
             </Form>
           </div>
           {step.key !== 'review' && (
             <aside className="hidden lg:block lg:w-111">
               <div className="sticky top-27 mt-9">
-                <StepReview
-                  form={form}
-                  appointmentType={selectedType}
-                  tenant={tenant}
-                  stepKey={step.key}
-                />
+                <StepReview form={form} appointmentType={selectedType} tenant={tenant} stepKey={step.key} />
               </div>
             </aside>
           )}
@@ -103,6 +88,4 @@ export default function ShowForm(props: PageProps) {
   )
 }
 
-ShowForm.layout = (page: React.ReactElement) => (
-  <MinimalLayout className="bg-background">{page}</MinimalLayout>
-)
+ShowForm.layout = (page: React.ReactElement) => <MinimalLayout className="bg-background">{page}</MinimalLayout>

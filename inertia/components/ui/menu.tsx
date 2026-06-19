@@ -37,12 +37,7 @@ export function Menu(props: MenuProps) {
       {trigger && isValidElement(trigger) && <BaseMenu.Trigger render={trigger} />}
 
       <BaseMenu.Portal>
-        <BaseMenu.Positioner
-          side="bottom"
-          align={align}
-          sideOffset={8}
-          className={classes.positioner()}
-        >
+        <BaseMenu.Positioner side="bottom" align={align} sideOffset={8} className={classes.positioner()}>
           <BaseMenu.Popup className={classes.popup()}>{children}</BaseMenu.Popup>
         </BaseMenu.Positioner>
       </BaseMenu.Portal>

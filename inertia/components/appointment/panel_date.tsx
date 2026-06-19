@@ -21,9 +21,7 @@ export function PanelDate(props: PanelDateProps) {
         <Breadcrumb>
           <Breadcrumb.List>
             <Breadcrumb.Item>
-              <Breadcrumb.Link render={<button onClick={() => goToStep(0)} />}>
-                Tipo de cita
-              </Breadcrumb.Link>
+              <Breadcrumb.Link render={<button onClick={() => goToStep(0)} />}>Tipo de cita</Breadcrumb.Link>
             </Breadcrumb.Item>
             <Breadcrumb.Separator />
             <Breadcrumb.Item>
@@ -46,14 +44,7 @@ export function PanelDate(props: PanelDateProps) {
         />
       </Drawer.Body>
       <Drawer.Footer className="px-8 py-4">
-        <Button
-          type="button"
-          disabled={!canContinue}
-          onClick={next}
-          className="w-full"
-          variant="primary"
-          size="lg"
-        >
+        <Button type="button" disabled={!canContinue} onClick={next} className="w-full" variant="primary" size="lg">
           Continuar
         </Button>
       </Drawer.Footer>

@@ -30,12 +30,7 @@ export function CalendarEventPreviewCard(props: CalendarEventPreviewCardProps) {
       }}
     >
       {isValidElement(children) && (
-        <PreviewCard.Trigger
-          ref={triggerRef}
-          delay={300}
-          render={children}
-          onMouseLeave={() => setOpen(false)}
-        />
+        <PreviewCard.Trigger ref={triggerRef} delay={300} render={children} onMouseLeave={() => setOpen(false)} />
       )}
 
       <PreviewCard.Portal>
@@ -72,13 +67,9 @@ export function CalendarEventPreviewCard(props: CalendarEventPreviewCardProps) {
                 <div className="flex items-center gap-4">
                   <Avatar fullName={event.patient?.fullName} />
                   <div>
-                    <div className="text-[17px]/6 font-medium">
-                      {event.patient?.fullName || 'Sin cita'}
-                    </div>
+                    <div className="text-[17px]/6 font-medium">{event.patient?.fullName || 'Sin cita'}</div>
                     {event.patient?.phone && (
-                      <div className="text-sm/5 text-foreground">
-                        {formatPhoneNumber(event.patient.phone)}
-                      </div>
+                      <div className="text-sm/5 text-foreground">{formatPhoneNumber(event.patient.phone)}</div>
                     )}
                   </div>
                 </div>

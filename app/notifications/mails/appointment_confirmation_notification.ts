@@ -17,11 +17,7 @@ export default class AppointmentConfirmationNotification extends BaseMail {
   prepare() {
     const { id, patient, appointmentType, startDate, bookingRef, tenantId } = this.appointment
 
-    const url = urlFor(
-      'confirm_appointment.render',
-      { appointmentId: id, tenantId },
-      { prefixUrl: appUrl }
-    )
+    const url = urlFor('confirm_appointment.render', { appointmentId: id, tenantId }, { prefixUrl: appUrl })
 
     this.message.to(this.to).htmlView('emails/appointment_confirmation', {
       patient,

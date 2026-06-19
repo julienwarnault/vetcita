@@ -34,10 +34,7 @@ export function CalendarDaysView(props: CalendarDaysViewProps) {
   }, [isFirstRender])
 
   return (
-    <div
-      ref={contentRef}
-      className="flex-1 overflow-x-hidden overflow-y-scroll bg-white overscroll-none"
-    >
+    <div ref={contentRef} className="flex-1 overflow-x-hidden overflow-y-scroll bg-white overscroll-none">
       <div className="relative" style={{ '--days': days.length } as CSSProperties}>
         <div className="sticky top-0 z-30 grid h-18 grid-cols-[48px_repeat(var(--days),1fr)] bg-white shadow-sm">
           <div />
@@ -75,11 +72,7 @@ export function CalendarDaysView(props: CalendarDaysViewProps) {
         <div className="relative grid grid-cols-[48px_repeat(var(--days),1fr)]">
           <div className="z-10 flex w-12 flex-col bg-white">
             {Array.from({ length: 24 }).map((_, index) => (
-              <div
-                key={index}
-                className="flex h-6 items-center justify-center first:pt-4"
-                style={{ marginBottom: 72 }}
-              >
+              <div key={index} className="flex h-6 items-center justify-center first:pt-4" style={{ marginBottom: 72 }}>
                 <div className="flex flex-col items-end font-semibold leading-3">
                   <div className="text-[13px] font-semibold">{((index + 1 + 10) % 12) + 1}:00</div>
                   <div className="text-xs font-medium">{index >= 12 ? 'pm' : 'am'}</div>

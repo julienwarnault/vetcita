@@ -8,12 +8,5 @@ type ButtonProps = ComponentProps<typeof Button>
 export function ButtonLink(props: ButtonProps & Omit<LinkProps, 'size'>) {
   const { variant, size, ...rest } = props
 
-  return (
-    <Button
-      variant={variant}
-      size={size}
-      render={<Link {...(rest as LinkProps)} />}
-      nativeButton={false}
-    />
-  )
+  return <Button variant={variant} size={size} render={<Link {...(rest as LinkProps)} />} nativeButton={false} />
 }

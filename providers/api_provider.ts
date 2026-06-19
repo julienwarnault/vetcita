@@ -25,9 +25,7 @@ class ApiSerializer extends BaseSerializer<{
    */
   definePaginationMetaData(metaData: unknown): SimplePaginatorMetaKeys {
     if (!this.isLucidPaginatorMetaData(metaData)) {
-      throw new Error(
-        'Invalid pagination metadata. Expected metadata to contain Lucid pagination keys'
-      )
+      throw new Error('Invalid pagination metadata. Expected metadata to contain Lucid pagination keys')
     }
     return metaData
   }
@@ -42,10 +40,7 @@ const serialize = Object.assign(
     return serializer.serialize(data, resolver ?? this.containerResolver)
   },
   {
-    withoutWrapping(
-      this: HttpContext,
-      ...[data, resolver]: Parameters<ApiSerializer['serializeWithoutWrapping']>
-    ) {
+    withoutWrapping(this: HttpContext, ...[data, resolver]: Parameters<ApiSerializer['serializeWithoutWrapping']>) {
       return serializer.serializeWithoutWrapping(data, resolver ?? this.containerResolver)
     },
   }

@@ -16,9 +16,7 @@ export function StepReview(props: StepReviewProps) {
   const { appointmentType, tenant, form, stepKey } = props
   const { data } = form
 
-  const startDateTime = data.startDate
-    ? DateTime.fromISO(data.startDate, { zone: DEFAULT_TIMEZONE })
-    : null
+  const startDateTime = data.startDate ? DateTime.fromISO(data.startDate, { zone: DEFAULT_TIMEZONE }) : null
   const formattedDate = startDateTime?.setLocale('es-MX').toFormat('EEEE, d MMMM yyyy')
   const formattedTime = startDateTime?.toFormat('hh:mma')
 

@@ -65,10 +65,7 @@ export function ListTable<T extends Record<string, any>>(props: ListTableProps<T
             return (
               <tr
                 key={i}
-                className={cn(
-                  'bg-white',
-                  !!onRowClick && 'border-b hover:bg-background cursor-pointer'
-                )}
+                className={cn('bg-white', !!onRowClick && 'border-b hover:bg-background cursor-pointer')}
                 onClick={() => onRowClick?.(row)}
               >
                 {columns.map((column, j) => (

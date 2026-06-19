@@ -27,15 +27,10 @@ export function PanelPatient(props: PanelPatientProps) {
   const [debouncedSearch] = useDebounce(search, 500)
   const [selectionView, setSelectionView] = useState(!!selectedPatientId)
 
-  const { data, isLoading } = useQuery(
-    query.listPatients.api.queryOptions({ query: { search: debouncedSearch } })
-  )
+  const { data, isLoading } = useQuery(query.listPatients.api.queryOptions({ query: { search: debouncedSearch } }))
 
   const { data: patient, refetch } = useQuery(
-    query.getPatient.api.queryOptions(
-      { params: { id: selectedPatientId! } },
-      { enabled: Boolean(selectedPatientId) }
-    )
+    query.getPatient.api.queryOptions({ params: { id: selectedPatientId! } }, { enabled: Boolean(selectedPatientId) })
   )
 
   useEffect(() => {
@@ -55,12 +50,8 @@ export function PanelPatient(props: PanelPatientProps) {
                   <div className="flex flex-col items-center">
                     <Avatar size="4xl" className="mb-3" fullName={patient.fullName} />
                     <div className="text-[17px]/6 font-semibold pb-1">{patient.fullName}</div>
-                    {patient.email && (
-                      <div className="text-[15px]/5 text-muted">{patient.email}</div>
-                    )}
-                    <div className="text-[15px]/5 text-muted">
-                      {formatPhoneNumber(patient.phone)}
-                    </div>
+                    {patient.email && <div className="text-[15px]/5 text-muted">{patient.email}</div>}
+                    <div className="text-[15px]/5 text-muted">{formatPhoneNumber(patient.phone)}</div>
                   </div>
                   <div className="flex gap-3">
                     <Menu
@@ -170,9 +161,7 @@ export function PanelPatient(props: PanelPatientProps) {
                     <Avatar size="lg" fullName={patient.fullName} />
                     <div className="flex-1 min-w-0">
                       <div className="text-[15px]/5 font-semibold truncate">{patient.fullName}</div>
-                      {patient.phone && (
-                        <div className="text-[15px]/5 text-muted truncate">{patient.phone}</div>
-                      )}
+                      {patient.phone && <div className="text-[15px]/5 text-muted truncate">{patient.phone}</div>}
                     </div>
                   </button>
                 ))}

@@ -24,16 +24,7 @@ interface PopoverProps {
 }
 
 export function Popover(props: PopoverProps) {
-  const {
-    trigger,
-    className,
-    children,
-    open,
-    onOpenChange,
-    align = 'center',
-    alignOffset,
-    sideOffset = 8,
-  } = props
+  const { trigger, className, children, open, onOpenChange, align = 'center', alignOffset, sideOffset = 8 } = props
 
   const classes = popover({})
 
@@ -50,9 +41,7 @@ export function Popover(props: PopoverProps) {
           className={classes.positioner()}
           collisionAvoidance={{ side: 'none' }}
         >
-          <BasePopover.Popup
-            render={<Card shadow={true} className={classes.popup({ className })} />}
-          >
+          <BasePopover.Popup render={<Card shadow={true} className={classes.popup({ className })} />}>
             {children}
           </BasePopover.Popup>
         </BasePopover.Positioner>

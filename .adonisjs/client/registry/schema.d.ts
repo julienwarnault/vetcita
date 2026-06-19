@@ -213,7 +213,7 @@ export interface Registry {
   }
   'list_appointment_statuses.render': {
     methods: ["GET","HEAD"]
-    pattern: '/settings/appointment-statuses'
+    pattern: '/settings/statuses'
     types: {
       body: {}
       paramsTuple: []
@@ -225,7 +225,7 @@ export interface Registry {
   }
   'create_appointment_status.render': {
     methods: ["GET","HEAD"]
-    pattern: '/settings/appointment-statuses/new'
+    pattern: '/settings/statuses/new'
     types: {
       body: {}
       paramsTuple: []
@@ -237,7 +237,7 @@ export interface Registry {
   }
   'create_appointment_status.execute': {
     methods: ["POST"]
-    pattern: '/settings/appointment-statuses'
+    pattern: '/settings/statuses'
     types: {
       body: ExtractBody<InferInput<(typeof import('#app/appointment_statuses/controllers/create_appointment_status_controller').default)['validator']>>
       paramsTuple: []
@@ -249,7 +249,7 @@ export interface Registry {
   }
   'update_appointment_status.render': {
     methods: ["GET","HEAD"]
-    pattern: '/settings/appointment-statuses/:id/edit'
+    pattern: '/settings/statuses/:id/edit'
     types: {
       body: {}
       paramsTuple: [ParamValue]
@@ -261,7 +261,7 @@ export interface Registry {
   }
   'update_appointment_status.execute': {
     methods: ["PUT"]
-    pattern: '/settings/appointment-statuses/:id'
+    pattern: '/settings/statuses/:id'
     types: {
       body: ExtractBody<InferInput<(typeof import('#app/appointment_statuses/controllers/update_appointment_status_controller').default)['validator']>>
       paramsTuple: [ParamValue]
@@ -273,7 +273,7 @@ export interface Registry {
   }
   'move_appointment_status.execute': {
     methods: ["POST"]
-    pattern: '/settings/appointment-statuses/:id/move'
+    pattern: '/settings/statuses/:id/move'
     types: {
       body: ExtractBody<InferInput<(typeof import('#app/appointment_statuses/controllers/move_appointment_status_controller').default)['validator']>>
       paramsTuple: [ParamValue]
@@ -285,7 +285,7 @@ export interface Registry {
   }
   'delete_appointment_status.execute': {
     methods: ["DELETE"]
-    pattern: '/settings/appointment-statuses/:id'
+    pattern: '/settings/statuses/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]

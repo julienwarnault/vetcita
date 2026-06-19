@@ -6,11 +6,7 @@ const defaultOptions: Required<AnimateOptions> = {
   duration: 300,
 }
 
-export function animate(
-  element: HTMLElement,
-  keyframes: Keyframe[],
-  options?: AnimateOptions
-): Promise<Animation> {
+export function animate(element: HTMLElement, keyframes: Keyframe[], options?: AnimateOptions): Promise<Animation> {
   const { duration } = { ...defaultOptions, ...options }
 
   const animation = element.animate(keyframes, {
