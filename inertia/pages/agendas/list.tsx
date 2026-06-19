@@ -31,7 +31,7 @@ export default function List(props: PageProps) {
 
   return (
     <div className="flex">
-      <div className="container p-10">
+      <div className="container-xl p-10">
         <ViewHeader title="Agendas" badge={agendas.length.toString()}>
           <ButtonLink route="create_agenda.render" size="lg">
             Añadir

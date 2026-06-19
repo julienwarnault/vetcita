@@ -34,7 +34,7 @@ export default function List(props: PageProps) {
 
   return (
     <div className="flex">
-      <div className="container p-10">
+      <div className="container-xl p-10">
         <ViewHeader title="Tipos de cita" badge={appointmentTypes.length.toString()}>
           <ButtonLink route="create_appointment_type.render" size="lg">
             Añadir
