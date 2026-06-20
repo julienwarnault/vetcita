@@ -32,7 +32,7 @@ export class SearchAppointments {
 
     if (!params.patientIds && params.search) {
       const ref = `%${params.search}%`
-      query.whereILike('bookingRef', ref)
+      query.whereILike('booking_ref', ref)
     }
 
     const appointments = await query

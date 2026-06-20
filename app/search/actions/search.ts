@@ -26,7 +26,7 @@ export class Search {
 
     const { appointments } = await this.searchAppointments.execute({
       tenantId: params.tenantId,
-      patientIds: search ? patients.map((patient) => patient.id) : undefined,
+      patientIds: search && patients?.length > 0 ? patients.map((patient) => patient.id) : undefined,
       search,
       limit: 40,
     })
