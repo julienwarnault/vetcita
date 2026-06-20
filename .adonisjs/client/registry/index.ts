@@ -276,6 +276,12 @@ const routes = {
     tokens: [{"old":"/appointments/:id/status","type":0,"val":"appointments","end":""},{"old":"/appointments/:id/status","type":1,"val":"id","end":""},{"old":"/appointments/:id/status","type":0,"val":"status","end":""}],
     types: placeholder as Registry['change_appointment_status.execute']['types'],
   },
+  'search.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/search',
+    tokens: [{"old":"/search","type":0,"val":"search","end":""}],
+    types: placeholder as Registry['search.render']['types'],
+  },
   'event_stream': {
     methods: ["GET","HEAD"],
     pattern: '/__transmit/events',

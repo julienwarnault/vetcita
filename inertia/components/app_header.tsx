@@ -1,6 +1,10 @@
+import { SearchIcon } from 'lucide-react'
+import { useModalStack } from '@inertiaui/modal-react'
 import { Link } from '@adonisjs/inertia/react'
 import { Popover } from './ui/popover'
 import { Avatar } from './ui/avatar'
+import { Button } from './ui/button'
+import { urlFor } from '~/lib/tuyau'
 import { appName } from '~/app/app'
 
 interface AppHeaderProps {
@@ -11,16 +15,28 @@ interface AppHeaderProps {
 export function AppHeader(props: AppHeaderProps) {
   const { fullName, tenantName } = props
 
+  const { visitModal } = useModalStack()
+
   return (
     <header className="flex h-16 items-center justify-between border-b bg-surface px-4">
       <Link route="dashboard">
         <h1 className="text-xl font-bold">{appName}</h1>
       </Link>
-      <div>
+      <div className="flex items-center">
+        <Button
+          size="icon-lg"
+          variant="tertiary"
+          rounded="lg"
+          onClick={() => {
+            visitModal(urlFor('search.render'))
+          }}
+        >
+          <SearchIcon />
+        </Button>
         <Popover
           align="end"
           trigger={
-            <button>
+            <button className="ml-2">
               <Avatar fullName={fullName} />
             </button>
           }

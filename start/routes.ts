@@ -9,6 +9,7 @@ import '#patients/routes'
 import '#tenants/routes'
 import '#booking/routes'
 import '#scheduling/routes'
+import '#search/routes'
 
 transmit.registerRoutes()
 

@@ -4,11 +4,12 @@ import type { VariantProps } from 'tailwind-variants'
 import { Button as BaseButton } from '@base-ui/react/button'
 
 const button = tv({
-  base: 'group inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full transition-colors disabled:pointer-events-none disabled:opacity-50',
+  base: 'group inline-flex items-center justify-center gap-1.5 whitespace-nowrap transition-colors disabled:pointer-events-none disabled:opacity-50',
   variants: {
     variant: {
       primary: 'bg-primary text-white hover:bg-primary/90',
-      secondary: 'border border-border bg-white hover:border-input',
+      secondary: 'border border-border bg-white hover:bg-background hover:border-input',
+      tertiary: 'bg-transparent hover:bg-background',
     },
     size: {
       'sm': 'h-9 px-4 text-[15px] font-medium',
@@ -16,10 +17,15 @@ const button = tv({
       'icon-sm': 'size-9 [&_svg]:size-4',
       'icon-lg': 'size-12',
     },
+    rounded: {
+      full: 'rounded-full',
+      lg: 'rounded-lg',
+    },
   },
   defaultVariants: {
     variant: 'primary',
     size: 'sm',
+    rounded: 'full',
   },
 })
 
@@ -33,14 +39,14 @@ interface ButtonProps extends ButtonVariants {
 }
 
 export function Button(props: BaseButton.Props & ButtonProps) {
-  const { children, variant, size, type = 'button', disabled, className, onClick, ...rest } = props
+  const { children, variant, size, rounded, type = 'button', disabled, className, onClick, ...rest } = props
 
   return (
     <BaseButton
       type={type}
       disabled={disabled}
       onClick={onClick}
-      className={button({ variant, size, className })}
+      className={button({ variant, size, rounded, className })}
       {...rest}
     >
       {children}

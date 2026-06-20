@@ -49,6 +49,7 @@ export type ScannedRoutes = {
     'update_appointment.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_appointment.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'change_appointment_status.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'search.render': { paramsTuple?: []; params?: {} }
     'event_stream': { paramsTuple?: []; params?: {} }
     'subscribe': { paramsTuple?: []; params?: {} }
     'unsubscribe': { paramsTuple?: []; params?: {} }
@@ -81,6 +82,7 @@ export type ScannedRoutes = {
     'booking_link.render': { paramsTuple?: []; params?: {} }
     'create_appointment.render': { paramsTuple?: []; params?: {} }
     'update_appointment.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'search.render': { paramsTuple?: []; params?: {} }
     'event_stream': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
@@ -111,6 +113,7 @@ export type ScannedRoutes = {
     'booking_link.render': { paramsTuple?: []; params?: {} }
     'create_appointment.render': { paramsTuple?: []; params?: {} }
     'update_appointment.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'search.render': { paramsTuple?: []; params?: {} }
     'event_stream': { paramsTuple?: []; params?: {} }
   }
   POST: {

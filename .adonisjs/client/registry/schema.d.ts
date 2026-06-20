@@ -547,6 +547,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/booking/controllers/change_appointment_status_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
+  'search.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/search'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/search/controllers/search_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/search/controllers/search_controller').default['render']>>>
+    }
+  }
   'event_stream': {
     methods: ["GET","HEAD"]
     pattern: '/__transmit/events'

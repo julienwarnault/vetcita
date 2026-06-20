@@ -103,6 +103,9 @@ export interface ApiDefinition {
   changeAppointmentStatus: {
     execute: typeof routes['change_appointment_status.execute']
   }
+  search: {
+    render: typeof routes['search.render']
+  }
   eventStream: typeof routes['event_stream']
   subscribe: typeof routes['subscribe']
   unsubscribe: typeof routes['unsubscribe']

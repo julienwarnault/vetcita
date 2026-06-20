@@ -1,17 +1,25 @@
-import { HeadlessModal, ModalInstance } from '@inertiaui/modal-react'
-import { useEffect, useState, ReactNode, useCallback, useRef } from 'react'
+import { useEffect, useState, ReactNode, useCallback, useRef, Ref } from 'react'
+import { HeadlessModal, ModalInstance, ReloadOptions } from '@inertiaui/modal-react'
 import { animate, cancelAnimations } from '~/lib/animate'
 import { Portal } from './ui/portal'
 
 interface InertiaModalProps {
+  ref?: Ref<InertiaModalRef>
   children: ReactNode | ((props: ModalInstance) => ReactNode)
 }
 
+export interface InertiaModalRef {
+  afterLeave: () => void
+  close: () => void
+  emit: (event: string, ...args: unknown[]) => void
+  reload: (options?: ReloadOptions) => void
+}
+
 export function InertiaModal(props: InertiaModalProps) {
-  const { children } = props
+  const { ref, children } = props
 
   return (
-    <HeadlessModal>
+    <HeadlessModal ref={ref as any}>
       {({ isOpen, shouldRender, close, afterLeave, onTopOfStack, modalContext, ...rest }: any) => {
         if (!shouldRender) return null
 

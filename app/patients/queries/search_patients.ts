@@ -1,14 +1,15 @@
 import Patient from '#patients/models/patient'
 import type { UUID } from '#shared/types'
 
-interface GetPatientsParams {
+interface SearchPatientsParams {
   tenantId: UUID
   search?: string
+  limit: number
 }
 
-export class GetPatients {
-  async execute(params: GetPatientsParams) {
-    const query = Patient.query().where('tenantId', params.tenantId)
+export class SearchPatients {
+  async execute(params: SearchPatientsParams) {
+    const query = Patient.query().where('tenant_id', params.tenantId).orderBy('created_at', 'desc').limit(params.limit)
 
     if (params.search) {
       const term = `%${params.search}%`

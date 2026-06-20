@@ -19,8 +19,6 @@ export class ChangeAppointmentStatus {
 
     appointment.merge({ statusId: params.statusId })
 
-    console.log(appointment.id, params.statusId)
-
     await appointment.useTransaction(trx!).save()
 
     return { appointment }

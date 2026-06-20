@@ -9,6 +9,7 @@ const avatar = tv({
     size: {
       'md': 'size-12 text-base',
       'lg': 'size-[54px] text-lg',
+      'xl': 'size-[64px] text-xl',
       '4xl': 'size-24 text-3xl',
     },
   },

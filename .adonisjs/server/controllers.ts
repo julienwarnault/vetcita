@@ -50,4 +50,7 @@ export const controllers = {
   tenants: {
     UpdateTenant: () => import('#app/tenants/controllers/update_tenant_controller'),
   },
+  search: {
+    Search: () => import('#app/search/controllers/search_controller'),
+  },
 }
