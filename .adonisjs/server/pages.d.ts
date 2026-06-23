@@ -34,5 +34,6 @@ declare module '@adonisjs/inertia/types' {
     'settings/show': ExtractProps<(typeof import('../../inertia/pages/settings/show.tsx'))['default']>
     'tenants/form': ExtractProps<(typeof import('../../inertia/pages/tenants/form.tsx'))['default']>
     'search': ExtractProps<(typeof import('../../inertia/pages/search.tsx'))['default']>
+    'auth/signup': ExtractProps<(typeof import('../../inertia/pages/auth/signup.tsx'))['default']>
   }
 }

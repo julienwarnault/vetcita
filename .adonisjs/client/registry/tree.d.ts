@@ -10,6 +10,10 @@ export interface ApiDefinition {
   }
   dashboard: typeof routes['dashboard']
   settings: typeof routes['settings']
+  signup: {
+    render: typeof routes['signup.render']
+    execute: typeof routes['signup.execute']
+  }
   login: {
     render: typeof routes['login.render']
     execute: typeof routes['login.execute']

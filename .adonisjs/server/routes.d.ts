@@ -8,6 +8,8 @@ export type ScannedRoutes = {
     'get_bookable_slots.render': { paramsTuple?: []; params?: {} }
     'dashboard': { paramsTuple?: []; params?: {} }
     'settings': { paramsTuple?: []; params?: {} }
+    'signup.render': { paramsTuple?: []; params?: {} }
+    'signup.execute': { paramsTuple?: []; params?: {} }
     'login.render': { paramsTuple?: []; params?: {} }
     'login.execute': { paramsTuple?: []; params?: {} }
     'logout.execute': { paramsTuple?: []; params?: {} }
@@ -59,6 +61,7 @@ export type ScannedRoutes = {
     'get_bookable_slots.render': { paramsTuple?: []; params?: {} }
     'dashboard': { paramsTuple?: []; params?: {} }
     'settings': { paramsTuple?: []; params?: {} }
+    'signup.render': { paramsTuple?: []; params?: {} }
     'login.render': { paramsTuple?: []; params?: {} }
     'list_agendas.render': { paramsTuple?: []; params?: {} }
     'create_agenda.render': { paramsTuple?: []; params?: {} }
@@ -90,6 +93,7 @@ export type ScannedRoutes = {
     'get_bookable_slots.render': { paramsTuple?: []; params?: {} }
     'dashboard': { paramsTuple?: []; params?: {} }
     'settings': { paramsTuple?: []; params?: {} }
+    'signup.render': { paramsTuple?: []; params?: {} }
     'login.render': { paramsTuple?: []; params?: {} }
     'list_agendas.render': { paramsTuple?: []; params?: {} }
     'create_agenda.render': { paramsTuple?: []; params?: {} }
@@ -117,6 +121,7 @@ export type ScannedRoutes = {
     'event_stream': { paramsTuple?: []; params?: {} }
   }
   POST: {
+    'signup.execute': { paramsTuple?: []; params?: {} }
     'login.execute': { paramsTuple?: []; params?: {} }
     'logout.execute': { paramsTuple?: []; params?: {} }
     'create_agenda.execute': { paramsTuple?: []; params?: {} }

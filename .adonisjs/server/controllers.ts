@@ -35,6 +35,7 @@ export const controllers = {
   identity: {
     Login: () => import('#app/identity/controllers/login_controller'),
     Logout: () => import('#app/identity/controllers/logout_controller'),
+    Signup: () => import('#app/identity/controllers/signup_controller'),
   },
   patients: {
     CreatePatient: () => import('#app/patients/controllers/create_patient_controller'),

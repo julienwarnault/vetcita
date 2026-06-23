@@ -4,6 +4,9 @@ import { middleware } from '#start/kernel'
 
 router
   .group(() => {
+    router.get('signup', [controllers.identity.Signup, 'render'])
+    router.post('signup', [controllers.identity.Signup, 'execute'])
+
     router.get('login', [controllers.identity.Login, 'render'])
     router.post('login', [controllers.identity.Login, 'execute'])
   })

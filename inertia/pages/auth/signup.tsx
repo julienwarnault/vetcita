@@ -7,15 +7,15 @@ import { Card } from '~/components/ui/card'
 import AuthLayout from '~/layouts/auth'
 import { appName } from '~/app/app'
 
-export default function Login() {
+export default function Signup() {
   return (
     <div className="bg-background min-h-screen">
       <header className="container-xl py-6">
         <div className="flex items-center justify-between">
           <div className="text-xl font-bold">{appName}</div>
 
-          <ButtonLink route="signup.render" size="lg" variant="secondary">
-            Crear cuenta
+          <ButtonLink route="login.render" size="lg" variant="secondary">
+            Iniciar sesión
           </ButtonLink>
         </div>
       </header>
@@ -25,26 +25,38 @@ export default function Login() {
           <div className="w-full">
             <Card size="xl">
               <div className="pb-8 text-center">
-                <h1 className="text-2xl/8 font-semibold">Iniciar sesión</h1>
-                <p className="text-[15px] text-muted">Ingresa tus datos para acceder a tu cuenta</p>
+                <h1 className="text-2xl/8 font-semibold">Crear cuenta</h1>
+                <p className="text-[15px] text-muted">Completa tus datos para empezar</p>
               </div>
 
-              <Form route="login.execute">
+              <Form route="signup.execute" className="gap-6">
+                <Field name="fullName">
+                  <Field.Label>Nombre completo</Field.Label>
+                  <Input placeholder="Introduce un nombre completo" autoComplete="name" />
+                  <Field.Error />
+                </Field>
+
+                <Field name="tenantName">
+                  <Field.Label htmlFor="email">Nombre del consultorio</Field.Label>
+                  <Input placeholder="Introduce un nombre" autoComplete="organization" />
+                  <Field.Error />
+                </Field>
+
                 <Field name="email">
                   <Field.Label htmlFor="email">Correo electrónico</Field.Label>
-                  <Input type="email" placeholder="Introduce tu correo" autoComplete="username" />
+                  <Input type="email" placeholder="Introduce un correo" autoComplete="email" />
                   <Field.Error />
                 </Field>
 
                 <Field name="password">
                   <Field.Label>Contraseña</Field.Label>
-                  <Input type="password" placeholder="Introduce tu contraseña" autoComplete="current-password" />
+                  <Input type="password" placeholder="Introduce una contraseña" autoComplete="new-password" />
                   <Field.Error />
                 </Field>
 
                 <div>
                   <Button type="submit" size="lg" className="w-full">
-                    Iniciar sesión
+                    Crear una cuenta
                   </Button>
                 </div>
               </Form>
@@ -56,4 +68,4 @@ export default function Login() {
   )
 }
 
-Login.layout = (page: React.ReactElement) => <AuthLayout>{page}</AuthLayout>
+Signup.layout = (page: React.ReactElement) => <AuthLayout>{page}</AuthLayout>

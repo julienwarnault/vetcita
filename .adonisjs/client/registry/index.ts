@@ -30,6 +30,18 @@ const routes = {
     tokens: [{"old":"/settings","type":0,"val":"settings","end":""}],
     types: placeholder as Registry['settings']['types'],
   },
+  'signup.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/signup',
+    tokens: [{"old":"/signup","type":0,"val":"signup","end":""}],
+    types: placeholder as Registry['signup.render']['types'],
+  },
+  'signup.execute': {
+    methods: ["POST"],
+    pattern: '/signup',
+    tokens: [{"old":"/signup","type":0,"val":"signup","end":""}],
+    types: placeholder as Registry['signup.execute']['types'],
+  },
   'login.render': {
     methods: ["GET","HEAD"],
     pattern: '/login',

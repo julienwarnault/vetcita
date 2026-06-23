@@ -55,6 +55,30 @@ export interface Registry {
       errorResponse: unknown
     }
   }
+  'signup.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/signup'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/identity/controllers/signup_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/identity/controllers/signup_controller').default['render']>>>
+    }
+  }
+  'signup.execute': {
+    methods: ["POST"]
+    pattern: '/signup'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#app/identity/controllers/signup_controller').default)['validator']>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#app/identity/controllers/signup_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/identity/controllers/signup_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/identity/controllers/signup_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
   'login.render': {
     methods: ["GET","HEAD"]
     pattern: '/login'
