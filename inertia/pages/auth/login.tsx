@@ -1,3 +1,4 @@
+import { InputPassword } from '~/components/ui/input_password'
 import { ButtonLink } from '~/components/ui/button_link'
 import { Button } from '~/components/ui/button'
 import { Field } from '~/components/ui/field'
@@ -38,7 +39,11 @@ export default function Login() {
 
                 <Field name="password">
                   <Field.Label>Contraseña</Field.Label>
-                  <Input type="password" placeholder="Introduce tu contraseña" autoComplete="current-password" />
+                  <InputPassword
+                    type="password"
+                    placeholder="Introduce tu contraseña"
+                    autoComplete="current-password"
+                  />
                   <Field.Error />
                 </Field>
 

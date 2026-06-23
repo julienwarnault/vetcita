@@ -15,7 +15,7 @@ export const baseInput = tv({
 
 type InputVariants = VariantProps<typeof baseInput>
 
-interface InputProps extends InputVariants {
+export interface InputProps extends InputVariants {
   className?: string
 }
 
