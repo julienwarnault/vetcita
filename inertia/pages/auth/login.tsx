@@ -39,11 +39,7 @@ export default function Login() {
 
                 <Field name="password">
                   <Field.Label>Contraseña</Field.Label>
-                  <InputPassword
-                    type="password"
-                    placeholder="Introduce tu contraseña"
-                    autoComplete="current-password"
-                  />
+                  <InputPassword placeholder="Introduce tu contraseña" autoComplete="current-password" />
                   <Field.Error />
                 </Field>
 
