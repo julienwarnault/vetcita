@@ -6,7 +6,7 @@ export type ScannedRoutes = {
   ALL: {
     'get_bookable_days.render': { paramsTuple?: []; params?: {} }
     'get_bookable_slots.render': { paramsTuple?: []; params?: {} }
-    'dashboard': { paramsTuple?: []; params?: {} }
+    'dashboard.render': { paramsTuple?: []; params?: {} }
     'settings': { paramsTuple?: []; params?: {} }
     'signup.render': { paramsTuple?: []; params?: {} }
     'signup.execute': { paramsTuple?: []; params?: {} }
@@ -59,7 +59,7 @@ export type ScannedRoutes = {
   GET: {
     'get_bookable_days.render': { paramsTuple?: []; params?: {} }
     'get_bookable_slots.render': { paramsTuple?: []; params?: {} }
-    'dashboard': { paramsTuple?: []; params?: {} }
+    'dashboard.render': { paramsTuple?: []; params?: {} }
     'settings': { paramsTuple?: []; params?: {} }
     'signup.render': { paramsTuple?: []; params?: {} }
     'login.render': { paramsTuple?: []; params?: {} }
@@ -91,7 +91,7 @@ export type ScannedRoutes = {
   HEAD: {
     'get_bookable_days.render': { paramsTuple?: []; params?: {} }
     'get_bookable_slots.render': { paramsTuple?: []; params?: {} }
-    'dashboard': { paramsTuple?: []; params?: {} }
+    'dashboard.render': { paramsTuple?: []; params?: {} }
     'settings': { paramsTuple?: []; params?: {} }
     'signup.render': { paramsTuple?: []; params?: {} }
     'login.render': { paramsTuple?: []; params?: {} }

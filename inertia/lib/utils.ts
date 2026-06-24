@@ -46,3 +46,7 @@ export function range(from: number, to: number): number[] {
   const step = from <= to ? 1 : -1
   return Array.from({ length: Math.abs(to - from) + 1 }, (_, i) => from + i * step)
 }
+
+export function sum(numbers: number[]): number {
+  return numbers.reduce((acc, current) => acc + current, 0)
+}

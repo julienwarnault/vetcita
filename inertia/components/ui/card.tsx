@@ -8,6 +8,7 @@ const card = tv({
       md: 'px-5 py-2',
       lg: 'p-6',
       xl: 'p-10',
+      none: 'p-0',
     },
     shadow: {
       true: 'shadow-xl',

@@ -19,7 +19,7 @@ export function AppHeader(props: AppHeaderProps) {
 
   return (
     <header className="flex h-16 items-center justify-between border-b bg-surface px-4">
-      <Link route="dashboard">
+      <Link route="dashboard.render">
         <h1 className="text-xl font-bold">{appName}</h1>
       </Link>
       <div className="flex items-center">

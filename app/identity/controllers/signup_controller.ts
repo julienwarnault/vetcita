@@ -30,6 +30,6 @@ export default class SignupController {
     })
 
     await auth.use('web').login(user)
-    response.redirect().toRoute('dashboard')
+    response.redirect().toRoute('dashboard.render')
   }
 }

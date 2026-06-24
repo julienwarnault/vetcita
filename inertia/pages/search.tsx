@@ -1,17 +1,15 @@
-import { DateTime } from 'luxon'
 import { XIcon } from 'lucide-react'
 import { Data } from '@generated/data'
 import { useRef, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 import { useModalStack } from '@inertiaui/modal-react'
 import { InertiaModal, InertiaModalRef } from '~/components/inertia_modal'
-import { formatDuration, formatPhoneNumber } from '~/lib/utils'
+import { AppointmentItem } from '~/components/appointment_item'
 import { FormHeader } from '~/components/form_header'
+import { formatPhoneNumber } from '~/lib/utils'
 import { Button } from '~/components/ui/button'
 import { Avatar } from '~/components/ui/avatar'
-import { Badge } from '~/components/ui/badge'
 import MinimalLayout from '~/layouts/minimal'
-import { DEFAULT_LOCALE } from '~/lib/date'
 import { InertiaProps } from '~/types'
 import { urlFor } from '~/lib/tuyau'
 
@@ -71,44 +69,9 @@ export default function Search(props: PageProps) {
               <div className="text-[20px]/7 font-semibold pb-3.5">Próximas citas</div>
               {appointments?.length > 0 ? (
                 <div className="flex-1">
-                  {appointments.map((appointment) => {
-                    const startDate = DateTime.fromISO(appointment.localStartDate!)
-
-                    return (
-                      <button
-                        key={appointment.id}
-                        className="flex not-last:border-b w-full px-6 hover:bg-background"
-                        onClick={() => visitModal(urlFor('update_appointment.render', { id: appointment.id }))}
-                      >
-                        <div className="flex flex-row items-start py-5">
-                          <div className="flex flex-col mr-4 text-center">
-                            <span className="text-[17px]/6 font-semibold">
-                              {startDate.setLocale(DEFAULT_LOCALE).toFormat('d')}
-                            </span>
-                            <span className="text-[15px]/5">
-                              {startDate.setLocale(DEFAULT_LOCALE).toFormat('LLL.')}
-                            </span>
-                          </div>
-                          <div className="flex flex-col text-left">
-                            <div className="flex gap-2">
-                              <div className="text-[15px]/5 text-muted">
-                                {`${startDate.setLocale(DEFAULT_LOCALE).toFormat('ccc.').toLowerCase()} ${startDate.toFormat('h:mma').toLowerCase()}`}
-                              </div>
-                              <Badge size="md" color={appointment.status?.color}>
-                                {appointment?.status?.name}
-                              </Badge>
-                            </div>
-                            <div className="flex flex-col">
-                              <div className="text-[17px]/6 font-semibold">{appointment.appointmentType?.name}</div>
-                              <div className="text-[15px]/5 text-muted">
-                                {`${appointment.patient ? `${appointment.patient.fullName},` : ''} ${formatDuration(appointment.duration)} con ${appointment.agenda?.name}`.trim()}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </button>
-                    )
-                  })}
+                  {appointments.map((appointment) => (
+                    <AppointmentItem key={appointment.id} appointment={appointment} />
+                  ))}
                 </div>
               ) : (
                 <p className="text-[15px]/5 text-muted">Ninguno encontrado</p>

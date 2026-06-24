@@ -10,7 +10,7 @@ import { urlFor } from '~/lib/tuyau'
 const NAVIGATION = [
   {
     name: 'Inicio',
-    route: 'dashboard',
+    route: 'dashboard.render',
     navigationIcon: 'house',
   },
   {

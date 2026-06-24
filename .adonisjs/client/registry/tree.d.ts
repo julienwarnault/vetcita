@@ -8,7 +8,9 @@ export interface ApiDefinition {
   getBookableSlots: {
     render: typeof routes['get_bookable_slots.render']
   }
-  dashboard: typeof routes['dashboard']
+  dashboard: {
+    render: typeof routes['dashboard.render']
+  }
   settings: typeof routes['settings']
   signup: {
     render: typeof routes['signup.render']

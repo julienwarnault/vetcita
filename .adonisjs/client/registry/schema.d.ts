@@ -31,7 +31,7 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/get_bookable_slots_controller').default['render']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'dashboard': {
+  'dashboard.render': {
     methods: ["GET","HEAD"]
     pattern: '/dashboard'
     types: {
@@ -39,8 +39,8 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: unknown
-      errorResponse: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#app/shared/controllers/dashboard_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/shared/controllers/dashboard_controller').default['render']>>>
     }
   }
   'settings': {

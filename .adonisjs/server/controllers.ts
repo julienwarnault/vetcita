@@ -48,10 +48,13 @@ export const controllers = {
     GetBookableDays: () => import('#app/scheduling/controllers/get_bookable_days_controller'),
     GetBookableSlots: () => import('#app/scheduling/controllers/get_bookable_slots_controller'),
   },
-  tenants: {
-    UpdateTenant: () => import('#app/tenants/controllers/update_tenant_controller'),
-  },
   search: {
     Search: () => import('#app/search/controllers/search_controller'),
+  },
+  shared: {
+    Dashboard: () => import('#app/shared/controllers/dashboard_controller'),
+  },
+  tenants: {
+    UpdateTenant: () => import('#app/tenants/controllers/update_tenant_controller'),
   },
 }

@@ -21,7 +21,7 @@ export default class LoginController {
     try {
       const user = await User.verifyCredentials(email, password)
       await auth.use('web').login(user)
-      response.redirect().toRoute('dashboard')
+      response.redirect().toRoute('dashboard.render')
     } catch (error) {
       throw error
     }

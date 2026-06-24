@@ -18,11 +18,11 @@ const routes = {
     tokens: [{"old":"/api/bookable-slots","type":0,"val":"api","end":""},{"old":"/api/bookable-slots","type":0,"val":"bookable-slots","end":""}],
     types: placeholder as Registry['get_bookable_slots.render']['types'],
   },
-  'dashboard': {
+  'dashboard.render': {
     methods: ["GET","HEAD"],
     pattern: '/dashboard',
     tokens: [{"old":"/dashboard","type":0,"val":"dashboard","end":""}],
-    types: placeholder as Registry['dashboard']['types'],
+    types: placeholder as Registry['dashboard.render']['types'],
   },
   'settings': {
     methods: ["GET","HEAD"],
