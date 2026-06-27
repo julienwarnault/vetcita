@@ -6,6 +6,8 @@ import { Card } from '~/components/ui/card'
 import { DEFAULT_LOCALE } from '~/lib/date'
 import { InertiaProps } from '~/types'
 import { sum } from '~/lib/utils'
+import { Empty } from '~/components/ui/empty'
+import { Link } from '@adonisjs/inertia/react'
 
 type PageProps = InertiaProps<{
   lastUpdated: Data.Booking.Appointment[]
@@ -54,6 +56,22 @@ export default function Dashboard(props: PageProps) {
                 {todayAppointments.map((appointment) => (
                   <AppointmentItem key={appointment.id} appointment={appointment} />
                 ))}
+                {todayAppointments.length == 0 && (
+                  <Empty
+                    icon="calendar-clock"
+                    heading="No hay citas hoy"
+                    description={
+                      <div>
+                        Visita la sección{' '}
+                        <Link route="show_calendar.render" className="text-accent">
+                          Calendario
+                        </Link>{' '}
+                        para añadir algunas citas
+                      </div>
+                    }
+                    border={false}
+                  />
+                )}
               </div>
             </div>
           </Card>
