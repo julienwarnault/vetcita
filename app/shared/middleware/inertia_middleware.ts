@@ -1,4 +1,5 @@
 import type { HttpContext } from '@adonisjs/core/http'
+import i18nManager from '@adonisjs/i18n/services/main'
 import type { NextFn } from '@adonisjs/core/types/http'
 import BaseInertiaMiddleware from '@adonisjs/inertia/inertia_middleware'
 import UserTransformer from '#identity/transformers/user_transformer'
@@ -13,7 +14,7 @@ export default class InertiaMiddleware extends BaseInertiaMiddleware {
      * In that case, we must always assume that HttpContext is not fully hydrated
      * with all the properties
      */
-    const { session, auth } = ctx as Partial<HttpContext>
+    const { session, auth, i18n } = ctx as Partial<HttpContext>
 
     /**
      * Data shared with all Inertia pages. Make sure you are using
@@ -24,6 +25,7 @@ export default class InertiaMiddleware extends BaseInertiaMiddleware {
       flash: ctx.inertia.always(session?.flashMessages.all()),
       user: ctx.inertia.always(auth?.user ? UserTransformer.transform(auth.user) : undefined),
       qs: ctx.inertia.always(ctx.request.qs()),
+      locale: ctx.inertia.always(i18n?.locale ?? i18nManager.defaultLocale),
     }
   }
 

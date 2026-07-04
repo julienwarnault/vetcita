@@ -21,7 +21,7 @@ export default class PrecognitionMiddleware {
     }
 
     try {
-      await validator.validate(ctx.request.all())
+      await ctx.request.validateUsing(validator)
       return this.#validationPassed(ctx)
     } catch (error) {
       if (!(error instanceof errors.E_VALIDATION_ERROR)) {
