@@ -2,12 +2,6 @@
 import type { routes } from './index.ts'
 
 export interface ApiDefinition {
-  getBookableDays: {
-    render: typeof routes['get_bookable_days.render']
-  }
-  getBookableSlots: {
-    render: typeof routes['get_bookable_slots.render']
-  }
   dashboard: {
     render: typeof routes['dashboard.render']
   }
@@ -108,6 +102,19 @@ export interface ApiDefinition {
   }
   changeAppointmentStatus: {
     execute: typeof routes['change_appointment_status.execute']
+  }
+  listShifts: {
+    render: typeof routes['list_shifts.render']
+  }
+  updateWorkingHours: {
+    render: typeof routes['update_working_hours.render']
+    execute: typeof routes['update_working_hours.execute']
+  }
+  getBookableDays: {
+    render: typeof routes['get_bookable_days.render']
+  }
+  getBookableSlots: {
+    render: typeof routes['get_bookable_slots.render']
   }
   search: {
     render: typeof routes['search.render']

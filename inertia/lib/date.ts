@@ -1,4 +1,4 @@
-import { DateTime, Interval } from 'luxon'
+import { DateTime, Info, Interval } from 'luxon'
 
 export const DEFAULT_TIMEZONE = 'America/Mexico_City'
 export const DEFAULT_LOCALE = 'es-MX'
@@ -48,4 +48,8 @@ export function toInterval(value: Interval | DateTime | undefined): Interval | u
   }
 
   return value
+}
+
+export function getWeekdays() {
+  return Info.weekdays('long', { locale: DEFAULT_LOCALE })
 }

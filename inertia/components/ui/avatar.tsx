@@ -7,6 +7,7 @@ const avatar = tv({
   base: 'inline-flex shrink-0 select-none items-center justify-center overflow-hidden rounded-full bg-accent align-middle font-semibold text-white',
   variants: {
     size: {
+      'sm': 'size-10 text-[13px]',
       'md': 'size-12 text-base',
       'lg': 'size-[54px] text-lg',
       'xl': 'size-[64px] text-xl',

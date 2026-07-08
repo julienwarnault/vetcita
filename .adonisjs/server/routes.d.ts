@@ -4,8 +4,6 @@ type ParamValue = string | number | bigint | boolean
 
 export type ScannedRoutes = {
   ALL: {
-    'get_bookable_days.render': { paramsTuple?: []; params?: {} }
-    'get_bookable_slots.render': { paramsTuple?: []; params?: {} }
     'dashboard.render': { paramsTuple?: []; params?: {} }
     'settings': { paramsTuple?: []; params?: {} }
     'signup.render': { paramsTuple?: []; params?: {} }
@@ -51,14 +49,17 @@ export type ScannedRoutes = {
     'update_appointment.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_appointment.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'change_appointment_status.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'list_shifts.render': { paramsTuple?: []; params?: {} }
+    'update_working_hours.render': { paramsTuple: [ParamValue]; params: {'agendaId': ParamValue} }
+    'update_working_hours.execute': { paramsTuple: [ParamValue]; params: {'agendaId': ParamValue} }
+    'get_bookable_days.render': { paramsTuple?: []; params?: {} }
+    'get_bookable_slots.render': { paramsTuple?: []; params?: {} }
     'search.render': { paramsTuple?: []; params?: {} }
     'event_stream': { paramsTuple?: []; params?: {} }
     'subscribe': { paramsTuple?: []; params?: {} }
     'unsubscribe': { paramsTuple?: []; params?: {} }
   }
   GET: {
-    'get_bookable_days.render': { paramsTuple?: []; params?: {} }
-    'get_bookable_slots.render': { paramsTuple?: []; params?: {} }
     'dashboard.render': { paramsTuple?: []; params?: {} }
     'settings': { paramsTuple?: []; params?: {} }
     'signup.render': { paramsTuple?: []; params?: {} }
@@ -85,12 +86,14 @@ export type ScannedRoutes = {
     'booking_link.render': { paramsTuple?: []; params?: {} }
     'create_appointment.render': { paramsTuple?: []; params?: {} }
     'update_appointment.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'list_shifts.render': { paramsTuple?: []; params?: {} }
+    'update_working_hours.render': { paramsTuple: [ParamValue]; params: {'agendaId': ParamValue} }
+    'get_bookable_days.render': { paramsTuple?: []; params?: {} }
+    'get_bookable_slots.render': { paramsTuple?: []; params?: {} }
     'search.render': { paramsTuple?: []; params?: {} }
     'event_stream': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
-    'get_bookable_days.render': { paramsTuple?: []; params?: {} }
-    'get_bookable_slots.render': { paramsTuple?: []; params?: {} }
     'dashboard.render': { paramsTuple?: []; params?: {} }
     'settings': { paramsTuple?: []; params?: {} }
     'signup.render': { paramsTuple?: []; params?: {} }
@@ -117,6 +120,10 @@ export type ScannedRoutes = {
     'booking_link.render': { paramsTuple?: []; params?: {} }
     'create_appointment.render': { paramsTuple?: []; params?: {} }
     'update_appointment.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'list_shifts.render': { paramsTuple?: []; params?: {} }
+    'update_working_hours.render': { paramsTuple: [ParamValue]; params: {'agendaId': ParamValue} }
+    'get_bookable_days.render': { paramsTuple?: []; params?: {} }
+    'get_bookable_slots.render': { paramsTuple?: []; params?: {} }
     'search.render': { paramsTuple?: []; params?: {} }
     'event_stream': { paramsTuple?: []; params?: {} }
   }
@@ -141,6 +148,7 @@ export type ScannedRoutes = {
     'update_patient.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_tenant.execute': { paramsTuple?: []; params?: {} }
     'update_appointment.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'update_working_hours.execute': { paramsTuple: [ParamValue]; params: {'agendaId': ParamValue} }
   }
   DELETE: {
     'delete_appointment_status.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }

@@ -47,6 +47,8 @@ export const controllers = {
   scheduling: {
     GetBookableDays: () => import('#app/scheduling/controllers/get_bookable_days_controller'),
     GetBookableSlots: () => import('#app/scheduling/controllers/get_bookable_slots_controller'),
+    ListShifts: () => import('#app/scheduling/controllers/list_shifts_controller'),
+    UpdateWorkingHours: () => import('#app/scheduling/controllers/update_working_hours_controller'),
   },
   search: {
     Search: () => import('#app/search/controllers/search_controller'),

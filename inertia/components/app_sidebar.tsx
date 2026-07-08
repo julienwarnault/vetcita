@@ -34,6 +34,11 @@ const NAVIGATION = [
     navigationIcon: 'users',
   },
   {
+    name: 'Turnos programados',
+    route: 'list_shifts.render',
+    navigationIcon: 'calendar-clock',
+  },
+  {
     name: 'Ajustes',
     route: 'settings',
     navigationIcon: 'settings',

@@ -29,7 +29,7 @@ export default class UpdateAgendaController {
     const user = auth.getUserOrFail()
 
     const { appointmentTypes } = await this.getAppointmentTypes.execute({ tenantId: user.tenantId })
-    const { agenda } = await this.getAgenda.execute({ id: params.id })
+    const { agenda } = await this.getAgenda.execute({ tenantId: user.tenantId, id: params.id })
 
     return inertia.render('agendas/form', {
       agenda: AgendaTransformer.transform(agenda),

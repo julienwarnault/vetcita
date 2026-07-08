@@ -6,18 +6,6 @@ import type { ApiDefinition } from './tree.d.ts'
 const placeholder: any = {}
 
 const routes = {
-  'get_bookable_days.render': {
-    methods: ["GET","HEAD"],
-    pattern: '/api/bookable-days',
-    tokens: [{"old":"/api/bookable-days","type":0,"val":"api","end":""},{"old":"/api/bookable-days","type":0,"val":"bookable-days","end":""}],
-    types: placeholder as Registry['get_bookable_days.render']['types'],
-  },
-  'get_bookable_slots.render': {
-    methods: ["GET","HEAD"],
-    pattern: '/api/bookable-slots',
-    tokens: [{"old":"/api/bookable-slots","type":0,"val":"api","end":""},{"old":"/api/bookable-slots","type":0,"val":"bookable-slots","end":""}],
-    types: placeholder as Registry['get_bookable_slots.render']['types'],
-  },
   'dashboard.render': {
     methods: ["GET","HEAD"],
     pattern: '/dashboard',
@@ -287,6 +275,36 @@ const routes = {
     pattern: '/appointments/:id/status',
     tokens: [{"old":"/appointments/:id/status","type":0,"val":"appointments","end":""},{"old":"/appointments/:id/status","type":1,"val":"id","end":""},{"old":"/appointments/:id/status","type":0,"val":"status","end":""}],
     types: placeholder as Registry['change_appointment_status.execute']['types'],
+  },
+  'list_shifts.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/shifts',
+    tokens: [{"old":"/shifts","type":0,"val":"shifts","end":""}],
+    types: placeholder as Registry['list_shifts.render']['types'],
+  },
+  'update_working_hours.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/working-hours/:agendaId',
+    tokens: [{"old":"/working-hours/:agendaId","type":0,"val":"working-hours","end":""},{"old":"/working-hours/:agendaId","type":1,"val":"agendaId","end":""}],
+    types: placeholder as Registry['update_working_hours.render']['types'],
+  },
+  'update_working_hours.execute': {
+    methods: ["PUT"],
+    pattern: '/working-hours/:agendaId',
+    tokens: [{"old":"/working-hours/:agendaId","type":0,"val":"working-hours","end":""},{"old":"/working-hours/:agendaId","type":1,"val":"agendaId","end":""}],
+    types: placeholder as Registry['update_working_hours.execute']['types'],
+  },
+  'get_bookable_days.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/bookable-days',
+    tokens: [{"old":"/api/bookable-days","type":0,"val":"api","end":""},{"old":"/api/bookable-days","type":0,"val":"bookable-days","end":""}],
+    types: placeholder as Registry['get_bookable_days.render']['types'],
+  },
+  'get_bookable_slots.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/bookable-slots',
+    tokens: [{"old":"/api/bookable-slots","type":0,"val":"api","end":""},{"old":"/api/bookable-slots","type":0,"val":"bookable-slots","end":""}],
+    types: placeholder as Registry['get_bookable_slots.render']['types'],
   },
   'search.render': {
     methods: ["GET","HEAD"],

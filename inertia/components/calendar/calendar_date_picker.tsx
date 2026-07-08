@@ -10,11 +10,12 @@ import { Button } from '~/components/ui/button'
 interface CalendarDatePickerProps {
   date: string
   view: ViewType
+  numberOfMonths?: number
   onDateChange: (date: DateTime) => void
 }
 
 export function CalendarDatePicker(props: CalendarDatePickerProps) {
-  const { date, view, onDateChange } = props
+  const { date, view, numberOfMonths = 2, onDateChange } = props
 
   const { start, end } = getRangeForView(date, view)
   const selectedDays = Interval.fromDateTimes(start, end)
@@ -46,7 +47,6 @@ export function CalendarDatePicker(props: CalendarDatePickerProps) {
       <Popover
         open={isOpen}
         onOpenChange={setIsOpen}
-        align="start"
         alignOffset={-35}
         trigger={
           <Button variant="secondary" className="min-w-44 max-w-44 truncate">
@@ -57,7 +57,7 @@ export function CalendarDatePicker(props: CalendarDatePickerProps) {
         <div className="p-4">
           <DatePicker
             initialMonth={start.startOf('month')}
-            numberOfMonths={2}
+            numberOfMonths={numberOfMonths}
             selectedDays={selectedDays}
             onDayClick={(newDay) => {
               onDateChange(newDay)
