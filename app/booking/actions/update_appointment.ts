@@ -36,14 +36,14 @@ export class UpdateAppointment {
       .where('tenantId', appointment.tenantId)
       .firstOrFail()
 
-    const startDate = DateTime.fromISO(params.startDate, { zone: DEFAULT_TIMEZONE })
+    const startDate = DateTime.fromISO(params.startDate)
     const endDate = startDate.plus({ minutes: appointmentType.duration })
 
     const isBookable = await this.checkSlotBookable.execute({
       tenantId: appointment.tenantId,
       appointmentTypeId: params.appointmentTypeId,
       agendaId: params.agendaId,
-      start: startDate,
+      start: startDate.setZone(DEFAULT_TIMEZONE),
       appointmentId: params.id,
     })
 
@@ -53,7 +53,7 @@ export class UpdateAppointment {
 
     appointment.merge({
       appointmentTypeId: params.appointmentTypeId,
-      patientId: params.patientId,
+      patientId: params.patientId ?? null,
       agendaId: params.agendaId,
       startDate,
       endDate,
