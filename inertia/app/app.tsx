@@ -10,7 +10,7 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import { resolvePageComponent } from '@adonisjs/inertia/helpers'
 import { client, queryClient } from '~/lib/tuyau'
 
-export const appName = import.meta.env.VITE_APP_NAME || 'Healthcare'
+export const appName = import.meta.env.VITE_APP_NAME || 'Vetcita'
 
 createInertiaApp({
   title: (title) => (title ? `${title} - ${appName}` : appName),
