@@ -30,7 +30,13 @@ export function CalendarEventPreviewCard(props: CalendarEventPreviewCardProps) {
       }}
     >
       {isValidElement(children) && (
-        <PreviewCard.Trigger ref={triggerRef} delay={300} render={children} onMouseLeave={() => setOpen(false)} />
+        <PreviewCard.Trigger
+          ref={triggerRef}
+          delay={300}
+          render={children}
+          onMouseDown={(e) => e.stopPropagation()}
+          onMouseLeave={() => setOpen(false)}
+        />
       )}
 
       <PreviewCard.Portal>
