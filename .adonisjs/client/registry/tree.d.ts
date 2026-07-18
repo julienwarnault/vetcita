@@ -106,6 +106,17 @@ export interface ApiDefinition {
   listShifts: {
     render: typeof routes['list_shifts.render']
   }
+  createClosedDate: {
+    render: typeof routes['create_closed_date.render']
+    execute: typeof routes['create_closed_date.execute']
+  }
+  updateClosedDate: {
+    render: typeof routes['update_closed_date.render']
+    execute: typeof routes['update_closed_date.execute']
+  }
+  deleteClosedDate: {
+    execute: typeof routes['delete_closed_date.execute']
+  }
   updateWorkingHours: {
     render: typeof routes['update_working_hours.render']
     execute: typeof routes['update_working_hours.execute']

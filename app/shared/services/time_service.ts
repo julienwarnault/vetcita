@@ -15,4 +15,18 @@ export class TimeService {
     const rounded = Math.ceil(totalMinutes / nearestTo) * nearestTo
     return dt.startOf('day').plus({ minutes: rounded })
   }
+
+  getDatesBetween(start: DateTime, end: DateTime): DateTime[] {
+    const dates: DateTime[] = []
+
+    let current = start.startOf('day')
+    const last = end.startOf('day')
+
+    while (current <= last) {
+      dates.push(current)
+      current = current.plus({ days: 1 })
+    }
+
+    return dates
+  }
 }

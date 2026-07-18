@@ -282,6 +282,36 @@ const routes = {
     tokens: [{"old":"/shifts","type":0,"val":"shifts","end":""}],
     types: placeholder as Registry['list_shifts.render']['types'],
   },
+  'create_closed_date.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/closed-dates/new',
+    tokens: [{"old":"/closed-dates/new","type":0,"val":"closed-dates","end":""},{"old":"/closed-dates/new","type":0,"val":"new","end":""}],
+    types: placeholder as Registry['create_closed_date.render']['types'],
+  },
+  'create_closed_date.execute': {
+    methods: ["POST"],
+    pattern: '/closed-dates',
+    tokens: [{"old":"/closed-dates","type":0,"val":"closed-dates","end":""}],
+    types: placeholder as Registry['create_closed_date.execute']['types'],
+  },
+  'update_closed_date.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/closed-dates/edit/:id',
+    tokens: [{"old":"/closed-dates/edit/:id","type":0,"val":"closed-dates","end":""},{"old":"/closed-dates/edit/:id","type":0,"val":"edit","end":""},{"old":"/closed-dates/edit/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['update_closed_date.render']['types'],
+  },
+  'update_closed_date.execute': {
+    methods: ["PUT"],
+    pattern: '/closed-dates/:id',
+    tokens: [{"old":"/closed-dates/:id","type":0,"val":"closed-dates","end":""},{"old":"/closed-dates/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['update_closed_date.execute']['types'],
+  },
+  'delete_closed_date.execute': {
+    methods: ["DELETE"],
+    pattern: '/closed-dates/:id',
+    tokens: [{"old":"/closed-dates/:id","type":0,"val":"closed-dates","end":""},{"old":"/closed-dates/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['delete_closed_date.execute']['types'],
+  },
   'update_working_hours.render': {
     methods: ["GET","HEAD"],
     pattern: '/working-hours/:agendaId',

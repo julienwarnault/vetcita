@@ -44,6 +44,6 @@ export default class UpdateAgendaController {
       return this.updateAgenda.execute({ id: params.id, ...payload })
     })
 
-    return response.redirect().toRoute('list_agendas.render')
+    return response.redirect().back()
   }
 }

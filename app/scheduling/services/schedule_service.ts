@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { inject } from '@adonisjs/core'
 import { TimeService } from '#shared/services/time_service'
-import WorkingHour from '#scheduling/models/working_hour'
+import { Shift } from '#scheduling/services/shift_builder'
 import Appointment from '#booking/models/appointment'
 import type { UUID } from '#shared/types'
 
@@ -24,7 +24,7 @@ interface GetBookableSlotsParams {
   to: DateTime
   duration: number
   agendaIds: UUID[]
-  workingHours: WorkingHour[]
+  shifts: Shift[]
   appointments: Appointment[]
 }
 
@@ -32,7 +32,7 @@ interface IsSlotBookableParams {
   agendaId: UUID
   start: DateTime
   duration: number
-  workingHours: WorkingHour[]
+  shifts: Shift[]
   appointments: Appointment[]
 }
 
@@ -43,14 +43,10 @@ export class ScheduleService {
   constructor(private readonly timeService: TimeService) {}
 
   getBookableSlots(params: GetBookableSlotsParams): BookableSlotsByDate {
-    if (params.duration <= 0 || params.agendaIds.length === 0) return new Map()
-
-    const availabilityPeriods = this.#getAvailabilityPeriods(params.workingHours, params.from, params.to)
-
-    if (availabilityPeriods.length === 0) return new Map()
+    if (params.duration <= 0 || params.agendaIds.length === 0 || params.shifts.length === 0) return new Map()
 
     const allSlots = this.#generateSlots(
-      availabilityPeriods,
+      params.shifts,
       this.#buildBlockingPeriods(params.appointments),
       params.duration
     )
@@ -65,38 +61,13 @@ export class ScheduleService {
 
     if (end <= this.timeService.now()) return false
 
-    const periods = this.#getAvailabilityPeriods(params.workingHours, params.start, params.start)
-    const withinWorkingHours = periods.some(
-      (period) => period.agendaId === params.agendaId && params.start >= period.start && end <= period.end
+    const withinWorkingHours = params.shifts.some(
+      (shift) => shift.agendaId === params.agendaId && params.start >= shift.start && end <= shift.end
     )
 
     if (!withinWorkingHours) return false
 
     return this.#isSlotAvailable(params.start, end, this.#buildBlockingPeriods(params.appointments))
-  }
-
-  #getAvailabilityPeriods(workingHours: WorkingHour[], from: DateTime, to: DateTime): TimePeriod[] {
-    const periods: TimePeriod[] = []
-    let cursor = from.startOf('day')
-
-    while (cursor <= to.startOf('day')) {
-      const todayHours = workingHours.filter((wh) => wh.dayOfWeek === cursor.weekday)
-
-      for (const wh of todayHours) {
-        const [startH, startM] = wh.startTime.split(':').map(Number)
-        const [endH, endM] = wh.endTime.split(':').map(Number)
-
-        periods.push({
-          agendaId: wh.agendaId,
-          start: cursor.set({ hour: startH, minute: startM, second: 0, millisecond: 0 }),
-          end: cursor.set({ hour: endH, minute: endM, second: 0, millisecond: 0 }),
-        })
-      }
-
-      cursor = cursor.plus({ days: 1 })
-    }
-
-    return periods
   }
 
   #buildBlockingPeriods(appointments: Appointment[]): TimePeriod[] {

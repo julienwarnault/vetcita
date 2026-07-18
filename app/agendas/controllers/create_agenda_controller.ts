@@ -41,6 +41,6 @@ export default class CreateAgendaController {
       return this.createAgenda.execute({ ...payload, tenantId: user.tenantId })
     })
 
-    return response.redirect().toRoute('list_agendas.render')
+    return response.redirect().back()
   }
 }

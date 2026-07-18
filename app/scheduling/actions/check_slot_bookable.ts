@@ -2,8 +2,8 @@ import { DateTime } from 'luxon'
 import { inject } from '@adonisjs/core'
 import { GetAppointmentType } from '#appointment_types/queries/get_appointment_type'
 import { ScheduleService } from '#scheduling/services/schedule_service'
-import { GetWorkingHours } from '#scheduling/queries/get_working_hours'
 import { GetAppointments } from '#booking/queries/get_appointments'
+import { GetShifts } from '#scheduling/queries/get_shifts'
 import type { UUID } from '#shared/types'
 
 interface CheckSlotBookableParams {
@@ -18,7 +18,7 @@ interface CheckSlotBookableParams {
 export class CheckSlotBookable {
   constructor(
     private readonly getAppointmentType: GetAppointmentType,
-    private readonly getWorkingHours: GetWorkingHours,
+    private readonly getShifts: GetShifts,
     private readonly getAppointments: GetAppointments,
     private readonly scheduleService: ScheduleService
   ) {}
@@ -33,21 +33,19 @@ export class CheckSlotBookable {
       return false
     }
 
-    const [{ workingHours }, { appointments }] = await Promise.all([
-      this.getWorkingHours.execute({ tenantId: params.tenantId, agendaIds: [params.agendaId] }),
-      this.getAppointments.execute({
-        tenantId: params.tenantId,
-        agendaIds: [params.agendaId],
-        from: params.start.startOf('day'),
-        to: params.start.endOf('day'),
-      }),
+    const from = params.start.startOf('day')
+    const to = params.start.endOf('day')
+
+    const [{ shifts }, { appointments }] = await Promise.all([
+      this.getShifts.execute({ tenantId: params.tenantId, agendaIds: [params.agendaId], from, to }),
+      this.getAppointments.execute({ tenantId: params.tenantId, agendaIds: [params.agendaId], from, to }),
     ])
 
     const isBookable = this.scheduleService.isSlotBookable({
       agendaId: params.agendaId,
       start: params.start,
       duration: appointmentType.duration,
-      workingHours,
+      shifts,
       appointments: appointments.filter(({ id }) => id !== params.appointmentId),
     })
 

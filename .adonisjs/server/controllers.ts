@@ -49,6 +49,9 @@ export const controllers = {
     GetBookableSlots: () => import('#app/scheduling/controllers/get_bookable_slots_controller'),
     ListShifts: () => import('#app/scheduling/controllers/list_shifts_controller'),
     UpdateWorkingHours: () => import('#app/scheduling/controllers/update_working_hours_controller'),
+    CreateClosedDate: () => import('#app/scheduling/controllers/create_closed_date_controller'),
+    DeleteClosedDate: () => import('#app/scheduling/controllers/delete_closed_date_controller'),
+    UpdateClosedDate: () => import('#app/scheduling/controllers/update_closed_date_controller'),
   },
   search: {
     Search: () => import('#app/search/controllers/search_controller'),

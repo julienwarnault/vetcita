@@ -2,10 +2,12 @@ import vine from '@vinejs/vine'
 import { DateTime } from 'luxon'
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
-import WorkingHourTransformer from '#scheduling/transformers/working_hour_transformer'
+import ClosedDateTransformer from '#scheduling/transformers/closed_date_transformer'
+import ShiftTransformer from '#scheduling/transformers/shift_transformer'
 import AgendaTransformer from '#agendas/transformers/agenda_transformer'
-import { GetWorkingHours } from '#scheduling/queries/get_working_hours'
+import { GetClosedDates } from '#scheduling/queries/get_closed_dates'
 import { DEFAULT_TIMEZONE } from '#shared/services/time_service'
+import { GetShifts } from '#scheduling/queries/get_shifts'
 import { GetAgendas } from '#agendas/queries/get_agendas'
 
 @inject()
@@ -18,7 +20,8 @@ export default class ListShiftsController {
 
   constructor(
     private readonly getAgendas: GetAgendas,
-    private readonly getWorkingHours: GetWorkingHours
+    private readonly getClosedDates: GetClosedDates,
+    private readonly getShifts: GetShifts
   ) {}
 
   async render({ request, inertia, response, auth }: HttpContext) {
@@ -34,15 +37,20 @@ export default class ListShiftsController {
       return response.redirect().toRoute('list_shifts.render', {}, { qs: { date } })
     }
 
-    const [{ agendas }, { workingHours }] = await Promise.all([
+    const from = DateTime.fromISO(date).startOf('week')
+    const to = DateTime.fromISO(date).endOf('week')
+
+    const [{ agendas }, { shifts }, { closedDates }] = await Promise.all([
       this.getAgendas.execute({ tenantId: user.tenantId }),
-      this.getWorkingHours.execute({ tenantId: user.tenantId }),
+      this.getShifts.execute({ tenantId: user.tenantId, from, to }),
+      this.getClosedDates.execute({ tenantId: user.tenantId, from, to }),
     ])
 
     return inertia.render('shifts/list', {
       date,
+      shifts: ShiftTransformer.transform(shifts),
       agendas: AgendaTransformer.transform(agendas),
-      workingHours: WorkingHourTransformer.transform(workingHours),
+      closedDates: ClosedDateTransformer.transform(closedDates),
     })
   }
 }

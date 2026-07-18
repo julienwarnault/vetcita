@@ -2,9 +2,9 @@ import { DateTime } from 'luxon'
 import { inject } from '@adonisjs/core'
 import { GetAppointmentType } from '#appointment_types/queries/get_appointment_type'
 import { ScheduleService } from '#scheduling/services/schedule_service'
-import { GetWorkingHours } from '#scheduling/queries/get_working_hours'
 import { GetAppointments } from '#booking/queries/get_appointments'
 import { DEFAULT_TIMEZONE } from '#shared/services/time_service'
+import { GetShifts } from '#scheduling/queries/get_shifts'
 import type { UUID } from '#shared/types'
 
 interface GetBookableSlotsParams {
@@ -18,7 +18,7 @@ interface GetBookableSlotsParams {
 export class GetBookableSlots {
   constructor(
     private readonly getAppointmentType: GetAppointmentType,
-    private readonly getWorkingHours: GetWorkingHours,
+    private readonly getShifts: GetShifts,
     private readonly getAppointments: GetAppointments,
     private readonly scheduleService: ScheduleService
   ) {}
@@ -34,8 +34,8 @@ export class GetBookableSlots {
     const agendaIds = appointmentType.agendas.map((agenda) => agenda.id)
     if (agendaIds.length === 0) return { slots: [] }
 
-    const [{ workingHours }, { appointments }] = await Promise.all([
-      this.getWorkingHours.execute({ tenantId: params.tenantId, agendaIds }),
+    const [{ shifts }, { appointments }] = await Promise.all([
+      this.getShifts.execute({ tenantId: params.tenantId, agendaIds, from: day, to: day }),
       this.getAppointments.execute({ tenantId: params.tenantId, agendaIds, from: day, to: day }),
     ])
 
@@ -44,7 +44,7 @@ export class GetBookableSlots {
       to: day,
       duration: appointmentType.duration,
       agendaIds,
-      workingHours,
+      shifts,
       appointments: appointments.filter(({ id }) => id !== params.appointmentId),
     })
 

@@ -559,6 +559,66 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/list_shifts_controller').default['render']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
+  'create_closed_date.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/closed-dates/new'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/scheduling/controllers/create_closed_date_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/create_closed_date_controller').default['render']>>>
+    }
+  }
+  'create_closed_date.execute': {
+    methods: ["POST"]
+    pattern: '/closed-dates'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#app/scheduling/controllers/create_closed_date_controller').default)['validator']>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#app/scheduling/controllers/create_closed_date_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/scheduling/controllers/create_closed_date_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/create_closed_date_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'update_closed_date.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/closed-dates/edit/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/scheduling/controllers/update_closed_date_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/update_closed_date_controller').default['render']>>>
+    }
+  }
+  'update_closed_date.execute': {
+    methods: ["PUT"]
+    pattern: '/closed-dates/:id'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#app/scheduling/controllers/update_closed_date_controller').default)['validator']>>
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#app/scheduling/controllers/update_closed_date_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/scheduling/controllers/update_closed_date_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/update_closed_date_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'delete_closed_date.execute': {
+    methods: ["DELETE"]
+    pattern: '/closed-dates/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/scheduling/controllers/delete_closed_date_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/delete_closed_date_controller').default['execute']>>>
+    }
+  }
   'update_working_hours.render': {
     methods: ["GET","HEAD"]
     pattern: '/working-hours/:agendaId'

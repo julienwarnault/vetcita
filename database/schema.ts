@@ -33,7 +33,7 @@ export class AgendaSchema extends BaseModel {
   @column()
   declare name: string
   @column()
-  declare tenantId: UUID | null
+  declare tenantId: UUID
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
 }
@@ -60,17 +60,7 @@ export class AppointmentStatusSchema extends BaseModel {
 }
 
 export class AppointmentTypeSchema extends BaseModel {
-  static $columns = [
-    'color',
-    'createdAt',
-    'description',
-    'duration',
-    'id',
-    'name',
-    'price',
-    'tenantId',
-    'updatedAt',
-  ] as const
+  static $columns = ['color', 'createdAt', 'description', 'duration', 'id', 'name', 'price', 'tenantId', 'updatedAt'] as const
   $columns = AppointmentTypeSchema.$columns
   @column()
   declare color: string
@@ -93,21 +83,7 @@ export class AppointmentTypeSchema extends BaseModel {
 }
 
 export class AppointmentSchema extends BaseModel {
-  static $columns = [
-    'agendaId',
-    'appointmentTypeId',
-    'bookingRef',
-    'createdAt',
-    'duration',
-    'endDate',
-    'id',
-    'patientId',
-    'reminderSentAt',
-    'startDate',
-    'statusId',
-    'tenantId',
-    'updatedAt',
-  ] as const
+  static $columns = ['agendaId', 'appointmentTypeId', 'bookingRef', 'createdAt', 'duration', 'endDate', 'id', 'patientId', 'reminderSentAt', 'startDate', 'statusId', 'tenantId', 'updatedAt'] as const
   $columns = AppointmentSchema.$columns
   @column()
   declare agendaId: UUID
@@ -137,18 +113,27 @@ export class AppointmentSchema extends BaseModel {
   declare updatedAt: DateTime | null
 }
 
+export class ClosedDateSchema extends BaseModel {
+  static $columns = ['createdAt', 'description', 'end', 'id', 'start', 'tenantId', 'updatedAt'] as const
+  $columns = ClosedDateSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare description: string | null
+  @column.date()
+  declare end: DateTime
+  @column({ isPrimary: true })
+  declare id: UUID
+  @column.date()
+  declare start: DateTime
+  @column()
+  declare tenantId: UUID
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class PatientSchema extends BaseModel {
-  static $columns = [
-    'createdAt',
-    'email',
-    'firstName',
-    'id',
-    'lastName',
-    'notes',
-    'phone',
-    'tenantId',
-    'updatedAt',
-  ] as const
+  static $columns = ['createdAt', 'email', 'firstName', 'id', 'lastName', 'notes', 'phone', 'tenantId', 'updatedAt'] as const
   $columns = PatientSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -165,7 +150,7 @@ export class PatientSchema extends BaseModel {
   @column()
   declare phone: string
   @column()
-  declare tenantId: UUID | null
+  declare tenantId: UUID
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
 }
@@ -209,16 +194,7 @@ export class UserSchema extends BaseModel {
 }
 
 export class WorkingHourSchema extends BaseModel {
-  static $columns = [
-    'agendaId',
-    'createdAt',
-    'dayOfWeek',
-    'endTime',
-    'id',
-    'startTime',
-    'tenantId',
-    'updatedAt',
-  ] as const
+  static $columns = ['agendaId', 'createdAt', 'dayOfWeek', 'endTime', 'id', 'startTime', 'tenantId', 'updatedAt'] as const
   $columns = WorkingHourSchema.$columns
   @column()
   declare agendaId: UUID
