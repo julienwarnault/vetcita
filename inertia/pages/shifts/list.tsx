@@ -8,6 +8,7 @@ import { DEFAULT_TIMEZONE, eachDayOfInterval, today } from '~/lib/date'
 import { ShiftTable } from '~/components/shift/shifts_table'
 import { ViewHeader } from '~/components/view_header'
 import { Button } from '~/components/ui/button'
+import { timeToMinutes } from '~/lib/utils'
 import { Menu } from '~/components/ui/menu'
 import { InertiaProps } from '~/types'
 import { urlFor } from '~/lib/tuyau'
@@ -17,10 +18,11 @@ type PageProps = InertiaProps<{
   agendas: Data.Agendas.Agenda[]
   shifts: Data.Scheduling.Shift[]
   closedDates: Data.Scheduling.ClosedDate[]
+  timeOffs: Data.Scheduling.TimeOff[]
 }>
 
 export default function List(props: PageProps) {
-  const { date, agendas, shifts, closedDates } = props
+  const { date, agendas, shifts, closedDates, timeOffs } = props
 
   const { visitModal } = useModalStack()
 
@@ -48,6 +50,7 @@ export default function List(props: PageProps) {
               </Button>
             }
           >
+            <Menu.Item onClick={() => visitModal(urlFor('create_time_off.render'))}>Días libres</Menu.Item>
             <Menu.Item onClick={() => visitModal(urlFor('create_closed_date.render'))}>Fechas de cierre</Menu.Item>
             <Menu.Item onClick={() => visitModal(urlFor('create_agenda.render'))}>Nueva agenda</Menu.Item>
           </Menu>
@@ -79,6 +82,19 @@ export default function List(props: PageProps) {
                 interval: Interval.fromDateTimes(
                   DateTime.fromISO(closedDate.start!).startOf('day'),
                   DateTime.fromISO(closedDate.end!).endOf('day')
+                ),
+              }))}
+              timeOffs={timeOffs.map((timeOff) => ({
+                id: timeOff.id,
+                agendaId: timeOff.agendaId,
+                type: timeOff.type,
+                interval: Interval.fromDateTimes(
+                  DateTime.max(DateTime.fromISO(timeOff.start!).startOf('day'), minValue).plus({
+                    minutes: timeToMinutes(timeOff.startTime),
+                  }),
+                  DateTime.min(DateTime.fromISO(timeOff.end!).startOf('day'), maxValue.startOf('day')).plus({
+                    minutes: timeToMinutes(timeOff.endTime),
+                  })
                 ),
               }))}
             />

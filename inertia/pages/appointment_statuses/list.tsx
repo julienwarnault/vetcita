@@ -93,7 +93,7 @@ export default function List(props: PageProps) {
                       <PencilIcon size={16} />
                       Editar
                     </Menu.Item>
-                    <Menu.Item type="danger" onClick={() => handleDelete(status.id)}>
+                    <Menu.Item variant="destructive" onClick={() => handleDelete(status.id)}>
                       <Trash2Icon size={16} />
                       Eliminar
                     </Menu.Item>

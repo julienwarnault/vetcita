@@ -53,3 +53,8 @@ export function toInterval(value: Interval | DateTime | undefined): Interval | u
 export function getWeekdays() {
   return Info.weekdays('long', { locale: DEFAULT_LOCALE })
 }
+
+export function containsDay(interval: Interval, date: DateTime): boolean {
+  const day = date.startOf('day')
+  return day >= interval.start!.startOf('day') && day <= interval.end!.startOf('day')
+}

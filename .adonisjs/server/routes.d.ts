@@ -55,6 +55,11 @@ export type ScannedRoutes = {
     'update_closed_date.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_closed_date.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'delete_closed_date.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'create_time_off.render': { paramsTuple?: []; params?: {} }
+    'create_time_off.execute': { paramsTuple?: []; params?: {} }
+    'update_time_off.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'update_time_off.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'delete_time_off.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_working_hours.render': { paramsTuple: [ParamValue]; params: {'agendaId': ParamValue} }
     'update_working_hours.execute': { paramsTuple: [ParamValue]; params: {'agendaId': ParamValue} }
     'get_bookable_days.render': { paramsTuple?: []; params?: {} }
@@ -94,6 +99,8 @@ export type ScannedRoutes = {
     'list_shifts.render': { paramsTuple?: []; params?: {} }
     'create_closed_date.render': { paramsTuple?: []; params?: {} }
     'update_closed_date.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'create_time_off.render': { paramsTuple?: []; params?: {} }
+    'update_time_off.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_working_hours.render': { paramsTuple: [ParamValue]; params: {'agendaId': ParamValue} }
     'get_bookable_days.render': { paramsTuple?: []; params?: {} }
     'get_bookable_slots.render': { paramsTuple?: []; params?: {} }
@@ -130,6 +137,8 @@ export type ScannedRoutes = {
     'list_shifts.render': { paramsTuple?: []; params?: {} }
     'create_closed_date.render': { paramsTuple?: []; params?: {} }
     'update_closed_date.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'create_time_off.render': { paramsTuple?: []; params?: {} }
+    'update_time_off.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_working_hours.render': { paramsTuple: [ParamValue]; params: {'agendaId': ParamValue} }
     'get_bookable_days.render': { paramsTuple?: []; params?: {} }
     'get_bookable_slots.render': { paramsTuple?: []; params?: {} }
@@ -148,6 +157,7 @@ export type ScannedRoutes = {
     'book_appointment.execute': { paramsTuple: [ParamValue]; params: {'tenantId': ParamValue} }
     'create_appointment.execute': { paramsTuple?: []; params?: {} }
     'create_closed_date.execute': { paramsTuple?: []; params?: {} }
+    'create_time_off.execute': { paramsTuple?: []; params?: {} }
     'subscribe': { paramsTuple?: []; params?: {} }
     'unsubscribe': { paramsTuple?: []; params?: {} }
   }
@@ -159,12 +169,14 @@ export type ScannedRoutes = {
     'update_tenant.execute': { paramsTuple?: []; params?: {} }
     'update_appointment.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_closed_date.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'update_time_off.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_working_hours.execute': { paramsTuple: [ParamValue]; params: {'agendaId': ParamValue} }
   }
   DELETE: {
     'delete_appointment_status.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'delete_patient.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'delete_closed_date.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'delete_time_off.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   PATCH: {
     'change_appointment_status.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }

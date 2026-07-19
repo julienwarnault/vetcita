@@ -8,7 +8,7 @@ interface GetAgendasParams {
 
 export class GetAgendas {
   async execute(params: GetAgendasParams) {
-    const query = Agenda.query().where('tenantId', params.tenantId)
+    const query = Agenda.query().where('tenantId', params.tenantId).orderBy('name')
 
     if (params.search) {
       query.where((q) => q.whereILike('name', `%${params.search}%`))

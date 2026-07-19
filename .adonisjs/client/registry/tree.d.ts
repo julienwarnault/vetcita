@@ -117,6 +117,17 @@ export interface ApiDefinition {
   deleteClosedDate: {
     execute: typeof routes['delete_closed_date.execute']
   }
+  createTimeOff: {
+    render: typeof routes['create_time_off.render']
+    execute: typeof routes['create_time_off.execute']
+  }
+  updateTimeOff: {
+    render: typeof routes['update_time_off.render']
+    execute: typeof routes['update_time_off.execute']
+  }
+  deleteTimeOff: {
+    execute: typeof routes['delete_time_off.execute']
+  }
   updateWorkingHours: {
     render: typeof routes['update_working_hours.render']
     execute: typeof routes['update_working_hours.execute']

@@ -12,9 +12,10 @@ import type AppointmentWorkflowAppointmentStatusTransformer from '#app/appointme
 import type BookingAppointmentTransformer from '#app/booking/transformers/appointment_transformer'
 import type IdentityUserTransformer from '#app/identity/transformers/user_transformer'
 import type PatientsPatientTransformer from '#app/patients/transformers/patient_transformer'
-import type SchedulingWorkingHourTransformer from '#app/scheduling/transformers/working_hour_transformer'
 import type SchedulingClosedDateTransformer from '#app/scheduling/transformers/closed_date_transformer'
 import type SchedulingShiftTransformer from '#app/scheduling/transformers/shift_transformer'
+import type SchedulingTimeOffTransformer from '#app/scheduling/transformers/time_off_transformer'
+import type SchedulingWorkingHourTransformer from '#app/scheduling/transformers/working_hour_transformer'
 import type TenantsTenantTransformer from '#app/tenants/transformers/tenant_transformer'
 import type InertiaMiddleware from '#shared/middleware/inertia_middleware'
 
@@ -56,10 +57,6 @@ export namespace Data {
     }
   }
   export namespace Scheduling {
-    export type WorkingHour = InferData<SchedulingWorkingHourTransformer>
-    export namespace WorkingHour {
-      export type Variants = InferVariants<SchedulingWorkingHourTransformer>
-    }
     export type ClosedDate = InferData<SchedulingClosedDateTransformer>
     export namespace ClosedDate {
       export type Variants = InferVariants<SchedulingClosedDateTransformer>
@@ -67,6 +64,14 @@ export namespace Data {
     export type Shift = InferData<SchedulingShiftTransformer>
     export namespace Shift {
       export type Variants = InferVariants<SchedulingShiftTransformer>
+    }
+    export type TimeOff = InferData<SchedulingTimeOffTransformer>
+    export namespace TimeOff {
+      export type Variants = InferVariants<SchedulingTimeOffTransformer>
+    }
+    export type WorkingHour = InferData<SchedulingWorkingHourTransformer>
+    export namespace WorkingHour {
+      export type Variants = InferVariants<SchedulingWorkingHourTransformer>
     }
   }
   export namespace Tenants {

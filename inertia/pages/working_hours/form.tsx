@@ -260,7 +260,7 @@ interface TimeOptionsProps {
   stepMinutes?: number
 }
 
-const TimeOptions = React.memo(function TimeOptions({ stepMinutes = 5 }: TimeOptionsProps) {
+export const TimeOptions = React.memo(function TimeOptions({ stepMinutes = 5 }: TimeOptionsProps) {
   const count = (24 * 60) / stepMinutes
 
   return (

@@ -55,3 +55,13 @@ export function range(from: number, to: number): number[] {
 export function sum(numbers: number[]): number {
   return numbers.reduce((acc, current) => acc + current, 0)
 }
+
+export function groupBy<T>(items: Array<T>, key: (item: T) => string) {
+  const map = new Map<string, Array<T>>()
+  for (const item of items) {
+    const k = key(item)
+    if (!map.has(k)) map.set(k, [])
+    map.get(k)!.push(item)
+  }
+  return map
+}

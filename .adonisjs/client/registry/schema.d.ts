@@ -619,6 +619,66 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/delete_closed_date_controller').default['execute']>>>
     }
   }
+  'create_time_off.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/time-offs/new'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/scheduling/controllers/create_time_off_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/create_time_off_controller').default['render']>>>
+    }
+  }
+  'create_time_off.execute': {
+    methods: ["POST"]
+    pattern: '/time-offs'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#app/scheduling/controllers/create_time_off_controller').default)['validator']>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#app/scheduling/controllers/create_time_off_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/scheduling/controllers/create_time_off_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/create_time_off_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'update_time_off.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/time-offs/edit/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/scheduling/controllers/update_time_off_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/update_time_off_controller').default['render']>>>
+    }
+  }
+  'update_time_off.execute': {
+    methods: ["PUT"]
+    pattern: '/time-offs/:id'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#app/scheduling/controllers/update_time_off_controller').default)['validator']>>
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#app/scheduling/controllers/update_time_off_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/scheduling/controllers/update_time_off_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/update_time_off_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'delete_time_off.execute': {
+    methods: ["DELETE"]
+    pattern: '/time-offs/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/scheduling/controllers/delete_time_off_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/delete_time_off_controller').default['execute']>>>
+    }
+  }
   'update_working_hours.render': {
     methods: ["GET","HEAD"]
     pattern: '/working-hours/:agendaId'

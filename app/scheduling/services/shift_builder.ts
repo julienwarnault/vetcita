@@ -1,5 +1,5 @@
-import type { DateTime } from 'luxon'
 import { inject } from '@adonisjs/core'
+import { Interval, type DateTime } from 'luxon'
 import { DEFAULT_TIMEZONE, TimeService } from '#shared/services/time_service'
 import type { UUID } from '#shared/types'
 
@@ -22,12 +22,21 @@ type ClosedDate = {
   end: DateTime
 }
 
+type TimeOff = {
+  agendaId: UUID
+  start: DateTime
+  end: DateTime
+  startTime: string
+  endTime: string
+}
+
 type BuildShiftsParams = {
   from: DateTime
   to: DateTime
   agendaIds: UUID[]
   workingHours: WorkingHour[]
   closedDates: ClosedDate[]
+  timeOffs: TimeOff[]
 }
 
 @inject()
@@ -46,7 +55,12 @@ export class ShiftBuilder {
     return dates.flatMap((date) => {
       if (this.#isClosedDate(date, params.closedDates)) return []
 
-      return this.#buildFromWorkingHours(agendaId, date, params.workingHours)
+      const shifts = this.#buildFromWorkingHours(agendaId, date, params.workingHours)
+
+      return this.#subtractTimeOffs(
+        shifts,
+        params.timeOffs.filter((timeOff) => timeOff.agendaId === agendaId)
+      )
     })
   }
 
@@ -71,6 +85,42 @@ export class ShiftBuilder {
         end: this.#combineDateAndTime(date, workingHour.endTime),
       }
     })
+  }
+
+  #subtractTimeOffs(shifts: Shift[], timeOffs: TimeOff[]) {
+    let result = shifts
+
+    for (const timeOff of timeOffs) {
+      const periods = this.#expandTimeOff(timeOff)
+
+      for (const period of periods) {
+        result = result.flatMap((shift) => this.#subtractPeriod(shift, period))
+      }
+    }
+
+    return result.filter((shift) => shift.start < shift.end)
+  }
+
+  #expandTimeOff(timeOff: TimeOff): Array<{ start: DateTime; end: DateTime }> {
+    return this.timeService.getDatesBetween(timeOff.start, timeOff.end).map((date) => ({
+      start: this.#combineDateAndTime(date, timeOff.startTime),
+      end: this.#combineDateAndTime(date, timeOff.endTime),
+    }))
+  }
+
+  #subtractPeriod(shift: Shift, period: { start: DateTime; end: DateTime }): Shift[] {
+    const shiftInterval = Interval.fromDateTimes(shift.start, shift.end)
+    const periodInterval = Interval.fromDateTimes(period.start, period.end)
+
+    if (!shiftInterval.overlaps(periodInterval)) {
+      return [shift]
+    }
+
+    return shiftInterval.difference(periodInterval).map((interval) => ({
+      ...shift,
+      start: interval.start!,
+      end: interval.end!,
+    }))
   }
 
   #combineDateAndTime(date: DateTime, time: string): DateTime {

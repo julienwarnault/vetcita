@@ -312,6 +312,36 @@ const routes = {
     tokens: [{"old":"/closed-dates/:id","type":0,"val":"closed-dates","end":""},{"old":"/closed-dates/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['delete_closed_date.execute']['types'],
   },
+  'create_time_off.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/time-offs/new',
+    tokens: [{"old":"/time-offs/new","type":0,"val":"time-offs","end":""},{"old":"/time-offs/new","type":0,"val":"new","end":""}],
+    types: placeholder as Registry['create_time_off.render']['types'],
+  },
+  'create_time_off.execute': {
+    methods: ["POST"],
+    pattern: '/time-offs',
+    tokens: [{"old":"/time-offs","type":0,"val":"time-offs","end":""}],
+    types: placeholder as Registry['create_time_off.execute']['types'],
+  },
+  'update_time_off.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/time-offs/edit/:id',
+    tokens: [{"old":"/time-offs/edit/:id","type":0,"val":"time-offs","end":""},{"old":"/time-offs/edit/:id","type":0,"val":"edit","end":""},{"old":"/time-offs/edit/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['update_time_off.render']['types'],
+  },
+  'update_time_off.execute': {
+    methods: ["PUT"],
+    pattern: '/time-offs/:id',
+    tokens: [{"old":"/time-offs/:id","type":0,"val":"time-offs","end":""},{"old":"/time-offs/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['update_time_off.execute']['types'],
+  },
+  'delete_time_off.execute': {
+    methods: ["DELETE"],
+    pattern: '/time-offs/:id',
+    tokens: [{"old":"/time-offs/:id","type":0,"val":"time-offs","end":""},{"old":"/time-offs/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['delete_time_off.execute']['types'],
+  },
   'update_working_hours.render': {
     methods: ["GET","HEAD"],
     pattern: '/working-hours/:agendaId',

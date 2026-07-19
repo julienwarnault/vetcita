@@ -174,6 +174,33 @@ export class TenantSchema extends BaseModel {
   declare website: string | null
 }
 
+export class TimeOffSchema extends BaseModel {
+  static $columns = ['agendaId', 'createdAt', 'description', 'end', 'endTime', 'id', 'start', 'startTime', 'tenantId', 'type', 'updatedAt'] as const
+  $columns = TimeOffSchema.$columns
+  @column()
+  declare agendaId: UUID
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare description: string | null
+  @column.date()
+  declare end: DateTime
+  @column()
+  declare endTime: string
+  @column({ isPrimary: true })
+  declare id: UUID
+  @column.date()
+  declare start: DateTime
+  @column()
+  declare startTime: string
+  @column()
+  declare tenantId: UUID
+  @column()
+  declare type: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class UserSchema extends BaseModel {
   static $columns = ['createdAt', 'email', 'fullName', 'id', 'password', 'tenantId', 'updatedAt'] as const
   $columns = UserSchema.$columns
