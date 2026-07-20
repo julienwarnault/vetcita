@@ -17,6 +17,12 @@ type WorkingHour = {
   endTime: string
 }
 
+type ScheduleDay = {
+  agendaId: UUID
+  date: DateTime
+  shifts: { startTime: string; endTime: string }[]
+}
+
 type ClosedDate = {
   start: DateTime
   end: DateTime
@@ -35,6 +41,7 @@ type BuildShiftsParams = {
   to: DateTime
   agendaIds: UUID[]
   workingHours: WorkingHour[]
+  scheduleDays: ScheduleDay[]
   closedDates: ClosedDate[]
   timeOffs: TimeOff[]
 }
@@ -55,7 +62,11 @@ export class ShiftBuilder {
     return dates.flatMap((date) => {
       if (this.#isClosedDate(date, params.closedDates)) return []
 
-      const shifts = this.#buildFromWorkingHours(agendaId, date, params.workingHours)
+      const scheduleDay = this.#findScheduleDay(agendaId, date, params.scheduleDays)
+
+      const shifts = scheduleDay
+        ? this.#buildFromScheduleDay(agendaId, date, scheduleDay)
+        : this.#buildFromWorkingHours(agendaId, date, params.workingHours)
 
       return this.#subtractTimeOffs(
         shifts,
@@ -72,6 +83,17 @@ export class ShiftBuilder {
     })
   }
 
+  #buildFromScheduleDay(agendaId: UUID, date: DateTime, scheduleDay: ScheduleDay) {
+    return scheduleDay.shifts
+      .map((shift) => ({
+        agendaId,
+        date: date.toISODate()!,
+        start: this.#combineDateAndTime(date, shift.startTime),
+        end: this.#combineDateAndTime(date, shift.endTime),
+      }))
+      .filter((shift) => shift.start < shift.end)
+  }
+
   #buildFromWorkingHours(agendaId: UUID, date: DateTime, workingHours: WorkingHour[]) {
     const agendaWorkingHours = workingHours.filter(
       (workingHour) => workingHour.agendaId === agendaId && date.weekday === workingHour.dayOfWeek
@@ -84,6 +106,12 @@ export class ShiftBuilder {
         start: this.#combineDateAndTime(date, workingHour.startTime),
         end: this.#combineDateAndTime(date, workingHour.endTime),
       }
+    })
+  }
+
+  #findScheduleDay(agendaId: UUID, date: DateTime, scheduleDays: ScheduleDay[]) {
+    return scheduleDays.find((scheduleDay) => {
+      return scheduleDay.agendaId === agendaId && scheduleDay.date.hasSame(date, 'day')
     })
   }
 

@@ -2,6 +2,7 @@ import { type DateTime } from 'luxon'
 import { inject } from '@adonisjs/core'
 import { ShiftBuilder } from '#scheduling/services/shift_builder'
 import WorkingHour from '#scheduling/models/working_hour'
+import ScheduleDay from '#scheduling/models/schedule_day'
 import ClosedDate from '#scheduling/models/closed_date'
 import TimeOff from '#scheduling/models/time_off'
 import Agenda from '#agendas/models/agenda'
@@ -33,6 +34,13 @@ export class GetShifts {
       .orderBy('day_of_week')
       .orderBy('start_time')
 
+    const scheduleDays = await ScheduleDay.query()
+      .where('tenant_id', params.tenantId)
+      .where('date', '<=', params.to.toFormat('yyyy-MM-dd'))
+      .where('date', '>=', params.from.toFormat('yyyy-MM-dd'))
+      .orderBy('agenda_id')
+      .orderBy('date')
+
     const closedDates = await ClosedDate.query()
       .where('tenant_id', params.tenantId)
       .where('start', '<=', params.to.toJSDate())
@@ -50,6 +58,7 @@ export class GetShifts {
       to: params.to,
       agendaIds: agendaIds,
       workingHours: workingHours,
+      scheduleDays: scheduleDays,
       closedDates: closedDates,
       timeOffs: timeOffs,
     })

@@ -185,9 +185,60 @@ export function ShiftTable(props: ShiftTableProps) {
                           )
                         })}
                         {dateShifts.map((shift, i) => (
-                          <div key={`${agenda.id}:${isoDate}:shift:${i}`} className="bg-accent/10 rounded-lg px-4 py-3">
-                            <div className="text-[13px]/4 font-normal">{formatTimeRange(shift.start, shift.end)}</div>
-                          </div>
+                          <Menu
+                            key={`${agenda.id}:${isoDate}:shift:${i}`}
+                            align="start"
+                            trigger={
+                              <button className="bg-accent/10 rounded-lg px-4 py-3 hover:bg-accent/20">
+                                <div className="text-[13px]/4 font-normal">
+                                  {formatTimeRange(shift.start, shift.end)}
+                                </div>
+                              </button>
+                            }
+                          >
+                            <Menu.Item
+                              onClick={() =>
+                                visitModal(
+                                  urlFor('upsert_schedule_day.render', {
+                                    date: date.toISODate()!,
+                                    agendaId: agenda.id,
+                                  })
+                                )
+                              }
+                            >
+                              Añadir turno
+                            </Menu.Item>
+                            <Menu.Item
+                              onClick={() => {
+                                visitModal(
+                                  urlFor('create_time_off.render', null, {
+                                    qs: { initialDate: date.toISODate(), initialAgendaId: agenda.id },
+                                  })
+                                )
+                              }}
+                            >
+                              Añadir días libres
+                            </Menu.Item>
+                            <Menu.Item
+                              variant="destructive"
+                              onClick={() => {
+                                router.put(
+                                  urlFor('upsert_schedule_day.execute', {
+                                    agendaId: agenda.id,
+                                    date: date.toISODate()!,
+                                  }),
+                                  {
+                                    shifts: dateShifts.toSpliced(i, 1).map((s) => ({
+                                      startTime: s.start.toFormat('HH:mm:ss'),
+                                      endTime: s.end.toFormat('HH:mm:ss'),
+                                    })),
+                                  }
+                                )
+                              }}
+                            >
+                              Eliminar este turno
+                            </Menu.Item>
+                          </Menu>
                         ))}
                       </div>
                       {!isClosed && (
@@ -217,6 +268,18 @@ export function ShiftTable(props: ShiftTableProps) {
                               </button>
                             }
                           >
+                            <Menu.Item
+                              onClick={() =>
+                                visitModal(
+                                  urlFor('upsert_schedule_day.render', {
+                                    date: date.toISODate()!,
+                                    agendaId: agenda.id,
+                                  })
+                                )
+                              }
+                            >
+                              Añadir turno
+                            </Menu.Item>
                             <Menu.Item
                               onClick={() =>
                                 visitModal(

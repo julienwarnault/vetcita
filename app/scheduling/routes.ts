@@ -17,6 +17,8 @@ router
     router.delete('time-offs/:id', [controllers.scheduling.DeleteTimeOff, 'execute'])
     router.get('working-hours/:agendaId', [controllers.scheduling.UpdateWorkingHours, 'render'])
     router.put('working-hours/:agendaId', [controllers.scheduling.UpdateWorkingHours, 'execute'])
+    router.get('schedule-days/:agendaId/:date', [controllers.scheduling.UpsertScheduleDay, 'render'])
+    router.put('schedule-days/:agendaId/:date', [controllers.scheduling.UpsertScheduleDay, 'execute'])
   })
   .use([middleware.auth()])
 

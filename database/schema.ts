@@ -155,6 +155,25 @@ export class PatientSchema extends BaseModel {
   declare updatedAt: DateTime | null
 }
 
+export class ScheduleDaySchema extends BaseModel {
+  static $columns = ['agendaId', 'createdAt', 'date', 'id', 'shifts', 'tenantId', 'updatedAt'] as const
+  $columns = ScheduleDaySchema.$columns
+  @column()
+  declare agendaId: UUID
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column.date()
+  declare date: DateTime
+  @column({ isPrimary: true })
+  declare id: UUID
+  @column()
+  declare shifts: any
+  @column()
+  declare tenantId: UUID
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class TenantSchema extends BaseModel {
   static $columns = ['createdAt', 'id', 'name', 'phone', 'slug', 'updatedAt', 'website'] as const
   $columns = TenantSchema.$columns

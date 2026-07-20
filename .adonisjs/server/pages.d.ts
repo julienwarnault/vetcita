@@ -36,6 +36,7 @@ declare module '@adonisjs/inertia/types' {
     'settings/show': ExtractProps<(typeof import('../../inertia/pages/settings/show.tsx'))['default']>
     'shifts/closed_date_form': ExtractProps<(typeof import('../../inertia/pages/shifts/closed_date_form.tsx'))['default']>
     'shifts/list': ExtractProps<(typeof import('../../inertia/pages/shifts/list.tsx'))['default']>
+    'shifts/schedule_day_form': ExtractProps<(typeof import('../../inertia/pages/shifts/schedule_day_form.tsx'))['default']>
     'shifts/time_off_form': ExtractProps<(typeof import('../../inertia/pages/shifts/time_off_form.tsx'))['default']>
     'tenants/form': ExtractProps<(typeof import('../../inertia/pages/tenants/form.tsx'))['default']>
     'working_hours/form': ExtractProps<(typeof import('../../inertia/pages/working_hours/form.tsx'))['default']>

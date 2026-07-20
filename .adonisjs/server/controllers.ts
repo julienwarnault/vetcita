@@ -55,6 +55,7 @@ export const controllers = {
     UpdateClosedDate: () => import('#app/scheduling/controllers/update_closed_date_controller'),
     UpdateTimeOff: () => import('#app/scheduling/controllers/update_time_off_controller'),
     UpdateWorkingHours: () => import('#app/scheduling/controllers/update_working_hours_controller'),
+    UpsertScheduleDay: () => import('#app/scheduling/controllers/upsert_schedule_day_controller'),
   },
   search: {
     Search: () => import('#app/search/controllers/search_controller'),

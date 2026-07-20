@@ -354,6 +354,18 @@ const routes = {
     tokens: [{"old":"/working-hours/:agendaId","type":0,"val":"working-hours","end":""},{"old":"/working-hours/:agendaId","type":1,"val":"agendaId","end":""}],
     types: placeholder as Registry['update_working_hours.execute']['types'],
   },
+  'upsert_schedule_day.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/schedule-days/:agendaId/:date',
+    tokens: [{"old":"/schedule-days/:agendaId/:date","type":0,"val":"schedule-days","end":""},{"old":"/schedule-days/:agendaId/:date","type":1,"val":"agendaId","end":""},{"old":"/schedule-days/:agendaId/:date","type":1,"val":"date","end":""}],
+    types: placeholder as Registry['upsert_schedule_day.render']['types'],
+  },
+  'upsert_schedule_day.execute': {
+    methods: ["PUT"],
+    pattern: '/schedule-days/:agendaId/:date',
+    tokens: [{"old":"/schedule-days/:agendaId/:date","type":0,"val":"schedule-days","end":""},{"old":"/schedule-days/:agendaId/:date","type":1,"val":"agendaId","end":""},{"old":"/schedule-days/:agendaId/:date","type":1,"val":"date","end":""}],
+    types: placeholder as Registry['upsert_schedule_day.execute']['types'],
+  },
   'get_bookable_days.render': {
     methods: ["GET","HEAD"],
     pattern: '/api/bookable-days',

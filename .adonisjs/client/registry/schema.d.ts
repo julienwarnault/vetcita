@@ -703,6 +703,30 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/update_working_hours_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
+  'upsert_schedule_day.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/schedule-days/:agendaId/:date'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue, ParamValue]
+      params: { agendaId: ParamValue; date: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/scheduling/controllers/upsert_schedule_day_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/upsert_schedule_day_controller').default['render']>>>
+    }
+  }
+  'upsert_schedule_day.execute': {
+    methods: ["PUT"]
+    pattern: '/schedule-days/:agendaId/:date'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#app/scheduling/controllers/upsert_schedule_day_controller').default)['validator']>>
+      paramsTuple: [ParamValue, ParamValue]
+      params: { agendaId: ParamValue; date: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#app/scheduling/controllers/upsert_schedule_day_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/scheduling/controllers/upsert_schedule_day_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/upsert_schedule_day_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
   'get_bookable_days.render': {
     methods: ["GET","HEAD"]
     pattern: '/api/bookable-days'
