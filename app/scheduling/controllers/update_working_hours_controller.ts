@@ -12,7 +12,9 @@ import { GetAgenda } from '#agendas/queries/get_agenda'
 export default class UpdateWorkingHoursController {
   static validator = vine.create(
     vine.object({
-      weekShifts: vine.array(vine.array(vine.tuple([vine.string(), vine.string()]))).fixedLength(7),
+      weekShifts: vine
+        .array(vine.array(vine.object({ startTime: vine.string(), endTime: vine.string() })))
+        .fixedLength(7),
     })
   )
 
@@ -30,7 +32,7 @@ export default class UpdateWorkingHoursController {
       this.getWorkingHours.execute({ tenantId: user.tenantId, agendaIds: [params.agendaId] }),
     ])
 
-    return inertia.render('working_hours/form', {
+    return inertia.render('shifts/working_hours_form', {
       agenda: AgendaTransformer.transform(agenda),
       workingHours: WorkingHourTransformer.transform(workingHours),
     })
@@ -45,6 +47,6 @@ export default class UpdateWorkingHoursController {
       return this.updateWorkingHours.execute({ agendaId: params.agendaId, tenantId: user.tenantId, ...payload })
     })
 
-    return response.redirect().toRoute('list_shifts.render')
+    return response.redirect().back()
   }
 }

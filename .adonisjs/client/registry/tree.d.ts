@@ -132,9 +132,16 @@ export interface ApiDefinition {
     render: typeof routes['update_working_hours.render']
     execute: typeof routes['update_working_hours.execute']
   }
-  upsertScheduleDay: {
-    render: typeof routes['upsert_schedule_day.render']
-    execute: typeof routes['upsert_schedule_day.execute']
+  createScheduleDay: {
+    render: typeof routes['create_schedule_day.render']
+    execute: typeof routes['create_schedule_day.execute']
+  }
+  updateScheduleDay: {
+    render: typeof routes['update_schedule_day.render']
+    execute: typeof routes['update_schedule_day.execute']
+  }
+  deleteScheduleDay: {
+    execute: typeof routes['delete_schedule_day.execute']
   }
   getBookableDays: {
     render: typeof routes['get_bookable_days.render']

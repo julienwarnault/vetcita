@@ -25,7 +25,7 @@ export type EmptyVariants = VariantProps<typeof empty>
 
 interface EmptyProps {
   heading: string
-  description: ReactNode
+  description?: ReactNode
   illustration?: string
   icon?: IconName
   className?: string

@@ -1,34 +1,35 @@
 import { useMemo } from 'react'
+import { DateTime } from 'luxon'
 import { Data } from '@generated/data'
 import { router } from '@inertiajs/react'
-import { DateTime, Interval } from 'luxon'
 import { useModalStack } from '@inertiaui/modal-react'
 import { CalendarDatePicker } from '~/components/calendar/calendar_date_picker'
-import { DEFAULT_TIMEZONE, eachDayOfInterval, today } from '~/lib/date'
 import { ShiftTable } from '~/components/shift/shifts_table'
 import { ViewHeader } from '~/components/view_header'
 import { Button } from '~/components/ui/button'
-import { timeToMinutes } from '~/lib/utils'
+import { toShiftTable } from '~/lib/scheduling'
 import { Menu } from '~/components/ui/menu'
 import { InertiaProps } from '~/types'
 import { urlFor } from '~/lib/tuyau'
+import { today } from '~/lib/date'
 
 type PageProps = InertiaProps<{
   date: string
   agendas: Data.Agendas.Agenda[]
   shifts: Data.Scheduling.Shift[]
   closedDates: Data.Scheduling.ClosedDate[]
+  scheduleDays: Data.Scheduling.ScheduleDay[]
   timeOffs: Data.Scheduling.TimeOff[]
 }>
 
 export default function List(props: PageProps) {
-  const { date, agendas, shifts, closedDates, timeOffs } = props
+  const { date, agendas, shifts, closedDates, scheduleDays, timeOffs } = props
 
   const { visitModal } = useModalStack()
 
-  const minValue = useMemo(() => DateTime.fromISO(date).startOf('week'), [date])
-  const maxValue = useMemo(() => DateTime.fromISO(date).endOf('week'), [date])
-  const dates = useMemo(() => eachDayOfInterval({ start: minValue, end: maxValue }), [minValue, maxValue])
+  const table = useMemo(() => {
+    return toShiftTable({ date, shifts, scheduleDays, closedDates, timeOffs })
+  }, [date, shifts, closedDates, scheduleDays, timeOffs])
 
   function navigate(newDate: string) {
     const qs: Record<string, any> = { date: newDate }
@@ -67,37 +68,7 @@ export default function List(props: PageProps) {
               </div>
             </div>
 
-            <ShiftTable
-              dates={dates}
-              agendas={agendas}
-              shifts={shifts.map((shift) => ({
-                date: shift.date,
-                agendaId: shift.agendaId,
-                start: DateTime.fromISO(shift.start!, { zone: DEFAULT_TIMEZONE }),
-                end: DateTime.fromISO(shift.end!, { zone: DEFAULT_TIMEZONE }),
-              }))}
-              closedDates={closedDates.map((closedDate) => ({
-                id: closedDate.id,
-                description: closedDate.description,
-                interval: Interval.fromDateTimes(
-                  DateTime.fromISO(closedDate.start!).startOf('day'),
-                  DateTime.fromISO(closedDate.end!).endOf('day')
-                ),
-              }))}
-              timeOffs={timeOffs.map((timeOff) => ({
-                id: timeOff.id,
-                agendaId: timeOff.agendaId,
-                type: timeOff.type,
-                interval: Interval.fromDateTimes(
-                  DateTime.max(DateTime.fromISO(timeOff.start!).startOf('day'), minValue).plus({
-                    minutes: timeToMinutes(timeOff.startTime),
-                  }),
-                  DateTime.min(DateTime.fromISO(timeOff.end!).startOf('day'), maxValue.startOf('day')).plus({
-                    minutes: timeToMinutes(timeOff.endTime),
-                  })
-                ),
-              }))}
-            />
+            <ShiftTable agendas={agendas} {...table} />
           </div>
         </div>
       </div>

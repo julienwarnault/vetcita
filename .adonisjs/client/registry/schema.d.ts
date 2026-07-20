@@ -703,28 +703,64 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/update_working_hours_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'upsert_schedule_day.render': {
+  'create_schedule_day.render': {
     methods: ["GET","HEAD"]
-    pattern: '/schedule-days/:agendaId/:date'
+    pattern: '/schedule-days/new'
     types: {
       body: {}
-      paramsTuple: [ParamValue, ParamValue]
-      params: { agendaId: ParamValue; date: ParamValue }
+      paramsTuple: []
+      params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#app/scheduling/controllers/upsert_schedule_day_controller').default['render']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/upsert_schedule_day_controller').default['render']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/scheduling/controllers/create_schedule_day_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/create_schedule_day_controller').default['render']>>>
     }
   }
-  'upsert_schedule_day.execute': {
-    methods: ["PUT"]
-    pattern: '/schedule-days/:agendaId/:date'
+  'create_schedule_day.execute': {
+    methods: ["POST"]
+    pattern: '/schedule-days'
     types: {
-      body: ExtractBody<InferInput<(typeof import('#app/scheduling/controllers/upsert_schedule_day_controller').default)['validator']>>
-      paramsTuple: [ParamValue, ParamValue]
-      params: { agendaId: ParamValue; date: ParamValue }
-      query: ExtractQuery<InferInput<(typeof import('#app/scheduling/controllers/upsert_schedule_day_controller').default)['validator']>>
-      response: ExtractResponse<Awaited<ReturnType<import('#app/scheduling/controllers/upsert_schedule_day_controller').default['execute']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/upsert_schedule_day_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+      body: ExtractBody<InferInput<(typeof import('#app/scheduling/controllers/create_schedule_day_controller').default)['validator']>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#app/scheduling/controllers/create_schedule_day_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/scheduling/controllers/create_schedule_day_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/create_schedule_day_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'update_schedule_day.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/schedule-days/edit/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/scheduling/controllers/update_schedule_day_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/update_schedule_day_controller').default['render']>>>
+    }
+  }
+  'update_schedule_day.execute': {
+    methods: ["PUT"]
+    pattern: '/schedule-days/:id'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#app/scheduling/controllers/update_schedule_day_controller').default)['validator']>>
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#app/scheduling/controllers/update_schedule_day_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/scheduling/controllers/update_schedule_day_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/update_schedule_day_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'delete_schedule_day.execute': {
+    methods: ["DELETE"]
+    pattern: '/schedule-days/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/scheduling/controllers/delete_schedule_day_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/scheduling/controllers/delete_schedule_day_controller').default['execute']>>>
     }
   }
   'get_bookable_days.render': {

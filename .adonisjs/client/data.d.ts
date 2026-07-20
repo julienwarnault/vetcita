@@ -13,6 +13,7 @@ import type BookingAppointmentTransformer from '#app/booking/transformers/appoin
 import type IdentityUserTransformer from '#app/identity/transformers/user_transformer'
 import type PatientsPatientTransformer from '#app/patients/transformers/patient_transformer'
 import type SchedulingClosedDateTransformer from '#app/scheduling/transformers/closed_date_transformer'
+import type SchedulingScheduleDayTransformer from '#app/scheduling/transformers/schedule_day_transformer'
 import type SchedulingShiftTransformer from '#app/scheduling/transformers/shift_transformer'
 import type SchedulingTimeOffTransformer from '#app/scheduling/transformers/time_off_transformer'
 import type SchedulingWorkingHourTransformer from '#app/scheduling/transformers/working_hour_transformer'
@@ -60,6 +61,10 @@ export namespace Data {
     export type ClosedDate = InferData<SchedulingClosedDateTransformer>
     export namespace ClosedDate {
       export type Variants = InferVariants<SchedulingClosedDateTransformer>
+    }
+    export type ScheduleDay = InferData<SchedulingScheduleDayTransformer>
+    export namespace ScheduleDay {
+      export type Variants = InferVariants<SchedulingScheduleDayTransformer>
     }
     export type Shift = InferData<SchedulingShiftTransformer>
     export namespace Shift {

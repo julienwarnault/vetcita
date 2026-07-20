@@ -12,6 +12,7 @@ export default class extends BaseSchema {
       table.uuid('agenda_id').notNullable().references('id').inTable('agendas').onDelete('CASCADE')
       table.date('date').notNullable()
       table.jsonb('shifts').notNullable()
+      table.unique(['tenant_id', 'agenda_id', 'date'])
     })
   }
 

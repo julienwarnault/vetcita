@@ -63,6 +63,6 @@ export class GetShifts {
       timeOffs: timeOffs,
     })
 
-    return { shifts }
+    return { shifts, agendas, workingHours, scheduleDays, closedDates, timeOffs }
   }
 }

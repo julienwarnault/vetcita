@@ -23,6 +23,11 @@ interface ShiftTableProps {
     start: DateTime
     end: DateTime
   }>
+  scheduleDays: Array<{
+    id: string
+    agendaId: string
+    date: string
+  }>
   closedDates: Array<{
     id: string
     interval: Interval
@@ -43,15 +48,24 @@ function formatTimeRange(start: DateTime, end: DateTime) {
 }
 
 export function ShiftTable(props: ShiftTableProps) {
-  const { dates, agendas, shifts, closedDates, timeOffs } = props
+  const { dates, agendas, shifts, scheduleDays, closedDates, timeOffs } = props
 
   const { visitModal } = useModalStack()
 
   const shiftsByAgenda = groupBy(shifts, (s) => s.agendaId)
+  const scheduleDaysByAgenda = groupBy(scheduleDays, (t) => t.agendaId)
   const timeOffsByAgenda = groupBy(timeOffs, (t) => t.agendaId)
   const closedEventByDate = new Map(
     dates.map((date) => [date.toISODate()!, closedDates.find((cd) => cd.interval.contains(date))])
   )
+
+  function handleEditDay(agendaId: string, date: DateTime, scheduledDayId?: string) {
+    if (scheduledDayId) {
+      visitModal(urlFor('update_schedule_day.render', { id: scheduledDayId }))
+    } else {
+      visitModal(urlFor('create_schedule_day.render', {}, { qs: { date: date.toISODate(), agendaId } }))
+    }
+  }
 
   return (
     <table className="border-separate border-spacing-0 h-1">
@@ -89,13 +103,14 @@ export function ShiftTable(props: ShiftTableProps) {
         {agendas.map((agenda, agendaIndex) => {
           const agendaShifts = shiftsByAgenda.get(agenda.id) ?? []
           const agendaTimeOffs = timeOffsByAgenda.get(agenda.id) ?? []
+          const agendaScheduleDays = scheduleDaysByAgenda.get(agenda.id) ?? []
           const isFirstAgenda = agendaIndex === 0
 
           return (
             <tr key={agenda.id} className="group">
               <td
                 className="content-start border-l border-r border-b p-4 cursor-pointer hover:bg-background group-first:border-t group-first:rounded-tl-xl group-last:rounded-bl-xl"
-                onClick={() => router.visit(urlFor('update_working_hours.render', { agendaId: agenda.id }))}
+                onClick={() => visitModal(urlFor('update_working_hours.render', { agendaId: agenda.id }))}
               >
                 <div className="flex gap-2">
                   <div className="flex flex-1 items-center gap-3">
@@ -121,6 +136,8 @@ export function ShiftTable(props: ShiftTableProps) {
                 const dateTimeOffs = agendaTimeOffs.filter((t) => containsDay(t.interval, date))
                 const isNoWorkDay = dateShifts.length === 0 && dateTimeOffs.length === 0
 
+                const scheduleDayId = agendaScheduleDays.find((s) => s.date === isoDate)?.id
+
                 return (
                   <td
                     key={`${agenda.id}:${isoDate}`}
@@ -140,7 +157,7 @@ export function ShiftTable(props: ShiftTableProps) {
                             <div className="text-[13px]/4 font-normal">{closedEvent.description ?? 'Cerrado'}</div>
                           </button>
                         )}
-                        {dateTimeOffs.map((timeOff, i) => {
+                        {dateTimeOffs.map((timeOff) => {
                           const isFirstDateOfTimeOff = timeOff.interval.start?.hasSame(date, 'day')
                           const span = isFirstDateOfTimeOff ? timeOff.interval.count('days') : 1
 
@@ -196,47 +213,19 @@ export function ShiftTable(props: ShiftTableProps) {
                               </button>
                             }
                           >
-                            <Menu.Item
-                              onClick={() =>
-                                visitModal(
-                                  urlFor('upsert_schedule_day.render', {
-                                    date: date.toISODate()!,
-                                    agendaId: agenda.id,
-                                  })
-                                )
-                              }
-                            >
-                              Añadir turno
+                            <Menu.Item onClick={() => handleEditDay(agenda.id, date, scheduleDayId)}>
+                              Editar este día
                             </Menu.Item>
                             <Menu.Item
                               onClick={() => {
                                 visitModal(
                                   urlFor('create_time_off.render', null, {
-                                    qs: { initialDate: date.toISODate(), initialAgendaId: agenda.id },
+                                    qs: { initialDate: isoDate, initialAgendaId: agenda.id },
                                   })
                                 )
                               }}
                             >
                               Añadir días libres
-                            </Menu.Item>
-                            <Menu.Item
-                              variant="destructive"
-                              onClick={() => {
-                                router.put(
-                                  urlFor('upsert_schedule_day.execute', {
-                                    agendaId: agenda.id,
-                                    date: date.toISODate()!,
-                                  }),
-                                  {
-                                    shifts: dateShifts.toSpliced(i, 1).map((s) => ({
-                                      startTime: s.start.toFormat('HH:mm:ss'),
-                                      endTime: s.end.toFormat('HH:mm:ss'),
-                                    })),
-                                  }
-                                )
-                              }}
-                            >
-                              Eliminar este turno
                             </Menu.Item>
                           </Menu>
                         ))}
@@ -268,23 +257,14 @@ export function ShiftTable(props: ShiftTableProps) {
                               </button>
                             }
                           >
-                            <Menu.Item
-                              onClick={() =>
-                                visitModal(
-                                  urlFor('upsert_schedule_day.render', {
-                                    date: date.toISODate()!,
-                                    agendaId: agenda.id,
-                                  })
-                                )
-                              }
-                            >
-                              Añadir turno
+                            <Menu.Item onClick={() => handleEditDay(agenda.id, date, scheduleDayId)}>
+                              Editar este día
                             </Menu.Item>
                             <Menu.Item
                               onClick={() =>
                                 visitModal(
                                   urlFor('create_time_off.render', null, {
-                                    qs: { initialDate: date.toISODate(), initialAgendaId: agenda.id },
+                                    qs: { initialDate: isoDate, initialAgendaId: agenda.id },
                                   })
                                 )
                               }

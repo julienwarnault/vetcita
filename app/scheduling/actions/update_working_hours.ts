@@ -5,7 +5,7 @@ import type { UUID } from '#shared/types'
 interface UpdateWorkingHoursParams {
   agendaId: UUID
   tenantId: UUID
-  weekShifts: [string, string][][]
+  weekShifts: { startTime: string; endTime: string }[][]
 }
 
 export class UpdateWorkingHours {
@@ -19,7 +19,7 @@ export class UpdateWorkingHours {
 
     const workingHours = await WorkingHour.createMany(
       params.weekShifts.flatMap((ranges, i) =>
-        ranges.map(([startTime, endTime]) => ({
+        ranges.map(({ startTime, endTime }) => ({
           tenantId: params.tenantId,
           agendaId: params.agendaId,
           dayOfWeek: i + 1,

@@ -2,9 +2,10 @@ import { Data } from '@generated/data'
 import { Trash2Icon } from 'lucide-react'
 import { router } from '@inertiajs/react'
 import { NativeSelect } from '~/components/ui/native_select'
+import { InputTime } from '~/components/shift/input_time'
 import { InertiaModal } from '~/components/inertia_modal'
 import { FormHeader } from '~/components/form_header'
-import { TimeOptions } from '../working_hours/form'
+import { DEFAULT_SHIFT } from '~/lib/scheduling'
 import { Button } from '~/components/ui/button'
 import { Banner } from '~/components/ui/banner'
 import { Field } from '~/components/ui/field'
@@ -103,17 +104,13 @@ export default function TimeOffForm(props: PageProps) {
 
                 <Field name="startTime" className="col-span-3">
                   <Field.Label>Hora de inicio</Field.Label>
-                  <NativeSelect defaultValue={timeOff?.startTime ?? '09:00:00'}>
-                    <TimeOptions />
-                  </NativeSelect>
+                  <InputTime defaultValue={timeOff?.startTime ?? DEFAULT_SHIFT.startTime} />
                   <Field.Error />
                 </Field>
 
                 <Field name="endTime" className="col-span-3">
                   <Field.Label>Hora de finalización</Field.Label>
-                  <NativeSelect defaultValue={timeOff?.endTime ?? '17:00:00'}>
-                    <TimeOptions />
-                  </NativeSelect>
+                  <InputTime defaultValue={timeOff?.endTime ?? DEFAULT_SHIFT.endTime} />
                   <Field.Error />
                 </Field>
 
