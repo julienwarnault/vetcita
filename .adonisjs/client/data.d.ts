@@ -18,6 +18,8 @@ import type SchedulingShiftTransformer from '#app/scheduling/transformers/shift_
 import type SchedulingTimeOffTransformer from '#app/scheduling/transformers/time_off_transformer'
 import type SchedulingWorkingHourTransformer from '#app/scheduling/transformers/working_hour_transformer'
 import type TenantsTenantTransformer from '#app/tenants/transformers/tenant_transformer'
+import type PetsBreedTransformer from '#app/pets/transformers/breed_transformer'
+import type PetsSpeciesTransformer from '#app/pets/transformers/species_transformer'
 import type InertiaMiddleware from '#shared/middleware/inertia_middleware'
 
 export namespace Data {
@@ -83,6 +85,16 @@ export namespace Data {
     export type Tenant = InferData<TenantsTenantTransformer>
     export namespace Tenant {
       export type Variants = InferVariants<TenantsTenantTransformer>
+    }
+  }
+  export namespace Pets {
+    export type Breed = InferData<PetsBreedTransformer>
+    export namespace Breed {
+      export type Variants = InferVariants<PetsBreedTransformer>
+    }
+    export type Species = InferData<PetsSpeciesTransformer>
+    export namespace Species {
+      export type Variants = InferVariants<PetsSpeciesTransformer>
     }
   }
   export type SharedProps = InferSharedProps<InertiaMiddleware>

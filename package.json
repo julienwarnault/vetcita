@@ -25,6 +25,7 @@
     "#identity/*": "./app/identity/*.js",
     "#notifications/*": "./app/notifications/*.js",
     "#patients/*": "./app/patients/*.js",
+    "#pets/*": "./app/pets/*.js",
     "#scheduling/*": "./app/scheduling/*.js",
     "#search/*": "./app/search/*.js",
     "#shared/*": "./app/shared/*.js",

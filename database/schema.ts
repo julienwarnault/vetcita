@@ -113,6 +113,17 @@ export class AppointmentSchema extends BaseModel {
   declare updatedAt: DateTime | null
 }
 
+export class BreedSchema extends BaseModel {
+  static $columns = ['id', 'name', 'speciesId'] as const
+  $columns = BreedSchema.$columns
+  @column({ isPrimary: true })
+  declare id: UUID
+  @column()
+  declare name: string
+  @column()
+  declare speciesId: UUID | null
+}
+
 export class ClosedDateSchema extends BaseModel {
   static $columns = ['createdAt', 'description', 'end', 'id', 'start', 'tenantId', 'updatedAt'] as const
   $columns = ClosedDateSchema.$columns
@@ -172,6 +183,15 @@ export class ScheduleDaySchema extends BaseModel {
   declare tenantId: UUID
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+}
+
+export class SpeciesSchema extends BaseModel {
+  static $columns = ['id', 'name'] as const
+  $columns = SpeciesSchema.$columns
+  @column({ isPrimary: true })
+  declare id: UUID
+  @column()
+  declare name: string
 }
 
 export class TenantSchema extends BaseModel {
