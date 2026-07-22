@@ -152,6 +152,20 @@ export interface ApiDefinition {
   search: {
     render: typeof routes['search.render']
   }
+  listPets: {
+    render: typeof routes['list_pets.render']
+  }
+  createPet: {
+    render: typeof routes['create_pet.render']
+    execute: typeof routes['create_pet.execute']
+  }
+  getPet: {
+    render: typeof routes['get_pet.render']
+  }
+  updatePet: {
+    render: typeof routes['update_pet.render']
+    execute: typeof routes['update_pet.execute']
+  }
   eventStream: typeof routes['event_stream']
   subscribe: typeof routes['subscribe']
   unsubscribe: typeof routes['unsubscribe']

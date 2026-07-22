@@ -10,6 +10,7 @@ import '#tenants/routes'
 import '#booking/routes'
 import '#scheduling/routes'
 import '#search/routes'
+import '#pets/routes'
 
 transmit.registerRoutes()
 

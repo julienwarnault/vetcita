@@ -20,7 +20,7 @@ interface SelectProps {
   value?: string
   open?: boolean
   onOpenChange?: (open: boolean) => void
-  onValueChange: (value: string | null) => void
+  onValueChange?: (value: string | null) => void
   align?: BaseSelect.Positioner.Props['align']
 }
 

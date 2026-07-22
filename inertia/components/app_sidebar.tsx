@@ -24,6 +24,11 @@ const NAVIGATION = [
     navigationIcon: 'contact-round',
   },
   {
+    name: 'Mascotas',
+    route: 'list_pets.render',
+    navigationIcon: 'paw-print',
+  },
+  {
     name: 'Tipos de cita',
     route: 'list_appointment_types.render',
     navigationIcon: 'book-open',

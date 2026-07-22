@@ -799,6 +799,78 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/search/controllers/search_controller').default['render']>>>
     }
   }
+  'list_pets.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/pets'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/pets/controllers/list_pets_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/pets/controllers/list_pets_controller').default['render']>>>
+    }
+  }
+  'create_pet.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/pets/new'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/pets/controllers/create_pet_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/pets/controllers/create_pet_controller').default['render']>>>
+    }
+  }
+  'create_pet.execute': {
+    methods: ["POST"]
+    pattern: '/pets'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#app/pets/controllers/create_pet_controller').default)['validator']>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#app/pets/controllers/create_pet_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/pets/controllers/create_pet_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/pets/controllers/create_pet_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'get_pet.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/pets/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/pets/controllers/get_pet_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/pets/controllers/get_pet_controller').default['render']>>>
+    }
+  }
+  'update_pet.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/pets/edit/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/pets/controllers/update_pet_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/pets/controllers/update_pet_controller').default['render']>>>
+    }
+  }
+  'update_pet.execute': {
+    methods: ["PUT"]
+    pattern: '/pets/:id'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#app/pets/controllers/update_pet_controller').default)['validator']>>
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#app/pets/controllers/update_pet_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/pets/controllers/update_pet_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/pets/controllers/update_pet_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
   'event_stream': {
     methods: ["GET","HEAD"]
     pattern: '/__transmit/events'

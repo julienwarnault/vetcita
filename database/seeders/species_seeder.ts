@@ -1,6 +1,6 @@
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
-import Species from '#app/pets/models/species'
-import Breed from '#app/pets/models/breed'
+import Species from '#pets/models/species'
+import Breed from '#pets/models/breed'
 
 export default class extends BaseSeeder {
   async run() {

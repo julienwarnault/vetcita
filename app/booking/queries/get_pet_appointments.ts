@@ -1,0 +1,22 @@
+import Appointment from '#booking/models/appointment'
+import type { UUID } from '#shared/types'
+
+interface GetPetAppointmentsParams {
+  tenantId: UUID
+  petId: UUID
+}
+
+export class GetPetAppointments {
+  async execute(params: GetPetAppointmentsParams) {
+    const appointments = await Appointment.query()
+      .where('tenant_id', params.tenantId)
+      .where('pet_id', params.petId)
+      .orderBy('start_date')
+      .preload('appointmentType')
+      .preload('agenda')
+      .preload('status')
+      .orderBy('start_date', 'desc')
+
+    return { appointments }
+  }
+}

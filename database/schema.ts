@@ -166,6 +166,33 @@ export class PatientSchema extends BaseModel {
   declare updatedAt: DateTime | null
 }
 
+export class PetSchema extends BaseModel {
+  static $columns = ['breedId', 'createdAt', 'dateOfBirth', 'gender', 'id', 'name', 'notes', 'patientId', 'speciesId', 'tenantId', 'updatedAt'] as const
+  $columns = PetSchema.$columns
+  @column()
+  declare breedId: UUID | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column.date()
+  declare dateOfBirth: DateTime | null
+  @column()
+  declare gender: string | null
+  @column({ isPrimary: true })
+  declare id: UUID
+  @column()
+  declare name: string
+  @column()
+  declare notes: string | null
+  @column()
+  declare patientId: UUID | null
+  @column()
+  declare speciesId: UUID | null
+  @column()
+  declare tenantId: UUID | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class ScheduleDaySchema extends BaseModel {
   static $columns = ['agendaId', 'createdAt', 'date', 'id', 'shifts', 'tenantId', 'updatedAt'] as const
   $columns = ScheduleDaySchema.$columns

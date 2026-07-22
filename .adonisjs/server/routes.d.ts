@@ -70,6 +70,12 @@ export type ScannedRoutes = {
     'get_bookable_days.render': { paramsTuple?: []; params?: {} }
     'get_bookable_slots.render': { paramsTuple?: []; params?: {} }
     'search.render': { paramsTuple?: []; params?: {} }
+    'list_pets.render': { paramsTuple?: []; params?: {} }
+    'create_pet.render': { paramsTuple?: []; params?: {} }
+    'create_pet.execute': { paramsTuple?: []; params?: {} }
+    'get_pet.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'update_pet.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'update_pet.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'event_stream': { paramsTuple?: []; params?: {} }
     'subscribe': { paramsTuple?: []; params?: {} }
     'unsubscribe': { paramsTuple?: []; params?: {} }
@@ -112,6 +118,10 @@ export type ScannedRoutes = {
     'get_bookable_days.render': { paramsTuple?: []; params?: {} }
     'get_bookable_slots.render': { paramsTuple?: []; params?: {} }
     'search.render': { paramsTuple?: []; params?: {} }
+    'list_pets.render': { paramsTuple?: []; params?: {} }
+    'create_pet.render': { paramsTuple?: []; params?: {} }
+    'get_pet.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'update_pet.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'event_stream': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
@@ -152,6 +162,10 @@ export type ScannedRoutes = {
     'get_bookable_days.render': { paramsTuple?: []; params?: {} }
     'get_bookable_slots.render': { paramsTuple?: []; params?: {} }
     'search.render': { paramsTuple?: []; params?: {} }
+    'list_pets.render': { paramsTuple?: []; params?: {} }
+    'create_pet.render': { paramsTuple?: []; params?: {} }
+    'get_pet.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'update_pet.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'event_stream': { paramsTuple?: []; params?: {} }
   }
   POST: {
@@ -168,6 +182,7 @@ export type ScannedRoutes = {
     'create_closed_date.execute': { paramsTuple?: []; params?: {} }
     'create_time_off.execute': { paramsTuple?: []; params?: {} }
     'create_schedule_day.execute': { paramsTuple?: []; params?: {} }
+    'create_pet.execute': { paramsTuple?: []; params?: {} }
     'subscribe': { paramsTuple?: []; params?: {} }
     'unsubscribe': { paramsTuple?: []; params?: {} }
   }
@@ -182,6 +197,7 @@ export type ScannedRoutes = {
     'update_time_off.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_working_hours.execute': { paramsTuple: [ParamValue]; params: {'agendaId': ParamValue} }
     'update_schedule_day.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'update_pet.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   DELETE: {
     'delete_appointment_status.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }

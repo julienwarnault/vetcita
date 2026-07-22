@@ -12,14 +12,15 @@ import type AppointmentWorkflowAppointmentStatusTransformer from '#app/appointme
 import type BookingAppointmentTransformer from '#app/booking/transformers/appointment_transformer'
 import type IdentityUserTransformer from '#app/identity/transformers/user_transformer'
 import type PatientsPatientTransformer from '#app/patients/transformers/patient_transformer'
+import type PetsBreedTransformer from '#app/pets/transformers/breed_transformer'
+import type PetsPetTransformer from '#app/pets/transformers/pet_transformer'
+import type PetsSpeciesTransformer from '#app/pets/transformers/species_transformer'
 import type SchedulingClosedDateTransformer from '#app/scheduling/transformers/closed_date_transformer'
 import type SchedulingScheduleDayTransformer from '#app/scheduling/transformers/schedule_day_transformer'
 import type SchedulingShiftTransformer from '#app/scheduling/transformers/shift_transformer'
 import type SchedulingTimeOffTransformer from '#app/scheduling/transformers/time_off_transformer'
 import type SchedulingWorkingHourTransformer from '#app/scheduling/transformers/working_hour_transformer'
 import type TenantsTenantTransformer from '#app/tenants/transformers/tenant_transformer'
-import type PetsBreedTransformer from '#app/pets/transformers/breed_transformer'
-import type PetsSpeciesTransformer from '#app/pets/transformers/species_transformer'
 import type InertiaMiddleware from '#shared/middleware/inertia_middleware'
 
 export namespace Data {
@@ -59,6 +60,20 @@ export namespace Data {
       export type Variants = InferVariants<PatientsPatientTransformer>
     }
   }
+  export namespace Pets {
+    export type Breed = InferData<PetsBreedTransformer>
+    export namespace Breed {
+      export type Variants = InferVariants<PetsBreedTransformer>
+    }
+    export type Pet = InferData<PetsPetTransformer>
+    export namespace Pet {
+      export type Variants = InferVariants<PetsPetTransformer>
+    }
+    export type Species = InferData<PetsSpeciesTransformer>
+    export namespace Species {
+      export type Variants = InferVariants<PetsSpeciesTransformer>
+    }
+  }
   export namespace Scheduling {
     export type ClosedDate = InferData<SchedulingClosedDateTransformer>
     export namespace ClosedDate {
@@ -85,16 +100,6 @@ export namespace Data {
     export type Tenant = InferData<TenantsTenantTransformer>
     export namespace Tenant {
       export type Variants = InferVariants<TenantsTenantTransformer>
-    }
-  }
-  export namespace Pets {
-    export type Breed = InferData<PetsBreedTransformer>
-    export namespace Breed {
-      export type Variants = InferVariants<PetsBreedTransformer>
-    }
-    export type Species = InferData<PetsSpeciesTransformer>
-    export namespace Species {
-      export type Variants = InferVariants<PetsSpeciesTransformer>
     }
   }
   export type SharedProps = InferSharedProps<InertiaMiddleware>

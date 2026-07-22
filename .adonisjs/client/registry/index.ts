@@ -402,6 +402,42 @@ const routes = {
     tokens: [{"old":"/search","type":0,"val":"search","end":""}],
     types: placeholder as Registry['search.render']['types'],
   },
+  'list_pets.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/pets',
+    tokens: [{"old":"/pets","type":0,"val":"pets","end":""}],
+    types: placeholder as Registry['list_pets.render']['types'],
+  },
+  'create_pet.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/pets/new',
+    tokens: [{"old":"/pets/new","type":0,"val":"pets","end":""},{"old":"/pets/new","type":0,"val":"new","end":""}],
+    types: placeholder as Registry['create_pet.render']['types'],
+  },
+  'create_pet.execute': {
+    methods: ["POST"],
+    pattern: '/pets',
+    tokens: [{"old":"/pets","type":0,"val":"pets","end":""}],
+    types: placeholder as Registry['create_pet.execute']['types'],
+  },
+  'get_pet.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/pets/:id',
+    tokens: [{"old":"/pets/:id","type":0,"val":"pets","end":""},{"old":"/pets/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['get_pet.render']['types'],
+  },
+  'update_pet.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/pets/edit/:id',
+    tokens: [{"old":"/pets/edit/:id","type":0,"val":"pets","end":""},{"old":"/pets/edit/:id","type":0,"val":"edit","end":""},{"old":"/pets/edit/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['update_pet.render']['types'],
+  },
+  'update_pet.execute': {
+    methods: ["PUT"],
+    pattern: '/pets/:id',
+    tokens: [{"old":"/pets/:id","type":0,"val":"pets","end":""},{"old":"/pets/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['update_pet.execute']['types'],
+  },
   'event_stream': {
     methods: ["GET","HEAD"],
     pattern: '/__transmit/events',

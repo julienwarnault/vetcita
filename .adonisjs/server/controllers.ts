@@ -44,6 +44,13 @@ export const controllers = {
     ListPatients: () => import('#app/patients/controllers/list_patients_controller'),
     UpdatePatient: () => import('#app/patients/controllers/update_patient_controller'),
   },
+  pets: {
+    CreatePet: () => import('#app/pets/controllers/create_pet_controller'),
+    DeletePet: () => import('#app/pets/controllers/delete_pet_controller'),
+    GetPet: () => import('#app/pets/controllers/get_pet_controller'),
+    ListPets: () => import('#app/pets/controllers/list_pets_controller'),
+    UpdatePet: () => import('#app/pets/controllers/update_pet_controller'),
+  },
   scheduling: {
     CreateClosedDate: () => import('#app/scheduling/controllers/create_closed_date_controller'),
     CreateScheduleDay: () => import('#app/scheduling/controllers/create_schedule_day_controller'),

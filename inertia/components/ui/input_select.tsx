@@ -7,7 +7,7 @@ import { Card } from './card'
 const select = tv({
   slots: {
     trigger: [baseInput(), 'flex items-center justify-between'],
-    positioner: 'z-50',
+    positioner: 'z-110',
     icon: 'inline-flex items-center justify-center data-[popup-open]:rotate-180',
     popup: 'w-[var(--anchor-width)] max-h-72 overscroll-none',
     list: 'overflow-visible',
