@@ -16,13 +16,14 @@ interface PanelReviewProps {
   appointmentType?: Data.AppointmentTypes.AppointmentType
   status?: Data.AppointmentWorkflow.AppointmentStatus
   statuses: Data.AppointmentWorkflow.AppointmentStatus[]
+  canContinue: boolean
   goToStep(step: number): void
   next(): void
   close(): void
 }
 
 export function PanelReview(props: PanelReviewProps) {
-  const { form, appointmentType, statuses, status, next, goToStep, close } = props
+  const { form, appointmentType, statuses, status, canContinue, next, goToStep, close } = props
   const { data, setData, isDirty } = form
 
   const startDate = DateTime.fromISO(data.startDate)
@@ -112,7 +113,7 @@ export function PanelReview(props: PanelReviewProps) {
           className="w-full"
           variant="primary"
           size="lg"
-          disabled={!!data.id && !isDirty}
+          disabled={(!!data.id && !isDirty) || !canContinue}
         >
           Guardar
         </Button>

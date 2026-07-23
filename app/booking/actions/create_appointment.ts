@@ -15,7 +15,7 @@ import type { UUID } from '#shared/types'
 interface CreateAppointmentParams {
   appointmentTypeId: UUID
   agendaId: UUID
-  clientId?: UUID
+  clientId: UUID
   startDate: string
   tenantId: UUID
 }

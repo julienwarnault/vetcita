@@ -58,6 +58,7 @@ export default function ShowForm(props: PageProps) {
           form={form}
           next={actions.next}
           goToStep={actions.goToStep}
+          canContinue={canContinue}
           appointmentType={selectedType!}
           status={selectedStatus}
           statuses={statuses}

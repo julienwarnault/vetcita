@@ -17,7 +17,7 @@ export default class CreateAppointmentController {
       appointmentTypeId: uuidSchema(),
       agendaId: uuidSchema(),
       startDate: vine.string(),
-      clientId: uuidSchema().optional(),
+      clientId: uuidSchema(),
       statusId: vine.string().optional(),
     })
   )

@@ -37,9 +37,7 @@ export function CalendarEvent(props: CalendarEventProps) {
             {event.start.toFormat('h:mm')}&nbsp;-&nbsp;
             {event.end.toFormat('h:mm')}
           </div>
-          <strong className="overflow-visible text-[13px]/4 font-semibold">
-            {event.client?.fullName || 'Sin cita'}
-          </strong>
+          <strong className="overflow-visible text-[13px]/4 font-semibold">{event.client?.fullName}</strong>
         </div>
         <div className="overflow-hidden text-[13px]/4">{event.typeName}</div>
       </div>

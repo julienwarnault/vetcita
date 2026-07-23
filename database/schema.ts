@@ -83,7 +83,7 @@ export class AppointmentTypeSchema extends BaseModel {
 }
 
 export class AppointmentSchema extends BaseModel {
-  static $columns = ['agendaId', 'appointmentTypeId', 'bookingRef', 'clientId', 'createdAt', 'duration', 'endDate', 'id', 'petId', 'reminderSentAt', 'startDate', 'statusId', 'tenantId', 'updatedAt'] as const
+  static $columns = ['agendaId', 'appointmentTypeId', 'bookingRef', 'clientId', 'createdAt', 'duration', 'endDate', 'id', 'reminderSentAt', 'startDate', 'statusId', 'tenantId', 'updatedAt'] as const
   $columns = AppointmentSchema.$columns
   @column()
   declare agendaId: UUID
@@ -92,7 +92,7 @@ export class AppointmentSchema extends BaseModel {
   @column()
   declare bookingRef: string
   @column()
-  declare clientId: UUID | null
+  declare clientId: UUID
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
   @column()
@@ -101,8 +101,6 @@ export class AppointmentSchema extends BaseModel {
   declare endDate: DateTime
   @column({ isPrimary: true })
   declare id: UUID
-  @column()
-  declare petId: UUID | null
   @column.dateTime()
   declare reminderSentAt: DateTime | null
   @column.dateTime()

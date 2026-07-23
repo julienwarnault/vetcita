@@ -29,7 +29,7 @@ export const STEPS = [
   {
     key: 'review',
     fields: [],
-    canContinue: () => true,
+    canContinue: (d: AppointmentData) => Boolean(d.clientId),
   },
 ] as const
 

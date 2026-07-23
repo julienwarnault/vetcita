@@ -91,7 +91,7 @@ export default function Search(props: PageProps) {
                     >
                       <Avatar size="xl" fullName={client.fullName} />
                       <div className="flex flex-col items-start">
-                        <div className="text-[15px]/5">{client?.fullName || 'Sin cita'}</div>
+                        <div className="text-[15px]/5">{client.fullName}</div>
                         <div className="text-[15px]/5 text-muted">{formatPhoneNumber(client.phone)}</div>
                       </div>
                     </button>

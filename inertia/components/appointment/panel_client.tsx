@@ -101,7 +101,7 @@ export function PanelClient(props: PanelClientProps) {
       )}
       {!selectedClientId && selectionView && (
         <>
-          <Drawer.Header className="sticky top-0 px-8 pt-8 pb-4">
+          <Drawer.Header className="sticky top-0 px-8 pt-8 pb-4 mb-2">
             <h3 className="font-semibold text-[19px]/6">Seleccionar cliente</h3>
             <div className="relative mt-6">
               <SearchIcon className="absolute left-4 top-1/2 -translate-y-1/2 size-5 text-muted-foreground" />
@@ -133,19 +133,6 @@ export function PanelClient(props: PanelClientProps) {
               >
                 <Avatar size="lg" icon="plus" />
                 <div className="text-[15px]/5 font-semibold truncate">Añadir un nuevo cliente</div>
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  onChange?.('')
-                  setSelectionView(false)
-                }}
-                className={cn(
-                  'flex items-center gap-3 px-8 py-2 bg-white hover:bg-background transition-colors text-left'
-                )}
-              >
-                <Avatar size="lg" />
-                <div className="text-[15px]/5 font-semibold truncate">Sin cita</div>
               </button>
               <hr className="my-2" />
               {!isLoading &&

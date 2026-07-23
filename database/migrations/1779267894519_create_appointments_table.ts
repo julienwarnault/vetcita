@@ -10,7 +10,7 @@ export default class extends BaseSchema {
       table.timestamp('updated_at').nullable()
       table.uuid('appointment_type_id').notNullable().references('id').inTable('appointment_types')
       table.uuid('agenda_id').notNullable().references('id').inTable('agendas').onDelete('CASCADE')
-      table.uuid('client_id').nullable().references('id').inTable('clients')
+      table.uuid('client_id').notNullable().references('id').inTable('clients')
       table.uuid('tenant_id').notNullable().references('id').inTable('tenants')
       table.timestamp('start_date').notNullable()
       table.timestamp('end_date').notNullable()
