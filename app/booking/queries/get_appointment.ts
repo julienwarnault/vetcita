@@ -12,7 +12,7 @@ export class GetAppointment {
       .where('id', params.id)
       .where('tenantId', params.tenantId)
       .preload('appointmentType')
-      .preload('patient')
+      .preload('client')
       .preload('tenant')
       .preload('status')
       .firstOrFail()

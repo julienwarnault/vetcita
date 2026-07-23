@@ -68,7 +68,7 @@ export default function ShowForm(props: PageProps) {
             <h2 className="text-2xl font-semibold">Enlaces externos</h2>
             <p className="text-[15px]/5 text-muted">
               Añade el sitio web de tu empresa y los enlaces a tus perfiles de redes sociales para compartirlos con los
-              patientes.
+              clientes.
             </p>
 
             <div className="grid w-full gap-y-6 pt-6">

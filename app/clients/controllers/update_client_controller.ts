@@ -1,13 +1,13 @@
 import vine from '@vinejs/vine'
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
-import PatientTransformer from '#patients/transformers/patient_transformer'
+import ClientTransformer from '#clients/transformers/client_transformer'
 import { withTransaction } from '#shared/utils/with_transaction'
-import { UpdatePatient } from '#patients/actions/update_patient'
-import { GetPatient } from '#patients/queries/get_patient'
+import { UpdateClient } from '#clients/actions/update_client'
+import { GetClient } from '#clients/queries/get_client'
 
 @inject()
-export default class UpdatePatientController {
+export default class UpdateClientController {
   static validator = vine.create(
     vine.object({
       firstName: vine.string(),
@@ -19,26 +19,26 @@ export default class UpdatePatientController {
   )
 
   constructor(
-    private readonly getPatient: GetPatient,
-    private readonly updatePatient: UpdatePatient
+    private readonly getClient: GetClient,
+    private readonly updateClient: UpdateClient
   ) {}
 
   async render({ inertia, params, auth }: HttpContext) {
     const user = auth.getUserOrFail()
 
-    const { patient } = await this.getPatient.execute({ id: params.id, tenantId: user.tenantId })
+    const { client } = await this.getClient.execute({ id: params.id, tenantId: user.tenantId })
 
-    return inertia.render('patients/form', {
-      patient: PatientTransformer.transform(patient),
+    return inertia.render('clients/form', {
+      client: ClientTransformer.transform(client),
     })
   }
 
   async execute({ request, params, response, auth }: HttpContext) {
-    const payload = await request.validateUsing(UpdatePatientController.validator)
+    const payload = await request.validateUsing(UpdateClientController.validator)
     const user = auth.getUserOrFail()
 
     await withTransaction(() => {
-      return this.updatePatient.execute({ id: params.id, tenantId: user.tenantId, ...payload })
+      return this.updateClient.execute({ id: params.id, tenantId: user.tenantId, ...payload })
     })
 
     return response.redirect().back()

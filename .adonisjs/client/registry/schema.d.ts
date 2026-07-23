@@ -295,112 +295,112 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/appointment_workflow/controllers/delete_appointment_status_controller').default['execute']>>>
     }
   }
-  'list_patients.render': {
+  'list_clients.render': {
     methods: ["GET","HEAD"]
-    pattern: '/patients'
+    pattern: '/clients'
     types: {
       body: {}
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#app/patients/controllers/list_patients_controller').default['render']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/patients/controllers/list_patients_controller').default['render']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/clients/controllers/list_clients_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/clients/controllers/list_clients_controller').default['render']>>>
     }
   }
-  'create_patient.render': {
+  'create_client.render': {
     methods: ["GET","HEAD"]
-    pattern: '/patients/new'
+    pattern: '/clients/new'
     types: {
       body: {}
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#app/patients/controllers/create_patient_controller').default['render']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/patients/controllers/create_patient_controller').default['render']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/clients/controllers/create_client_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/clients/controllers/create_client_controller').default['render']>>>
     }
   }
-  'create_patient.execute': {
+  'create_client.execute': {
     methods: ["POST"]
-    pattern: '/patients'
+    pattern: '/clients'
     types: {
-      body: ExtractBody<InferInput<(typeof import('#app/patients/controllers/create_patient_controller').default)['validator']>>
+      body: ExtractBody<InferInput<(typeof import('#app/clients/controllers/create_client_controller').default)['validator']>>
       paramsTuple: []
       params: {}
-      query: ExtractQuery<InferInput<(typeof import('#app/patients/controllers/create_patient_controller').default)['validator']>>
-      response: ExtractResponse<Awaited<ReturnType<import('#app/patients/controllers/create_patient_controller').default['execute']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/patients/controllers/create_patient_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+      query: ExtractQuery<InferInput<(typeof import('#app/clients/controllers/create_client_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/clients/controllers/create_client_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/clients/controllers/create_client_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'update_patient.render': {
+  'update_client.render': {
     methods: ["GET","HEAD"]
-    pattern: '/patients/edit/:id'
+    pattern: '/clients/edit/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#app/patients/controllers/update_patient_controller').default['render']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/patients/controllers/update_patient_controller').default['render']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/clients/controllers/update_client_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/clients/controllers/update_client_controller').default['render']>>>
     }
   }
-  'get_patient.render': {
+  'get_client.render': {
     methods: ["GET","HEAD"]
-    pattern: '/patients/:id'
+    pattern: '/clients/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#app/patients/controllers/get_patient_controller').default['render']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/patients/controllers/get_patient_controller').default['render']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/clients/controllers/get_client_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/clients/controllers/get_client_controller').default['render']>>>
     }
   }
-  'update_patient.execute': {
+  'update_client.execute': {
     methods: ["PUT"]
-    pattern: '/patients/:id'
+    pattern: '/clients/:id'
     types: {
-      body: ExtractBody<InferInput<(typeof import('#app/patients/controllers/update_patient_controller').default)['validator']>>
+      body: ExtractBody<InferInput<(typeof import('#app/clients/controllers/update_client_controller').default)['validator']>>
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
-      query: ExtractQuery<InferInput<(typeof import('#app/patients/controllers/update_patient_controller').default)['validator']>>
-      response: ExtractResponse<Awaited<ReturnType<import('#app/patients/controllers/update_patient_controller').default['execute']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/patients/controllers/update_patient_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+      query: ExtractQuery<InferInput<(typeof import('#app/clients/controllers/update_client_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/clients/controllers/update_client_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/clients/controllers/update_client_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'delete_patient.execute': {
+  'delete_client.execute': {
     methods: ["DELETE"]
-    pattern: '/patients/:id'
+    pattern: '/clients/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#app/patients/controllers/delete_patient_controller').default['execute']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/patients/controllers/delete_patient_controller').default['execute']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/clients/controllers/delete_client_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/clients/controllers/delete_client_controller').default['execute']>>>
     }
   }
-  'list_patients.api': {
+  'list_clients.api': {
     methods: ["GET","HEAD"]
-    pattern: '/api/patients'
+    pattern: '/api/clients'
     types: {
       body: {}
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#app/patients/controllers/list_patients_controller').default['api']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/patients/controllers/list_patients_controller').default['api']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/clients/controllers/list_clients_controller').default['api']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/clients/controllers/list_clients_controller').default['api']>>>
     }
   }
-  'get_patient.api': {
+  'get_client.api': {
     methods: ["GET","HEAD"]
-    pattern: '/api/patients/:id'
+    pattern: '/api/clients/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#app/patients/controllers/get_patient_controller').default['api']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/patients/controllers/get_patient_controller').default['api']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/clients/controllers/get_client_controller').default['api']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/clients/controllers/get_client_controller').default['api']>>>
     }
   }
   'update_tenant.render': {

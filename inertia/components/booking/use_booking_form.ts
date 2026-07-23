@@ -16,9 +16,9 @@ type BookingData = {
 
 export type BookingForm = InertiaPrecognitiveFormProps<BookingData>
 
-type PatientInfo = Pick<BookingData, 'firstName' | 'lastName' | 'email' | 'phone'>
+type ClientInfo = Pick<BookingData, 'firstName' | 'lastName' | 'email' | 'phone'>
 
-const DEFAULT_PATIENT_INFO: PatientInfo = {
+const DEFAULT_CLIENT_INFO: ClientInfo = {
   firstName: '',
   lastName: '',
   email: '',
@@ -64,17 +64,17 @@ export function useBookingForm(params: UseBookingFormParams) {
 
   const [stepIndex, setStepIndex] = useState(0)
 
-  const [patientInfo, setPatientInfo] = useLocalStorage<PatientInfo>('booking_patient_info', DEFAULT_PATIENT_INFO)
+  const [clientInfo, setClientInfo] = useLocalStorage<ClientInfo>('booking_client_info', DEFAULT_CLIENT_INFO)
 
   const form = useForm({
     tenantId: tenantId,
     appointmentTypeId: '',
     agendaId: '',
     startDate: '',
-    firstName: patientInfo.firstName,
-    lastName: patientInfo.lastName,
-    email: patientInfo.email,
-    phone: patientInfo.phone,
+    firstName: clientInfo.firstName,
+    lastName: clientInfo.lastName,
+    email: clientInfo.email,
+    phone: clientInfo.phone,
   }).withPrecognition('post', submitUrl)
 
   const step = STEPS[stepIndex]
@@ -97,7 +97,7 @@ export function useBookingForm(params: UseBookingFormParams) {
         replace: false,
         preserveState: false,
         onSuccess() {
-          setPatientInfo({
+          setClientInfo({
             firstName: form.data.firstName,
             lastName: form.data.lastName,
             email: form.data.email,

@@ -11,7 +11,7 @@ export class GetLastAppointmentsUpdated {
     const appointments = await Appointment.query()
       .where('tenant_id', params.tenantId)
       .preload('appointmentType')
-      .preload('patient')
+      .preload('client')
       .preload('agenda')
       .preload('status')
       .orderBy('updated_at', 'desc')

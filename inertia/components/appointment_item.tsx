@@ -39,7 +39,7 @@ export function AppointmentItem(props: AppointmentItemProps) {
           <div className="flex flex-col">
             <div className="text-[17px]/6 font-semibold">{appointment.appointmentType?.name}</div>
             <div className="text-[15px]/5 text-muted">
-              {`${appointment.patient ? `${appointment.patient.fullName},` : ''} ${formatDuration(appointment.duration)} con ${appointment.agenda?.name}`.trim()}
+              {`${appointment.client ? `${appointment.client.fullName},` : ''} ${formatDuration(appointment.duration)} con ${appointment.agenda?.name}`.trim()}
             </div>
           </div>
         </div>

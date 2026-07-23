@@ -15,12 +15,12 @@ import { urlFor } from '~/lib/tuyau'
 
 type PageProps = InertiaProps<{
   search: string
-  patients: Data.Patients.Patient[]
+  clients: Data.Clients.Client[]
   appointments: Data.Booking.Appointment[]
 }>
 
 export default function Search(props: PageProps) {
-  const { search: initialSearch = '', appointments, patients } = props
+  const { search: initialSearch = '', appointments, clients } = props
 
   const modalRef = useRef<InertiaModalRef>(null)
 
@@ -62,7 +62,7 @@ export default function Search(props: PageProps) {
             />
           </div>
           <p className="text-[15px]/5 text-muted">
-            Buscar por nombre de paciente, teléfono móvil, email o referencia de la reserva
+            Buscar por nombre de cliente, teléfono móvil, email o referencia de la reserva
           </p>
           <div className="flex flex-row gap-15 pt-12">
             <div className="flex flex-col flex-1">
@@ -81,18 +81,18 @@ export default function Search(props: PageProps) {
               <div className="text-[20px]/7 font-semibold pb-3.5">
                 {`Clientes ${!initialSearch ? '(añadidos recientemente)' : ''}`.trim()}
               </div>
-              {patients?.length > 0 ? (
+              {clients?.length > 0 ? (
                 <div className="flex-1">
-                  {patients.map((patient) => (
+                  {clients.map((client) => (
                     <button
-                      key={patient.id}
+                      key={client.id}
                       className="flex items-center pl-4 pr-6 py-4 gap-3 hover:bg-background w-full rounded-xl"
-                      onClick={() => visitModal(urlFor('get_patient.render', { id: patient.id }))}
+                      onClick={() => visitModal(urlFor('get_client.render', { id: client.id }))}
                     >
-                      <Avatar size="xl" fullName={patient.fullName} />
+                      <Avatar size="xl" fullName={client.fullName} />
                       <div className="flex flex-col items-start">
-                        <div className="text-[15px]/5">{patient?.fullName || 'Sin cita'}</div>
-                        <div className="text-[15px]/5 text-muted">{formatPhoneNumber(patient.phone)}</div>
+                        <div className="text-[15px]/5">{client?.fullName || 'Sin cita'}</div>
+                        <div className="text-[15px]/5 text-muted">{formatPhoneNumber(client.phone)}</div>
                       </div>
                     </button>
                   ))}

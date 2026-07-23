@@ -19,8 +19,8 @@ const NAVIGATION = [
     navigationIcon: 'calendar',
   },
   {
-    name: 'Pacientes',
-    route: 'list_patients.render',
+    name: 'Clientes',
+    route: 'list_clients.render',
     navigationIcon: 'contact-round',
   },
   {

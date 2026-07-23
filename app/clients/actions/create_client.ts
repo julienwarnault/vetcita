@@ -1,8 +1,8 @@
 import { transactionContext } from '#shared/contexts/transaction_context'
-import Patient from '#patients/models/patient'
+import Client from '#clients/models/client'
 import type { UUID } from '#shared/types'
 
-interface CreatePatientParams {
+interface CreateClientParams {
   firstName: string
   lastName: string
   email?: string
@@ -11,11 +11,11 @@ interface CreatePatientParams {
   tenantId: UUID
 }
 
-export class CreatePatient {
-  async execute(params: CreatePatientParams) {
+export class CreateClient {
+  async execute(params: CreateClientParams) {
     const trx = transactionContext.get()
 
-    const patient = await Patient.create(
+    const client = await Client.create(
       {
         firstName: params.firstName,
         lastName: params.lastName,
@@ -27,6 +27,6 @@ export class CreatePatient {
       { client: trx }
     )
 
-    return { patient }
+    return { client }
   }
 }

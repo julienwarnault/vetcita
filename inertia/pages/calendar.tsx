@@ -41,10 +41,10 @@ export default function ShowCalendar(props: PageProps) {
             start: DateTime.fromISO(appointment.startDate!, { zone: DEFAULT_TIMEZONE }),
             end: DateTime.fromISO(appointment.endDate!, { zone: DEFAULT_TIMEZONE }),
             duration: appointment.duration,
-            patient: appointment.patient && {
-              fullName: appointment.patient!.fullName,
-              phone: appointment.patient!.phone,
-              email: appointment.patient!.email ?? undefined,
+            client: appointment.client && {
+              fullName: appointment.client!.fullName,
+              phone: appointment.client!.phone,
+              email: appointment.client!.email ?? undefined,
             },
             status: {
               name: appointment.status!.name,

@@ -1,5 +1,5 @@
 import { Data } from '@generated/data'
-import { PatientSelector } from '~/components/patient_selector'
+import { ClientSelector } from '~/components/client_selector'
 import { InputSelect } from '~/components/ui/input_select'
 import { InertiaModal } from '~/components/inertia_modal'
 import { FormHeader } from '~/components/form_header'
@@ -65,12 +65,12 @@ export default function ShowForm(props: PageProps) {
                     <Field.Error />
                   </Field>
 
-                  <Field name="patientId">
+                  <Field name="clientId">
                     <Field.Label>Dueño *</Field.Label>
-                    <PatientSelector
-                      name="patientId"
-                      defaultValue={pet?.patientId ?? ''}
-                      defaultName={pet?.patient?.fullName}
+                    <ClientSelector
+                      name="clientId"
+                      defaultValue={pet?.clientId ?? ''}
+                      defaultName={pet?.client?.fullName}
                     />
                     <Field.Error />
                   </Field>

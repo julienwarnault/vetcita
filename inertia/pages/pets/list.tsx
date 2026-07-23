@@ -26,7 +26,7 @@ export default function List(props: PageProps) {
     {
       header: 'Cliente',
       width: '15%',
-      accessor: ({ patient }) => patient?.fullName,
+      accessor: ({ client }) => client?.fullName,
     },
     {
       header: 'Especias',

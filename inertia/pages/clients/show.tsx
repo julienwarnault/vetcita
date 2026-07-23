@@ -1,7 +1,7 @@
 import { Data } from '@generated/data'
 import { useModalStack } from '@inertiaui/modal-react'
-import { PanelAppointments } from '~/components/patient/panel_appointments'
-import { PanelDetails } from '~/components/patient/panel_details'
+import { PanelAppointments } from '~/components/client/panel_appointments'
+import { PanelDetails } from '~/components/client/panel_details'
 import { InertiaDrawer } from '~/components/inertia_drawer'
 import { Avatar } from '~/components/ui/avatar'
 import { Button } from '~/components/ui/button'
@@ -13,12 +13,12 @@ import { InertiaProps } from '~/types'
 import { urlFor } from '~/lib/tuyau'
 
 type PageProps = InertiaProps<{
-  patient: Data.Patients.Patient
+  client: Data.Clients.Client
   appointments: Data.Booking.Appointment[]
 }>
 
-export default function ShowPatient(props: PageProps) {
-  const { patient, appointments } = props
+export default function ShowClient(props: PageProps) {
+  const { client, appointments } = props
 
   const { visitModal, closeAll } = useModalStack()
 
@@ -33,10 +33,10 @@ export default function ShowPatient(props: PageProps) {
                   <div className="">
                     <div className="flex flex-col items-center px-8 pt-8 gap-6">
                       <div className="flex flex-col items-center">
-                        <Avatar size="4xl" className="mb-3" fullName={patient.fullName} />
-                        <div className="text-[17px]/6 font-semibold pb-1">{patient.fullName}</div>
-                        {patient.email && <div className="text-[15px]/5 text-muted">{patient.email}</div>}
-                        <div className="text-[15px]/5 text-muted">{formatPhoneNumber(patient.phone)}</div>
+                        <Avatar size="4xl" className="mb-3" fullName={client.fullName} />
+                        <div className="text-[17px]/6 font-semibold pb-1">{client.fullName}</div>
+                        {client.email && <div className="text-[15px]/5 text-muted">{client.email}</div>}
+                        <div className="text-[15px]/5 text-muted">{formatPhoneNumber(client.phone)}</div>
                       </div>
                       <div className="flex gap-3">
                         <Menu
@@ -49,18 +49,18 @@ export default function ShowPatient(props: PageProps) {
                         >
                           <Menu.Item
                             onClick={() => {
-                              visitModal(urlFor('update_patient.render', { id: patient.id }), {
+                              visitModal(urlFor('update_client.render', { id: client.id }), {
                                 onClose: reload,
                               })
                             }}
                           >
-                            Editar datos del paciente
+                            Editar datos del cliente
                           </Menu.Item>
                         </Menu>
                         <Button
                           onClick={() => {
                             closeAll(true)
-                            visitModal(urlFor('create_appointment.render', {}, { qs: { patientId: patient.id } }), {
+                            visitModal(urlFor('create_appointment.render', {}, { qs: { clientId: client.id } }), {
                               onClose: reload,
                             })
                           }}
@@ -76,7 +76,7 @@ export default function ShowPatient(props: PageProps) {
               </div>
               <Drawer.Menu>
                 <Tabs.List>
-                  <Tabs.Trigger value="details">Datos del paciente</Tabs.Trigger>
+                  <Tabs.Trigger value="details">Datos del cliente</Tabs.Trigger>
                   <Tabs.Trigger value="appointments">
                     Citas
                     <div className="flex items-center justify-center bg-white h-5 px-1.5 rounded-full border">
@@ -89,7 +89,7 @@ export default function ShowPatient(props: PageProps) {
           </Drawer.LeftPanel>
 
           <Tabs.Content value="details">
-            <PanelDetails patient={patient} />
+            <PanelDetails client={client} />
           </Tabs.Content>
 
           <Tabs.Content value="appointments">

@@ -32,17 +32,17 @@ export const controllers = {
     ShowCalendar: () => import('#app/booking/controllers/show_calendar_controller'),
     UpdateAppointment: () => import('#app/booking/controllers/update_appointment_controller'),
   },
+  clients: {
+    CreateClient: () => import('#app/clients/controllers/create_client_controller'),
+    DeleteClient: () => import('#app/clients/controllers/delete_client_controller'),
+    GetClient: () => import('#app/clients/controllers/get_client_controller'),
+    ListClients: () => import('#app/clients/controllers/list_clients_controller'),
+    UpdateClient: () => import('#app/clients/controllers/update_client_controller'),
+  },
   identity: {
     Login: () => import('#app/identity/controllers/login_controller'),
     Logout: () => import('#app/identity/controllers/logout_controller'),
     Signup: () => import('#app/identity/controllers/signup_controller'),
-  },
-  patients: {
-    CreatePatient: () => import('#app/patients/controllers/create_patient_controller'),
-    DeletePatient: () => import('#app/patients/controllers/delete_patient_controller'),
-    GetPatient: () => import('#app/patients/controllers/get_patient_controller'),
-    ListPatients: () => import('#app/patients/controllers/list_patients_controller'),
-    UpdatePatient: () => import('#app/patients/controllers/update_patient_controller'),
   },
   pets: {
     CreatePet: () => import('#app/pets/controllers/create_pet_controller'),

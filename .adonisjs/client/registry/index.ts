@@ -150,59 +150,59 @@ const routes = {
     tokens: [{"old":"/settings/statuses/:id","type":0,"val":"settings","end":""},{"old":"/settings/statuses/:id","type":0,"val":"statuses","end":""},{"old":"/settings/statuses/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['delete_appointment_status.execute']['types'],
   },
-  'list_patients.render': {
+  'list_clients.render': {
     methods: ["GET","HEAD"],
-    pattern: '/patients',
-    tokens: [{"old":"/patients","type":0,"val":"patients","end":""}],
-    types: placeholder as Registry['list_patients.render']['types'],
+    pattern: '/clients',
+    tokens: [{"old":"/clients","type":0,"val":"clients","end":""}],
+    types: placeholder as Registry['list_clients.render']['types'],
   },
-  'create_patient.render': {
+  'create_client.render': {
     methods: ["GET","HEAD"],
-    pattern: '/patients/new',
-    tokens: [{"old":"/patients/new","type":0,"val":"patients","end":""},{"old":"/patients/new","type":0,"val":"new","end":""}],
-    types: placeholder as Registry['create_patient.render']['types'],
+    pattern: '/clients/new',
+    tokens: [{"old":"/clients/new","type":0,"val":"clients","end":""},{"old":"/clients/new","type":0,"val":"new","end":""}],
+    types: placeholder as Registry['create_client.render']['types'],
   },
-  'create_patient.execute': {
+  'create_client.execute': {
     methods: ["POST"],
-    pattern: '/patients',
-    tokens: [{"old":"/patients","type":0,"val":"patients","end":""}],
-    types: placeholder as Registry['create_patient.execute']['types'],
+    pattern: '/clients',
+    tokens: [{"old":"/clients","type":0,"val":"clients","end":""}],
+    types: placeholder as Registry['create_client.execute']['types'],
   },
-  'update_patient.render': {
+  'update_client.render': {
     methods: ["GET","HEAD"],
-    pattern: '/patients/edit/:id',
-    tokens: [{"old":"/patients/edit/:id","type":0,"val":"patients","end":""},{"old":"/patients/edit/:id","type":0,"val":"edit","end":""},{"old":"/patients/edit/:id","type":1,"val":"id","end":""}],
-    types: placeholder as Registry['update_patient.render']['types'],
+    pattern: '/clients/edit/:id',
+    tokens: [{"old":"/clients/edit/:id","type":0,"val":"clients","end":""},{"old":"/clients/edit/:id","type":0,"val":"edit","end":""},{"old":"/clients/edit/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['update_client.render']['types'],
   },
-  'get_patient.render': {
+  'get_client.render': {
     methods: ["GET","HEAD"],
-    pattern: '/patients/:id',
-    tokens: [{"old":"/patients/:id","type":0,"val":"patients","end":""},{"old":"/patients/:id","type":1,"val":"id","end":""}],
-    types: placeholder as Registry['get_patient.render']['types'],
+    pattern: '/clients/:id',
+    tokens: [{"old":"/clients/:id","type":0,"val":"clients","end":""},{"old":"/clients/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['get_client.render']['types'],
   },
-  'update_patient.execute': {
+  'update_client.execute': {
     methods: ["PUT"],
-    pattern: '/patients/:id',
-    tokens: [{"old":"/patients/:id","type":0,"val":"patients","end":""},{"old":"/patients/:id","type":1,"val":"id","end":""}],
-    types: placeholder as Registry['update_patient.execute']['types'],
+    pattern: '/clients/:id',
+    tokens: [{"old":"/clients/:id","type":0,"val":"clients","end":""},{"old":"/clients/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['update_client.execute']['types'],
   },
-  'delete_patient.execute': {
+  'delete_client.execute': {
     methods: ["DELETE"],
-    pattern: '/patients/:id',
-    tokens: [{"old":"/patients/:id","type":0,"val":"patients","end":""},{"old":"/patients/:id","type":1,"val":"id","end":""}],
-    types: placeholder as Registry['delete_patient.execute']['types'],
+    pattern: '/clients/:id',
+    tokens: [{"old":"/clients/:id","type":0,"val":"clients","end":""},{"old":"/clients/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['delete_client.execute']['types'],
   },
-  'list_patients.api': {
+  'list_clients.api': {
     methods: ["GET","HEAD"],
-    pattern: '/api/patients',
-    tokens: [{"old":"/api/patients","type":0,"val":"api","end":""},{"old":"/api/patients","type":0,"val":"patients","end":""}],
-    types: placeholder as Registry['list_patients.api']['types'],
+    pattern: '/api/clients',
+    tokens: [{"old":"/api/clients","type":0,"val":"api","end":""},{"old":"/api/clients","type":0,"val":"clients","end":""}],
+    types: placeholder as Registry['list_clients.api']['types'],
   },
-  'get_patient.api': {
+  'get_client.api': {
     methods: ["GET","HEAD"],
-    pattern: '/api/patients/:id',
-    tokens: [{"old":"/api/patients/:id","type":0,"val":"api","end":""},{"old":"/api/patients/:id","type":0,"val":"patients","end":""},{"old":"/api/patients/:id","type":1,"val":"id","end":""}],
-    types: placeholder as Registry['get_patient.api']['types'],
+    pattern: '/api/clients/:id',
+    tokens: [{"old":"/api/clients/:id","type":0,"val":"api","end":""},{"old":"/api/clients/:id","type":0,"val":"clients","end":""},{"old":"/api/clients/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['get_client.api']['types'],
   },
   'update_tenant.render': {
     methods: ["GET","HEAD"],

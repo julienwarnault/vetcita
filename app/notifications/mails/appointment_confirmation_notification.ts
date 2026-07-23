@@ -15,12 +15,12 @@ export default class AppointmentConfirmationNotification extends BaseMail {
   }
 
   prepare() {
-    const { id, patient, appointmentType, startDate, bookingRef, tenantId } = this.appointment
+    const { id, client, appointmentType, startDate, bookingRef, tenantId } = this.appointment
 
     const url = urlFor('confirm_appointment.render', { appointmentId: id, tenantId }, { prefixUrl: appUrl })
 
     this.message.to(this.to).htmlView('emails/appointment_confirmation', {
-      patient,
+      client,
       appointmentType: appointmentType.name,
       startDate: startDate.setZone(DEFAULT_TIMEZONE).toFormat('dd/MM/yyyy h:mma'),
       bookingRef,

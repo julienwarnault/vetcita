@@ -5,7 +5,6 @@ import type { UUID } from '#shared/types'
 
 interface GetTodayAppointmentsParams {
   tenantId: UUID
-  patientIds?: UUID[]
   search?: string
   limit: number
 }
@@ -22,7 +21,7 @@ export class GetTodayAppointments {
       .where('start_date', '>=', startOfDay)
       .where('start_date', '<=', endOfDay)
       .preload('appointmentType')
-      .preload('patient')
+      .preload('client')
       .preload('agenda')
       .preload('status')
       .orderBy('start_date', 'asc')

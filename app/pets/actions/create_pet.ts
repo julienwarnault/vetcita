@@ -5,7 +5,7 @@ import Pet from '#pets/models/pet'
 
 interface CreatePetParams {
   name: string
-  patientId: UUID
+  clientId: UUID
   tenantId: UUID
   speciesId: UUID
   dateOfBirth?: DateTime
@@ -21,7 +21,7 @@ export class CreatePet {
     const pet = await Pet.create(
       {
         name: params.name,
-        patientId: params.patientId,
+        clientId: params.clientId,
         tenantId: params.tenantId,
         speciesId: params.speciesId,
         breedId: params.breedId || null,

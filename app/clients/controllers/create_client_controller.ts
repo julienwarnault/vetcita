@@ -2,10 +2,10 @@ import vine from '@vinejs/vine'
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
 import { withTransaction } from '#shared/utils/with_transaction'
-import { CreatePatient } from '#patients/actions/create_patient'
+import { CreateClient } from '#clients/actions/create_client'
 
 @inject()
-export default class CreatePatientController {
+export default class CreateClientController {
   static validator = vine.create(
     vine.object({
       firstName: vine.string(),
@@ -16,22 +16,22 @@ export default class CreatePatientController {
     })
   )
 
-  constructor(private readonly createPatient: CreatePatient) {}
+  constructor(private readonly createClient: CreateClient) {}
 
   async render({ inertia }: HttpContext) {
-    return inertia.render('patients/form', {})
+    return inertia.render('clients/form', {})
   }
 
   async execute({ request, response, auth, session }: HttpContext) {
-    const payload = await request.validateUsing(CreatePatientController.validator)
+    const payload = await request.validateUsing(CreateClientController.validator)
 
     const user = auth.getUserOrFail()
 
-    const { patient } = await withTransaction(() => {
-      return this.createPatient.execute({ ...payload, tenantId: user.tenantId })
+    const { client } = await withTransaction(() => {
+      return this.createClient.execute({ ...payload, tenantId: user.tenantId })
     })
 
-    session.flash('patientId', patient.id)
+    session.flash('clientId', client.id)
 
     return response.redirect().back()
   }

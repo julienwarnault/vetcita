@@ -12,46 +12,46 @@ import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 import { Menu } from '../ui/menu'
 
-interface PanelPatientProps {
+interface PanelClientProps {
   appointmentId?: string
-  selectedPatientId?: string
-  onChange?: (patientId: string) => void
+  selectedClientId?: string
+  onChange?: (clientId: string) => void
 }
 
-export function PanelPatient(props: PanelPatientProps) {
-  const { appointmentId, selectedPatientId, onChange } = props
+export function PanelClient(props: PanelClientProps) {
+  const { appointmentId, selectedClientId, onChange } = props
 
   const { visitModal } = useModalStack()
 
   const [search, setSearch] = useState('')
   const [debouncedSearch] = useDebounce(search, 500)
-  const [selectionView, setSelectionView] = useState(!!selectedPatientId)
+  const [selectionView, setSelectionView] = useState(!!selectedClientId)
 
-  const { data, isLoading } = useQuery(query.listPatients.api.queryOptions({ query: { search: debouncedSearch } }))
+  const { data, isLoading } = useQuery(query.listClients.api.queryOptions({ query: { search: debouncedSearch } }))
 
-  const { data: patient, refetch } = useQuery(
-    query.getPatient.api.queryOptions({ params: { id: selectedPatientId! } }, { enabled: Boolean(selectedPatientId) })
+  const { data: client, refetch } = useQuery(
+    query.getClient.api.queryOptions({ params: { id: selectedClientId! } }, { enabled: Boolean(selectedClientId) })
   )
 
   useEffect(() => {
-    setSelectionView(!!selectedPatientId)
+    setSelectionView(!!selectedClientId)
   }, [appointmentId])
 
-  const patients = data || []
+  const clients = data || []
 
   return (
-    <Drawer.LeftPanel className={selectionView || selectedPatientId ? 'min-w-[320px]' : 'min-w-44'}>
-      {selectedPatientId && (
+    <Drawer.LeftPanel className={selectionView || selectedClientId ? 'min-w-[320px]' : 'min-w-44'}>
+      {selectedClientId && (
         <>
-          {patient && (
+          {client && (
             <Drawer.Body className="p-0">
               <div className="">
                 <div className="flex flex-col items-center px-8 pt-8 gap-6">
                   <div className="flex flex-col items-center">
-                    <Avatar size="4xl" className="mb-3" fullName={patient.fullName} />
-                    <div className="text-[17px]/6 font-semibold pb-1">{patient.fullName}</div>
-                    {patient.email && <div className="text-[15px]/5 text-muted">{patient.email}</div>}
-                    <div className="text-[15px]/5 text-muted">{formatPhoneNumber(patient.phone)}</div>
+                    <Avatar size="4xl" className="mb-3" fullName={client.fullName} />
+                    <div className="text-[17px]/6 font-semibold pb-1">{client.fullName}</div>
+                    {client.email && <div className="text-[15px]/5 text-muted">{client.email}</div>}
+                    <div className="text-[15px]/5 text-muted">{formatPhoneNumber(client.phone)}</div>
                   </div>
                   <div className="flex gap-3">
                     <Menu
@@ -72,23 +72,23 @@ export function PanelPatient(props: PanelPatientProps) {
                       </Menu.Item>
                       <Menu.Item
                         onClick={() =>
-                          visitModal(urlFor('update_patient.render', { id: patient.id }), {
+                          visitModal(urlFor('update_client.render', { id: client.id }), {
                             onClose: refetch,
                           })
                         }
                       >
-                        Editar datos del paciente
+                        Editar datos del cliente
                       </Menu.Item>
                     </Menu>
                     <Button
                       variant="secondary"
                       onClick={() => {
-                        visitModal(urlFor('get_patient.render', { id: patient.id }), {
+                        visitModal(urlFor('get_client.render', { id: client.id }), {
                           onClose: refetch,
                         })
                       }}
                     >
-                      Ver paciente
+                      Ver cliente
                     </Button>
                   </div>
                 </div>
@@ -99,15 +99,15 @@ export function PanelPatient(props: PanelPatientProps) {
           )}
         </>
       )}
-      {!selectedPatientId && selectionView && (
+      {!selectedClientId && selectionView && (
         <>
           <Drawer.Header className="sticky top-0 px-8 pt-8 pb-4">
-            <h3 className="font-semibold text-[19px]/6">Seleccionar paciente</h3>
+            <h3 className="font-semibold text-[19px]/6">Seleccionar cliente</h3>
             <div className="relative mt-6">
               <SearchIcon className="absolute left-4 top-1/2 -translate-y-1/2 size-5 text-muted-foreground" />
               <Input
                 type="text"
-                placeholder="Buscar paciente"
+                placeholder="Buscar cliente"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="pl-11"
@@ -119,10 +119,10 @@ export function PanelPatient(props: PanelPatientProps) {
               <button
                 type="button"
                 onClick={() => {
-                  visitModal(urlFor('create_patient.render'), {
+                  visitModal(urlFor('create_client.render'), {
                     listeners: {
-                      onCreate(patientId: string) {
-                        onChange?.(patientId)
+                      onCreate(clientId: string) {
+                        onChange?.(clientId)
                       },
                     } as any,
                   })
@@ -132,7 +132,7 @@ export function PanelPatient(props: PanelPatientProps) {
                 )}
               >
                 <Avatar size="lg" icon="plus" />
-                <div className="text-[15px]/5 font-semibold truncate">Añadir un nuevo paciente</div>
+                <div className="text-[15px]/5 font-semibold truncate">Añadir un nuevo cliente</div>
               </button>
               <button
                 type="button"
@@ -149,19 +149,19 @@ export function PanelPatient(props: PanelPatientProps) {
               </button>
               <hr className="my-2" />
               {!isLoading &&
-                patients.map((patient) => (
+                clients.map((client) => (
                   <button
-                    key={patient.id}
+                    key={client.id}
                     type="button"
-                    onClick={() => onChange?.(patient.id)}
+                    onClick={() => onChange?.(client.id)}
                     className={cn(
                       'flex items-center gap-3 px-8 py-2 bg-white hover:bg-background transition-colors text-left'
                     )}
                   >
-                    <Avatar size="lg" fullName={patient.fullName} />
+                    <Avatar size="lg" fullName={client.fullName} />
                     <div className="flex-1 min-w-0">
-                      <div className="text-[15px]/5 font-semibold truncate">{patient.fullName}</div>
-                      {patient.phone && <div className="text-[15px]/5 text-muted truncate">{patient.phone}</div>}
+                      <div className="text-[15px]/5 font-semibold truncate">{client.fullName}</div>
+                      {client.phone && <div className="text-[15px]/5 text-muted truncate">{client.phone}</div>}
                     </div>
                   </button>
                 ))}
@@ -180,7 +180,7 @@ export function PanelPatient(props: PanelPatientProps) {
               <div className="flex items-center justify-center size-12 bg-accent/10 text-accent rounded-full">
                 <UserRoundPlusIcon size={20} />
               </div>
-              <div className="text-[17px]/6 font-semibold">Añadir paciente</div>
+              <div className="text-[17px]/6 font-semibold">Añadir cliente</div>
             </button>
           </Drawer.Body>
         </>

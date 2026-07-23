@@ -83,7 +83,7 @@ export class AppointmentTypeSchema extends BaseModel {
 }
 
 export class AppointmentSchema extends BaseModel {
-  static $columns = ['agendaId', 'appointmentTypeId', 'bookingRef', 'createdAt', 'duration', 'endDate', 'id', 'patientId', 'reminderSentAt', 'startDate', 'statusId', 'tenantId', 'updatedAt'] as const
+  static $columns = ['agendaId', 'appointmentTypeId', 'bookingRef', 'clientId', 'createdAt', 'duration', 'endDate', 'id', 'petId', 'reminderSentAt', 'startDate', 'statusId', 'tenantId', 'updatedAt'] as const
   $columns = AppointmentSchema.$columns
   @column()
   declare agendaId: UUID
@@ -91,6 +91,8 @@ export class AppointmentSchema extends BaseModel {
   declare appointmentTypeId: UUID
   @column()
   declare bookingRef: string
+  @column()
+  declare clientId: UUID | null
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
   @column()
@@ -100,7 +102,7 @@ export class AppointmentSchema extends BaseModel {
   @column({ isPrimary: true })
   declare id: UUID
   @column()
-  declare patientId: UUID | null
+  declare petId: UUID | null
   @column.dateTime()
   declare reminderSentAt: DateTime | null
   @column.dateTime()
@@ -124,28 +126,9 @@ export class BreedSchema extends BaseModel {
   declare speciesId: UUID | null
 }
 
-export class ClosedDateSchema extends BaseModel {
-  static $columns = ['createdAt', 'description', 'end', 'id', 'start', 'tenantId', 'updatedAt'] as const
-  $columns = ClosedDateSchema.$columns
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime
-  @column()
-  declare description: string | null
-  @column.date()
-  declare end: DateTime
-  @column({ isPrimary: true })
-  declare id: UUID
-  @column.date()
-  declare start: DateTime
-  @column()
-  declare tenantId: UUID
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime | null
-}
-
-export class PatientSchema extends BaseModel {
+export class ClientSchema extends BaseModel {
   static $columns = ['createdAt', 'email', 'firstName', 'id', 'lastName', 'notes', 'phone', 'tenantId', 'updatedAt'] as const
-  $columns = PatientSchema.$columns
+  $columns = ClientSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
   @column()
@@ -166,11 +149,32 @@ export class PatientSchema extends BaseModel {
   declare updatedAt: DateTime | null
 }
 
+export class ClosedDateSchema extends BaseModel {
+  static $columns = ['createdAt', 'description', 'end', 'id', 'start', 'tenantId', 'updatedAt'] as const
+  $columns = ClosedDateSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare description: string | null
+  @column.date()
+  declare end: DateTime
+  @column({ isPrimary: true })
+  declare id: UUID
+  @column.date()
+  declare start: DateTime
+  @column()
+  declare tenantId: UUID
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class PetSchema extends BaseModel {
-  static $columns = ['breedId', 'createdAt', 'dateOfBirth', 'gender', 'id', 'name', 'notes', 'patientId', 'speciesId', 'tenantId', 'updatedAt'] as const
+  static $columns = ['breedId', 'clientId', 'createdAt', 'dateOfBirth', 'gender', 'id', 'name', 'notes', 'speciesId', 'tenantId', 'updatedAt'] as const
   $columns = PetSchema.$columns
   @column()
   declare breedId: UUID | null
+  @column()
+  declare clientId: UUID | null
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
   @column.date()
@@ -183,8 +187,6 @@ export class PetSchema extends BaseModel {
   declare name: string
   @column()
   declare notes: string | null
-  @column()
-  declare patientId: UUID | null
   @column()
   declare speciesId: UUID | null
   @column()
@@ -213,8 +215,10 @@ export class ScheduleDaySchema extends BaseModel {
 }
 
 export class SpeciesSchema extends BaseModel {
-  static $columns = ['id', 'name'] as const
+  static $columns = ['iconUrl', 'id', 'name'] as const
   $columns = SpeciesSchema.$columns
+  @column()
+  declare iconUrl: string
   @column({ isPrimary: true })
   declare id: UUID
   @column()

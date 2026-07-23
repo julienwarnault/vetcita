@@ -6,7 +6,7 @@ import Pet from '#pets/models/pet'
 interface UpdatePetParams {
   id: UUID
   name: string
-  patientId: UUID
+  clientId: UUID
   speciesId: UUID
   dateOfBirth?: DateTime
   gender?: 'male' | 'female' | 'unknown'
@@ -22,7 +22,7 @@ export class UpdatePet {
 
     pet.merge({
       name: params.name,
-      patientId: params.patientId,
+      clientId: params.clientId,
       speciesId: params.speciesId,
       breedId: params.breedId || null,
       dateOfBirth: params.dateOfBirth,

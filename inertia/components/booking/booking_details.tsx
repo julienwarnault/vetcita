@@ -14,7 +14,7 @@ export function BookingDetails({ form, appointmentType }: BookingDetailsProps) {
   const { data } = form
 
   const startDate = data.startDate ? DateTime.fromISO(data.startDate) : null
-  const hasPatientInfo = data.firstName || data.lastName || data.phone
+  const hasClientInfo = data.firstName || data.lastName || data.phone
 
   return (
     <Card className="sticky top-24">
@@ -65,7 +65,7 @@ export function BookingDetails({ form, appointmentType }: BookingDetailsProps) {
           </div>
         )}
 
-        {hasPatientInfo && (
+        {hasClientInfo && (
           <div className="flex flex-col gap-3 pt-4 border-t">
             <div className="flex items-start gap-3">
               <div className="mt-0.5 text-muted">
@@ -84,7 +84,7 @@ export function BookingDetails({ form, appointmentType }: BookingDetailsProps) {
           </div>
         )}
 
-        {!appointmentType && !startDate && !hasPatientInfo && (
+        {!appointmentType && !startDate && !hasClientInfo && (
           <div className="text-sm/5 text-muted py-4">Selecciona un tipo de cita para comenzar</div>
         )}
       </div>

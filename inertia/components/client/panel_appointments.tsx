@@ -58,7 +58,7 @@ export function PanelAppointments(props: PanelAppointmentsProps) {
           {appointments.length == 0 && (
             <Empty
               heading="No hay citas"
-              description="No se han creado citas para este paciente"
+              description="No se han creado citas para este cliente"
               illustration="/illustrations/calendar.png"
               border={true}
             />

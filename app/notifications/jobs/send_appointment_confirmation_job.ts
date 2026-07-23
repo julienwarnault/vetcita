@@ -25,7 +25,7 @@ export default class SendAppointmentConfirmationJob extends Job<SendAppointmentC
 
     const appointment = await Appointment.query()
       .where('id', appointmentId)
-      .preload('patient')
+      .preload('client')
       .preload('appointmentType')
       .preload('tenant')
       .firstOrFail()

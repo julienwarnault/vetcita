@@ -1,8 +1,8 @@
 import { transactionContext } from '#shared/contexts/transaction_context'
-import Patient from '#patients/models/patient'
+import Client from '#clients/models/client'
 import type { UUID } from '#shared/types'
 
-interface UpdatePatientParams {
+interface UpdateClientParams {
   id: UUID
   tenantId: UUID
   firstName: string
@@ -12,16 +12,16 @@ interface UpdatePatientParams {
   notes?: string
 }
 
-export class UpdatePatient {
-  async execute(params: UpdatePatientParams) {
+export class UpdateClient {
+  async execute(params: UpdateClientParams) {
     const trx = transactionContext.get()
 
-    const patient = await Patient.query({ client: trx })
+    const client = await Client.query({ client: trx })
       .where('id', params.id)
       .where('tenantId', params.tenantId)
       .firstOrFail()
 
-    patient.merge({
+    client.merge({
       firstName: params.firstName,
       lastName: params.lastName,
       email: params.email?.toLowerCase().trim() || null,
@@ -29,8 +29,8 @@ export class UpdatePatient {
       notes: params.notes || null,
     })
 
-    await patient.save()
+    await client.save()
 
-    return { patient }
+    return { client }
   }
 }

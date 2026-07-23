@@ -1,8 +1,8 @@
 import { transactionContext } from '#shared/contexts/transaction_context'
-import Patient from '#patients/models/patient'
+import Client from '#clients/models/client'
 import type { UUID } from '#shared/types'
 
-interface FindOrUpdatePatientParams {
+interface FindOrUpdateClientParams {
   tenantId: UUID
   firstName: string
   lastName: string
@@ -10,11 +10,11 @@ interface FindOrUpdatePatientParams {
   email?: string
 }
 
-export class FindOrUpdatePatient {
-  async handle(params: FindOrUpdatePatientParams) {
+export class FindOrUpdateClient {
+  async handle(params: FindOrUpdateClientParams) {
     const trx = transactionContext.get()
 
-    return Patient.updateOrCreate(
+    return Client.updateOrCreate(
       { phone: params.phone, tenantId: params.tenantId },
       {
         tenantId: params.tenantId,

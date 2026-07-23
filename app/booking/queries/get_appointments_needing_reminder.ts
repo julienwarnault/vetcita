@@ -16,7 +16,7 @@ export class GetAppointmentsNeedingReminder {
       .whereNull('reminder_sent_at')
       .preload('tenant')
       .preload('appointmentType')
-      .preload('patient')
+      .preload('client')
 
     return { appointments }
   }

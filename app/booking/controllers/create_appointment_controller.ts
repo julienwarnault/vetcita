@@ -17,7 +17,7 @@ export default class CreateAppointmentController {
       appointmentTypeId: uuidSchema(),
       agendaId: uuidSchema(),
       startDate: vine.string(),
-      patientId: uuidSchema().optional(),
+      clientId: uuidSchema().optional(),
       statusId: vine.string().optional(),
     })
   )
@@ -31,7 +31,7 @@ export default class CreateAppointmentController {
   async render({ auth, inertia, request }: HttpContext) {
     const user = auth.getUserOrFail()
 
-    const patientId: UUID | undefined = request.qs().patientId
+    const clientId: UUID | undefined = request.qs().clientId
 
     const [{ appointmentTypes }, { statuses }] = await Promise.all([
       this.getAppointmentTypes.execute({ tenantId: user.tenantId }),
@@ -39,7 +39,7 @@ export default class CreateAppointmentController {
     ])
 
     return inertia.render('appointments/form', {
-      patientId,
+      clientId,
       appointmentTypes: AppointmentTypeTransformer.transform(appointmentTypes),
       statuses: AppointmentStatusTransformer.transform(statuses),
     })

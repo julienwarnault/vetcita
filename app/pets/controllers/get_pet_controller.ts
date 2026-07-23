@@ -6,7 +6,7 @@ import PetTransformer from '#pets/transformers/pet_transformer'
 import { GetPet } from '#pets/queries/get_pet'
 
 @inject()
-export default class ShowPatientController {
+export default class ShowPetController {
   constructor(
     private readonly getPet: GetPet,
     private readonly getAppointments: GetPetAppointments

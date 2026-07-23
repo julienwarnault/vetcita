@@ -1,14 +1,14 @@
-import Patient from '#patients/models/patient'
+import Client from '#clients/models/client'
 import type { UUID } from '#shared/types'
 
-interface GetPatientsParams {
+interface GetClientsParams {
   tenantId: UUID
   search?: string
 }
 
-export class GetPatients {
-  async execute(params: GetPatientsParams) {
-    const query = Patient.query().where('tenantId', params.tenantId)
+export class GetClients {
+  async execute(params: GetClientsParams) {
+    const query = Client.query().where('tenantId', params.tenantId)
 
     if (params.search) {
       const term = `%${params.search}%`
@@ -22,8 +22,8 @@ export class GetPatients {
       })
     }
 
-    const patients = await query
+    const clients = await query
 
-    return { patients }
+    return { clients }
   }
 }

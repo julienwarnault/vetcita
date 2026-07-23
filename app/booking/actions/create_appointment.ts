@@ -15,7 +15,7 @@ import type { UUID } from '#shared/types'
 interface CreateAppointmentParams {
   appointmentTypeId: UUID
   agendaId: UUID
-  patientId?: UUID
+  clientId?: UUID
   startDate: string
   tenantId: UUID
 }
@@ -54,7 +54,7 @@ export class CreateAppointment {
     const appointment = await Appointment.create(
       {
         appointmentTypeId: params.appointmentTypeId,
-        patientId: params.patientId,
+        clientId: params.clientId,
         agendaId: params.agendaId,
         startDate,
         endDate,

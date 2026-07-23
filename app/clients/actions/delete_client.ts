@@ -1,21 +1,21 @@
 import { transactionContext } from '#shared/contexts/transaction_context'
-import Patient from '#patients/models/patient'
+import Client from '#clients/models/client'
 import type { UUID } from '#shared/types'
 
-interface DeletePatientParams {
+interface DeleteClientParams {
   id: UUID
   tenantId: UUID
 }
 
-export class DeletePatient {
-  async execute(params: DeletePatientParams) {
+export class DeleteClient {
+  async execute(params: DeleteClientParams) {
     const trx = transactionContext.get()
 
-    const patient = await Patient.query({ client: trx })
+    const client = await Client.query({ client: trx })
       .where('id', params.id)
       .where('tenantId', params.tenantId)
       .firstOrFail()
 
-    await patient.delete()
+    await client.delete()
   }
 }

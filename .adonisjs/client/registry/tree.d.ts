@@ -56,24 +56,24 @@ export interface ApiDefinition {
   deleteAppointmentStatus: {
     execute: typeof routes['delete_appointment_status.execute']
   }
-  listPatients: {
-    render: typeof routes['list_patients.render']
-    api: typeof routes['list_patients.api']
+  listClients: {
+    render: typeof routes['list_clients.render']
+    api: typeof routes['list_clients.api']
   }
-  createPatient: {
-    render: typeof routes['create_patient.render']
-    execute: typeof routes['create_patient.execute']
+  createClient: {
+    render: typeof routes['create_client.render']
+    execute: typeof routes['create_client.execute']
   }
-  updatePatient: {
-    render: typeof routes['update_patient.render']
-    execute: typeof routes['update_patient.execute']
+  updateClient: {
+    render: typeof routes['update_client.render']
+    execute: typeof routes['update_client.execute']
   }
-  getPatient: {
-    render: typeof routes['get_patient.render']
-    api: typeof routes['get_patient.api']
+  getClient: {
+    render: typeof routes['get_client.render']
+    api: typeof routes['get_client.api']
   }
-  deletePatient: {
-    execute: typeof routes['delete_patient.execute']
+  deleteClient: {
+    execute: typeof routes['delete_client.execute']
   }
   updateTenant: {
     render: typeof routes['update_tenant.render']

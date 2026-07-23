@@ -15,7 +15,7 @@ interface UpdateAppointmentParams {
   tenantId: UUID
   appointmentTypeId: UUID
   agendaId: UUID
-  patientId?: UUID
+  clientId?: UUID
   startDate: string
 }
 
@@ -53,7 +53,7 @@ export class UpdateAppointment {
 
     appointment.merge({
       appointmentTypeId: params.appointmentTypeId,
-      patientId: params.patientId ?? null,
+      clientId: params.clientId ?? null,
       agendaId: params.agendaId,
       startDate,
       endDate,

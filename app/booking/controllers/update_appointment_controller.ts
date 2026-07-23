@@ -18,7 +18,7 @@ export default class UpdateAppointmentController {
       appointmentTypeId: uuidSchema(),
       agendaId: uuidSchema(),
       startDate: vine.string(),
-      patientId: uuidSchema().optional(),
+      clientId: uuidSchema().optional(),
     })
   )
 

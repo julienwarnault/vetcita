@@ -14,7 +14,7 @@ export default class CreatePetController {
   static validator = vine.create(
     vine.object({
       name: vine.string(),
-      patientId: uuidSchema(),
+      clientId: uuidSchema(),
       dateOfBirth: vine.date().optional(),
       gender: vine.enum(['male', 'female', 'unknown']).optional(),
       speciesId: uuidSchema(),

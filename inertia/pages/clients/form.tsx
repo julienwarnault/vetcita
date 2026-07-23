@@ -10,14 +10,14 @@ import { Form } from '~/components/ui/form'
 import { InertiaProps } from '~/types'
 
 type PageProps = InertiaProps<{
-  patient?: Data.Patients.Patient
+  client?: Data.Clients.Client
 }>
 
 export default function ShowForm(props: PageProps) {
-  const { patient } = props
+  const { client } = props
 
-  const isEdit = !!patient
-  const title = patient ? `Editar ${patient.firstName}` : 'Añadir un paciente'
+  const isEdit = !!client
+  const title = client ? `Editar ${client.firstName}` : 'Añadir un cliente'
 
   return (
     <InertiaModal>
@@ -44,46 +44,46 @@ export default function ShowForm(props: PageProps) {
 
             <Form
               id="form"
-              route={isEdit ? 'update_patient.execute' : 'create_patient.execute'}
-              routeParams={isEdit ? { id: patient.id } : undefined}
+              route={isEdit ? 'update_client.execute' : 'create_client.execute'}
+              routeParams={isEdit ? { id: client.id } : undefined}
               className="gap-16 pb-24"
               onSuccess={(data: any) => {
-                !isEdit && emit('onCreate', data.props.flash.patientId)
+                !isEdit && emit('onCreate', data.props.flash.clientId)
                 close()
               }}
             >
               <div>
                 <h2 className="text-2xl font-semibold">Perfil</h2>
-                <p className="text-[15px]/5 text-muted">Gestiona el perfil personal de tu paciente</p>
+                <p className="text-[15px]/5 text-muted">Gestiona el perfil personal de tu cliente</p>
 
                 <div className="grid grid-cols-6 w-full gap-x-4 gap-y-6 pt-6">
                   <Field name="firstName">
                     <Field.Label>Nombre *</Field.Label>
-                    <Input defaultValue={patient?.firstName ?? ''} />
+                    <Input defaultValue={client?.firstName ?? ''} />
                     <Field.Error />
                   </Field>
 
                   <Field name="lastName">
                     <Field.Label>Apellido *</Field.Label>
-                    <Input defaultValue={patient?.lastName ?? ''} />
+                    <Input defaultValue={client?.lastName ?? ''} />
                     <Field.Error />
                   </Field>
 
                   <Field name="phone">
                     <Field.Label>Teléfono *</Field.Label>
-                    <Input defaultValue={patient?.phone ?? ''} />
+                    <Input defaultValue={client?.phone ?? ''} />
                     <Field.Error />
                   </Field>
 
                   <Field name="email">
                     <Field.Label>Correo electrónico</Field.Label>
-                    <Input type="email" defaultValue={patient?.email ?? ''} />
+                    <Input type="email" defaultValue={client?.email ?? ''} />
                     <Field.Error />
                   </Field>
 
                   <Field name="notes" className="col-span-6">
                     <Field.Label>Comentarios</Field.Label>
-                    <Textarea placeholder="Añadir un comentario privado" defaultValue={patient?.notes ?? ''} />
+                    <Textarea placeholder="Añadir un comentario privado" defaultValue={client?.notes ?? ''} />
                     <Field.Error />
                   </Field>
                 </div>

@@ -23,7 +23,7 @@ export class GetAppointments {
         { column: 'duration', order: 'desc' },
       ])
       .preload('appointmentType')
-      .preload('patient')
+      .preload('client')
       .preload('agenda')
       .preload('status')
 

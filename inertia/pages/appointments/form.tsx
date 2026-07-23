@@ -3,7 +3,7 @@ import { Data } from '@generated/data'
 import { PanelAppointmentType } from '~/components/appointment/panel_appointment_type'
 import { useAppointmentForm } from '~/components/appointment/use_appointment_form'
 import { InertiaDrawer, InertiaDrawerRef } from '~/components/inertia_drawer'
-import { PanelPatient } from '~/components/appointment/panel_patient'
+import { PanelClient } from '~/components/appointment/panel_client'
 import { PanelReview } from '~/components/appointment/panel_review'
 import { PanelDate } from '~/components/appointment/panel_date'
 import usePageProps from '~/hooks/use_page_props'
@@ -11,14 +11,14 @@ import { InertiaProps } from '~/types'
 import { urlFor } from '~/lib/tuyau'
 
 type PageProps = InertiaProps<{
-  patientId?: string
+  clientId?: string
   appointment?: Data.Booking.Appointment
   appointmentTypes: Data.AppointmentTypes.AppointmentType[]
   statuses: Data.AppointmentWorkflow.AppointmentStatus[]
 }>
 
 export default function ShowForm(props: PageProps) {
-  const { patientId, appointment, appointmentTypes: types, statuses } = props
+  const { clientId, appointment, appointmentTypes: types, statuses } = props
 
   const isEdit = !!appointment
 
@@ -29,7 +29,7 @@ export default function ShowForm(props: PageProps) {
 
   const { form, step, canContinue, actions } = useAppointmentForm({
     appointment,
-    patientId,
+    clientId,
     tenantId: tenant!.id,
     submitUrl: isEdit
       ? urlFor('update_appointment.execute', { id: appointment.id })
@@ -42,10 +42,10 @@ export default function ShowForm(props: PageProps) {
 
   return (
     <InertiaDrawer ref={drawerRef}>
-      <PanelPatient
+      <PanelClient
         appointmentId={form.data.id}
-        selectedPatientId={form.data.patientId}
-        onChange={(patientId) => form.setData('patientId', patientId)}
+        selectedClientId={form.data.clientId}
+        onChange={(clientId) => form.setData('clientId', clientId)}
       />
       {step.key == 'type' && (
         <PanelAppointmentType form={form} next={actions.next} canContinue={canContinue} appointmentTypes={types} />

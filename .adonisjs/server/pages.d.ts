@@ -24,13 +24,13 @@ declare module '@adonisjs/inertia/types' {
     'booking/confirm': ExtractProps<(typeof import('../../inertia/pages/booking/confirm.tsx'))['default']>
     'booking/form': ExtractProps<(typeof import('../../inertia/pages/booking/form.tsx'))['default']>
     'calendar': ExtractProps<(typeof import('../../inertia/pages/calendar.tsx'))['default']>
+    'clients/form': ExtractProps<(typeof import('../../inertia/pages/clients/form.tsx'))['default']>
+    'clients/list': ExtractProps<(typeof import('../../inertia/pages/clients/list.tsx'))['default']>
+    'clients/show': ExtractProps<(typeof import('../../inertia/pages/clients/show.tsx'))['default']>
     'dashboard': ExtractProps<(typeof import('../../inertia/pages/dashboard.tsx'))['default']>
     'errors/not_found': ExtractProps<(typeof import('../../inertia/pages/errors/not_found.tsx'))['default']>
     'errors/server_error': ExtractProps<(typeof import('../../inertia/pages/errors/server_error.tsx'))['default']>
     'home': ExtractProps<(typeof import('../../inertia/pages/home.tsx'))['default']>
-    'patients/form': ExtractProps<(typeof import('../../inertia/pages/patients/form.tsx'))['default']>
-    'patients/list': ExtractProps<(typeof import('../../inertia/pages/patients/list.tsx'))['default']>
-    'patients/show': ExtractProps<(typeof import('../../inertia/pages/patients/show.tsx'))['default']>
     'pets/form': ExtractProps<(typeof import('../../inertia/pages/pets/form.tsx'))['default']>
     'pets/list': ExtractProps<(typeof import('../../inertia/pages/pets/list.tsx'))['default']>
     'pets/show': ExtractProps<(typeof import('../../inertia/pages/pets/show.tsx'))['default']>

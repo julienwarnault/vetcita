@@ -6,7 +6,7 @@ import type { UUID } from '#shared/types'
 
 interface SearchAppointmentsParams {
   tenantId: UUID
-  patientIds?: UUID[]
+  clientIds?: UUID[]
   search?: string
   limit: number
 }
@@ -20,17 +20,17 @@ export class SearchAppointments {
       .where('start_date', '>=', now.toUTC().toISO()!)
       .where('statusId', AppointmentStatus.BOOKED)
       .preload('appointmentType')
-      .preload('patient')
+      .preload('client')
       .preload('agenda')
       .preload('status')
       .orderBy('start_date', 'asc')
       .limit(params.limit)
 
-    if (params.patientIds) {
-      query.whereIn('patient_id', params.patientIds)
+    if (params.clientIds) {
+      query.whereIn('client_id', params.clientIds)
     }
 
-    if (!params.patientIds && params.search) {
+    if (!params.clientIds && params.search) {
       const ref = `%${params.search}%`
       query.whereILike('booking_ref', ref)
     }

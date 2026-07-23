@@ -8,10 +8,10 @@ interface SendAppointmentConfirmationParams {
 
 export class SendAppointmentConfirmation {
   async execute({ appointment }: SendAppointmentConfirmationParams) {
-    const { patient } = appointment
+    const { client } = appointment
 
-    if (patient.email) {
-      await mail.send(new AppointmentConfirmationNotification(appointment, patient.email))
+    if (client?.email) {
+      await mail.send(new AppointmentConfirmationNotification(appointment, client.email))
     }
   }
 }

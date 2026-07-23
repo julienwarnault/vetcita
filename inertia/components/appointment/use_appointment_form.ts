@@ -7,7 +7,7 @@ import { query, queryClient } from '~/lib/tuyau'
 type AppointmentData = {
   id: string
   tenantId: string
-  patientId: string
+  clientId: string
   appointmentTypeId: string
   agendaId: string
   startDate: string
@@ -35,14 +35,14 @@ export const STEPS = [
 
 type UseAppointmentFormParams = {
   tenantId: string
-  patientId?: string
+  clientId?: string
   appointment?: Data.Booking.Appointment
   submitUrl: string
   method: 'post' | 'put'
 }
 
 export function useAppointmentForm(params: UseAppointmentFormParams) {
-  const { method, submitUrl, appointment, tenantId, patientId } = params
+  const { method, submitUrl, appointment, tenantId, clientId } = params
 
   const { closeAll } = useModalStack()
 
@@ -51,7 +51,7 @@ export function useAppointmentForm(params: UseAppointmentFormParams) {
   const form = useForm({
     id: appointment?.id ?? '',
     tenantId: tenantId,
-    patientId: appointment?.patientId ?? patientId ?? '',
+    clientId: appointment?.clientId ?? clientId ?? '',
     appointmentTypeId: appointment?.appointmentTypeId ?? '',
     agendaId: appointment?.agendaId ?? '',
     startDate: appointment?.localStartDate ?? '',
@@ -118,12 +118,12 @@ export function useAppointmentForm(params: UseAppointmentFormParams) {
       ...old,
       id: appointment?.id ?? '',
       tenantId: tenantId,
-      patientId: appointment?.patientId ?? patientId ?? '',
+      clientId: appointment?.clientId ?? clientId ?? '',
       appointmentTypeId: appointment?.appointmentTypeId ?? '',
       agendaId: appointment?.agendaId ?? '',
       startDate: appointment?.localStartDate ?? '',
     }))
-  }, [appointment, patientId])
+  }, [appointment, clientId])
 
   return {
     step,

@@ -1,6 +1,6 @@
 import { Data } from '@generated/data'
 import { useModalStack } from '@inertiaui/modal-react'
-import { PanelAppointments } from '~/components/patient/panel_appointments'
+import { PanelAppointments } from '~/components/client/panel_appointments'
 import { PanelDetails } from '~/components/pet/panel_details'
 import { InertiaDrawer } from '~/components/inertia_drawer'
 import { Avatar } from '~/components/ui/avatar'
@@ -61,7 +61,7 @@ export default function ShowPet(props: PageProps) {
                               urlFor(
                                 'create_appointment.render',
                                 {},
-                                { qs: { patientId: pet.patientId, petId: pet.id } }
+                                { qs: { clientId: pet.clientId, petId: pet.id } }
                               ),
                               {
                                 onClose: reload,

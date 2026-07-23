@@ -9,12 +9,12 @@ interface SendAppointmentReminderParams {
 
 export class SendAppointmentReminder {
   async execute({ appointment }: SendAppointmentReminderParams) {
-    const { patient } = appointment
+    const { client } = appointment
 
     let sent = false
 
-    if (patient.email) {
-      await mail.send(new AppointmentReminderNotification(appointment, patient.email))
+    if (client?.email) {
+      await mail.send(new AppointmentReminderNotification(appointment, client.email))
       sent = true
     }
 

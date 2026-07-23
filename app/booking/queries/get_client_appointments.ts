@@ -1,16 +1,16 @@
 import Appointment from '#booking/models/appointment'
 import type { UUID } from '#shared/types'
 
-interface GetPatientAppointmentsParams {
+interface GetClientAppointmentsParams {
   tenantId: UUID
-  patientId: UUID
+  clientId: UUID
 }
 
-export class GetPatientAppointments {
-  async execute(params: GetPatientAppointmentsParams) {
+export class GetClientAppointments {
+  async execute(params: GetClientAppointmentsParams) {
     const appointments = await Appointment.query()
       .where('tenant_id', params.tenantId)
-      .where('patient_id', params.patientId)
+      .where('client_id', params.clientId)
       .orderBy('start_date')
       .preload('appointmentType')
       .preload('agenda')

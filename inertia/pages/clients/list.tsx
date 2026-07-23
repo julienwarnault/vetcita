@@ -10,17 +10,17 @@ import { InertiaProps } from '~/types'
 import { urlFor } from '~/lib/tuyau'
 
 type PageProps = InertiaProps<{
-  patients: Data.Patients.Patient[]
+  clients: Data.Clients.Client[]
 }>
 
 export default function List(props: PageProps) {
-  const { patients } = props
+  const { clients } = props
 
   const { visitModal, closeAll } = useModalStack()
 
-  const columns: Column<Data.Patients.Patient>[] = [
+  const columns: Column<Data.Clients.Client>[] = [
     {
-      header: 'Nombre del paciente',
+      header: 'Nombre del cliente',
       width: '34%',
       accessor: 'fullName',
     },
@@ -46,11 +46,11 @@ export default function List(props: PageProps) {
   return (
     <div className="flex">
       <div className="container-xl p-10">
-        <ViewHeader title="Pacientes" badge={patients.length.toString()}>
+        <ViewHeader title="Clientes" badge={clients.length.toString()}>
           <Button
             onClick={() => {
               closeAll()
-              visitModal(urlFor('create_patient.render'))
+              visitModal(urlFor('create_client.render'))
             }}
             size="lg"
           >
@@ -60,10 +60,10 @@ export default function List(props: PageProps) {
 
         <ListTable
           columns={columns}
-          data={patients}
+          data={clients}
           onRowClick={(row) => {
             closeAll(true)
-            visitModal(urlFor('get_patient.render', { id: row.id }))
+            visitModal(urlFor('get_client.render', { id: row.id }))
           }}
         />
       </div>
