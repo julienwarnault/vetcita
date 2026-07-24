@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
 import { cn } from 'tailwind-variants'
-import { CalendarEventPreviewCard } from './calendar_event_preview_card'
+import { CalendarDayEventsMenu } from './calendar_day_events_menu'
+import { CalendarDayEvent } from './calendar_day_event'
 import { CalendarDayMenu } from './calendar_day_menu'
 import { isPastDate, isToday } from '~/lib/date'
 import { Event } from '~/lib/calendar'
@@ -23,7 +24,7 @@ export function CalendarDayCell(props: CalendarDayCellProps) {
 
   return (
     <CalendarDayMenu day={day}>
-      <button
+      <div
         className={cn(
           'group relative flex flex-col gap-1 p-1.5 hover:bg-accent-faded',
           'hover:z-1 cursor-pointer',
@@ -47,27 +48,15 @@ export function CalendarDayCell(props: CalendarDayCellProps) {
 
         <>
           {visible.map((event) => (
-            <CalendarEventPreviewCard key={event.id} event={event}>
-              <div
-                className={cn(
-                  'relative flex rounded-sm p-1 z-2 cursor-pointer',
-                  'after:hidden after:absolute after:content-empty after:inset-0 after:border-2 after:rounded-sm hover:after:block hover:after:border-accent'
-                )}
-                style={{ backgroundColor: event.color }}
-                onClick={() => onEventClick?.(event)}
-              >
-                <div className="flex gap-1 overflow-hidden whitespace-nowrap">
-                  <div className="text-[13px]/4 font-normal">{event.start.toFormat('h:mm')}</div>
-                  <div className="text-[13px]/4 font-semibold">{event.client?.fullName}</div>
-                </div>
-              </div>
-            </CalendarEventPreviewCard>
+            <CalendarDayEvent key={event.id} event={event} onEventClick={onEventClick} />
           ))}
           {remaining > 0 && (
-            <div className="px-4 py-1 text-center text-[11px] text-foreground">{remaining} otro(s)</div>
+            <CalendarDayEventsMenu day={day} events={events} onEventClick={onEventClick}>
+              <button className="px-4 py-1 text-center text-[11px] text-foreground z-1">{remaining} otro(s)</button>
+            </CalendarDayEventsMenu>
           )}
         </>
-      </button>
+      </div>
     </CalendarDayMenu>
   )
 }

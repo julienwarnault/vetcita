@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { cn } from 'tailwind-variants'
 import { router } from '@inertiajs/react'
-import { Menu as PreviewCard } from '@base-ui/react'
+import { Menu as BaseMenu } from '@base-ui/react'
 import { isValidElement, ReactNode, useState } from 'react'
 import { AlignVerticalSpaceAroundIcon, XIcon } from 'lucide-react'
 import usePageProps from '~/hooks/use_page_props'
@@ -12,12 +12,12 @@ import { urlFor } from '~/lib/tuyau'
 import { Card } from '../ui/card'
 import { Menu } from '../ui/menu'
 
-interface CalendarEventPreviewCardProps {
+interface CalendarDayMenuProps {
   day: DateTime
   children: ReactNode
 }
 
-export function CalendarDayMenu(props: CalendarEventPreviewCardProps) {
+export function CalendarDayMenu(props: CalendarDayMenuProps) {
   const { day, children } = props
 
   const { qs } = usePageProps()
@@ -31,11 +31,11 @@ export function CalendarDayMenu(props: CalendarEventPreviewCardProps) {
   }
 
   return (
-    <PreviewCard.Root open={isOpen} onOpenChange={setIsOpen}>
-      {isValidElement(children) && <PreviewCard.Trigger delay={300} render={children} />}
+    <BaseMenu.Root open={isOpen} onOpenChange={setIsOpen}>
+      {isValidElement(children) && <BaseMenu.Trigger delay={300} render={children} nativeButton={false} />}
 
-      <PreviewCard.Portal>
-        <PreviewCard.Positioner
+      <BaseMenu.Portal>
+        <BaseMenu.Positioner
           sideOffset={10}
           side="left"
           positionMethod="fixed"
@@ -46,7 +46,7 @@ export function CalendarDayMenu(props: CalendarEventPreviewCardProps) {
             fallbackAxisSide: 'start',
           }}
         >
-          <PreviewCard.Popup
+          <BaseMenu.Popup
             render={<Card shadow={true} size="none" />}
             className={cn(
               'overflow-hidden w-70',
@@ -57,7 +57,7 @@ export function CalendarDayMenu(props: CalendarEventPreviewCardProps) {
             <div className="flex flex-col">
               <div className="flex items-center justify-between py-2 pl-6 pr-3 bg-border/60">
                 <div className="text-[17px]/6 font-semibold">
-                  {day.setLocale(DEFAULT_LOCALE).toFormat('cccc, d LLL')}{' '}
+                  {day.setLocale(DEFAULT_LOCALE).toFormat('cccc, d LLL')}
                 </div>
                 <Button size="icon-sm" variant="tertiary" className="-m-2" onClick={() => setIsOpen(false)}>
                   <XIcon />
@@ -70,9 +70,9 @@ export function CalendarDayMenu(props: CalendarEventPreviewCardProps) {
                 </Menu.Item>
               </div>
             </div>
-          </PreviewCard.Popup>
-        </PreviewCard.Positioner>
-      </PreviewCard.Portal>
-    </PreviewCard.Root>
+          </BaseMenu.Popup>
+        </BaseMenu.Positioner>
+      </BaseMenu.Portal>
+    </BaseMenu.Root>
   )
 }
