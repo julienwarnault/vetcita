@@ -154,6 +154,7 @@ export interface ApiDefinition {
   }
   listPets: {
     render: typeof routes['list_pets.render']
+    api: typeof routes['list_pets.api']
   }
   createPet: {
     render: typeof routes['create_pet.render']
@@ -161,6 +162,7 @@ export interface ApiDefinition {
   }
   getPet: {
     render: typeof routes['get_pet.render']
+    api: typeof routes['get_pet.api']
   }
   updatePet: {
     render: typeof routes['update_pet.render']

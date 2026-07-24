@@ -31,4 +31,15 @@ export default class ShowPetController {
       appointments: AppointmentTransformer.transform(appointments),
     })
   }
+
+  async api({ serialize, params, auth }: HttpContext) {
+    const user = auth.getUserOrFail()
+
+    const { pet } = await this.getPet.execute({
+      id: params.id,
+      tenantId: user.tenantId,
+    })
+
+    return await serialize.withoutWrapping(PetTransformer.transform(pet))
+  }
 }

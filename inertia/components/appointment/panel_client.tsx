@@ -1,105 +1,36 @@
+import { useState } from 'react'
 import { cn } from 'tailwind-variants'
+import { SearchIcon } from 'lucide-react'
 import { useDebounce } from 'use-debounce'
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { useModalStack } from '@inertiaui/modal-react'
-import { SearchIcon, UserRoundPlusIcon } from 'lucide-react'
-import { formatPhoneNumber } from '~/lib/utils'
 import { query, urlFor } from '~/lib/tuyau'
 import { Drawer } from '../ui/drawer'
 import { Avatar } from '../ui/avatar'
-import { Button } from '../ui/button'
 import { Input } from '../ui/input'
-import { Menu } from '../ui/menu'
 
 interface PanelClientProps {
-  appointmentId?: string
   selectedClientId?: string
   onChange?: (clientId: string) => void
 }
 
 export function PanelClient(props: PanelClientProps) {
-  const { appointmentId, selectedClientId, onChange } = props
+  const { selectedClientId, onChange } = props
 
   const { visitModal } = useModalStack()
 
   const [search, setSearch] = useState('')
   const [debouncedSearch] = useDebounce(search, 500)
-  const [selectionView, setSelectionView] = useState(!!selectedClientId)
 
-  const { data, isLoading } = useQuery(query.listClients.api.queryOptions({ query: { search: debouncedSearch } }))
-
-  const { data: client, refetch } = useQuery(
-    query.getClient.api.queryOptions({ params: { id: selectedClientId! } }, { enabled: Boolean(selectedClientId) })
+  const { data, isLoading } = useQuery(
+    query.listClients.api.queryOptions({ query: { search: debouncedSearch } }, { enabled: Boolean(!selectedClientId) })
   )
-
-  useEffect(() => {
-    setSelectionView(!!selectedClientId)
-  }, [appointmentId])
 
   const clients = data || []
 
   return (
-    <Drawer.LeftPanel className={selectionView || selectedClientId ? 'min-w-[320px]' : 'min-w-44'}>
-      {selectedClientId && (
-        <>
-          {client && (
-            <Drawer.Body className="p-0">
-              <div className="">
-                <div className="flex flex-col items-center px-8 pt-8 gap-6">
-                  <div className="flex flex-col items-center">
-                    <Avatar size="4xl" className="mb-3" fullName={client.fullName} />
-                    <div className="text-[17px]/6 font-semibold pb-1">{client.fullName}</div>
-                    {client.email && <div className="text-[15px]/5 text-muted">{client.email}</div>}
-                    <div className="text-[15px]/5 text-muted">{formatPhoneNumber(client.phone)}</div>
-                  </div>
-                  <div className="flex gap-3">
-                    <Menu
-                      trigger={
-                        <Button variant="secondary">
-                          Acciones <Menu.TriggerIcon />
-                        </Button>
-                      }
-                      align="start"
-                    >
-                      <Menu.Item
-                        onClick={() => {
-                          onChange?.('')
-                          setSelectionView(false)
-                        }}
-                      >
-                        Eliminar cliente
-                      </Menu.Item>
-                      <Menu.Item
-                        onClick={() =>
-                          visitModal(urlFor('update_client.render', { id: client.id }), {
-                            onClose: refetch,
-                          })
-                        }
-                      >
-                        Editar datos del cliente
-                      </Menu.Item>
-                    </Menu>
-                    <Button
-                      variant="secondary"
-                      onClick={() => {
-                        visitModal(urlFor('get_client.render', { id: client.id }), {
-                          onClose: refetch,
-                        })
-                      }}
-                    >
-                      Ver cliente
-                    </Button>
-                  </div>
-                </div>
-
-                <hr className="my-4" />
-              </div>
-            </Drawer.Body>
-          )}
-        </>
-      )}
-      {!selectedClientId && selectionView && (
+    <Drawer.LeftPanel className="min-w-[320px]">
+      {!selectedClientId && (
         <>
           <Drawer.Header className="sticky top-0 px-8 pt-8 pb-4 mb-2">
             <h3 className="font-semibold text-[19px]/6">Seleccionar cliente</h3>
@@ -153,22 +84,6 @@ export function PanelClient(props: PanelClientProps) {
                   </button>
                 ))}
             </div>
-          </Drawer.Body>
-        </>
-      )}
-      {!selectionView && !selectionView && (
-        <>
-          <Drawer.Body className="p-0 h-full">
-            <button
-              type="button"
-              className="flex flex-col gap-4 items-center justify-start py-8 h-full hover:bg-background w-full"
-              onClick={() => setSelectionView(true)}
-            >
-              <div className="flex items-center justify-center size-12 bg-accent/10 text-accent rounded-full">
-                <UserRoundPlusIcon size={20} />
-              </div>
-              <div className="text-[17px]/6 font-semibold">Añadir cliente</div>
-            </button>
           </Drawer.Body>
         </>
       )}

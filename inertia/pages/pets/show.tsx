@@ -1,5 +1,6 @@
 import { Data } from '@generated/data'
 import { useModalStack } from '@inertiaui/modal-react'
+import { PanelDetails as PanelClient } from '~/components/client/panel_details'
 import { PanelAppointments } from '~/components/client/panel_appointments'
 import { PanelDetails } from '~/components/pet/panel_details'
 import { InertiaDrawer } from '~/components/inertia_drawer'
@@ -32,7 +33,7 @@ export default function ShowPet(props: PageProps) {
                   <div className="">
                     <div className="flex flex-col items-center px-8 pt-8 gap-6">
                       <div className="flex flex-col items-center">
-                        <Avatar size="4xl" className="mb-3" fullName={pet.name} />
+                        <Avatar size="4xl" className="mb-3" src={pet.species?.illustrationUrl} />
                         <div className="text-[17px]/6 font-semibold pb-1">{pet.name}</div>
                       </div>
                       <div className="flex gap-3">
@@ -87,6 +88,7 @@ export default function ShowPet(props: PageProps) {
                       <span className="text-[13px]/4 text-muted font-medium">{appointments?.length ?? 0}</span>
                     </div>
                   </Tabs.Trigger>
+                  <Tabs.Trigger value="client">Datos del cliente</Tabs.Trigger>
                 </Tabs.List>
               </Drawer.Menu>
             </div>
@@ -98,6 +100,10 @@ export default function ShowPet(props: PageProps) {
 
           <Tabs.Content value="appointments">
             <PanelAppointments appointments={appointments} />
+          </Tabs.Content>
+
+          <Tabs.Content value="client">
+            <PanelClient client={pet.client!} />
           </Tabs.Content>
         </Tabs>
       )}

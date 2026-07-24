@@ -14,7 +14,7 @@ export class FindOrUpdateClient {
   async handle(params: FindOrUpdateClientParams) {
     const trx = transactionContext.get()
 
-    return Client.updateOrCreate(
+    const client = await Client.updateOrCreate(
       { phone: params.phone, tenantId: params.tenantId },
       {
         tenantId: params.tenantId,
@@ -27,5 +27,7 @@ export class FindOrUpdateClient {
         client: trx,
       }
     )
+
+    return { client }
   }
 }

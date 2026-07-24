@@ -76,6 +76,8 @@ export type ScannedRoutes = {
     'get_pet.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_pet.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_pet.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'list_pets.api': { paramsTuple?: []; params?: {} }
+    'get_pet.api': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'event_stream': { paramsTuple?: []; params?: {} }
     'subscribe': { paramsTuple?: []; params?: {} }
     'unsubscribe': { paramsTuple?: []; params?: {} }
@@ -122,6 +124,8 @@ export type ScannedRoutes = {
     'create_pet.render': { paramsTuple?: []; params?: {} }
     'get_pet.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_pet.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'list_pets.api': { paramsTuple?: []; params?: {} }
+    'get_pet.api': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'event_stream': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
@@ -166,6 +170,8 @@ export type ScannedRoutes = {
     'create_pet.render': { paramsTuple?: []; params?: {} }
     'get_pet.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_pet.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'list_pets.api': { paramsTuple?: []; params?: {} }
+    'get_pet.api': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'event_stream': { paramsTuple?: []; params?: {} }
   }
   POST: {

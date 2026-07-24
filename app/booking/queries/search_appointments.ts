@@ -21,6 +21,7 @@ export class SearchAppointments {
       .where('statusId', AppointmentStatus.BOOKED)
       .preload('appointmentType')
       .preload('client')
+      .preload('pet')
       .preload('agenda')
       .preload('status')
       .orderBy('start_date', 'asc')

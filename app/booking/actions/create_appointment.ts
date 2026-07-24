@@ -16,6 +16,7 @@ interface CreateAppointmentParams {
   appointmentTypeId: UUID
   agendaId: UUID
   clientId: UUID
+  petId: UUID
   startDate: string
   tenantId: UUID
 }
@@ -56,6 +57,7 @@ export class CreateAppointment {
         appointmentTypeId: params.appointmentTypeId,
         clientId: params.clientId,
         agendaId: params.agendaId,
+        petId: params.petId,
         startDate,
         endDate,
         duration: appointmentType.duration,

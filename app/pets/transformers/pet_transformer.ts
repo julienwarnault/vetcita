@@ -20,7 +20,7 @@ export default class PetTransformer extends BaseTransformer<Pet> {
         'createdAt',
         'updatedAt',
       ]),
-      client: ClientTransformer.transform(this.whenLoaded(this.resource.client)),
+      client: ClientTransformer.transform(this.whenLoaded(this.resource.owner)),
       species: SpeciesTransformer.transform(this.whenLoaded(this.resource.species)),
       breed: BreedTransformer.transform(this.whenLoaded(this.resource.breed)),
     }

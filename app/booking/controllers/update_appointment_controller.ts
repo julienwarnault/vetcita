@@ -19,6 +19,7 @@ export default class UpdateAppointmentController {
       agendaId: uuidSchema(),
       startDate: vine.string(),
       clientId: uuidSchema(),
+      petId: uuidSchema(),
     })
   )
 

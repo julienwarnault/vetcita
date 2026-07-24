@@ -22,6 +22,7 @@ export class GetTodayAppointments {
       .where('start_date', '<=', endOfDay)
       .preload('appointmentType')
       .preload('client')
+      .preload('pet')
       .preload('agenda')
       .preload('status')
       .orderBy('start_date', 'asc')

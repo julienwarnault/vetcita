@@ -2,11 +2,11 @@ import { BookingForm } from './use_booking_form'
 import { Field } from '../ui/field'
 import { Input } from '../ui/input'
 
-interface StepInfosProps {
+interface StepClientInfosProps {
   form: BookingForm
 }
 
-export function StepInfos({ form }: StepInfosProps) {
+export function StepClientInfos({ form }: StepClientInfosProps) {
   const { data, setData } = form
 
   return (

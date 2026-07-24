@@ -12,6 +12,8 @@ type BookingData = {
   lastName: string
   email: string
   phone: string
+  petName: string
+  petSpeciesId: string
 }
 
 export type BookingForm = InertiaPrecognitiveFormProps<BookingData>
@@ -45,6 +47,12 @@ export const STEPS = [
     canContinue: (d: BookingData) => Boolean(d.firstName && d.lastName && d.phone && d.email),
   },
   {
+    key: 'pet',
+    title: 'Mascota',
+    fields: ['petName', 'petSpeciesId'],
+    canContinue: (d: BookingData) => Boolean(d.petName && d.petSpeciesId),
+  },
+  {
     key: 'review',
     title: 'Revisar y confirmar',
     fields: [],
@@ -75,6 +83,8 @@ export function useBookingForm(params: UseBookingFormParams) {
     lastName: clientInfo.lastName,
     email: clientInfo.email,
     phone: clientInfo.phone,
+    petName: '',
+    petSpeciesId: '',
   }).withPrecognition('post', submitUrl)
 
   const step = STEPS[stepIndex]

@@ -4,9 +4,11 @@ import type { HttpContext } from '@adonisjs/core/http'
 import AppointmentTypeTransformer from '#appointment_types/transformers/appointment_type_transformer'
 import { GetAppointmentTypes } from '#appointment_types/queries/get_appointment_types'
 import TenantTransformer from '#tenants/transformers/tenant_transformer'
+import SpeciesTransformer from '#pets/transformers/species_transformer'
 import { BookAppointment } from '#booking/actions/book_appointment'
 import { withTransaction } from '#shared/utils/with_transaction'
 import { GetTenant } from '#tenants/queries/get_tenant'
+import { GetSpecies } from '#pets/queries/get_species'
 import { uuidSchema } from '#shared/validators'
 import { UUID } from '#shared/types'
 
@@ -21,12 +23,15 @@ export default class BookAppointmentController {
       lastName: vine.string(),
       phone: vine.string().phone(),
       email: vine.string().email(),
+      petName: vine.string(),
+      petSpeciesId: uuidSchema(),
     })
   )
 
   constructor(
     private readonly getTenant: GetTenant,
     private readonly getAppointmentTypes: GetAppointmentTypes,
+    private readonly getSpecies: GetSpecies,
     private readonly bookAppointment: BookAppointment
   ) {}
 
@@ -35,10 +40,12 @@ export default class BookAppointmentController {
 
     const { tenant } = await this.getTenant.execute({ id })
     const { appointmentTypes } = await this.getAppointmentTypes.execute({ tenantId: id })
+    const { species } = await this.getSpecies.execute()
 
     return inertia.render('booking/form', {
       tenant: TenantTransformer.transform(tenant),
       appointmentTypes: AppointmentTypeTransformer.transform(appointmentTypes),
+      species: SpeciesTransformer.transform(species),
     })
   }
 

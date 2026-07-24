@@ -12,6 +12,7 @@ export class GetLastAppointmentsUpdated {
       .where('tenant_id', params.tenantId)
       .preload('appointmentType')
       .preload('client')
+      .preload('pet')
       .preload('agenda')
       .preload('status')
       .orderBy('updated_at', 'desc')

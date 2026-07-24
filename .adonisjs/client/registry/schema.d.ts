@@ -871,6 +871,30 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/pets/controllers/update_pet_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
+  'list_pets.api': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/pets'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/pets/controllers/list_pets_controller').default['api']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/pets/controllers/list_pets_controller').default['api']>>>
+    }
+  }
+  'get_pet.api': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/pets/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/pets/controllers/get_pet_controller').default['api']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/pets/controllers/get_pet_controller').default['api']>>>
+    }
+  }
   'event_stream': {
     methods: ["GET","HEAD"]
     pattern: '/__transmit/events'

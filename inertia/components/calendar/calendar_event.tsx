@@ -28,7 +28,7 @@ export function CalendarEvent(props: CalendarEventProps) {
           height: ratio * event.duration - 1,
           left: `calc(${slot.index * columnPercentage}% + 3px)`,
           right: `calc(${(slot.columns - slot.index - 1) * columnPercentage}% + 4px)`,
-          backgroundColor: event.color,
+          backgroundColor: event.agenda.color,
         }}
         onClick={() => onClick?.(event)}
       >
@@ -37,7 +37,7 @@ export function CalendarEvent(props: CalendarEventProps) {
             {event.start.toFormat('h:mm')}&nbsp;-&nbsp;
             {event.end.toFormat('h:mm')}
           </div>
-          <strong className="overflow-visible text-[13px]/4 font-semibold">{event.client?.fullName}</strong>
+          <strong className="overflow-visible text-[13px]/4 font-semibold">{event.pet.name}</strong>
         </div>
         <div className="overflow-hidden text-[13px]/4">{event.typeName}</div>
       </div>

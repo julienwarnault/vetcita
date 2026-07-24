@@ -6,19 +6,21 @@ import { InertiaDrawer, InertiaDrawerRef } from '~/components/inertia_drawer'
 import { PanelClient } from '~/components/appointment/panel_client'
 import { PanelReview } from '~/components/appointment/panel_review'
 import { PanelDate } from '~/components/appointment/panel_date'
+import { PanelPet } from '~/components/appointment/panel_pet'
 import usePageProps from '~/hooks/use_page_props'
 import { InertiaProps } from '~/types'
 import { urlFor } from '~/lib/tuyau'
 
 type PageProps = InertiaProps<{
   clientId?: string
+  petId?: string
   appointment?: Data.Booking.Appointment
   appointmentTypes: Data.AppointmentTypes.AppointmentType[]
   statuses: Data.AppointmentWorkflow.AppointmentStatus[]
 }>
 
 export default function ShowForm(props: PageProps) {
-  const { clientId, appointment, appointmentTypes: types, statuses } = props
+  const { clientId, petId, appointment, appointmentTypes: types, statuses } = props
 
   const isEdit = !!appointment
 
@@ -30,6 +32,7 @@ export default function ShowForm(props: PageProps) {
   const { form, step, canContinue, actions } = useAppointmentForm({
     appointment,
     clientId,
+    petId,
     tenantId: tenant!.id,
     submitUrl: isEdit
       ? urlFor('update_appointment.execute', { id: appointment.id })
@@ -42,11 +45,25 @@ export default function ShowForm(props: PageProps) {
 
   return (
     <InertiaDrawer ref={drawerRef}>
-      <PanelClient
-        appointmentId={form.data.id}
-        selectedClientId={form.data.clientId}
-        onChange={(clientId) => form.setData('clientId', clientId)}
-      />
+      {/* Left */}
+      {!form.data.clientId && (
+        <PanelClient
+          selectedClientId={form.data.clientId}
+          onChange={(clientId) => form.setData('clientId', clientId)}
+        />
+      )}
+      {form.data.clientId && (
+        <PanelPet
+          selectedClientId={form.data.clientId}
+          selectedPetId={form.data.petId}
+          onChange={(petId) => form.setData('petId', petId)}
+          reset={() => {
+            form.setData('petId', '')
+            form.setData('clientId', '')
+          }}
+        />
+      )}
+      {/* Right */}
       {step.key == 'type' && (
         <PanelAppointmentType form={form} next={actions.next} canContinue={canContinue} appointmentTypes={types} />
       )}

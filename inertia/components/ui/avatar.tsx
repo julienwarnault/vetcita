@@ -4,7 +4,7 @@ import { DynamicIcon, IconName } from 'lucide-react/dynamic'
 import { Skeleton } from './skeleton'
 
 const avatar = tv({
-  base: 'inline-flex shrink-0 select-none items-center justify-center overflow-hidden rounded-full bg-accent align-middle font-semibold text-white',
+  base: 'inline-flex select-none items-center justify-center overflow-hidden rounded-full font-semibold text-white',
   variants: {
     size: {
       'sm': 'size-10 text-[13px]',
@@ -26,6 +26,7 @@ interface AvatarProps extends AvatarVariants {
   color?: string
   className?: string
   icon?: IconName
+  src?: string
   isLoading?: boolean
 }
 
@@ -35,6 +36,7 @@ export function Avatar(props: BaseAvatar.Root.Props & AvatarProps) {
     color,
     fullName,
     icon = 'person-standing',
+    src,
     className,
     style,
     isLoading = false,
@@ -46,13 +48,20 @@ export function Avatar(props: BaseAvatar.Root.Props & AvatarProps) {
     return <Skeleton className={cn(avatar({ size, className }))} />
   }
 
+  function renderContent() {
+    if (children) return children
+    if (fullName) return fullName.charAt(0).toUpperCase()
+    if (src) return <BaseAvatar.Image src={src} className="size-full object-cover" />
+    return <DynamicIcon name={icon} />
+  }
+
   return (
     <BaseAvatar.Root
       className={avatar({ size, className })}
-      style={color ? { backgroundColor: color, ...style } : style}
+      style={!src ? { backgroundColor: color || 'var(--color-accent)', ...style } : style}
       {...rest}
     >
-      {!children ? fullName?.charAt(0).toUpperCase() || <DynamicIcon name={icon} /> : children}
+      {renderContent()}{' '}
     </BaseAvatar.Root>
   )
 }

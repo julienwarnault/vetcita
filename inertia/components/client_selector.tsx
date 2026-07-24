@@ -25,11 +25,12 @@ interface ClientSelectorProps {
   defaultValue?: string
   defaultName?: string
   name?: string
+  disabled?: boolean
   className?: string
 }
 
 export function ClientSelector(props: ClientSelectorProps) {
-  const { className, defaultValue, defaultName, name = 'clientId' } = props
+  const { className, defaultValue, defaultName, disabled, name = 'clientId' } = props
 
   const classes = clientSelector()
 
@@ -65,9 +66,15 @@ export function ClientSelector(props: ClientSelectorProps) {
         }}
         itemToStringValue={(client) => client.fullName}
         filter={null}
+        disabled={disabled}
       >
         <Autocomplete.InputGroup className={classes.group()}>
-          <Autocomplete.Input className={classes.input()} name={`autocomplete_${name}`} placeholder="Buscar un dueño" />
+          <Autocomplete.Input
+            className={classes.input()}
+            name={`autocomplete_${name}`}
+            placeholder="Buscar un dueño"
+            disabled={disabled}
+          />
 
           <div className={classes.icons()}>
             <Autocomplete.Clear className={cn('autocomplete-clear', classes.icon())}>

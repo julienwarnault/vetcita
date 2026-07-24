@@ -13,6 +13,7 @@ export class GetAppointment {
       .where('tenantId', params.tenantId)
       .preload('appointmentType')
       .preload('client')
+      .preload('pet', (q) => q.preload('species'))
       .preload('tenant')
       .preload('status')
       .firstOrFail()

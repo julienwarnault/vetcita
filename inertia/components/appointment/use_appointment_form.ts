@@ -8,6 +8,7 @@ type AppointmentData = {
   id: string
   tenantId: string
   clientId: string
+  petId: string
   appointmentTypeId: string
   agendaId: string
   startDate: string
@@ -36,13 +37,14 @@ export const STEPS = [
 type UseAppointmentFormParams = {
   tenantId: string
   clientId?: string
+  petId?: string
   appointment?: Data.Booking.Appointment
   submitUrl: string
   method: 'post' | 'put'
 }
 
 export function useAppointmentForm(params: UseAppointmentFormParams) {
-  const { method, submitUrl, appointment, tenantId, clientId } = params
+  const { method, submitUrl, appointment, tenantId, clientId, petId } = params
 
   const { closeAll } = useModalStack()
 
@@ -52,6 +54,7 @@ export function useAppointmentForm(params: UseAppointmentFormParams) {
     id: appointment?.id ?? '',
     tenantId: tenantId,
     clientId: appointment?.clientId ?? clientId ?? '',
+    petId: appointment?.petId ?? petId ?? '',
     appointmentTypeId: appointment?.appointmentTypeId ?? '',
     agendaId: appointment?.agendaId ?? '',
     startDate: appointment?.localStartDate ?? '',
@@ -119,11 +122,12 @@ export function useAppointmentForm(params: UseAppointmentFormParams) {
       id: appointment?.id ?? '',
       tenantId: tenantId,
       clientId: appointment?.clientId ?? clientId ?? '',
+      petId: appointment?.petId ?? petId ?? '',
       appointmentTypeId: appointment?.appointmentTypeId ?? '',
       agendaId: appointment?.agendaId ?? '',
       startDate: appointment?.localStartDate ?? '',
     }))
-  }, [appointment, clientId])
+  }, [appointment, clientId, petId])
 
   return {
     step,

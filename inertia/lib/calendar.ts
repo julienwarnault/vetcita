@@ -6,10 +6,18 @@ export type Event = {
   start: DateTime
   end: DateTime
   duration: number
-  client?: {
+  client: {
     fullName: string
     phone: string
     email?: string
+  }
+  pet: {
+    name: string
+    illustrationUrl: string
+  }
+  agenda: {
+    name: string
+    color: string
   }
   status: {
     name: string
@@ -18,7 +26,6 @@ export type Event = {
   typeName: string
   color: string
   bookingRef: string
-  agenda: string
 }
 
 export type EventSlot = {

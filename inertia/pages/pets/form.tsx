@@ -14,19 +14,20 @@ import { InertiaProps } from '~/types'
 
 type PageProps = InertiaProps<{
   pet?: Data.Pets.Pet
+  client?: Data.Clients.Client
   species: Data.Pets.Species[]
   breeds: Data.Pets.Breed[]
 }>
 
 export default function ShowForm(props: PageProps) {
-  const { pet, species, breeds } = props
+  const { client, pet, species, breeds } = props
 
   const isEdit = !!pet
   const title = pet ? `Editar ${pet.name}` : 'Añadir una mascota'
 
   return (
     <InertiaModal>
-      {({ close }) => (
+      {({ close, emit }) => (
         <>
           <FormHeader
             title={title}
@@ -52,7 +53,10 @@ export default function ShowForm(props: PageProps) {
               route={isEdit ? 'update_pet.execute' : 'create_pet.execute'}
               routeParams={isEdit ? { id: pet.id } : undefined}
               className="gap-16 pb-24"
-              onSuccess={close}
+              onSuccess={(data: any) => {
+                !isEdit && emit('onCreate', data.props.flash.petId)
+                close()
+              }}
             >
               <div>
                 <h2 className="text-2xl font-semibold">Ficha</h2>
@@ -69,8 +73,9 @@ export default function ShowForm(props: PageProps) {
                     <Field.Label>Dueño *</Field.Label>
                     <ClientSelector
                       name="clientId"
-                      defaultValue={pet?.clientId ?? ''}
-                      defaultName={pet?.client?.fullName}
+                      defaultValue={pet?.clientId ?? client?.id ?? ''}
+                      defaultName={pet?.client?.fullName ?? client?.fullName ?? ''}
+                      disabled={!!client}
                     />
                     <Field.Error />
                   </Field>

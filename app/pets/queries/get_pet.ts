@@ -11,7 +11,7 @@ export class GetPet {
     const pet = await Pet.query()
       .where('id', params.id)
       .where('tenantId', params.tenantId)
-      .preload('client')
+      .preload('owner')
       .preload('species')
       .preload('breed')
       .firstOrFail()

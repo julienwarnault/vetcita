@@ -17,6 +17,7 @@ export class GetAppointmentsNeedingReminder {
       .preload('tenant')
       .preload('appointmentType')
       .preload('client')
+      .preload('pet')
 
     return { appointments }
   }

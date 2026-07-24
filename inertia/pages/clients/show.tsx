@@ -3,6 +3,7 @@ import { useModalStack } from '@inertiaui/modal-react'
 import { PanelAppointments } from '~/components/client/panel_appointments'
 import { PanelDetails } from '~/components/client/panel_details'
 import { InertiaDrawer } from '~/components/inertia_drawer'
+import { PanelPets } from '~/components/client/panel_pets'
 import { Avatar } from '~/components/ui/avatar'
 import { Button } from '~/components/ui/button'
 import { Drawer } from '~/components/ui/drawer'
@@ -15,10 +16,11 @@ import { urlFor } from '~/lib/tuyau'
 type PageProps = InertiaProps<{
   client: Data.Clients.Client
   appointments: Data.Booking.Appointment[]
+  pets: Data.Pets.Pet[]
 }>
 
 export default function ShowClient(props: PageProps) {
-  const { client, appointments } = props
+  const { client, appointments, pets } = props
 
   const { visitModal, closeAll } = useModalStack()
 
@@ -83,6 +85,12 @@ export default function ShowClient(props: PageProps) {
                       <span className="text-[13px]/4 text-muted font-medium">{appointments?.length ?? 0}</span>
                     </div>
                   </Tabs.Trigger>
+                  <Tabs.Trigger value="pets">
+                    Mascotas
+                    <div className="flex items-center justify-center bg-white h-5 px-1.5 rounded-full border">
+                      <span className="text-[13px]/4 text-muted font-medium">{pets?.length ?? 0}</span>
+                    </div>
+                  </Tabs.Trigger>
                 </Tabs.List>
               </Drawer.Menu>
             </div>
@@ -94,6 +102,10 @@ export default function ShowClient(props: PageProps) {
 
           <Tabs.Content value="appointments">
             <PanelAppointments appointments={appointments} />
+          </Tabs.Content>
+
+          <Tabs.Content value="pets">
+            <PanelPets pets={pets} />
           </Tabs.Content>
         </Tabs>
       )}

@@ -85,7 +85,7 @@ export function PanelReview(props: PanelReviewProps) {
             <div className="flex flex-1 flex-col gap-1 py-2">
               <div className="text-[17px]/6 font-medium">{appointmentType!.name}</div>
 
-              <div className="text-[15px]/5 text-foreground">
+              <div className="text-[15px]/5 text-muted">
                 {`${startDate.toFormat('h:mma')} - ${endDate.toFormat('h:mma')}`.toLowerCase()}
               </div>
             </div>

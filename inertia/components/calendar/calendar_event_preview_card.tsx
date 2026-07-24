@@ -71,19 +71,18 @@ export function CalendarEventPreviewCard(props: CalendarEventPreviewCardProps) {
               </div>
               <div className="flex flex-col gap-4 p-5">
                 <div className="flex items-center gap-4">
-                  <Avatar fullName={event.client?.fullName} />
+                  <Avatar src={event.pet.illustrationUrl} />
                   <div>
-                    <div className="text-[17px]/6 font-medium">{event.client?.fullName}</div>
-                    {event.client?.phone && (
-                      <div className="text-sm/5 text-foreground">{formatPhoneNumber(event.client.phone)}</div>
-                    )}
+                    <div className="text-[17px]/6 font-medium">{event.pet?.name}</div>
+                    <div className="text-sm/5 text-muted">{event.client.fullName}</div>
+                    <div className="text-sm/5 text-muted">{formatPhoneNumber(event.client.phone)}</div>
                   </div>
                 </div>
                 <div>
                   <div className="flex flex-col gap-0.5">
                     <div className="text-[15px]/5 font-medium">{event.typeName}</div>
                     <div className="text-[13px]/4 text-foreground">
-                      {formatDuration(event.duration)} • {event.agenda}
+                      {formatDuration(event.duration)} • {event.agenda.name}
                     </div>
                   </div>
                 </div>

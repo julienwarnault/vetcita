@@ -1,4 +1,4 @@
-import { tv } from 'tailwind-variants'
+import { cn, tv } from 'tailwind-variants'
 import { ChevronDownIcon } from 'lucide-react'
 import { Menu as BaseMenu } from '@base-ui/react/menu'
 import { ComponentProps, isValidElement, ReactNode } from 'react'
@@ -60,5 +60,10 @@ function MenuTriggerIcon() {
   return <ChevronDownIcon className={menu().icon()} size={16} />
 }
 
+function MenuSeparator({ className }: { className?: string }) {
+  return <hr className={cn('my-2', className)} />
+}
+
 Menu.Item = MenuItem
 Menu.TriggerIcon = MenuTriggerIcon
+Menu.Separator = MenuSeparator

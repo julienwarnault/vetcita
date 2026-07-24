@@ -13,6 +13,7 @@ export class GetClientAppointments {
       .where('client_id', params.clientId)
       .orderBy('start_date')
       .preload('appointmentType')
+      .preload('pet')
       .preload('agenda')
       .preload('status')
       .orderBy('start_date', 'desc')

@@ -1,5 +1,5 @@
-import { compose } from '@adonisjs/core/helpers'
 import { belongsTo } from '@adonisjs/lucid/orm'
+import { compose } from '@adonisjs/core/helpers'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import AppointmentStatus from '#appointment_workflow/models/appointment_status'
 import AppointmentType from '#appointment_types/models/appointment_type'
@@ -9,10 +9,14 @@ import { AppointmentSchema } from '#database/schema'
 import Client from '#clients/models/client'
 import Tenant from '#tenants/models/tenant'
 import Agenda from '#agendas/models/agenda'
+import Pet from '#pets/models/pet'
 
 export default class Appointment extends compose(AppointmentSchema, WithPrimaryUuid) {
   @belongsTo(() => AppointmentType)
   declare appointmentType: BelongsTo<typeof AppointmentType>
+
+  @belongsTo(() => Pet)
+  declare pet: BelongsTo<typeof Pet>
 
   @belongsTo(() => Client)
   declare client: BelongsTo<typeof Client>

@@ -15,6 +15,7 @@ interface UpdateAppointmentParams {
   tenantId: UUID
   appointmentTypeId: UUID
   agendaId: UUID
+  petId: UUID
   clientId: UUID
   startDate: string
 }
@@ -47,25 +48,34 @@ export class UpdateAppointment {
       appointmentId: params.id,
     })
 
-    if (!isBookable) {
-      throw new SlotNotBookableException()
-    }
-
     appointment.merge({
       appointmentTypeId: params.appointmentTypeId,
       clientId: params.clientId,
       agendaId: params.agendaId,
+      petId: params.petId,
       startDate,
       endDate,
       duration: appointmentType.duration,
     })
 
+    const hasScheduleChanges = this.#hasScheduleChanges(appointment)
+
+    if (hasScheduleChanges && !isBookable) {
+      throw new SlotNotBookableException()
+    }
+
     await appointment.useTransaction(trx!).save()
 
-    await dispatchAfterCommit(async () => {
-      await events.booking.AppointmentRescheduled.dispatch(appointment)
-    })
+    if (hasScheduleChanges) {
+      await dispatchAfterCommit(async () => {
+        await events.booking.AppointmentRescheduled.dispatch(appointment)
+      })
+    }
 
     return { appointment }
+  }
+
+  #hasScheduleChanges(appointment: Appointment) {
+    return appointment.isDirty(['appointmentTypeId', 'agendaId', 'startDate', 'endDate', 'duration'])
   }
 }

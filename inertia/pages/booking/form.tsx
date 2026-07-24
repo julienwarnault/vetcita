@@ -4,10 +4,11 @@ import { Head } from '@inertiajs/react'
 import { Form } from '@base-ui/react/form'
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react'
 import { StepAppointmentType } from '~/components/booking/step_appointment_type'
+import { StepClientInfos } from '~/components/booking/step_client_infos'
 import { useBookingForm } from '~/components/booking/use_booking_form'
 import { StepDateTime } from '~/components/booking/step_date_time'
+import { StepPetInfos } from '~/components/booking/step_pet_infos'
 import { StepReview } from '~/components/booking/step_review'
-import { StepInfos } from '~/components/booking/step_infos'
 import { FormHeader } from '~/components/form_header'
 import { Button } from '~/components/ui/button'
 import MinimalLayout from '~/layouts/minimal'
@@ -17,10 +18,11 @@ import { urlFor } from '~/lib/tuyau'
 type PageProps = InertiaProps<{
   tenant: Data.Tenants.Tenant
   appointmentTypes: Data.AppointmentTypes.AppointmentType[]
+  species: Data.Pets.Species[]
 }>
 
 export default function ShowForm(props: PageProps) {
-  const { tenant, appointmentTypes: types } = props
+  const { tenant, appointmentTypes: types, species } = props
 
   const { form, step, isFirst, isLast, canContinue, actions } = useBookingForm({
     tenantId: tenant.id,
@@ -33,6 +35,7 @@ export default function ShowForm(props: PageProps) {
   }
 
   const selectedType = types.find((type) => type.id === form.data.appointmentTypeId)
+  const selectedSpecies = species.find((s) => s.id === form.data.petSpeciesId)
 
   return (
     <>
@@ -58,9 +61,16 @@ export default function ShowForm(props: PageProps) {
             <Form id="form" onSubmit={handleSubmit} className="flex w-full flex-col gap-4" errors={form.errors}>
               {step.key == 'type' && <StepAppointmentType form={form} appointmentTypes={types} />}
               {step.key == 'datetime' && <StepDateTime form={form} />}
-              {step.key == 'infos' && <StepInfos form={form} />}
+              {step.key == 'infos' && <StepClientInfos form={form} />}
+              {step.key == 'pet' && <StepPetInfos form={form} species={species} />}
               {step.key == 'review' && (
-                <StepReview form={form} appointmentType={selectedType!} tenant={tenant} stepKey="review" />
+                <StepReview
+                  form={form}
+                  appointmentType={selectedType!}
+                  species={selectedSpecies!}
+                  tenant={tenant}
+                  stepKey="review"
+                />
               )}
             </Form>
           </div>

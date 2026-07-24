@@ -41,10 +41,14 @@ export default function ShowCalendar(props: PageProps) {
             start: DateTime.fromISO(appointment.startDate!, { zone: DEFAULT_TIMEZONE }),
             end: DateTime.fromISO(appointment.endDate!, { zone: DEFAULT_TIMEZONE }),
             duration: appointment.duration,
-            client: appointment.client && {
+            client: {
               fullName: appointment.client!.fullName,
               phone: appointment.client!.phone,
               email: appointment.client!.email ?? undefined,
+            },
+            pet: {
+              name: appointment.pet!.name,
+              illustrationUrl: appointment.pet!.species!.illustrationUrl,
             },
             status: {
               name: appointment.status!.name,
@@ -53,7 +57,10 @@ export default function ShowCalendar(props: PageProps) {
             typeName: appointment.appointmentType!.name,
             color: appointment.appointmentType!.color,
             bookingRef: appointment.bookingRef,
-            agenda: appointment.agenda!.name,
+            agenda: {
+              name: appointment.agenda!.name,
+              color: appointment.agenda!.color,
+            },
           }))}
         />
       </div>

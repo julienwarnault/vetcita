@@ -24,6 +24,7 @@ export class GetAppointments {
       ])
       .preload('appointmentType')
       .preload('client')
+      .preload('pet', (q) => q.preload('species'))
       .preload('agenda')
       .preload('status')
 

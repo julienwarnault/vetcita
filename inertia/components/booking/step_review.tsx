@@ -8,12 +8,13 @@ import { Card } from '../ui/card'
 interface StepReviewProps {
   form: BookingForm
   appointmentType?: Data.AppointmentTypes.AppointmentType
+  species?: Data.Pets.Species
   tenant: Data.Tenants.Tenant
   stepKey: StepKey
 }
 
 export function StepReview(props: StepReviewProps) {
-  const { appointmentType, tenant, form, stepKey } = props
+  const { appointmentType, species, tenant, form, stepKey } = props
   const { data } = form
 
   const startDateTime = data.startDate ? DateTime.fromISO(data.startDate, { zone: DEFAULT_TIMEZONE }) : null
@@ -27,7 +28,7 @@ export function StepReview(props: StepReviewProps) {
         <div className="font-semibold text-lg">{tenant.name}</div>
       </div>
 
-      {['datetime', 'infos', 'review'].includes(stepKey) && (
+      {['datetime', 'infos', 'pet', 'review'].includes(stepKey) && (
         <div className="flex flex-col p-4">
           <div className="font-semibold text-lg">{appointmentType?.name}</div>
           <div className="text-sm text-muted-foreground mt-1">
@@ -36,14 +37,14 @@ export function StepReview(props: StepReviewProps) {
         </div>
       )}
 
-      {['infos', 'review'].includes(stepKey) && (
+      {['infos', 'pet', 'review'].includes(stepKey) && (
         <div className="flex flex-col p-4">
           <div className="font-semibold text-lg capitalize">{formattedDate}</div>
           <div className="text-sm text-muted-foreground mt-1">{formattedTime}</div>
         </div>
       )}
 
-      {['review'].includes(stepKey) && (
+      {['pet', 'review'].includes(stepKey) && (
         <div className="p-4">
           <div className="font-semibold text-lg">
             {data.firstName} {data.lastName}
@@ -58,6 +59,13 @@ export function StepReview(props: StepReviewProps) {
               </div>
             )}
           </div>
+        </div>
+      )}
+
+      {['review'].includes(stepKey) && (
+        <div className="flex flex-col p-4">
+          <div className="font-semibold text-lg">{data.petName}</div>
+          <div className="text-sm text-muted-foreground mt-1">{species?.name}</div>
         </div>
       )}
     </Card>

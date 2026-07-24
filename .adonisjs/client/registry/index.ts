@@ -438,6 +438,18 @@ const routes = {
     tokens: [{"old":"/pets/:id","type":0,"val":"pets","end":""},{"old":"/pets/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['update_pet.execute']['types'],
   },
+  'list_pets.api': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/pets',
+    tokens: [{"old":"/api/pets","type":0,"val":"api","end":""},{"old":"/api/pets","type":0,"val":"pets","end":""}],
+    types: placeholder as Registry['list_pets.api']['types'],
+  },
+  'get_pet.api': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/pets/:id',
+    tokens: [{"old":"/api/pets/:id","type":0,"val":"api","end":""},{"old":"/api/pets/:id","type":0,"val":"pets","end":""},{"old":"/api/pets/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['get_pet.api']['types'],
+  },
   'event_stream': {
     methods: ["GET","HEAD"],
     pattern: '/__transmit/events',
