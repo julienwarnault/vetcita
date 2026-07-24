@@ -52,7 +52,10 @@ export default class extends BaseSeeder {
     }
 
     for (const [name, breeds] of Object.entries(species)) {
-      const { id: speciesId } = await Species.create({ name })
+      const { id: speciesId } = await Species.create({
+        name,
+        illustrationUrl: `/illustrations/${name.toLowerCase()}.png`,
+      })
       await Breed.createMany(breeds.map((breed) => ({ name: breed, speciesId })))
     }
   }
