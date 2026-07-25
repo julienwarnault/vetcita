@@ -1,3 +1,4 @@
+import { AppointmentStatus } from '#appointment_workflow/enums/appointment_status'
 import Appointment from '#booking/models/appointment'
 import type { UUID } from '#shared/types'
 
@@ -10,6 +11,7 @@ export class GetLastAppointmentsUpdated {
   async execute(params: GetLastAppointmentsUpdatedParams) {
     const appointments = await Appointment.query()
       .where('tenant_id', params.tenantId)
+      .whereNot('status_id', AppointmentStatus.CANCELLED)
       .preload('appointmentType')
       .preload('client')
       .preload('pet')

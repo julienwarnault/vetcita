@@ -1,4 +1,5 @@
 import type { DateTime } from 'luxon'
+import { AppointmentStatus } from '#appointment_workflow/enums/appointment_status'
 import Appointment from '#booking/models/appointment'
 import type { UUID } from '#shared/types'
 
@@ -18,6 +19,7 @@ export class GetAppointments {
       .where('tenant_id', params.tenantId)
       .where('start_date', '<=', to)
       .where('end_date', '>=', from)
+      .whereNot('status_id', AppointmentStatus.CANCELLED)
       .orderBy([
         { column: 'start_date', order: 'asc' },
         { column: 'duration', order: 'desc' },

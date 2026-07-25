@@ -1,4 +1,5 @@
 import { DateTime } from 'luxon'
+import { AppointmentStatus } from '#appointment_workflow/enums/appointment_status'
 import { DEFAULT_TIMEZONE } from '#shared/services/time_service'
 import Appointment from '#booking/models/appointment'
 import type { UUID } from '#shared/types'
@@ -20,6 +21,7 @@ export class GetTodayAppointments {
       .where('tenant_id', params.tenantId)
       .where('start_date', '>=', startOfDay)
       .where('start_date', '<=', endOfDay)
+      .whereNot('status_id', AppointmentStatus.CANCELLED)
       .preload('appointmentType')
       .preload('client')
       .preload('pet')
