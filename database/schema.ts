@@ -65,7 +65,7 @@ export class AppointmentTypeSchema extends BaseModel {
   @column()
   declare color: string
   @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime | null
+  declare createdAt: DateTime
   @column()
   declare description: string | null
   @column()
@@ -123,7 +123,7 @@ export class BreedSchema extends BaseModel {
   @column()
   declare name: string
   @column()
-  declare speciesId: UUID | null
+  declare speciesId: UUID
 }
 
 export class ClientSchema extends BaseModel {
@@ -174,7 +174,7 @@ export class PetSchema extends BaseModel {
   @column()
   declare breedId: UUID | null
   @column()
-  declare clientId: UUID | null
+  declare clientId: UUID
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
   @column.date()
@@ -188,9 +188,9 @@ export class PetSchema extends BaseModel {
   @column()
   declare notes: string | null
   @column()
-  declare speciesId: UUID | null
+  declare speciesId: UUID
   @column()
-  declare tenantId: UUID | null
+  declare tenantId: UUID
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
 }

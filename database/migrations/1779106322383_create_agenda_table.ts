@@ -10,7 +10,8 @@ export default class extends BaseSchema {
       table.timestamp('updated_at').nullable()
       table.string('name').notNullable()
       table.string('color', 7).notNullable()
-      table.uuid('tenant_id').references('id').inTable('tenants').onDelete('CASCADE')
+      table.uuid('tenant_id').notNullable().references('id').inTable('tenants').onDelete('CASCADE')
+      table.index(['tenant_id', 'name'])
     })
   }
 

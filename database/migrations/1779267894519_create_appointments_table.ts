@@ -17,8 +17,10 @@ export default class extends BaseSchema {
       table.integer('duration').notNullable()
       table.string('booking_ref', 8).notNullable().unique()
       table.timestamp('reminder_sent_at', { useTz: true }).nullable()
+      table.index(['tenant_id', 'agenda_id', 'start_date', 'end_date'])
+      table.index(['tenant_id', 'client_id', 'start_date'])
+      table.index(['tenant_id', 'updated_at'])
       table.index(['reminder_sent_at', 'start_date'])
-      table.index(['start_date', 'created_at'])
     })
   }
 

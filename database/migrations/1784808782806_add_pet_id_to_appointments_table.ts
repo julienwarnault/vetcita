@@ -6,11 +6,13 @@ export default class extends BaseSchema {
   async up() {
     this.schema.alterTable(this.tableName, (table) => {
       table.uuid('pet_id').notNullable().references('id').inTable('pets').onDelete('CASCADE')
+      table.index(['tenant_id', 'pet_id', 'start_date'])
     })
   }
 
   async down() {
     this.schema.alterTable(this.tableName, (table) => {
+      table.dropIndex(['tenant_id', 'pet_id', 'start_date'])
       table.dropColumn('pet_id')
     })
   }

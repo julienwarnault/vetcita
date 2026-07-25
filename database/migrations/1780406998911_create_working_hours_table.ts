@@ -13,7 +13,7 @@ export default class extends BaseSchema {
       table.integer('day_of_week').notNullable()
       table.time('start_time').notNullable()
       table.time('end_time').notNullable()
-      table.index(['agenda_id', 'day_of_week'])
+      table.index(['tenant_id', 'agenda_id', 'day_of_week'])
     })
   }
 

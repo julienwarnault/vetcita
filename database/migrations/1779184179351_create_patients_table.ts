@@ -13,7 +13,8 @@ export default class extends BaseSchema {
       table.string('email').nullable()
       table.string('phone').notNullable()
       table.text('notes').nullable()
-      table.uuid('tenant_id').references('id').inTable('tenants').onDelete('CASCADE')
+      table.uuid('tenant_id').notNullable().references('id').inTable('tenants').onDelete('CASCADE')
+      table.index(['tenant_id'])
     })
   }
 

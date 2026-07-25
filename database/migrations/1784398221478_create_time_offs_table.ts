@@ -16,6 +16,7 @@ export default class extends BaseSchema {
       table.date('end').notNullable()
       table.time('start_time').notNullable()
       table.time('end_time').notNullable()
+      table.index(['tenant_id', 'start', 'end'])
     })
   }
 

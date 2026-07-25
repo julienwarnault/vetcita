@@ -13,6 +13,7 @@ export default class extends BaseSchema {
       table.date('date').notNullable()
       table.jsonb('shifts').notNullable()
       table.unique(['tenant_id', 'agenda_id', 'date'])
+      table.index(['tenant_id', 'date'])
     })
   }
 

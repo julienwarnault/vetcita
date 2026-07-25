@@ -12,11 +12,13 @@ export default class extends BaseSchema {
         .references('id')
         .inTable('appointment_statuses')
         .defaultTo(AppointmentStatus.BOOKED)
+      table.index(['tenant_id', 'status_id', 'start_date'])
     })
   }
 
   async down() {
     this.schema.alterTable(this.tableName, (table) => {
+      table.dropIndex(['tenant_id', 'status_id', 'start_date'])
       table.dropColumn('status_id')
     })
   }
