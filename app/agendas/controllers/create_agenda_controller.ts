@@ -1,10 +1,10 @@
 import vine from '@vinejs/vine'
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
-import AppointmentTypeTransformer from '#appointment_types/transformers/appointment_type_transformer'
-import { GetAppointmentTypes } from '#appointment_types/queries/get_appointment_types'
+import ServiceTransformer from '#services/transformers/service_transformer'
 import { withTransaction } from '#shared/utils/with_transaction'
 import { CreateAgenda } from '#agendas/actions/create_agenda'
+import { GetServices } from '#services/queries/get_services'
 import { uuidSchema } from '#shared/validators'
 
 @inject()
@@ -13,22 +13,22 @@ export default class CreateAgendaController {
     vine.object({
       name: vine.string(),
       color: vine.string(),
-      appointmentTypeIds: vine.array(uuidSchema()).optional(),
+      serviceIds: vine.array(uuidSchema()).optional(),
     })
   )
 
   constructor(
-    private readonly getAppointmentTypes: GetAppointmentTypes,
+    private readonly getServices: GetServices,
     private readonly createAgenda: CreateAgenda
   ) {}
 
   async render({ inertia, auth }: HttpContext) {
     const user = auth.getUserOrFail()
 
-    const { appointmentTypes } = await this.getAppointmentTypes.execute({ tenantId: user.tenantId })
+    const { services } = await this.getServices.execute({ tenantId: user.tenantId })
 
     return inertia.render('agendas/form', {
-      appointmentTypes: AppointmentTypeTransformer.transform(appointmentTypes),
+      services: ServiceTransformer.transform(services),
     })
   }
 

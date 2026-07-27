@@ -6,7 +6,7 @@ import type { UUID } from '#shared/types'
 interface CreateAgendaParams {
   name: string
   color: string
-  appointmentTypeIds?: UUID[]
+  serviceIds?: UUID[]
   tenantId: UUID
 }
 
@@ -24,8 +24,8 @@ export class CreateAgenda {
       { client: trx }
     )
 
-    // Sync appointment types
-    await agenda.related('appointmentTypes').sync(params.appointmentTypeIds || [], true, trx)
+    // Sync services
+    await agenda.related('services').sync(params.serviceIds || [], true, trx)
 
     // Init working hours
     await WorkingHour.createMany(

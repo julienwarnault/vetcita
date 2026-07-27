@@ -1,8 +1,8 @@
 import { useRef } from 'react'
 import { Data } from '@generated/data'
-import { PanelAppointmentType } from '~/components/appointment/panel_appointment_type'
 import { useAppointmentForm } from '~/components/appointment/use_appointment_form'
 import { InertiaDrawer, InertiaDrawerRef } from '~/components/inertia_drawer'
+import { PanelService } from '~/components/appointment/panel_service'
 import { PanelClient } from '~/components/appointment/panel_client'
 import { PanelReview } from '~/components/appointment/panel_review'
 import { PanelDate } from '~/components/appointment/panel_date'
@@ -15,12 +15,12 @@ type PageProps = InertiaProps<{
   clientId?: string
   petId?: string
   appointment?: Data.Booking.Appointment
-  appointmentTypes: Data.AppointmentTypes.AppointmentType[]
+  services: Data.Services.Service[]
   statuses: Data.AppointmentWorkflow.AppointmentStatus[]
 }>
 
 export default function ShowForm(props: PageProps) {
-  const { clientId, petId, appointment, appointmentTypes: types, statuses } = props
+  const { clientId, petId, appointment, services, statuses } = props
 
   const isEdit = !!appointment
 
@@ -40,7 +40,7 @@ export default function ShowForm(props: PageProps) {
     method: isEdit ? 'put' : 'post',
   })
 
-  const selectedType = types.find(({ id }) => id === form.data.appointmentTypeId)
+  const selectedService = services.find(({ id }) => id === form.data.serviceId)
   const selectedStatus = statuses.find(({ id }) => id === appointment?.statusId)
 
   return (
@@ -64,8 +64,8 @@ export default function ShowForm(props: PageProps) {
         />
       )}
       {/* Right */}
-      {step.key == 'type' && (
-        <PanelAppointmentType form={form} next={actions.next} canContinue={canContinue} appointmentTypes={types} />
+      {step.key == 'service' && (
+        <PanelService form={form} next={actions.next} canContinue={canContinue} services={services} />
       )}
       {step.key == 'datetime' && (
         <PanelDate form={form} next={actions.next} goToStep={actions.goToStep} canContinue={canContinue} />
@@ -76,7 +76,7 @@ export default function ShowForm(props: PageProps) {
           next={actions.next}
           goToStep={actions.goToStep}
           canContinue={canContinue}
-          appointmentType={selectedType!}
+          service={selectedService!}
           status={selectedStatus}
           statuses={statuses}
           close={() => drawerRef.current?.close()}

@@ -8,15 +8,15 @@ import { BaseModel, column } from '@adonisjs/lucid/orm'
 import type { UUID } from '#shared/types'
 import { DateTime } from 'luxon'
 
-export class AgendaAppointmentTypeSchema extends BaseModel {
-  static $columns = ['agendaId', 'appointmentTypeId', 'createdAt', 'updatedAt'] as const
-  $columns = AgendaAppointmentTypeSchema.$columns
+export class AgendaServiceSchema extends BaseModel {
+  static $columns = ['agendaId', 'createdAt', 'serviceId', 'updatedAt'] as const
+  $columns = AgendaServiceSchema.$columns
   @column()
   declare agendaId: UUID
-  @column()
-  declare appointmentTypeId: UUID
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
+  @column()
+  declare serviceId: UUID
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
 }
@@ -59,36 +59,11 @@ export class AppointmentStatusSchema extends BaseModel {
   declare updatedAt: DateTime | null
 }
 
-export class AppointmentTypeSchema extends BaseModel {
-  static $columns = ['color', 'createdAt', 'description', 'duration', 'id', 'name', 'price', 'tenantId', 'updatedAt'] as const
-  $columns = AppointmentTypeSchema.$columns
-  @column()
-  declare color: string
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime
-  @column()
-  declare description: string | null
-  @column()
-  declare duration: number
-  @column({ isPrimary: true })
-  declare id: UUID
-  @column()
-  declare name: string
-  @column()
-  declare price: number | null
-  @column()
-  declare tenantId: UUID
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime | null
-}
-
 export class AppointmentSchema extends BaseModel {
-  static $columns = ['agendaId', 'appointmentTypeId', 'bookingRef', 'clientId', 'createdAt', 'duration', 'endDate', 'id', 'petId', 'reminderSentAt', 'startDate', 'statusId', 'tenantId', 'updatedAt'] as const
+  static $columns = ['agendaId', 'bookingRef', 'clientId', 'createdAt', 'duration', 'endDate', 'id', 'petId', 'reminderSentAt', 'serviceId', 'startDate', 'statusId', 'tenantId', 'updatedAt'] as const
   $columns = AppointmentSchema.$columns
   @column()
   declare agendaId: UUID
-  @column()
-  declare appointmentTypeId: UUID
   @column()
   declare bookingRef: string
   @column()
@@ -105,6 +80,8 @@ export class AppointmentSchema extends BaseModel {
   declare petId: UUID
   @column.dateTime()
   declare reminderSentAt: DateTime | null
+  @column()
+  declare serviceId: UUID
   @column.dateTime()
   declare startDate: DateTime
   @column()
@@ -208,6 +185,29 @@ export class ScheduleDaySchema extends BaseModel {
   declare id: UUID
   @column()
   declare shifts: any
+  @column()
+  declare tenantId: UUID
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class ServiceSchema extends BaseModel {
+  static $columns = ['color', 'createdAt', 'description', 'duration', 'id', 'name', 'price', 'tenantId', 'updatedAt'] as const
+  $columns = ServiceSchema.$columns
+  @column()
+  declare color: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare description: string | null
+  @column()
+  declare duration: number
+  @column({ isPrimary: true })
+  declare id: UUID
+  @column()
+  declare name: string
+  @column()
+  declare price: number | null
   @column()
   declare tenantId: UUID
   @column.dateTime({ autoCreate: true, autoUpdate: true })

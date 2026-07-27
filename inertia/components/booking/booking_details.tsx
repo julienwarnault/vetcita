@@ -7,10 +7,10 @@ import { Card } from '../ui/card'
 
 interface BookingDetailsProps {
   form: BookingForm
-  appointmentType?: Data.AppointmentTypes.AppointmentType
+  service?: Data.Services.Service
 }
 
-export function BookingDetails({ form, appointmentType }: BookingDetailsProps) {
+export function BookingDetails({ form, service }: BookingDetailsProps) {
   const { data } = form
 
   const startDate = data.startDate ? DateTime.fromISO(data.startDate) : null
@@ -23,16 +23,16 @@ export function BookingDetails({ form, appointmentType }: BookingDetailsProps) {
           <h2 className="font-semibold text-lg/6">Resumen</h2>
         </div>
 
-        {appointmentType && (
+        {service && (
           <div className="flex flex-col gap-3">
             <div className="flex items-start gap-3">
               <div className="mt-0.5 text-muted">
                 <CalendarIcon size={18} />
               </div>
               <div className="flex-1 flex flex-col gap-1">
-                <div className="font-medium text-base/6">{appointmentType.name}</div>
-                {appointmentType.description && (
-                  <div className="text-sm/5 text-muted">{appointmentType.description}</div>
+                <div className="font-medium text-base/6">{service.name}</div>
+                {service.description && (
+                  <div className="text-sm/5 text-muted">{service.description}</div>
                 )}
               </div>
             </div>
@@ -41,15 +41,15 @@ export function BookingDetails({ form, appointmentType }: BookingDetailsProps) {
               <div className="text-muted">
                 <ClockIcon size={18} />
               </div>
-              <div className="text-sm/5">{appointmentType.duration} minutos</div>
+              <div className="text-sm/5">{service.duration} minutos</div>
             </div>
 
-            {appointmentType.price && (
+            {service.price && (
               <div className="flex items-center gap-3">
                 <div className="text-muted">
                   <DollarSignIcon size={18} />
                 </div>
-                <div className="text-sm/5">${appointmentType.price}</div>
+                <div className="text-sm/5">${service.price}</div>
               </div>
             )}
           </div>
@@ -84,8 +84,8 @@ export function BookingDetails({ form, appointmentType }: BookingDetailsProps) {
           </div>
         )}
 
-        {!appointmentType && !startDate && !hasClientInfo && (
-          <div className="text-sm/5 text-muted py-4">Selecciona un tipo de cita para comenzar</div>
+        {!service && !startDate && !hasClientInfo && (
+          <div className="text-sm/5 text-muted py-4">Selecciona un servicio para comenzar</div>
         )}
       </div>
     </Card>

@@ -2,18 +2,18 @@ import { belongsTo } from '@adonisjs/lucid/orm'
 import { compose } from '@adonisjs/core/helpers'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import AppointmentStatus from '#appointment_workflow/models/appointment_status'
-import AppointmentType from '#appointment_types/models/appointment_type'
 import { WithPrimaryUuid } from '#shared/mixins/with_primary_uuid'
 import { DEFAULT_TIMEZONE } from '#shared/services/time_service'
 import { AppointmentSchema } from '#database/schema'
+import Service from '#services/models/service'
 import Client from '#clients/models/client'
 import Tenant from '#tenants/models/tenant'
 import Agenda from '#agendas/models/agenda'
 import Pet from '#pets/models/pet'
 
 export default class Appointment extends compose(AppointmentSchema, WithPrimaryUuid) {
-  @belongsTo(() => AppointmentType)
-  declare appointmentType: BelongsTo<typeof AppointmentType>
+  @belongsTo(() => Service)
+  declare service: BelongsTo<typeof Service>
 
   @belongsTo(() => Pet)
   declare pet: BelongsTo<typeof Pet>

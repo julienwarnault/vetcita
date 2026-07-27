@@ -1,15 +1,15 @@
 import { DateTime } from 'luxon'
 import { inject } from '@adonisjs/core'
-import { GetAppointmentType } from '#appointment_types/queries/get_appointment_type'
 import { ScheduleService } from '#scheduling/services/schedule_service'
 import { GetAppointments } from '#booking/queries/get_appointments'
 import { DEFAULT_TIMEZONE } from '#shared/services/time_service'
+import { GetService } from '#services/queries/get_service'
 import { GetShifts } from '#scheduling/queries/get_shifts'
 import type { UUID } from '#shared/types'
 
 interface GetBookableDaysParams {
   tenantId: UUID
-  appointmentTypeId: UUID
+  serviceId: UUID
   from: string
   to: string
   appointmentId?: UUID
@@ -18,7 +18,7 @@ interface GetBookableDaysParams {
 @inject()
 export class GetBookableDays {
   constructor(
-    private readonly getAppointmentType: GetAppointmentType,
+    private readonly getService: GetService,
     private readonly getShifts: GetShifts,
     private readonly getAppointments: GetAppointments,
     private readonly scheduleService: ScheduleService
@@ -28,12 +28,12 @@ export class GetBookableDays {
     const from = DateTime.fromISO(params.from, { zone: DEFAULT_TIMEZONE })
     const to = DateTime.fromISO(params.to, { zone: DEFAULT_TIMEZONE })
 
-    const { appointmentType } = await this.getAppointmentType.execute({
-      id: params.appointmentTypeId,
+    const { service } = await this.getService.execute({
+      id: params.serviceId,
       tenantId: params.tenantId,
     })
 
-    const agendaIds = appointmentType.agendas.map((agenda) => agenda.id)
+    const agendaIds = service.agendas.map((agenda) => agenda.id)
     if (agendaIds.length === 0) return { days: {} }
 
     const [{ shifts }, { appointments }] = await Promise.all([
@@ -44,7 +44,7 @@ export class GetBookableDays {
     const availability = this.scheduleService.getBookableSlots({
       from,
       to,
-      duration: appointmentType.duration,
+      duration: service.duration,
       agendaIds,
       shifts,
       appointments: appointments.filter(({ id }) => id !== params.appointmentId),

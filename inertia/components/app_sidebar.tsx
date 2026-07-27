@@ -30,7 +30,7 @@ const NAVIGATION = [
   },
   {
     name: 'Servicios',
-    route: 'list_appointment_types.render',
+    route: 'list_services.render',
     navigationIcon: 'book-open',
   },
   {

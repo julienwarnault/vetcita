@@ -28,16 +28,16 @@ export interface ApiDefinition {
     render: typeof routes['update_agenda.render']
     execute: typeof routes['update_agenda.execute']
   }
-  listAppointmentTypes: {
-    render: typeof routes['list_appointment_types.render']
+  listServices: {
+    render: typeof routes['list_services.render']
   }
-  createAppointmentType: {
-    render: typeof routes['create_appointment_type.render']
-    execute: typeof routes['create_appointment_type.execute']
+  createService: {
+    render: typeof routes['create_service.render']
+    execute: typeof routes['create_service.execute']
   }
-  updateAppointmentType: {
-    render: typeof routes['update_appointment_type.render']
-    execute: typeof routes['update_appointment_type.execute']
+  updateService: {
+    render: typeof routes['update_service.render']
+    execute: typeof routes['update_service.execute']
   }
   listAppointmentStatuses: {
     render: typeof routes['list_appointment_statuses.render']

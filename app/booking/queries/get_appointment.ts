@@ -11,7 +11,7 @@ export class GetAppointment {
     const appointment = await Appointment.query()
       .where('id', params.id)
       .where('tenantId', params.tenantId)
-      .preload('appointmentType')
+      .preload('service')
       .preload('client')
       .preload('pet', (q) => q.preload('species'))
       .preload('tenant')

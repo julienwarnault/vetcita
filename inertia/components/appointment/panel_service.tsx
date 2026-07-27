@@ -6,15 +6,15 @@ import { formatDuration } from '~/lib/utils'
 import { Drawer } from '../ui/drawer'
 import { Button } from '../ui/button'
 
-interface PanelAppointmentTypeProps {
+interface PanelServiceProps {
   form: AppointmentForm
   canContinue: boolean
-  appointmentTypes: Data.AppointmentTypes.AppointmentType[]
+  services: Data.Services.Service[]
   next(): void
 }
 
-export function PanelAppointmentType(props: PanelAppointmentTypeProps) {
-  const { form, canContinue, next, appointmentTypes } = props
+export function PanelService(props: PanelServiceProps) {
+  const { form, canContinue, next, services } = props
   const { data, setData } = form
 
   return (
@@ -23,7 +23,7 @@ export function PanelAppointmentType(props: PanelAppointmentTypeProps) {
         <Breadcrumb>
           <Breadcrumb.List>
             <Breadcrumb.Item>
-              <Breadcrumb.Page>Tipo de cita</Breadcrumb.Page>
+              <Breadcrumb.Page>Servicio</Breadcrumb.Page>
             </Breadcrumb.Item>
             <Breadcrumb.Separator />
             <Breadcrumb.Item>
@@ -34,23 +34,23 @@ export function PanelAppointmentType(props: PanelAppointmentTypeProps) {
       </Drawer.Header>
       <Drawer.Body className="w-120">
         <div className="flex flex-col gap-3">
-          <h3 className="font-semibold text-[19px]/6">Seleccionar tipo de cita</h3>
+          <h3 className="font-semibold text-[19px]/6">Seleccionar servicio</h3>
           <ul className="flex flex-col gap-3">
-            {appointmentTypes.map((type) => (
-              <li key={type.id}>
+            {services.map((service) => (
+              <li key={service.id}>
                 <button
                   type="button"
                   onClick={() => {
-                    setData('appointmentTypeId', type.id)
+                    setData('serviceId', service.id)
                     setData('startDate', '')
                   }}
                   className={cn(
                     'flex items-center justify-between bg-white border rounded-2xl p-4 w-full hover:bg-background',
-                    data.appointmentTypeId === type.id && 'outline-2 -outline-offset-1 outline-accent'
+                    data.serviceId === service.id && 'outline-2 -outline-offset-1 outline-accent'
                   )}
                 >
-                  <div className="font-medium text-base">{type.name}</div>
-                  <div className="text-sm text-muted-foreground">{formatDuration(type.duration)}</div>
+                  <div className="font-medium text-base">{service.name}</div>
+                  <div className="text-sm text-muted-foreground">{formatDuration(service.duration)}</div>
                 </button>
               </li>
             ))}

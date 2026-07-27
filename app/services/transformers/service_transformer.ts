@@ -1,8 +1,8 @@
 import { BaseTransformer } from '@adonisjs/core/transformers'
-import type AppointmentType from '#appointment_types/models/appointment_type'
 import AgendaTransformer from '#agendas/transformers/agenda_transformer'
+import type Service from '#services/models/service'
 
-export default class AppointmentTypeTransformer extends BaseTransformer<AppointmentType> {
+export default class ServiceTransformer extends BaseTransformer<Service> {
   toObject() {
     return {
       ...this.pick(this.resource, [

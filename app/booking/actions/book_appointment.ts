@@ -6,7 +6,7 @@ import type { UUID } from '#shared/types'
 
 interface BookAppointmentParams {
   tenantId: UUID
-  appointmentTypeId: UUID
+  serviceId: UUID
   agendaId: UUID
   startDate: string
   firstName: string
@@ -43,7 +43,7 @@ export class BookAppointment {
 
     return this.createAppointment.execute({
       tenantId: params.tenantId,
-      appointmentTypeId: params.appointmentTypeId,
+      serviceId: params.serviceId,
       agendaId: params.agendaId,
       clientId: client.id,
       petId: pet.id,

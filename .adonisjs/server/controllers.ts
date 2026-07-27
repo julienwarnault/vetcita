@@ -10,12 +10,6 @@ export const controllers = {
     ListAgendas: () => import('#app/agendas/controllers/list_agendas_controller'),
     UpdateAgenda: () => import('#app/agendas/controllers/update_agenda_controller'),
   },
-  appointmentTypes: {
-    CreateAppointmentType: () => import('#app/appointment_types/controllers/create_appointment_type_controller'),
-    DeleteAppointmentType: () => import('#app/appointment_types/controllers/delete_appointment_type_controller'),
-    ListAppointmentTypes: () => import('#app/appointment_types/controllers/list_appointment_types_controller'),
-    UpdateAppointmentType: () => import('#app/appointment_types/controllers/update_appointment_type_controller'),
-  },
   appointmentWorkflow: {
     CreateAppointmentStatus: () => import('#app/appointment_workflow/controllers/create_appointment_status_controller'),
     DeleteAppointmentStatus: () => import('#app/appointment_workflow/controllers/delete_appointment_status_controller'),
@@ -68,6 +62,12 @@ export const controllers = {
   },
   search: {
     Search: () => import('#app/search/controllers/search_controller'),
+  },
+  services: {
+    CreateService: () => import('#app/services/controllers/create_service_controller'),
+    DeleteService: () => import('#app/services/controllers/delete_service_controller'),
+    ListServices: () => import('#app/services/controllers/list_services_controller'),
+    UpdateService: () => import('#app/services/controllers/update_service_controller'),
   },
   shared: {
     Dashboard: () => import('#app/shared/controllers/dashboard_controller'),

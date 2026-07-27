@@ -4,16 +4,16 @@ import { SlotNotBookableException } from '#scheduling/exceptions/slot_not_bookab
 import { CheckSlotBookable } from '#scheduling/actions/check_slot_bookable'
 import { dispatchAfterCommit } from '#shared/utils/dispatch_after_commit'
 import { transactionContext } from '#shared/contexts/transaction_context'
-import AppointmentType from '#appointment_types/models/appointment_type'
 import { DEFAULT_TIMEZONE } from '#shared/services/time_service'
 import Appointment from '#booking/models/appointment'
+import Service from '#services/models/service'
 import { events } from '#generated/events'
 import type { UUID } from '#shared/types'
 
 interface UpdateAppointmentParams {
   id: UUID
   tenantId: UUID
-  appointmentTypeId: UUID
+  serviceId: UUID
   agendaId: UUID
   petId: UUID
   clientId: UUID
@@ -32,30 +32,30 @@ export class UpdateAppointment {
       .where('tenantId', params.tenantId)
       .firstOrFail()
 
-    const appointmentType = await AppointmentType.query({ client: trx })
-      .where('id', params.appointmentTypeId)
+    const service = await Service.query({ client: trx })
+      .where('id', params.serviceId)
       .where('tenantId', appointment.tenantId)
       .firstOrFail()
 
     const startDate = DateTime.fromISO(params.startDate)
-    const endDate = startDate.plus({ minutes: appointmentType.duration })
+    const endDate = startDate.plus({ minutes: service.duration })
 
     const isBookable = await this.checkSlotBookable.execute({
       tenantId: appointment.tenantId,
-      appointmentTypeId: params.appointmentTypeId,
+      serviceId: params.serviceId,
       agendaId: params.agendaId,
       start: startDate.setZone(DEFAULT_TIMEZONE),
       appointmentId: params.id,
     })
 
     appointment.merge({
-      appointmentTypeId: params.appointmentTypeId,
+      serviceId: params.serviceId,
       clientId: params.clientId,
       agendaId: params.agendaId,
       petId: params.petId,
       startDate,
       endDate,
-      duration: appointmentType.duration,
+      duration: service.duration,
     })
 
     const hasScheduleChanges = this.#hasScheduleChanges(appointment)
@@ -76,6 +76,6 @@ export class UpdateAppointment {
   }
 
   #hasScheduleChanges(appointment: Appointment) {
-    return appointment.isDirty(['appointmentTypeId', 'agendaId', 'startDate', 'endDate', 'duration'])
+    return appointment.isDirty(['serviceId', 'agendaId', 'startDate', 'endDate', 'duration'])
   }
 }

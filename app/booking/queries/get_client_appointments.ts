@@ -14,7 +14,7 @@ export class GetClientAppointments {
       .where('client_id', params.clientId)
       .whereNot('status_id', AppointmentStatus.CANCELLED)
       .orderBy('start_date')
-      .preload('appointmentType')
+      .preload('service')
       .preload('pet')
       .preload('agenda')
       .preload('status')

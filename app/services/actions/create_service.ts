@@ -1,8 +1,8 @@
 import { transactionContext } from '#shared/contexts/transaction_context'
-import AppointmentType from '#appointment_types/models/appointment_type'
+import Service from '#services/models/service'
 import type { UUID } from '#shared/types'
 
-interface CreateAppointmentTypeParams {
+interface CreateServiceParams {
   name: string
   color: string
   duration: number
@@ -12,11 +12,11 @@ interface CreateAppointmentTypeParams {
   tenantId: UUID
 }
 
-export class CreateAppointmentType {
-  async execute(params: CreateAppointmentTypeParams) {
+export class CreateService {
+  async execute(params: CreateServiceParams) {
     const trx = transactionContext.get()
 
-    const appointmentType = await AppointmentType.create(
+    const service = await Service.create(
       {
         name: params.name,
         color: params.color,
@@ -28,8 +28,8 @@ export class CreateAppointmentType {
       { client: trx }
     )
 
-    await appointmentType.related('agendas').sync(params.agendaIds || [], true, trx)
+    await service.related('agendas').sync(params.agendaIds || [], true, trx)
 
-    return { appointmentType }
+    return { service }
   }
 }

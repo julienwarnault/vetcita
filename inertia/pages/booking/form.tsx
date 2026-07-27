@@ -3,11 +3,11 @@ import { Data } from '@generated/data'
 import { Head } from '@inertiajs/react'
 import { Form } from '@base-ui/react/form'
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react'
-import { StepAppointmentType } from '~/components/booking/step_appointment_type'
 import { StepClientInfos } from '~/components/booking/step_client_infos'
 import { useBookingForm } from '~/components/booking/use_booking_form'
 import { StepDateTime } from '~/components/booking/step_date_time'
 import { StepPetInfos } from '~/components/booking/step_pet_infos'
+import { StepService } from '~/components/booking/step_service'
 import { StepReview } from '~/components/booking/step_review'
 import { FormHeader } from '~/components/form_header'
 import { Button } from '~/components/ui/button'
@@ -17,12 +17,12 @@ import { urlFor } from '~/lib/tuyau'
 
 type PageProps = InertiaProps<{
   tenant: Data.Tenants.Tenant
-  appointmentTypes: Data.AppointmentTypes.AppointmentType[]
+  services: Data.Services.Service[]
   species: Data.Pets.Species[]
 }>
 
 export default function ShowForm(props: PageProps) {
-  const { tenant, appointmentTypes: types, species } = props
+  const { tenant, services, species } = props
 
   const { form, step, isFirst, isLast, canContinue, actions } = useBookingForm({
     tenantId: tenant.id,
@@ -34,7 +34,7 @@ export default function ShowForm(props: PageProps) {
     actions.next()
   }
 
-  const selectedType = types.find((type) => type.id === form.data.appointmentTypeId)
+  const selectedService = services.find((service) => service.id === form.data.serviceId)
   const selectedSpecies = species.find((s) => s.id === form.data.petSpeciesId)
 
   return (
@@ -59,14 +59,14 @@ export default function ShowForm(props: PageProps) {
             </div>
 
             <Form id="form" onSubmit={handleSubmit} className="flex w-full flex-col gap-4" errors={form.errors}>
-              {step.key == 'type' && <StepAppointmentType form={form} appointmentTypes={types} />}
+              {step.key == 'service' && <StepService form={form} services={services} />}
               {step.key == 'datetime' && <StepDateTime form={form} />}
               {step.key == 'infos' && <StepClientInfos form={form} />}
               {step.key == 'pet' && <StepPetInfos form={form} species={species} />}
               {step.key == 'review' && (
                 <StepReview
                   form={form}
-                  appointmentType={selectedType!}
+                  service={selectedService!}
                   species={selectedSpecies!}
                   tenant={tenant}
                   stepKey="review"
@@ -77,7 +77,7 @@ export default function ShowForm(props: PageProps) {
           {step.key !== 'review' && (
             <aside className="hidden lg:block lg:w-111">
               <div className="sticky top-27 mt-9">
-                <StepReview form={form} appointmentType={selectedType} tenant={tenant} stepKey={step.key} />
+                <StepReview form={form} service={selectedService} tenant={tenant} stepKey={step.key} />
               </div>
             </aside>
           )}

@@ -3,31 +3,31 @@ import { Data } from '@generated/data'
 import { BookingForm } from './use_booking_form'
 import { formatDuration } from '~/lib/utils'
 
-interface StepAppointmentTypeProps {
+interface StepServiceProps {
   form: BookingForm
-  appointmentTypes: Data.AppointmentTypes.AppointmentType[]
+  services: Data.Services.Service[]
 }
 
-export function StepAppointmentType({ appointmentTypes, form }: StepAppointmentTypeProps) {
+export function StepService({ services, form }: StepServiceProps) {
   const { data, setData } = form
 
   return (
     <ul className="flex flex-col gap-4">
-      {appointmentTypes.map((type) => (
-        <li key={type.id}>
+      {services.map((service) => (
+        <li key={service.id}>
           <button
             type="button"
             onClick={() => {
-              setData('appointmentTypeId', type.id)
+              setData('serviceId', service.id)
               setData('startDate', '')
             }}
             className={cn(
               'flex items-center justify-between border bg-white rounded-lg p-4 w-full hover:bg-background',
-              data.appointmentTypeId === type.id && 'outline-2 -outline-offset-1 outline-accent'
+              data.serviceId === service.id && 'outline-2 -outline-offset-1 outline-accent'
             )}
           >
-            <div>{type.name}</div>
-            <div>{formatDuration(type.duration)}</div>
+            <div>{service.name}</div>
+            <div>{formatDuration(service.duration)}</div>
           </button>
         </li>
       ))}

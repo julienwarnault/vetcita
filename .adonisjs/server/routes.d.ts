@@ -16,11 +16,11 @@ export type ScannedRoutes = {
     'create_agenda.execute': { paramsTuple?: []; params?: {} }
     'update_agenda.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_agenda.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'list_appointment_types.render': { paramsTuple?: []; params?: {} }
-    'create_appointment_type.render': { paramsTuple?: []; params?: {} }
-    'create_appointment_type.execute': { paramsTuple?: []; params?: {} }
-    'update_appointment_type.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'update_appointment_type.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'list_services.render': { paramsTuple?: []; params?: {} }
+    'create_service.render': { paramsTuple?: []; params?: {} }
+    'create_service.execute': { paramsTuple?: []; params?: {} }
+    'update_service.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'update_service.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'list_appointment_statuses.render': { paramsTuple?: []; params?: {} }
     'create_appointment_status.render': { paramsTuple?: []; params?: {} }
     'create_appointment_status.execute': { paramsTuple?: []; params?: {} }
@@ -90,9 +90,9 @@ export type ScannedRoutes = {
     'list_agendas.render': { paramsTuple?: []; params?: {} }
     'create_agenda.render': { paramsTuple?: []; params?: {} }
     'update_agenda.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'list_appointment_types.render': { paramsTuple?: []; params?: {} }
-    'create_appointment_type.render': { paramsTuple?: []; params?: {} }
-    'update_appointment_type.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'list_services.render': { paramsTuple?: []; params?: {} }
+    'create_service.render': { paramsTuple?: []; params?: {} }
+    'update_service.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'list_appointment_statuses.render': { paramsTuple?: []; params?: {} }
     'create_appointment_status.render': { paramsTuple?: []; params?: {} }
     'update_appointment_status.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -136,9 +136,9 @@ export type ScannedRoutes = {
     'list_agendas.render': { paramsTuple?: []; params?: {} }
     'create_agenda.render': { paramsTuple?: []; params?: {} }
     'update_agenda.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'list_appointment_types.render': { paramsTuple?: []; params?: {} }
-    'create_appointment_type.render': { paramsTuple?: []; params?: {} }
-    'update_appointment_type.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'list_services.render': { paramsTuple?: []; params?: {} }
+    'create_service.render': { paramsTuple?: []; params?: {} }
+    'update_service.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'list_appointment_statuses.render': { paramsTuple?: []; params?: {} }
     'create_appointment_status.render': { paramsTuple?: []; params?: {} }
     'update_appointment_status.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -179,7 +179,7 @@ export type ScannedRoutes = {
     'login.execute': { paramsTuple?: []; params?: {} }
     'logout.execute': { paramsTuple?: []; params?: {} }
     'create_agenda.execute': { paramsTuple?: []; params?: {} }
-    'create_appointment_type.execute': { paramsTuple?: []; params?: {} }
+    'create_service.execute': { paramsTuple?: []; params?: {} }
     'create_appointment_status.execute': { paramsTuple?: []; params?: {} }
     'move_appointment_status.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'create_client.execute': { paramsTuple?: []; params?: {} }
@@ -194,7 +194,7 @@ export type ScannedRoutes = {
   }
   PUT: {
     'update_agenda.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'update_appointment_type.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'update_service.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_appointment_status.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_client.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_tenant.execute': { paramsTuple?: []; params?: {} }

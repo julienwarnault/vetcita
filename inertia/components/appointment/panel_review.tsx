@@ -13,7 +13,7 @@ import { Menu } from '../ui/menu'
 
 interface PanelReviewProps {
   form: AppointmentForm
-  appointmentType?: Data.AppointmentTypes.AppointmentType
+  service?: Data.Services.Service
   status?: Data.AppointmentWorkflow.AppointmentStatus
   statuses: Data.AppointmentWorkflow.AppointmentStatus[]
   canContinue: boolean
@@ -23,11 +23,11 @@ interface PanelReviewProps {
 }
 
 export function PanelReview(props: PanelReviewProps) {
-  const { form, appointmentType, statuses, status, canContinue, next, goToStep, close } = props
+  const { form, service, statuses, status, canContinue, next, goToStep, close } = props
   const { data, setData, isDirty } = form
 
   const startDate = DateTime.fromISO(data.startDate)
-  const endDate = startDate.plus({ minutes: appointmentType?.duration || 0 })
+  const endDate = startDate.plus({ minutes: service?.duration || 0 })
 
   return (
     <Drawer.MainPanel className="grid grid-rows-[auto_1fr_auto]">
@@ -76,14 +76,14 @@ export function PanelReview(props: PanelReviewProps) {
       </Drawer.Header>
       <Drawer.Body>
         <div className="flex flex-col gap-4">
-          <h2 className="text-xl font-semibold">Tipo de cita</h2>
+          <h2 className="text-xl font-semibold">Servicio</h2>
           <div className="flex items-center gap-4 hover:bg-background rounded-xl -m-2 p-2">
             <div
               className="w-1 h-auto rounded-full self-stretch shrink-0"
-              style={{ backgroundColor: appointmentType!.color }}
+              style={{ backgroundColor: service!.color }}
             />
             <div className="flex flex-1 flex-col gap-1 py-2">
-              <div className="text-[17px]/6 font-medium">{appointmentType!.name}</div>
+              <div className="text-[17px]/6 font-medium">{service!.name}</div>
 
               <div className="text-[15px]/5 text-muted">
                 {`${startDate.toFormat('h:mma')} - ${endDate.toFormat('h:mma')}`.toLowerCase()}
@@ -94,7 +94,7 @@ export function PanelReview(props: PanelReviewProps) {
                 size="icon-sm"
                 variant="secondary"
                 onClick={() => {
-                  setData('appointmentTypeId', '')
+                  setData('serviceId', '')
                   setData('startDate', '')
                   setData('agendaId', '')
                   goToStep(0)

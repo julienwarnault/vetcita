@@ -16,8 +16,6 @@ declare module '@adonisjs/inertia/types' {
     'agendas/list': ExtractProps<(typeof import('../../inertia/pages/agendas/list.tsx'))['default']>
     'appointment_statuses/form': ExtractProps<(typeof import('../../inertia/pages/appointment_statuses/form.tsx'))['default']>
     'appointment_statuses/list': ExtractProps<(typeof import('../../inertia/pages/appointment_statuses/list.tsx'))['default']>
-    'appointment_types/form': ExtractProps<(typeof import('../../inertia/pages/appointment_types/form.tsx'))['default']>
-    'appointment_types/list': ExtractProps<(typeof import('../../inertia/pages/appointment_types/list.tsx'))['default']>
     'appointments/form': ExtractProps<(typeof import('../../inertia/pages/appointments/form.tsx'))['default']>
     'auth/login': ExtractProps<(typeof import('../../inertia/pages/auth/login.tsx'))['default']>
     'auth/signup': ExtractProps<(typeof import('../../inertia/pages/auth/signup.tsx'))['default']>
@@ -35,6 +33,8 @@ declare module '@adonisjs/inertia/types' {
     'pets/list': ExtractProps<(typeof import('../../inertia/pages/pets/list.tsx'))['default']>
     'pets/show': ExtractProps<(typeof import('../../inertia/pages/pets/show.tsx'))['default']>
     'search': ExtractProps<(typeof import('../../inertia/pages/search.tsx'))['default']>
+    'services/form': ExtractProps<(typeof import('../../inertia/pages/services/form.tsx'))['default']>
+    'services/list': ExtractProps<(typeof import('../../inertia/pages/services/list.tsx'))['default']>
     'settings/booking_link': ExtractProps<(typeof import('../../inertia/pages/settings/booking_link.tsx'))['default']>
     'settings/show': ExtractProps<(typeof import('../../inertia/pages/settings/show.tsx'))['default']>
     'shifts/closed_date_form': ExtractProps<(typeof import('../../inertia/pages/shifts/closed_date_form.tsx'))['default']>

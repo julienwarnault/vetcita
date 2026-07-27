@@ -9,7 +9,7 @@ type AppointmentData = {
   tenantId: string
   clientId: string
   petId: string
-  appointmentTypeId: string
+  serviceId: string
   agendaId: string
   startDate: string
 }
@@ -18,9 +18,9 @@ export type AppointmentForm = InertiaPrecognitiveFormProps<AppointmentData>
 
 export const STEPS = [
   {
-    key: 'type',
-    fields: ['appointmentTypeId'],
-    canContinue: (d: AppointmentData) => Boolean(d.appointmentTypeId),
+    key: 'service',
+    fields: ['serviceId'],
+    canContinue: (d: AppointmentData) => Boolean(d.serviceId),
   },
   {
     key: 'datetime',
@@ -55,7 +55,7 @@ export function useAppointmentForm(params: UseAppointmentFormParams) {
     tenantId: tenantId,
     clientId: appointment?.clientId ?? clientId ?? '',
     petId: appointment?.petId ?? petId ?? '',
-    appointmentTypeId: appointment?.appointmentTypeId ?? '',
+    serviceId: appointment?.serviceId ?? '',
     agendaId: appointment?.agendaId ?? '',
     startDate: appointment?.localStartDate ?? '',
   }).withPrecognition(method, submitUrl)
@@ -123,7 +123,7 @@ export function useAppointmentForm(params: UseAppointmentFormParams) {
       tenantId: tenantId,
       clientId: appointment?.clientId ?? clientId ?? '',
       petId: appointment?.petId ?? petId ?? '',
-      appointmentTypeId: appointment?.appointmentTypeId ?? '',
+      serviceId: appointment?.serviceId ?? '',
       agendaId: appointment?.agendaId ?? '',
       startDate: appointment?.localStartDate ?? '',
     }))

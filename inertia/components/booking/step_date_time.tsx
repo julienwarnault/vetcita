@@ -12,7 +12,7 @@ export function StepDateTime({ form }: StepDateTimeProps) {
     <>
       <StartDatePicker
         tenantId={data.tenantId}
-        appointmentTypeId={data.appointmentTypeId}
+        serviceId={data.serviceId}
         value={data.startDate || undefined}
         startDate={data.startDate || undefined}
         onValueChange={(start, agendaId) => {

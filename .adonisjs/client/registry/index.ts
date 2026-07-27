@@ -78,35 +78,35 @@ const routes = {
     tokens: [{"old":"/agendas/:id","type":0,"val":"agendas","end":""},{"old":"/agendas/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['update_agenda.execute']['types'],
   },
-  'list_appointment_types.render': {
+  'list_services.render': {
     methods: ["GET","HEAD"],
-    pattern: '/appointment-types',
-    tokens: [{"old":"/appointment-types","type":0,"val":"appointment-types","end":""}],
-    types: placeholder as Registry['list_appointment_types.render']['types'],
+    pattern: '/services',
+    tokens: [{"old":"/services","type":0,"val":"services","end":""}],
+    types: placeholder as Registry['list_services.render']['types'],
   },
-  'create_appointment_type.render': {
+  'create_service.render': {
     methods: ["GET","HEAD"],
-    pattern: '/appointment-types/new',
-    tokens: [{"old":"/appointment-types/new","type":0,"val":"appointment-types","end":""},{"old":"/appointment-types/new","type":0,"val":"new","end":""}],
-    types: placeholder as Registry['create_appointment_type.render']['types'],
+    pattern: '/services/new',
+    tokens: [{"old":"/services/new","type":0,"val":"services","end":""},{"old":"/services/new","type":0,"val":"new","end":""}],
+    types: placeholder as Registry['create_service.render']['types'],
   },
-  'create_appointment_type.execute': {
+  'create_service.execute': {
     methods: ["POST"],
-    pattern: '/appointment-types',
-    tokens: [{"old":"/appointment-types","type":0,"val":"appointment-types","end":""}],
-    types: placeholder as Registry['create_appointment_type.execute']['types'],
+    pattern: '/services',
+    tokens: [{"old":"/services","type":0,"val":"services","end":""}],
+    types: placeholder as Registry['create_service.execute']['types'],
   },
-  'update_appointment_type.render': {
+  'update_service.render': {
     methods: ["GET","HEAD"],
-    pattern: '/appointment-types/edit/:id',
-    tokens: [{"old":"/appointment-types/edit/:id","type":0,"val":"appointment-types","end":""},{"old":"/appointment-types/edit/:id","type":0,"val":"edit","end":""},{"old":"/appointment-types/edit/:id","type":1,"val":"id","end":""}],
-    types: placeholder as Registry['update_appointment_type.render']['types'],
+    pattern: '/services/edit/:id',
+    tokens: [{"old":"/services/edit/:id","type":0,"val":"services","end":""},{"old":"/services/edit/:id","type":0,"val":"edit","end":""},{"old":"/services/edit/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['update_service.render']['types'],
   },
-  'update_appointment_type.execute': {
+  'update_service.execute': {
     methods: ["PUT"],
-    pattern: '/appointment-types/:id',
-    tokens: [{"old":"/appointment-types/:id","type":0,"val":"appointment-types","end":""},{"old":"/appointment-types/:id","type":1,"val":"id","end":""}],
-    types: placeholder as Registry['update_appointment_type.execute']['types'],
+    pattern: '/services/:id',
+    tokens: [{"old":"/services/:id","type":0,"val":"services","end":""},{"old":"/services/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['update_service.execute']['types'],
   },
   'list_appointment_statuses.render': {
     methods: ["GET","HEAD"],

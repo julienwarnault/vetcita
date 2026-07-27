@@ -1,14 +1,14 @@
 import vine from '@vinejs/vine'
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
-import { CreateAppointmentType } from '#appointment_types/actions/create_appointment_type'
+import { CreateService } from '#services/actions/create_service'
 import AgendaTransformer from '#agendas/transformers/agenda_transformer'
 import { withTransaction } from '#shared/utils/with_transaction'
 import { GetAgendas } from '#agendas/queries/get_agendas'
 import { uuidSchema } from '#shared/validators'
 
 @inject()
-export default class CreateAppointmentTypeController {
+export default class CreateServiceController {
   static validator = vine.create(
     vine.object({
       name: vine.string(),
@@ -22,7 +22,7 @@ export default class CreateAppointmentTypeController {
 
   constructor(
     private readonly getAgendas: GetAgendas,
-    private readonly createAppointmentType: CreateAppointmentType
+    private readonly createService: CreateService
   ) {}
 
   async render({ inertia, auth }: HttpContext) {
@@ -30,20 +30,20 @@ export default class CreateAppointmentTypeController {
 
     const { agendas } = await this.getAgendas.execute({ tenantId: user.tenantId })
 
-    return inertia.render('appointment_types/form', {
+    return inertia.render('services/form', {
       agendas: AgendaTransformer.transform(agendas),
     })
   }
 
   async execute({ request, response, auth }: HttpContext) {
-    const payload = await request.validateUsing(CreateAppointmentTypeController.validator)
+    const payload = await request.validateUsing(CreateServiceController.validator)
 
     const user = auth.getUserOrFail()
 
     await withTransaction(() => {
-      return this.createAppointmentType.execute({ ...payload, tenantId: user.tenantId })
+      return this.createService.execute({ ...payload, tenantId: user.tenantId })
     })
 
-    return response.redirect().toRoute('list_appointment_types.render')
+    return response.redirect().toRoute('list_services.render')
   }
 }

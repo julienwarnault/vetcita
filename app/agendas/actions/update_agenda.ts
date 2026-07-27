@@ -6,7 +6,7 @@ interface UpdateAgendaParams {
   id: UUID
   name: string
   color: string
-  appointmentTypeIds?: UUID[]
+  serviceIds?: UUID[]
 }
 
 export class UpdateAgenda {
@@ -22,7 +22,7 @@ export class UpdateAgenda {
 
     await agenda.useTransaction(trx!).save()
 
-    await agenda.related('appointmentTypes').sync(params.appointmentTypeIds || [], true, trx)
+    await agenda.related('services').sync(params.serviceIds || [], true, trx)
 
     return { agenda }
   }

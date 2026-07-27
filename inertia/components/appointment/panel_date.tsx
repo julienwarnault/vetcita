@@ -21,7 +21,7 @@ export function PanelDate(props: PanelDateProps) {
         <Breadcrumb>
           <Breadcrumb.List>
             <Breadcrumb.Item>
-              <Breadcrumb.Link render={<button onClick={() => goToStep(0)} />}>Tipo de cita</Breadcrumb.Link>
+              <Breadcrumb.Link render={<button onClick={() => goToStep(0)} />}>Servicio</Breadcrumb.Link>
             </Breadcrumb.Item>
             <Breadcrumb.Separator />
             <Breadcrumb.Item>
@@ -33,7 +33,7 @@ export function PanelDate(props: PanelDateProps) {
       <Drawer.Body className="w-120">
         <StartDatePicker
           tenantId={data.tenantId}
-          appointmentTypeId={data.appointmentTypeId}
+          serviceId={data.serviceId}
           appointmentId={data.id || undefined}
           value={data.startDate || undefined}
           startDate={data.startDate || undefined}

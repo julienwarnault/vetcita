@@ -2,11 +2,11 @@ import vine from '@vinejs/vine'
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
 import AppointmentStatusTransformer from '#appointment_workflow/transformers/appointment_status_transformer'
-import AppointmentTypeTransformer from '#appointment_types/transformers/appointment_type_transformer'
 import { GetAppointmentStatuses } from '#appointment_workflow/queries/get_appointment_statuses'
-import { GetAppointmentTypes } from '#appointment_types/queries/get_appointment_types'
+import ServiceTransformer from '#services/transformers/service_transformer'
 import { CreateAppointment } from '#booking/actions/create_appointment'
 import { withTransaction } from '#shared/utils/with_transaction'
+import { GetServices } from '#services/queries/get_services'
 import { uuidSchema } from '#shared/validators'
 import { UUID } from '#shared/types'
 
@@ -14,7 +14,7 @@ import { UUID } from '#shared/types'
 export default class CreateAppointmentController {
   static validator = vine.create(
     vine.object({
-      appointmentTypeId: uuidSchema(),
+      serviceId: uuidSchema(),
       agendaId: uuidSchema(),
       startDate: vine.string(),
       clientId: uuidSchema(),
@@ -24,7 +24,7 @@ export default class CreateAppointmentController {
   )
 
   constructor(
-    private readonly getAppointmentTypes: GetAppointmentTypes,
+    private readonly getServices: GetServices,
     private readonly getAppointmentStatuses: GetAppointmentStatuses,
     private readonly createAppointment: CreateAppointment
   ) {}
@@ -35,15 +35,15 @@ export default class CreateAppointmentController {
     const clientId = request.input('clientId', undefined) as UUID | undefined
     const petId = request.input('petId', undefined) as UUID | undefined
 
-    const [{ appointmentTypes }, { statuses }] = await Promise.all([
-      this.getAppointmentTypes.execute({ tenantId: user.tenantId }),
+    const [{ services }, { statuses }] = await Promise.all([
+      this.getServices.execute({ tenantId: user.tenantId }),
       this.getAppointmentStatuses.execute({ tenantId: user.tenantId }),
     ])
 
     return inertia.render('appointments/form', {
       clientId,
       petId,
-      appointmentTypes: AppointmentTypeTransformer.transform(appointmentTypes),
+      services: ServiceTransformer.transform(services),
       statuses: AppointmentStatusTransformer.transform(statuses),
     })
   }

@@ -7,14 +7,14 @@ import { Card } from '../ui/card'
 
 interface StepReviewProps {
   form: BookingForm
-  appointmentType?: Data.AppointmentTypes.AppointmentType
+  service?: Data.Services.Service
   species?: Data.Pets.Species
   tenant: Data.Tenants.Tenant
   stepKey: StepKey
 }
 
 export function StepReview(props: StepReviewProps) {
-  const { appointmentType, species, tenant, form, stepKey } = props
+  const { service, species, tenant, form, stepKey } = props
   const { data } = form
 
   const startDateTime = data.startDate ? DateTime.fromISO(data.startDate, { zone: DEFAULT_TIMEZONE }) : null
@@ -30,9 +30,9 @@ export function StepReview(props: StepReviewProps) {
 
       {['datetime', 'infos', 'pet', 'review'].includes(stepKey) && (
         <div className="flex flex-col p-4">
-          <div className="font-semibold text-lg">{appointmentType?.name}</div>
+          <div className="font-semibold text-lg">{service?.name}</div>
           <div className="text-sm text-muted-foreground mt-1">
-            Duración: {formatDuration(appointmentType?.duration || 0)}
+            Duración: {formatDuration(service?.duration || 0)}
           </div>
         </div>
       )}

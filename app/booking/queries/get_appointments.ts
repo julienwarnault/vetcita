@@ -24,7 +24,7 @@ export class GetAppointments {
         { column: 'start_date', order: 'asc' },
         { column: 'duration', order: 'desc' },
       ])
-      .preload('appointmentType')
+      .preload('service')
       .preload('client')
       .preload('pet', (q) => q.preload('species'))
       .preload('agenda')

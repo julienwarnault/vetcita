@@ -9,7 +9,7 @@ export default class GetBookableSlotsController {
   static validator = vine.create(
     vine.object({
       tenantId: uuidSchema(),
-      appointmentTypeId: uuidSchema(),
+      serviceId: uuidSchema(),
       appointmentId: uuidSchema().optional(),
       date: vine.string(),
     })

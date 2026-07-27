@@ -7,7 +7,6 @@
 import type { InferData, InferVariants } from '@adonisjs/core/types/transformers'
 import type { InferSharedProps } from '@adonisjs/inertia/types'
 import type AgendasAgendaTransformer from '#app/agendas/transformers/agenda_transformer'
-import type AppointmentTypesAppointmentTypeTransformer from '#app/appointment_types/transformers/appointment_type_transformer'
 import type AppointmentWorkflowAppointmentStatusTransformer from '#app/appointment_workflow/transformers/appointment_status_transformer'
 import type BookingAppointmentTransformer from '#app/booking/transformers/appointment_transformer'
 import type ClientsClientTransformer from '#app/clients/transformers/client_transformer'
@@ -20,6 +19,7 @@ import type SchedulingScheduleDayTransformer from '#app/scheduling/transformers/
 import type SchedulingShiftTransformer from '#app/scheduling/transformers/shift_transformer'
 import type SchedulingTimeOffTransformer from '#app/scheduling/transformers/time_off_transformer'
 import type SchedulingWorkingHourTransformer from '#app/scheduling/transformers/working_hour_transformer'
+import type ServicesServiceTransformer from '#app/services/transformers/service_transformer'
 import type TenantsTenantTransformer from '#app/tenants/transformers/tenant_transformer'
 import type InertiaMiddleware from '#shared/middleware/inertia_middleware'
 
@@ -28,12 +28,6 @@ export namespace Data {
     export type Agenda = InferData<AgendasAgendaTransformer>
     export namespace Agenda {
       export type Variants = InferVariants<AgendasAgendaTransformer>
-    }
-  }
-  export namespace AppointmentTypes {
-    export type AppointmentType = InferData<AppointmentTypesAppointmentTypeTransformer>
-    export namespace AppointmentType {
-      export type Variants = InferVariants<AppointmentTypesAppointmentTypeTransformer>
     }
   }
   export namespace AppointmentWorkflow {
@@ -94,6 +88,12 @@ export namespace Data {
     export type WorkingHour = InferData<SchedulingWorkingHourTransformer>
     export namespace WorkingHour {
       export type Variants = InferVariants<SchedulingWorkingHourTransformer>
+    }
+  }
+  export namespace Services {
+    export type Service = InferData<ServicesServiceTransformer>
+    export namespace Service {
+      export type Variants = InferVariants<ServicesServiceTransformer>
     }
   }
   export namespace Tenants {

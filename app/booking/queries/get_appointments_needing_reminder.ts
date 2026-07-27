@@ -15,7 +15,7 @@ export class GetAppointmentsNeedingReminder {
       .where('status_id', AppointmentStatus.BOOKED)
       .whereNull('reminder_sent_at')
       .preload('tenant')
-      .preload('appointmentType')
+      .preload('service')
       .preload('client')
       .preload('pet')
 

@@ -6,14 +6,14 @@ import { CheckSlotBookable } from '#scheduling/actions/check_slot_bookable'
 import { dispatchAfterCommit } from '#shared/utils/dispatch_after_commit'
 import { transactionContext } from '#shared/contexts/transaction_context'
 import { BookingRefService } from '#booking/services/booking_ref_service'
-import AppointmentType from '#appointment_types/models/appointment_type'
 import { DEFAULT_TIMEZONE } from '#shared/services/time_service'
 import Appointment from '#booking/models/appointment'
+import Service from '#services/models/service'
 import { events } from '#generated/events'
 import type { UUID } from '#shared/types'
 
 interface CreateAppointmentParams {
-  appointmentTypeId: UUID
+  serviceId: UUID
   agendaId: UUID
   clientId: UUID
   petId: UUID
@@ -31,17 +31,17 @@ export class CreateAppointment {
   async execute(params: CreateAppointmentParams) {
     const trx = transactionContext.get()
 
-    const appointmentType = await AppointmentType.query({ client: trx })
-      .where('id', params.appointmentTypeId)
+    const service = await Service.query({ client: trx })
+      .where('id', params.serviceId)
       .where('tenantId', params.tenantId)
       .firstOrFail()
 
     const startDate = DateTime.fromISO(params.startDate, { zone: DEFAULT_TIMEZONE })
-    const endDate = startDate.plus({ minutes: appointmentType.duration })
+    const endDate = startDate.plus({ minutes: service.duration })
 
     const isBookable = await this.checkSlotBookable.execute({
       tenantId: params.tenantId,
-      appointmentTypeId: params.appointmentTypeId,
+      serviceId: params.serviceId,
       agendaId: params.agendaId,
       start: startDate,
     })
@@ -54,13 +54,13 @@ export class CreateAppointment {
 
     const appointment = await Appointment.create(
       {
-        appointmentTypeId: params.appointmentTypeId,
+        serviceId: params.serviceId,
         clientId: params.clientId,
         agendaId: params.agendaId,
         petId: params.petId,
         startDate,
         endDate,
-        duration: appointmentType.duration,
+        duration: service.duration,
         tenantId: params.tenantId,
         bookingRef: bookingRef,
         statusId: AppointmentStatus.BOOKED,

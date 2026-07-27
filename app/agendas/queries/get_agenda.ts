@@ -11,7 +11,7 @@ export class GetAgenda {
     const agenda = await Agenda.query()
       .where('id', params.id)
       .where('tenantId', params.tenantId)
-      .preload('appointmentTypes')
+      .preload('services')
       .firstOrFail()
 
     return { agenda }

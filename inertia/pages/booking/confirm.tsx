@@ -15,7 +15,7 @@ type PageProps = InertiaProps<{
 
 export default function Confirm(props: PageProps) {
   const { appointment } = props
-  const { appointmentType } = appointment
+  const { service } = appointment
 
   const startDateTime = DateTime.fromISO(appointment.startDate!.toString(), {
     zone: DEFAULT_TIMEZONE,
@@ -47,11 +47,11 @@ export default function Confirm(props: PageProps) {
                 <div className="font-semibold text-[19px]/6">Resumen</div>
                 <div className="flex justify-between items-center pt-4">
                   <div>
-                    <div className="text-[16px]">{appointmentType?.name}</div>
+                    <div className="text-[16px]">{service?.name}</div>
                     <div className="text-sm/5 text-muted">{formatDuration(appointment?.duration)}</div>
                   </div>
-                  {appointmentType?.price && (
-                    <div className="text-[16px] font-semibold">{appointmentType?.price} MXN</div>
+                  {service?.price && (
+                    <div className="text-[16px] font-semibold">{service?.price} MXN</div>
                   )}
                 </div>
               </div>

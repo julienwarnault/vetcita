@@ -5,7 +5,7 @@ import { query, queryClient } from '~/lib/tuyau'
 
 type BookingData = {
   tenantId: string
-  appointmentTypeId: string
+  serviceId: string
   agendaId: string
   startDate: string
   firstName: string
@@ -29,10 +29,10 @@ const DEFAULT_CLIENT_INFO: ClientInfo = {
 
 export const STEPS = [
   {
-    key: 'type',
-    title: 'Seleccionar tipo de cita',
-    fields: ['appointmentTypeId'],
-    canContinue: (d: BookingData) => Boolean(d.appointmentTypeId),
+    key: 'service',
+    title: 'Seleccionar servicio',
+    fields: ['serviceId'],
+    canContinue: (d: BookingData) => Boolean(d.serviceId),
   },
   {
     key: 'datetime',
@@ -76,7 +76,7 @@ export function useBookingForm(params: UseBookingFormParams) {
 
   const form = useForm({
     tenantId: tenantId,
-    appointmentTypeId: '',
+    serviceId: '',
     agendaId: '',
     startDate: '',
     firstName: clientInfo.firstName,

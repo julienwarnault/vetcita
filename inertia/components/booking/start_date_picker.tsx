@@ -23,7 +23,7 @@ function getGroupInterval(groupIndex: number, origin: DateTime): Interval {
 
 interface StartDatePickerProps {
   tenantId: string
-  appointmentTypeId: string
+  serviceId: string
   appointmentId?: string
   value?: string
   startDate?: string
@@ -34,7 +34,7 @@ interface StartDatePickerProps {
 export function StartDatePicker(props: StartDatePickerProps) {
   const {
     tenantId,
-    appointmentTypeId,
+    serviceId,
     appointmentId,
     value,
     startDate = today().toFormat('yyyy-MM-dd'),
@@ -99,13 +99,13 @@ export function StartDatePicker(props: StartDatePickerProps) {
         {
           query: {
             tenantId,
-            appointmentTypeId,
+            serviceId,
             appointmentId,
             from: interval.start!.toFormat('yyyy-MM-dd'),
             to: interval.end!.toFormat('yyyy-MM-dd'),
           },
         },
-        { enabled: Boolean(tenantId && appointmentTypeId), staleTime: Infinity }
+        { enabled: Boolean(tenantId && serviceId), staleTime: Infinity }
       )
     }),
     combine: (results) =>
@@ -119,12 +119,12 @@ export function StartDatePicker(props: StartDatePickerProps) {
       {
         query: {
           tenantId,
-          appointmentTypeId,
+          serviceId,
           appointmentId,
           date: internalDate.toFormat('yyyy-MM-dd'),
         },
       },
-      { enabled: Boolean(tenantId && appointmentTypeId && isDateAvailable) }
+      { enabled: Boolean(tenantId && serviceId && isDateAvailable) }
     )
   )
 

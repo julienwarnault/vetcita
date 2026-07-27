@@ -15,15 +15,15 @@ import { Form } from '~/components/ui/form'
 import { InertiaProps } from '~/types'
 
 type PageProps = InertiaProps<{
-  appointmentType?: Data.AppointmentTypes.AppointmentType
+  service?: Data.Services.Service
   agendas: Data.Agendas.Agenda[]
 }>
 
 export default function ShowForm(props: PageProps) {
-  const { appointmentType, agendas } = props
+  const { service, agendas } = props
 
-  const isEdit = !!appointmentType
-  const title = appointmentType ? `Editar ${appointmentType.name}` : 'Añadir un tipo de cita'
+  const isEdit = !!service
+  const title = service ? `Editar ${service.name}` : 'Añadir un servicio'
 
   return (
     <>
@@ -31,7 +31,7 @@ export default function ShowForm(props: PageProps) {
         title={title}
         rightElement={
           <>
-            <ButtonLink size="lg" variant="secondary" route="list_appointment_types.render">
+            <ButtonLink size="lg" variant="secondary" route="list_services.render">
               Cerrar
             </ButtonLink>
             <Button type="submit" size="lg" form="form">
@@ -48,8 +48,8 @@ export default function ShowForm(props: PageProps) {
 
         <Form
           id="form"
-          route={isEdit ? 'update_appointment_type.execute' : 'create_appointment_type.execute'}
-          routeParams={isEdit ? { id: appointmentType.id } : undefined}
+          route={isEdit ? 'update_service.execute' : 'create_service.execute'}
+          routeParams={isEdit ? { id: service.id } : undefined}
           className="gap-16 pb-24"
         >
           <div>
@@ -57,22 +57,22 @@ export default function ShowForm(props: PageProps) {
 
             <div className="grid grid-cols-6 w-full gap-x-4 gap-y-6 pt-6">
               <Field name="name" className="col-span-6">
-                <Field.Label>Nombre del tipo de cita *</Field.Label>
-                <Input placeholder="Añade un nombre de tipo de cita" defaultValue={appointmentType?.name ?? ''} />
+                <Field.Label>Nombre del servicio *</Field.Label>
+                <Input placeholder="Añade un nombre de servicio" defaultValue={service?.name ?? ''} />
                 <Field.Error />
               </Field>
 
               <Field name="color" className="col-span-6">
                 <Field.Label>Color del calendario *</Field.Label>
-                <ColorSelect defaultValue={appointmentType?.color ?? COLORS_LIGHT[0]} />
+                <ColorSelect defaultValue={service?.color ?? COLORS_LIGHT[0]} />
                 <Field.Error />
               </Field>
 
               <Field name="description" className="col-span-6">
                 <Field.Label>Descripción</Field.Label>
                 <Textarea
-                  placeholder="Añade una breve descripción del tipo de cita"
-                  defaultValue={appointmentType?.description ?? ''}
+                  placeholder="Añade una breve descripción del servicio"
+                  defaultValue={service?.description ?? ''}
                 />
                 <Field.Error />
               </Field>
@@ -86,7 +86,7 @@ export default function ShowForm(props: PageProps) {
               <Field name="price">
                 <Field.Label>Precio</Field.Label>
                 <InputGroup>
-                  <InputGroup.Input type="number" placeholder="0.00" defaultValue={appointmentType?.price ?? ''} />
+                  <InputGroup.Input type="number" placeholder="0.00" defaultValue={service?.price ?? ''} />
                   <InputGroup.Addon>$</InputGroup.Addon>
                   <InputGroup.Addon align="end">MXN</InputGroup.Addon>
                 </InputGroup>
@@ -116,7 +116,7 @@ export default function ShowForm(props: PageProps) {
                     { label: '3h y 30 min', value: '210' },
                     { label: '4h', value: '240' },
                   ]}
-                  defaultValue={appointmentType?.duration?.toString() || '30'}
+                  defaultValue={service?.duration?.toString() || '30'}
                 />
                 <Field.Error />
               </Field>
@@ -140,7 +140,7 @@ export default function ShowForm(props: PageProps) {
                   </div>
                 )}
                 defaultValue={
-                  appointmentType ? appointmentType.agendas!.map((type) => type.id) : agendas.map(({ id }) => id)
+                  service ? service.agendas!.map((agenda) => agenda.id) : agendas.map(({ id }) => id)
                 }
               />
             </div>

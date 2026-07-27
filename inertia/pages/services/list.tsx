@@ -8,13 +8,13 @@ import { InertiaProps } from '~/types'
 import { urlFor } from '~/lib/tuyau'
 
 type PageProps = InertiaProps<{
-  appointmentTypes: Data.AppointmentTypes.AppointmentType[]
+  services: Data.Services.Service[]
 }>
 
 export default function List(props: PageProps) {
-  const { appointmentTypes } = props
+  const { services } = props
 
-  const columns: Column<Data.AppointmentTypes.AppointmentType>[] = [
+  const columns: Column<Data.Services.Service>[] = [
     {
       header: 'Nombre',
       width: '34%',
@@ -35,17 +35,17 @@ export default function List(props: PageProps) {
   return (
     <div className="flex">
       <div className="container-xl p-10">
-        <ViewHeader title="Servicios" badge={appointmentTypes.length.toString()}>
-          <ButtonLink route="create_appointment_type.render" size="lg">
+        <ViewHeader title="Servicios" badge={services.length.toString()}>
+          <ButtonLink route="create_service.render" size="lg">
             Añadir
           </ButtonLink>
         </ViewHeader>
 
         <ListTable
           columns={columns}
-          data={appointmentTypes}
+          data={services}
           onRowClick={(row) => {
-            router.visit(urlFor('update_appointment_type.render', { id: row.id }))
+            router.visit(urlFor('update_service.render', { id: row.id }))
           }}
         />
       </div>

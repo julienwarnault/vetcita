@@ -13,11 +13,11 @@ import { InertiaProps } from '~/types'
 
 type PageProps = InertiaProps<{
   agenda?: Data.Agendas.Agenda
-  appointmentTypes: Data.AppointmentTypes.AppointmentType[]
+  services: Data.Services.Service[]
 }>
 
 export default function ShowForm(props: PageProps) {
-  const { agenda, appointmentTypes } = props
+  const { agenda, services } = props
 
   const isEdit = !!agenda
   const title = agenda ? `Editar ${agenda.name}` : 'Añadir un agenda'
@@ -77,21 +77,21 @@ export default function ShowForm(props: PageProps) {
 
                 <div className="grid grid-cols-6 w-full gap-x-4 gap-y-6 pt-6">
                   <CheckboxFieldArray
-                    name="appointmentTypeIds[]"
+                    name="serviceIds[]"
                     className="col-span-6"
-                    items={appointmentTypes}
-                    getValue={(type) => type.id}
-                    renderItem={(type) => (
+                    items={services}
+                    getValue={(service) => service.id}
+                    renderItem={(service) => (
                       <div className="flex flex-1 justify-between items-center">
                         <div>
-                          <div className="text-[17px]/6 font-medium">{type.name}</div>
-                          <div className="text-muted">{formatDuration(type.duration)}</div>
+                          <div className="text-[17px]/6 font-medium">{service.name}</div>
+                          <div className="text-muted">{formatDuration(service.duration)}</div>
                         </div>
-                        {type.price && <div className="text-[17px]/6 font-medium">{type.price} MXN</div>}
+                        {service.price && <div className="text-[17px]/6 font-medium">{service.price} MXN</div>}
                       </div>
                     )}
                     defaultValue={
-                      agenda ? agenda.appointmentTypes!.map((type) => type.id) : appointmentTypes.map(({ id }) => id)
+                      agenda ? agenda.services!.map((service) => service.id) : services.map(({ id }) => id)
                     }
                   />
                 </div>

@@ -19,7 +19,7 @@ export class SearchAppointments {
       .where('tenant_id', params.tenantId)
       .where('start_date', '>=', now.toUTC().toISO()!)
       .where('statusId', AppointmentStatus.BOOKED)
-      .preload('appointmentType')
+      .preload('service')
       .preload('client')
       .preload('pet')
       .preload('agenda')

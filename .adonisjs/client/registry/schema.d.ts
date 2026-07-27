@@ -151,64 +151,64 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/agendas/controllers/update_agenda_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'list_appointment_types.render': {
+  'list_services.render': {
     methods: ["GET","HEAD"]
-    pattern: '/appointment-types'
+    pattern: '/services'
     types: {
       body: {}
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#app/appointment_types/controllers/list_appointment_types_controller').default['render']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/appointment_types/controllers/list_appointment_types_controller').default['render']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/services/controllers/list_services_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/services/controllers/list_services_controller').default['render']>>>
     }
   }
-  'create_appointment_type.render': {
+  'create_service.render': {
     methods: ["GET","HEAD"]
-    pattern: '/appointment-types/new'
+    pattern: '/services/new'
     types: {
       body: {}
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#app/appointment_types/controllers/create_appointment_type_controller').default['render']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/appointment_types/controllers/create_appointment_type_controller').default['render']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/services/controllers/create_service_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/services/controllers/create_service_controller').default['render']>>>
     }
   }
-  'create_appointment_type.execute': {
+  'create_service.execute': {
     methods: ["POST"]
-    pattern: '/appointment-types'
+    pattern: '/services'
     types: {
-      body: ExtractBody<InferInput<(typeof import('#app/appointment_types/controllers/create_appointment_type_controller').default)['validator']>>
+      body: ExtractBody<InferInput<(typeof import('#app/services/controllers/create_service_controller').default)['validator']>>
       paramsTuple: []
       params: {}
-      query: ExtractQuery<InferInput<(typeof import('#app/appointment_types/controllers/create_appointment_type_controller').default)['validator']>>
-      response: ExtractResponse<Awaited<ReturnType<import('#app/appointment_types/controllers/create_appointment_type_controller').default['execute']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/appointment_types/controllers/create_appointment_type_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+      query: ExtractQuery<InferInput<(typeof import('#app/services/controllers/create_service_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/services/controllers/create_service_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/services/controllers/create_service_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'update_appointment_type.render': {
+  'update_service.render': {
     methods: ["GET","HEAD"]
-    pattern: '/appointment-types/edit/:id'
+    pattern: '/services/edit/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#app/appointment_types/controllers/update_appointment_type_controller').default['render']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/appointment_types/controllers/update_appointment_type_controller').default['render']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/services/controllers/update_service_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/services/controllers/update_service_controller').default['render']>>>
     }
   }
-  'update_appointment_type.execute': {
+  'update_service.execute': {
     methods: ["PUT"]
-    pattern: '/appointment-types/:id'
+    pattern: '/services/:id'
     types: {
-      body: ExtractBody<InferInput<(typeof import('#app/appointment_types/controllers/update_appointment_type_controller').default)['validator']>>
+      body: ExtractBody<InferInput<(typeof import('#app/services/controllers/update_service_controller').default)['validator']>>
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
-      query: ExtractQuery<InferInput<(typeof import('#app/appointment_types/controllers/update_appointment_type_controller').default)['validator']>>
-      response: ExtractResponse<Awaited<ReturnType<import('#app/appointment_types/controllers/update_appointment_type_controller').default['execute']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/appointment_types/controllers/update_appointment_type_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+      query: ExtractQuery<InferInput<(typeof import('#app/services/controllers/update_service_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/services/controllers/update_service_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/services/controllers/update_service_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'list_appointment_statuses.render': {

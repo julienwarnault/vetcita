@@ -12,7 +12,7 @@ export class GetLastAppointmentsUpdated {
     const appointments = await Appointment.query()
       .where('tenant_id', params.tenantId)
       .whereNot('status_id', AppointmentStatus.CANCELLED)
-      .preload('appointmentType')
+      .preload('service')
       .preload('client')
       .preload('pet')
       .preload('agenda')

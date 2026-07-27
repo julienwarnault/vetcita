@@ -1,12 +1,12 @@
 import vine from '@vinejs/vine'
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
-import AppointmentTypeTransformer from '#appointment_types/transformers/appointment_type_transformer'
-import { GetAppointmentTypes } from '#appointment_types/queries/get_appointment_types'
+import ServiceTransformer from '#services/transformers/service_transformer'
 import TenantTransformer from '#tenants/transformers/tenant_transformer'
 import SpeciesTransformer from '#pets/transformers/species_transformer'
 import { BookAppointment } from '#booking/actions/book_appointment'
 import { withTransaction } from '#shared/utils/with_transaction'
+import { GetServices } from '#services/queries/get_services'
 import { GetTenant } from '#tenants/queries/get_tenant'
 import { GetSpecies } from '#pets/queries/get_species'
 import { uuidSchema } from '#shared/validators'
@@ -16,7 +16,7 @@ import { UUID } from '#shared/types'
 export default class BookAppointmentController {
   static validator = vine.create(
     vine.object({
-      appointmentTypeId: uuidSchema(),
+      serviceId: uuidSchema(),
       agendaId: uuidSchema(),
       startDate: vine.string(),
       firstName: vine.string(),
@@ -30,7 +30,7 @@ export default class BookAppointmentController {
 
   constructor(
     private readonly getTenant: GetTenant,
-    private readonly getAppointmentTypes: GetAppointmentTypes,
+    private readonly getServices: GetServices,
     private readonly getSpecies: GetSpecies,
     private readonly bookAppointment: BookAppointment
   ) {}
@@ -39,12 +39,12 @@ export default class BookAppointmentController {
     const id = request.param('tenantId')
 
     const { tenant } = await this.getTenant.execute({ id })
-    const { appointmentTypes } = await this.getAppointmentTypes.execute({ tenantId: id })
+    const { services } = await this.getServices.execute({ tenantId: id })
     const { species } = await this.getSpecies.execute()
 
     return inertia.render('booking/form', {
       tenant: TenantTransformer.transform(tenant),
-      appointmentTypes: AppointmentTypeTransformer.transform(appointmentTypes),
+      services: ServiceTransformer.transform(services),
       species: SpeciesTransformer.transform(species),
     })
   }

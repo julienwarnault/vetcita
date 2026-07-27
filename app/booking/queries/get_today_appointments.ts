@@ -22,7 +22,7 @@ export class GetTodayAppointments {
       .where('start_date', '>=', startOfDay)
       .where('start_date', '<=', endOfDay)
       .whereNot('status_id', AppointmentStatus.CANCELLED)
-      .preload('appointmentType')
+      .preload('service')
       .preload('client')
       .preload('pet')
       .preload('agenda')

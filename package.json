@@ -19,7 +19,6 @@
   "imports": {
     "#app/*": "./app/*.js",
     "#agendas/*": "./app/agendas/*.js",
-    "#appointment_types/*": "./app/appointment_types/*.js",
     "#appointment_workflow/*": "./app/appointment_workflow/*.js",
     "#booking/*": "./app/booking/*.js",
     "#clients/*": "./app/clients/*.js",
@@ -28,6 +27,7 @@
     "#pets/*": "./app/pets/*.js",
     "#scheduling/*": "./app/scheduling/*.js",
     "#search/*": "./app/search/*.js",
+    "#services/*": "./app/services/*.js",
     "#shared/*": "./app/shared/*.js",
     "#tenants/*": "./app/tenants/*.js",
     "#generated/*": "./.adonisjs/server/*.js",

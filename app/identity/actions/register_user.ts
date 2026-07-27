@@ -1,8 +1,8 @@
 import { inject } from '@adonisjs/core'
 import { transactionContext } from '#shared/contexts/transaction_context'
-import AppointmentType from '#appointment_types/models/appointment_type'
 import { CreateTenant } from '#tenants/actions/create_tenant'
 import { CreateAgenda } from '#agendas/actions/create_agenda'
+import Service from '#services/models/service'
 import User from '#identity/models/user'
 
 interface RegisterUserParams {
@@ -45,8 +45,8 @@ export class RegisterUser {
       tenantId: tenant.id,
     })
 
-    // Create appointment types
-    await AppointmentType.createMany(
+    // Create services
+    await Service.createMany(
       [
         { name: 'Consulta general', duration: 30, price: 350, color: '#b8adff', tenantId: tenant.id },
         { name: 'Vacunación', duration: 20, price: 250, color: '#c5e89c', tenantId: tenant.id },
