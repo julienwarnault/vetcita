@@ -1,5 +1,6 @@
 import { inject } from '@adonisjs/core'
 import { transactionContext } from '#shared/contexts/transaction_context'
+import AppointmentType from '#appointment_types/models/appointment_type'
 import { CreateTenant } from '#tenants/actions/create_tenant'
 import { CreateAgenda } from '#agendas/actions/create_agenda'
 import User from '#identity/models/user'
@@ -43,6 +44,19 @@ export class RegisterUser {
       color: '#97c6f0',
       tenantId: tenant.id,
     })
+
+    // Create appointment types
+    await AppointmentType.createMany(
+      [
+        { name: 'Consulta general', duration: 30, price: 350, color: '#b8adff', tenantId: tenant.id },
+        { name: 'Vacunación', duration: 20, price: 250, color: '#c5e89c', tenantId: tenant.id },
+        { name: 'Cirugía', duration: 120, price: 1500, color: '#e85d6f', tenantId: tenant.id },
+        { name: 'Baño y estética', duration: 60, price: 350, color: '#f6a2e4', tenantId: tenant.id },
+        { name: 'Desparasitación', duration: 15, price: 200, color: '#c5e89c', tenantId: tenant.id },
+        { name: 'Emergencia', duration: 60, price: 800, color: '#ffa175', tenantId: tenant.id },
+      ],
+      { client: trx }
+    )
 
     return { user }
   }

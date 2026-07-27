@@ -29,17 +29,17 @@ const NAVIGATION = [
     navigationIcon: 'paw-print',
   },
   {
-    name: 'Tipos de cita',
+    name: 'Servicios',
     route: 'list_appointment_types.render',
     navigationIcon: 'book-open',
   },
   {
-    name: 'Agendas',
+    name: 'Equipo',
     route: 'list_agendas.render',
     navigationIcon: 'users',
   },
   {
-    name: 'Turnos programados',
+    name: 'Horarios',
     route: 'list_shifts.render',
     navigationIcon: 'calendar-clock',
   },

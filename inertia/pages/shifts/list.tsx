@@ -43,7 +43,7 @@ export default function List(props: PageProps) {
   return (
     <div className="flex">
       <div className="container-xl p-10">
-        <ViewHeader title="Turnos programados">
+        <ViewHeader title="Horarios">
           <Menu
             trigger={
               <Button size="lg">

@@ -33,8 +33,8 @@ export class CreateAgenda {
         tenantId: params.tenantId,
         agendaId: agenda.id,
         dayOfWeek,
-        startTime: '08:00',
-        endTime: '19:00',
+        startTime: dayOfWeek === 5 ? '09:00' : '09:00',
+        endTime: dayOfWeek === 5 ? '14:00' : '18:00',
       })),
       { client: trx }
     )

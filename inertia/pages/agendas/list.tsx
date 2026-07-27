@@ -34,7 +34,7 @@ export default function List(props: PageProps) {
   return (
     <div className="flex">
       <div className="container-xl p-10">
-        <ViewHeader title="Agendas" badge={agendas.length.toString()}>
+        <ViewHeader title="Equipo" badge={agendas.length.toString()}>
           <Button onClick={() => visitModal(urlFor('create_agenda.render'))} size="lg">
             Añadir
           </Button>
