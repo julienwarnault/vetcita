@@ -39,14 +39,14 @@ export class RegisterUser {
     )
 
     // Create agenda
-    await this.createAgenda.execute({
+    const { agenda } = await this.createAgenda.execute({
       name: params.fullName,
       color: '#97c6f0',
       tenantId: tenant.id,
     })
 
     // Create services
-    await Service.createMany(
+    const services = await Service.createMany(
       [
         { name: 'Consulta general', duration: 30, price: 350, color: '#b8adff', tenantId: tenant.id },
         { name: 'Vacunación', duration: 20, price: 250, color: '#c5e89c', tenantId: tenant.id },
@@ -56,6 +56,13 @@ export class RegisterUser {
         { name: 'Emergencia', duration: 60, price: 800, color: '#ffa175', tenantId: tenant.id },
       ],
       { client: trx }
+    )
+
+    // Link the default services to the default agenda through the pivot table.
+    await agenda.related('services').sync(
+      services.map((service) => service.id),
+      true,
+      trx
     )
 
     return { user }
