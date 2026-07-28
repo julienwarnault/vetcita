@@ -33,7 +33,7 @@ export function PanelDetails(props: PanelDetailsProps) {
               <div className="text-[15px]/5 font-normal text-muted">{formatPhoneNumber(client.phone)}</div>
             </div>
             <div>
-              <div className="text-[15px]/5 font-medium">Se unió</div>
+              <div className="text-[15px]/5 font-medium">Creado el</div>
               <div className="text-[15px]/5 font-normal text-muted">
                 {DateTime.fromISO(client.createdAt!).setLocale(DEFAULT_LOCALE).toFormat('d ccc. yyyy')}
               </div>

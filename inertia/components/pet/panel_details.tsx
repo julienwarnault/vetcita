@@ -32,8 +32,12 @@ export function PanelDetails(props: PanelDetailsProps) {
               <div className="text-[15px]/5 font-normal text-muted">{pet.genderLabel ?? '-'}</div>
             </div>
             <div>
+              <div className="text-[15px]/5 font-medium">Esterilizado</div>
+              <div className="text-[15px]/5 font-normal text-muted">{pet.isNeutered ? 'Sí' : 'No'}</div>
+            </div>
+            <div>
               <div className="text-[15px]/5 font-medium">Raza</div>
-              <div className="text-[15px]/5 font-normal text-muted">{pet.breed?.name ?? '-'}</div>
+              <div className="text-[15px]/5 font-normal text-muted">{pet.breed ?? '-'}</div>
             </div>
             <div>
               <div className="text-[15px]/5 font-medium">Creado el</div>

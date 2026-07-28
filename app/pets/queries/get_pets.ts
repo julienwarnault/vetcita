@@ -8,7 +8,7 @@ interface GetPetsParams {
 
 export class GetPets {
   async execute(params: GetPetsParams) {
-    const query = Pet.query().where('tenantId', params.tenantId).preload('owner').preload('species').preload('breed')
+    const query = Pet.query().where('tenantId', params.tenantId).preload('owner').preload('species')
 
     if (params.search) {
       const term = `%${params.search}%`

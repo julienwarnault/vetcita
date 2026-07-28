@@ -13,7 +13,6 @@ export class GetPet {
       .where('tenantId', params.tenantId)
       .preload('owner')
       .preload('species')
-      .preload('breed')
       .firstOrFail()
 
     return { pet }

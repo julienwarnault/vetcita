@@ -3,12 +3,10 @@ import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
 import ClientTransformer from '#clients/transformers/client_transformer'
 import SpeciesTransformer from '#pets/transformers/species_transformer'
-import BreedTransformer from '#pets/transformers/breed_transformer'
 import { withTransaction } from '#shared/utils/with_transaction'
 import { GetClient } from '#clients/queries/get_client'
 import { GetSpecies } from '#pets/queries/get_species'
 import { CreatePet } from '#pets/actions/create_pet'
-import { GetBreeds } from '#pets/queries/get_breeds'
 import { uuidSchema } from '#shared/validators'
 
 @inject()
@@ -19,14 +17,18 @@ export default class CreatePetController {
       clientId: uuidSchema(),
       dateOfBirth: vine.date().optional(),
       gender: vine.enum(['male', 'female', 'unknown']).optional(),
+      isNeutered: vine.boolean().optional(),
       speciesId: uuidSchema(),
-      breedId: uuidSchema().optional(),
+      breed: vine.string().optional(),
+      color: vine.string().optional(),
+      weight: vine.number().positive().optional(),
+      bloodType: vine.string().optional(),
+      allergies: vine.string().optional(),
       notes: vine.string().optional(),
     })
   )
 
   constructor(
-    private readonly getBreeds: GetBreeds,
     private readonly getSpecies: GetSpecies,
     private readonly getClient: GetClient,
     private readonly createPet: CreatePet
@@ -37,16 +39,14 @@ export default class CreatePetController {
 
     const user = auth.getUserOrFail()
 
-    const [{ species }, { breeds }, { client }] = await Promise.all([
+    const [{ species }, { client }] = await Promise.all([
       this.getSpecies.execute(),
-      this.getBreeds.execute({}),
       clientId ? this.getClient.execute({ id: clientId, tenantId: user.tenantId }) : { client: null },
     ])
 
     return inertia.render('pets/form', {
       client: ClientTransformer.transform(client) ?? undefined,
       species: SpeciesTransformer.transform(species),
-      breeds: BreedTransformer.transform(breeds),
     })
   }
 

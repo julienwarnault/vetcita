@@ -13,7 +13,6 @@ export class GetClientPets {
       .where('client_id', params.clientId)
       .preload('owner')
       .preload('species')
-      .preload('breed')
 
     return { pets }
   }

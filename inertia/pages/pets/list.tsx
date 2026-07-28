@@ -20,7 +20,7 @@ export default function List(props: PageProps) {
   const columns: Column<Data.Pets.Pet>[] = [
     {
       header: 'Nombre de la mascota',
-      width: '30%',
+      width: '20%',
       accessor: 'name',
     },
     {
@@ -30,18 +30,23 @@ export default function List(props: PageProps) {
     },
     {
       header: 'Especias',
-      width: '15%',
+      width: '10%',
       accessor: ({ species }) => species?.name,
     },
     {
       header: 'Sexo',
-      width: '15%',
+      width: '10%',
       accessor: 'genderLabel',
     },
     {
       header: 'Raza',
-      width: '15%',
-      accessor: ({ breed }) => breed?.name ?? '-',
+      width: '10%',
+      accessor: 'breed',
+    },
+    {
+      header: 'Peso',
+      width: '10%',
+      accessor: ({ weight }) => (weight ? `${weight} kg` : '-'),
     },
     {
       header: 'Creado el',

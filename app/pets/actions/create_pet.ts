@@ -10,7 +10,12 @@ interface CreatePetParams {
   speciesId: UUID
   dateOfBirth?: DateTime
   gender?: 'male' | 'female' | 'unknown'
-  breedId?: UUID
+  isNeutered?: boolean
+  breed?: string
+  color?: string
+  weight?: number
+  bloodType?: string
+  allergies?: string
   notes?: string
 }
 
@@ -24,9 +29,14 @@ export class CreatePet {
         clientId: params.clientId,
         tenantId: params.tenantId,
         speciesId: params.speciesId,
-        breedId: params.breedId || null,
+        breed: params.breed || null,
         dateOfBirth: params.dateOfBirth,
         gender: params.gender || null,
+        isNeutered: params.isNeutered ?? false,
+        color: params.color || null,
+        weight: params.weight || null,
+        bloodType: params.bloodType || null,
+        allergies: params.allergies || null,
         notes: params.notes || null,
       },
       { client: trx }

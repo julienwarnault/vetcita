@@ -92,17 +92,6 @@ export class AppointmentSchema extends BaseModel {
   declare updatedAt: DateTime | null
 }
 
-export class BreedSchema extends BaseModel {
-  static $columns = ['id', 'name', 'speciesId'] as const
-  $columns = BreedSchema.$columns
-  @column({ isPrimary: true })
-  declare id: UUID
-  @column()
-  declare name: string
-  @column()
-  declare speciesId: UUID
-}
-
 export class ClientSchema extends BaseModel {
   static $columns = ['createdAt', 'email', 'firstName', 'id', 'lastName', 'notes', 'phone', 'tenantId', 'updatedAt'] as const
   $columns = ClientSchema.$columns
@@ -146,12 +135,18 @@ export class ClosedDateSchema extends BaseModel {
 }
 
 export class PetSchema extends BaseModel {
-  static $columns = ['breedId', 'clientId', 'createdAt', 'dateOfBirth', 'gender', 'id', 'name', 'notes', 'speciesId', 'tenantId', 'updatedAt'] as const
+  static $columns = ['allergies', 'bloodType', 'breed', 'clientId', 'color', 'createdAt', 'dateOfBirth', 'gender', 'id', 'isNeutered', 'name', 'notes', 'speciesId', 'tenantId', 'updatedAt', 'weight'] as const
   $columns = PetSchema.$columns
   @column()
-  declare breedId: UUID | null
+  declare allergies: string | null
+  @column()
+  declare bloodType: string | null
+  @column()
+  declare breed: string | null
   @column()
   declare clientId: UUID
+  @column()
+  declare color: string | null
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
   @column.date()
@@ -160,6 +155,8 @@ export class PetSchema extends BaseModel {
   declare gender: string | null
   @column({ isPrimary: true })
   declare id: UUID
+  @column()
+  declare isNeutered: boolean
   @column()
   declare name: string
   @column()
@@ -170,6 +167,8 @@ export class PetSchema extends BaseModel {
   declare tenantId: UUID
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+  @column()
+  declare weight: number | null
 }
 
 export class ScheduleDaySchema extends BaseModel {

@@ -7,7 +7,6 @@ import { PetSchema } from '#database/schema'
 import Client from '#clients/models/client'
 import Tenant from '#tenants/models/tenant'
 import Species from '#pets/models/species'
-import Breed from '#pets/models/breed'
 
 export default class Pet extends compose(PetSchema, WithPrimaryUuid) {
   @column()
@@ -19,9 +18,6 @@ export default class Pet extends compose(PetSchema, WithPrimaryUuid) {
 
   @belongsTo(() => Species)
   declare species: BelongsTo<typeof Species>
-
-  @belongsTo(() => Breed)
-  declare breed: BelongsTo<typeof Breed>
 
   @belongsTo(() => Client, { foreignKey: 'clientId' })
   declare owner: BelongsTo<typeof Client>
