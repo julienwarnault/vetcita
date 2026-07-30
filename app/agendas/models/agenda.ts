@@ -7,8 +7,15 @@ import { AgendaSchema } from '#database/schema'
 import Service from '#services/models/service'
 import Tenant from '#tenants/models/tenant'
 
+export enum AgendaRole {
+  owner = 'owner',
+  none = 'none',
+}
+
 export default class Agenda extends compose(AgendaSchema, WithPrimaryUuid) {
   static table = 'agendas'
+
+  declare role: AgendaRole
 
   @belongsTo(() => Tenant)
   declare tenant: BelongsTo<typeof Tenant>

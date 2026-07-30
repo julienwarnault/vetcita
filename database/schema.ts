@@ -22,16 +22,20 @@ export class AgendaServiceSchema extends BaseModel {
 }
 
 export class AgendaSchema extends BaseModel {
-  static $columns = ['color', 'createdAt', 'id', 'name', 'tenantId', 'updatedAt', 'userId'] as const
+  static $columns = ['color', 'createdAt', 'email', 'id', 'name', 'role', 'tenantId', 'updatedAt', 'userId'] as const
   $columns = AgendaSchema.$columns
   @column()
   declare color: string
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
+  @column()
+  declare email: string | null
   @column({ isPrimary: true })
   declare id: UUID
   @column()
   declare name: string
+  @column()
+  declare role: string
   @column()
   declare tenantId: UUID
   @column.dateTime({ autoCreate: true, autoUpdate: true })

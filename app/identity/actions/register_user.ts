@@ -2,6 +2,7 @@ import { inject } from '@adonisjs/core'
 import { transactionContext } from '#shared/contexts/transaction_context'
 import { CreateTenant } from '#tenants/actions/create_tenant'
 import { CreateAgenda } from '#agendas/actions/create_agenda'
+import { AgendaRole } from '#agendas/models/agenda'
 import Service from '#services/models/service'
 import User from '#identity/models/user'
 
@@ -40,9 +41,11 @@ export class RegisterUser {
     // Create agenda
     const { agenda } = await this.createAgenda.execute({
       name: params.fullName,
+      email: params.email,
       color: '#97c6f0',
       tenantId: tenant.id,
       userId: user.id,
+      role: AgendaRole.owner,
     })
 
     // Create services

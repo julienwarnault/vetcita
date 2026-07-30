@@ -16,10 +16,15 @@ export default function List(props: PageProps) {
 
   const { visitModal } = useModalStack()
 
+  const roleLabels = {
+    owner: 'Propietario',
+    none: 'Sin acceso',
+  }
+
   const columns: Column<Data.Agendas.Agenda>[] = [
     {
       header: 'Nombre',
-      width: '34%',
+      width: '45%',
       accessor: (agenda) => {
         return (
           <div className="flex items-center gap-2">
@@ -28,6 +33,16 @@ export default function List(props: PageProps) {
           </div>
         )
       },
+    },
+    {
+      header: 'Contacto',
+      width: '30%',
+      accessor: (agenda) => agenda.email ?? '-',
+    },
+    {
+      header: 'Rol de permisos',
+      width: '25%',
+      accessor: (agenda) => roleLabels[agenda.role as keyof typeof roleLabels] ?? agenda.role,
     },
   ]
 

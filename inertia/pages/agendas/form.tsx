@@ -1,6 +1,7 @@
 import { Data } from '@generated/data'
 import { CheckboxFieldArray } from '~/components/ui/checkbox_field_array'
 import { COLORS_LIGHT, ColorSelect } from '~/components/ui/color_select'
+import { NativeSelect } from '~/components/ui/native_select'
 import { InertiaModal } from '~/components/inertia_modal'
 import { FormHeader } from '~/components/form_header'
 import { Button } from '~/components/ui/button'
@@ -21,6 +22,8 @@ export default function ShowForm(props: PageProps) {
 
   const isEdit = !!agenda
   const title = agenda ? `Editar ${agenda.name}` : 'Añadir un agenda'
+
+  const isOwner = agenda?.role === 'owner'
 
   return (
     <InertiaModal>
@@ -49,6 +52,10 @@ export default function ShowForm(props: PageProps) {
               id="form"
               route={isEdit ? 'update_agenda.execute' : 'create_agenda.execute'}
               routeParams={isEdit ? { id: agenda.id } : undefined}
+              transform={(data) => ({
+                ...data,
+                role: isOwner ? agenda.role : data.role,
+              })}
               className="gap-16 pb-24"
               onSuccess={close}
             >
@@ -57,9 +64,24 @@ export default function ShowForm(props: PageProps) {
                 <p className="text-[15px]/5 text-muted">Gestiona el agenda</p>
 
                 <div className="grid grid-cols-6 w-full gap-x-4 gap-y-6 pt-6">
-                  <Field name="name" className="col-span-6">
+                  <Field name="name" className="col-span-3">
                     <Field.Label>Nombre *</Field.Label>
                     <Input defaultValue={agenda?.name ?? ''} />
+                    <Field.Error />
+                  </Field>
+
+                  <Field name="email" className="col-span-3">
+                    <Field.Label>Email{isOwner ? ' *' : ''}</Field.Label>
+                    <Input type="email" defaultValue={agenda?.email ?? ''} />
+                    <Field.Error />
+                  </Field>
+
+                  <Field name="role" className="col-span-3">
+                    <Field.Label>Rol de permisos *</Field.Label>
+                    <NativeSelect defaultValue={agenda?.role ?? 'none'} disabled={isOwner}>
+                      <NativeSelect.Option value="none">Sin acceso</NativeSelect.Option>
+                      {isOwner && <NativeSelect.Option value="owner">Propietario</NativeSelect.Option>}
+                    </NativeSelect>
                     <Field.Error />
                   </Field>
 
@@ -90,9 +112,7 @@ export default function ShowForm(props: PageProps) {
                         {service.price && <div className="text-[17px]/6 font-medium">{service.price} MXN</div>}
                       </div>
                     )}
-                    defaultValue={
-                      agenda ? agenda.services!.map((service) => service.id) : services.map(({ id }) => id)
-                    }
+                    defaultValue={agenda ? agenda.services!.map((service) => service.id) : services.map(({ id }) => id)}
                   />
                 </div>
               </div>

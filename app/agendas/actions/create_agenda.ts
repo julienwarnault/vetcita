@@ -1,10 +1,12 @@
 import { transactionContext } from '#shared/contexts/transaction_context'
+import Agenda, { type AgendaRole } from '#agendas/models/agenda'
 import WorkingHour from '#scheduling/models/working_hour'
-import Agenda from '#agendas/models/agenda'
 import type { UUID } from '#shared/types'
 
 interface CreateAgendaParams {
   name: string
+  email?: string | null
+  role: AgendaRole
   color: string
   userId?: UUID
   serviceIds?: UUID[]
@@ -19,9 +21,11 @@ export class CreateAgenda {
     const agenda = await Agenda.create(
       {
         name: params.name,
+        email: params.email,
         color: params.color,
         userId: params.userId,
         tenantId: params.tenantId,
+        role: params.role,
       },
       { client: trx }
     )

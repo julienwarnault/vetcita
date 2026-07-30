@@ -5,15 +5,18 @@ import ServiceTransformer from '#services/transformers/service_transformer'
 import AgendaTransformer from '#agendas/transformers/agenda_transformer'
 import { withTransaction } from '#shared/utils/with_transaction'
 import { UpdateAgenda } from '#agendas/actions/update_agenda'
+import { emailSchema, uuidSchema } from '#shared/validators'
 import { GetServices } from '#services/queries/get_services'
 import { GetAgenda } from '#agendas/queries/get_agenda'
-import { uuidSchema } from '#shared/validators'
+import { AgendaRole } from '#agendas/models/agenda'
 
 @inject()
 export default class UpdateAgendaController {
   static validator = vine.create(
     vine.object({
       name: vine.string(),
+      email: emailSchema().optional().requiredWhen('role', '!=', 'none'),
+      role: vine.enum(AgendaRole),
       color: vine.string(),
       serviceIds: vine.array(uuidSchema()).optional(),
     })
