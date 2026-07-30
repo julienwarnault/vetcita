@@ -25,7 +25,7 @@ export default function ShowForm(props: PageProps) {
   const isEdit = !!appointment
 
   const { user } = usePageProps()
-  const tenant = user?.tenant
+  const tenant = user?.agenda?.tenantId
 
   const drawerRef = useRef<InertiaDrawerRef>(null)
 
@@ -33,7 +33,7 @@ export default function ShowForm(props: PageProps) {
     appointment,
     clientId,
     petId,
-    tenantId: tenant!.id,
+    tenantId: tenant!,
     submitUrl: isEdit
       ? urlFor('update_appointment.execute', { id: appointment.id })
       : urlFor('create_appointment.execute'),

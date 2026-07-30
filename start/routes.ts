@@ -17,3 +17,4 @@ transmit.registerRoutes()
 
 router.where('id', router.matchers.uuid())
 router.where('petId', router.matchers.uuid())
+router.where('tenantId', router.matchers.uuid())

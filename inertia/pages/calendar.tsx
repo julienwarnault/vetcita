@@ -26,7 +26,7 @@ export default function ShowCalendar(props: PageProps) {
     router.reload({ only: ['appointments'] })
   }, 2_000)
 
-  useSubscribe({ channel: `tenants/${user?.tenantId}/appointments`, onMessage: debounced })
+  useSubscribe({ channel: `tenants/${user?.agenda?.tenantId}/appointments`, onMessage: debounced })
 
   return (
     <div className="flex flex-1 flex-col overflow-hidden">

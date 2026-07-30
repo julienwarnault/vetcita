@@ -312,7 +312,7 @@ export class TimeOffSchema extends BaseModel {
 }
 
 export class UserSchema extends BaseModel {
-  static $columns = ['createdAt', 'email', 'fullName', 'id', 'password', 'tenantId', 'updatedAt'] as const
+  static $columns = ['createdAt', 'email', 'fullName', 'id', 'password', 'updatedAt'] as const
   $columns = UserSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -324,8 +324,6 @@ export class UserSchema extends BaseModel {
   declare id: UUID
   @column({ serializeAs: null })
   declare password: string
-  @column()
-  declare tenantId: UUID
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
 }

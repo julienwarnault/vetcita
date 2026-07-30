@@ -15,7 +15,7 @@ export default function Settings() {
       <div className="container pb-24 h-full">
         <ViewHeader
           title="Ajustes del workspace"
-          subtitle={`Gestiona los ajustes de ${user?.tenant?.name}.`}
+          subtitle={`Gestiona los ajustes de ${user?.agenda?.tenant?.name}.`}
           className="pt-12 pb-8"
         />
 

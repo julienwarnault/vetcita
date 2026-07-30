@@ -11,12 +11,11 @@ export default class SilentAuthMiddleware {
   async handle(ctx: HttpContext, next: NextFn) {
     await ctx.auth.check()
 
-    // Preload tenant and agenda
     if (ctx.auth.user) {
-      await ctx.auth.user.load('agenda')
-      await ctx.auth.user.load('tenant')
+      await ctx.auth.user.load('agenda', (query) => {
+        query.preload('tenant')
+      })
     }
-
     return next()
   }
 }

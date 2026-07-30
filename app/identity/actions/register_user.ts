@@ -33,7 +33,6 @@ export class RegisterUser {
         fullName: params.fullName,
         email: params.email.trim().toLowerCase(),
         password: params.password,
-        tenantId: tenant.id,
       },
       { client: trx }
     )
