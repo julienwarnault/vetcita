@@ -10,4 +10,4 @@ router
     router.get('agendas/edit/:id', [controllers.agendas.UpdateAgenda, 'render'])
     router.put('agendas/:id', [controllers.agendas.UpdateAgenda, 'execute'])
   })
-  .use([middleware.auth()])
+  .use([middleware.auth(), middleware.requireTenant()])

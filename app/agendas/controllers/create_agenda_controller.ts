@@ -22,23 +22,19 @@ export default class CreateAgendaController {
     private readonly createAgenda: CreateAgenda
   ) {}
 
-  async render({ inertia, auth }: HttpContext) {
-    const user = auth.getUserOrFail()
-
-    const { services } = await this.getServices.execute({ tenantId: user.tenantId })
+  async render({ inertia, tenantId }: HttpContext) {
+    const { services } = await this.getServices.execute({ tenantId })
 
     return inertia.render('agendas/form', {
       services: ServiceTransformer.transform(services),
     })
   }
 
-  async execute({ request, response, auth }: HttpContext) {
+  async execute({ request, response, tenantId }: HttpContext) {
     const payload = await request.validateUsing(CreateAgendaController.validator)
 
-    const user = auth.getUserOrFail()
-
     await withTransaction(() => {
-      return this.createAgenda.execute({ ...payload, tenantId: user.tenantId })
+      return this.createAgenda.execute({ ...payload, tenantId })
     })
 
     return response.redirect().back()

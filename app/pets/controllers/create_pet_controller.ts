@@ -34,14 +34,12 @@ export default class CreatePetController {
     private readonly createPet: CreatePet
   ) {}
 
-  async render({ inertia, auth, request }: HttpContext) {
+  async render({ inertia, tenantId, request }: HttpContext) {
     const clientId = request.input('clientId', null)
-
-    const user = auth.getUserOrFail()
 
     const [{ species }, { client }] = await Promise.all([
       this.getSpecies.execute(),
-      clientId ? this.getClient.execute({ id: clientId, tenantId: user.tenantId }) : { client: null },
+      clientId ? this.getClient.execute({ id: clientId, tenantId }) : { client: null },
     ])
 
     return inertia.render('pets/form', {
@@ -50,13 +48,11 @@ export default class CreatePetController {
     })
   }
 
-  async execute({ request, response, auth, session }: HttpContext) {
+  async execute({ request, response, tenantId, session }: HttpContext) {
     const payload = await request.validateUsing(CreatePetController.validator)
 
-    const user = auth.getUserOrFail()
-
     const { pet } = await withTransaction(() => {
-      return this.createPet.execute({ ...payload, tenantId: user.tenantId })
+      return this.createPet.execute({ ...payload, tenantId })
     })
 
     session.flash('petId', pet.id)

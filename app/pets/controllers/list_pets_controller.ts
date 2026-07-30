@@ -11,25 +11,21 @@ export default class ListPetsController {
     private readonly getClientPets: GetClientPets
   ) {}
 
-  async render({ request, inertia, auth }: HttpContext) {
+  async render({ request, inertia, tenantId }: HttpContext) {
     const search = request.input('search', undefined)
 
-    const user = auth.getUserOrFail()
-
-    const { pets } = await this.getPets.execute({ tenantId: user.tenantId, search })
+    const { pets } = await this.getPets.execute({ tenantId, search })
 
     return inertia.render('pets/list', {
       pets: PetTransformer.transform(pets),
     })
   }
 
-  async api({ request, serialize, auth }: HttpContext) {
+  async api({ request, serialize, tenantId }: HttpContext) {
     const clientId = request.input('clientId', undefined)
 
-    const user = auth.getUserOrFail()
-
     const { pets } = await this.getClientPets.execute({
-      tenantId: user.tenantId,
+      tenantId,
       clientId,
     })
 

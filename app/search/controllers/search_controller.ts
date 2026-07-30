@@ -8,11 +8,9 @@ import { Search } from '#search/actions/search'
 export default class SearchController {
   constructor(private readonly search: Search) {}
 
-  async render({ request, inertia, auth }: HttpContext) {
-    const user = auth.getUserOrFail()
-
+  async render({ request, inertia, tenantId }: HttpContext) {
     const { search, clients, appointments } = await this.search.execute({
-      tenantId: user.tenantId,
+      tenantId,
       search: request.input('q', ''),
     })
 

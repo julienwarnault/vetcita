@@ -8,10 +8,8 @@ import { appUrl } from '#config/app'
 export default class BookingLinkController {
   constructor(private readonly qrCodeService: QrCodeService) {}
 
-  async render({ inertia, auth }: HttpContext) {
-    const user = auth.getUserOrFail()
-
-    const publicUrl = urlFor('book_appointment.render', { tenantId: user.tenantId }, { prefixUrl: appUrl })
+  async render({ inertia, tenantId }: HttpContext) {
+    const publicUrl = urlFor('book_appointment.render', { tenantId }, { prefixUrl: appUrl })
 
     const qrDataUrl = await this.qrCodeService.generateQRCode(publicUrl)
 

@@ -14,4 +14,4 @@ router
     router.get('api/clients', [controllers.clients.ListClients, 'api'])
     router.get('api/clients/:id', [controllers.clients.GetClient, 'api'])
   })
-  .use([middleware.auth()])
+  .use([middleware.auth(), middleware.requireTenant()])

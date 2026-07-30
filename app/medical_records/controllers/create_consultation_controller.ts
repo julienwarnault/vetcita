@@ -33,12 +33,10 @@ export default class CreateConsultationController {
     private readonly createConsultation: CreateConsultation
   ) {}
 
-  async render({ inertia, auth, params }: HttpContext) {
-    const user = auth.getUserOrFail()
-
+  async render({ inertia, tenantId, params }: HttpContext) {
     const [{ pet }, { appointments }] = await Promise.all([
-      this.getPet.execute({ id: params.petId, tenantId: user.tenantId }),
-      this.getPetAppointments.execute({ petId: params.petId, tenantId: user.tenantId }),
+      this.getPet.execute({ id: params.petId, tenantId }),
+      this.getPetAppointments.execute({ petId: params.petId, tenantId }),
     ])
     return inertia.render('consultations/form', {
       pet: PetTransformer.transform(pet),
@@ -46,17 +44,15 @@ export default class CreateConsultationController {
     })
   }
 
-  async execute({ request, response, params, auth }: HttpContext) {
+  async execute({ request, response, params, tenantId, agenda }: HttpContext) {
     const payload = await request.validateUsing(CreateConsultationController.validator)
-
-    const user = auth.getUserOrFail()
 
     await withTransaction(() => {
       return this.createConsultation.execute({
         ...payload,
         petId: params.petId,
-        tenantId: user.tenantId,
-        agendaId: user.agenda.id,
+        tenantId,
+        agendaId: agenda.id,
       })
     })
 

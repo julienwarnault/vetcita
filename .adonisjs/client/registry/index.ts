@@ -206,14 +206,14 @@ const routes = {
   },
   'update_tenant.render': {
     methods: ["GET","HEAD"],
-    pattern: '/tenant/edit',
-    tokens: [{"old":"/tenant/edit","type":0,"val":"tenant","end":""},{"old":"/tenant/edit","type":0,"val":"edit","end":""}],
+    pattern: '/settings/tenant/edit',
+    tokens: [{"old":"/settings/tenant/edit","type":0,"val":"settings","end":""},{"old":"/settings/tenant/edit","type":0,"val":"tenant","end":""},{"old":"/settings/tenant/edit","type":0,"val":"edit","end":""}],
     types: placeholder as Registry['update_tenant.render']['types'],
   },
   'update_tenant.execute': {
     methods: ["PUT"],
-    pattern: '/tenant',
-    tokens: [{"old":"/tenant","type":0,"val":"tenant","end":""}],
+    pattern: '/settings/tenant',
+    tokens: [{"old":"/settings/tenant","type":0,"val":"settings","end":""},{"old":"/settings/tenant","type":0,"val":"tenant","end":""}],
     types: placeholder as Registry['update_tenant.execute']['types'],
   },
   'book_appointment.render': {

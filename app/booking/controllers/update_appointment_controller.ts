@@ -30,13 +30,11 @@ export default class UpdateAppointmentController {
     private readonly updateAppointment: UpdateAppointment
   ) {}
 
-  async render({ params, inertia, auth }: HttpContext) {
-    const user = auth.getUserOrFail()
-
+  async render({ params, inertia, tenantId }: HttpContext) {
     const [{ appointment }, { services }, { statuses }] = await Promise.all([
-      this.getAppointment.execute({ id: params.id, tenantId: user.tenantId }),
-      this.getServices.execute({ tenantId: user.tenantId }),
-      this.getAppointmentStatuses.execute({ tenantId: user.tenantId }),
+      this.getAppointment.execute({ id: params.id, tenantId }),
+      this.getServices.execute({ tenantId }),
+      this.getAppointmentStatuses.execute({ tenantId }),
     ])
 
     return inertia.render('appointments/form', {
@@ -46,13 +44,11 @@ export default class UpdateAppointmentController {
     })
   }
 
-  async execute({ request, response, params, auth }: HttpContext) {
+  async execute({ request, response, params, tenantId }: HttpContext) {
     const payload = await request.validateUsing(UpdateAppointmentController.validator)
 
-    const user = auth.getUserOrFail()
-
     await withTransaction(() => {
-      return this.updateAppointment.execute({ id: params.id, tenantId: user.tenantId, ...payload })
+      return this.updateAppointment.execute({ id: params.id, tenantId, ...payload })
     })
 
     return response.redirect().back()

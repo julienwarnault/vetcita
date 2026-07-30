@@ -7,11 +7,9 @@ import { DeleteClient } from '#clients/actions/delete_client'
 export default class DeleteClientController {
   constructor(private readonly deleteClient: DeleteClient) {}
 
-  async execute({ params, response, auth }: HttpContext) {
-    const user = auth.getUserOrFail()
-
+  async execute({ params, response, tenantId }: HttpContext) {
     await withTransaction(() => {
-      return this.deleteClient.execute({ id: params.id, tenantId: user.tenantId })
+      return this.deleteClient.execute({ id: params.id, tenantId })
     })
 
     return response.noContent()

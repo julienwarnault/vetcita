@@ -16,4 +16,4 @@ router
     router.put('appointments/:id', [controllers.booking.UpdateAppointment, 'execute'])
     router.patch('appointments/:id/status', [controllers.booking.ChangeAppointmentStatus, 'execute'])
   })
-  .use([middleware.auth()])
+  .use([middleware.auth(), middleware.requireTenant()])

@@ -8,4 +8,4 @@ router
     router.get('dashboard', [controllers.shared.Dashboard, 'render'])
     router.on('settings').renderInertia('settings/show', {}).as('settings')
   })
-  .use(middleware.auth())
+  .use([middleware.auth(), middleware.requireTenant()])

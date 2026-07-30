@@ -20,12 +20,10 @@ export default class UpdateAppointmentStatusController {
     private readonly updateAppointmentStatus: UpdateAppointmentStatus
   ) {}
 
-  async render({ inertia, params, auth }: HttpContext) {
-    const user = auth.getUserOrFail()
-
+  async render({ inertia, params, tenantId }: HttpContext) {
     const { status } = await this.getAppointmentStatus.execute({
       id: params.id,
-      tenantId: user.tenantId,
+      tenantId,
     })
 
     return inertia.render('appointment_statuses/form', {
@@ -33,15 +31,13 @@ export default class UpdateAppointmentStatusController {
     })
   }
 
-  async execute({ request, params, response, auth }: HttpContext) {
+  async execute({ request, params, response, tenantId }: HttpContext) {
     const payload = await request.validateUsing(UpdateAppointmentStatusController.validator)
-
-    const user = auth.getUserOrFail()
 
     await withTransaction(() => {
       return this.updateAppointmentStatus.execute({
         id: params.id,
-        tenantId: user.tenantId,
+        tenantId,
         ...payload,
       })
     })

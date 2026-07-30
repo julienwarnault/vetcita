@@ -21,10 +21,8 @@ export default class UpdateClosedDateController {
     private readonly updateClosedDate: UpdateClosedDate
   ) {}
 
-  async render({ inertia, auth, params }: HttpContext) {
-    const user = auth.getUserOrFail()
-
-    const { closedDate } = await this.getClosedDate.execute({ tenantId: user.tenantId, id: params.id })
+  async render({ inertia, tenantId, params }: HttpContext) {
+    const { closedDate } = await this.getClosedDate.execute({ tenantId, id: params.id })
 
     return inertia.render('shifts/closed_date_form', {
       closedDate: ClosedDateTransformer.transform(closedDate),

@@ -13,13 +13,11 @@ export default class DashboardController {
     private readonly getUpcomingAppointments: GetUpcomingAppointments
   ) {}
 
-  async render({ inertia, auth }: HttpContext) {
-    const user = auth.getUserOrFail()
-
+  async render({ inertia, tenantId }: HttpContext) {
     const [{ appointments: lastUpdated }, { appointments: todayAppointments }, { upcoming }] = await Promise.all([
-      this.getLastAppointmentsUpdated.execute({ tenantId: user.tenantId, limit: 40 }),
-      this.getTodayAppointments.execute({ tenantId: user.tenantId, limit: 40 }),
-      this.getUpcomingAppointments.execute({ tenantId: user.tenantId }),
+      this.getLastAppointmentsUpdated.execute({ tenantId, limit: 40 }),
+      this.getTodayAppointments.execute({ tenantId, limit: 40 }),
+      this.getUpcomingAppointments.execute({ tenantId }),
     ])
 
     return inertia.render('dashboard', {

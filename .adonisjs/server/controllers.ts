@@ -40,9 +40,9 @@ export const controllers = {
   },
   medicalRecords: {
     CreateConsultation: () => import('#app/medical_records/controllers/create_consultation_controller'),
+    CreateVaccine: () => import('#app/medical_records/controllers/create_vaccine_controller'),
     ListConsultations: () => import('#app/medical_records/controllers/list_consultations_controller'),
     UpdateConsultation: () => import('#app/medical_records/controllers/update_consultation_controller'),
-    CreateVaccine: () => import('#app/medical_records/controllers/create_vaccine_controller'),
     UpdateVaccine: () => import('#app/medical_records/controllers/update_vaccine_controller'),
   },
   pets: {

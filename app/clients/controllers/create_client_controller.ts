@@ -22,13 +22,11 @@ export default class CreateClientController {
     return inertia.render('clients/form', {})
   }
 
-  async execute({ request, response, auth, session }: HttpContext) {
+  async execute({ request, response, tenantId, session }: HttpContext) {
     const payload = await request.validateUsing(CreateClientController.validator)
 
-    const user = auth.getUserOrFail()
-
     const { client } = await withTransaction(() => {
-      return this.createClient.execute({ ...payload, tenantId: user.tenantId })
+      return this.createClient.execute({ ...payload, tenantId })
     })
 
     session.flash('clientId', client.id)

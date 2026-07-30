@@ -36,13 +36,11 @@ export default class UpdateConsultationController {
     private readonly updateConsultation: UpdateConsultation
   ) {}
 
-  async render({ inertia, params, auth }: HttpContext) {
-    const user = auth.getUserOrFail()
-
+  async render({ inertia, params, tenantId }: HttpContext) {
     const [{ pet }, { appointments }, { consultation }] = await Promise.all([
-      this.getPet.execute({ id: params.petId, tenantId: user.tenantId }),
-      this.getPetAppointments.execute({ petId: params.petId, tenantId: user.tenantId }),
-      this.getConsultation.execute({ id: params.id, tenantId: user.tenantId }),
+      this.getPet.execute({ id: params.petId, tenantId }),
+      this.getPetAppointments.execute({ petId: params.petId, tenantId }),
+      this.getConsultation.execute({ id: params.id, tenantId }),
     ])
 
     return inertia.render('consultations/form', {
@@ -52,16 +50,14 @@ export default class UpdateConsultationController {
     })
   }
 
-  async execute({ request, params, response, auth }: HttpContext) {
+  async execute({ request, params, response, tenantId }: HttpContext) {
     const payload = await request.validateUsing(UpdateConsultationController.validator)
-
-    const user = auth.getUserOrFail()
 
     await withTransaction(() => {
       return this.updateConsultation.execute({
         id: params.id,
         petId: params.petId,
-        tenantId: user.tenantId,
+        tenantId,
         ...payload,
       })
     })

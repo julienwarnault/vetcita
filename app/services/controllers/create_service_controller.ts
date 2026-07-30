@@ -25,23 +25,19 @@ export default class CreateServiceController {
     private readonly createService: CreateService
   ) {}
 
-  async render({ inertia, auth }: HttpContext) {
-    const user = auth.getUserOrFail()
-
-    const { agendas } = await this.getAgendas.execute({ tenantId: user.tenantId })
+  async render({ inertia, tenantId }: HttpContext) {
+    const { agendas } = await this.getAgendas.execute({ tenantId })
 
     return inertia.render('services/form', {
       agendas: AgendaTransformer.transform(agendas),
     })
   }
 
-  async execute({ request, response, auth }: HttpContext) {
+  async execute({ request, response, tenantId }: HttpContext) {
     const payload = await request.validateUsing(CreateServiceController.validator)
 
-    const user = auth.getUserOrFail()
-
     await withTransaction(() => {
-      return this.createService.execute({ ...payload, tenantId: user.tenantId })
+      return this.createService.execute({ ...payload, tenantId })
     })
 
     return response.redirect().toRoute('list_services.render')

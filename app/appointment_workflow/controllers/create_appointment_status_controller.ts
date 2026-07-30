@@ -19,13 +19,11 @@ export default class CreateAppointmentStatusController {
     return inertia.render('appointment_statuses/form', {})
   }
 
-  async execute({ request, response, auth }: HttpContext) {
+  async execute({ request, response, tenantId }: HttpContext) {
     const payload = await request.validateUsing(CreateAppointmentStatusController.validator)
 
-    const user = auth.getUserOrFail()
-
     await withTransaction(() => {
-      return this.createAppointmentStatus.execute({ ...payload, tenantId: user.tenantId })
+      return this.createAppointmentStatus.execute({ ...payload, tenantId })
     })
 
     return response.redirect().toRoute('list_appointment_statuses.render')

@@ -29,12 +29,10 @@ export default class CreateVaccineController {
     private readonly createVaccine: CreateVaccine
   ) {}
 
-  async render({ inertia, params, auth }: HttpContext) {
-    const user = auth.getUserOrFail()
-
+  async render({ inertia, params, tenantId }: HttpContext) {
     const [{ pet }, { appointments }] = await Promise.all([
-      this.getPet.execute({ id: params.petId, tenantId: user.tenantId }),
-      this.getPetAppointments.execute({ petId: params.petId, tenantId: user.tenantId }),
+      this.getPet.execute({ id: params.petId, tenantId }),
+      this.getPetAppointments.execute({ petId: params.petId, tenantId }),
     ])
 
     return inertia.render('vaccines/forms', {
@@ -43,18 +41,16 @@ export default class CreateVaccineController {
     })
   }
 
-  async execute({ request, response, params, auth }: HttpContext) {
+  async execute({ request, response, params, tenantId, agenda }: HttpContext) {
     const payload = await request.validateUsing(CreateVaccineController.validator)
-    const user = auth.getUserOrFail()
-
-    await this.getPet.execute({ id: params.petId, tenantId: user.tenantId })
+    await this.getPet.execute({ id: params.petId, tenantId })
 
     await withTransaction(() => {
       return this.createVaccine.execute({
         ...payload,
         petId: params.petId,
-        tenantId: user.tenantId,
-        agendaId: user.agenda?.id,
+        tenantId,
+        agendaId: agenda.id,
       })
     })
 

@@ -13,4 +13,4 @@ router
     router.get('api/pets', [controllers.pets.ListPets, 'api'])
     router.get('api/pets/:id', [controllers.pets.GetPet, 'api'])
   })
-  .use([middleware.auth()])
+  .use([middleware.auth(), middleware.requireTenant()])

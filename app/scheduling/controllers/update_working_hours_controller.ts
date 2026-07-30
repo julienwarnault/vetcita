@@ -24,12 +24,10 @@ export default class UpdateWorkingHoursController {
     private readonly updateWorkingHours: UpdateWorkingHours
   ) {}
 
-  async render({ params, inertia, auth }: HttpContext) {
-    const user = auth.getUserOrFail()
-
+  async render({ params, inertia, tenantId }: HttpContext) {
     const [{ agenda }, { workingHours }] = await Promise.all([
-      this.getAgenda.execute({ tenantId: user.tenantId, id: params.agendaId }),
-      this.getWorkingHours.execute({ tenantId: user.tenantId, agendaIds: [params.agendaId] }),
+      this.getAgenda.execute({ tenantId, id: params.agendaId }),
+      this.getWorkingHours.execute({ tenantId, agendaIds: [params.agendaId] }),
     ])
 
     return inertia.render('shifts/working_hours_form', {
@@ -38,13 +36,11 @@ export default class UpdateWorkingHoursController {
     })
   }
 
-  async execute({ request, params, response, auth }: HttpContext) {
-    const user = auth.getUserOrFail()
-
+  async execute({ request, params, response, tenantId }: HttpContext) {
     const payload = await request.validateUsing(UpdateWorkingHoursController.validator)
 
     await withTransaction(() => {
-      return this.updateWorkingHours.execute({ agendaId: params.agendaId, tenantId: user.tenantId, ...payload })
+      return this.updateWorkingHours.execute({ agendaId: params.agendaId, tenantId, ...payload })
     })
 
     return response.redirect().back()

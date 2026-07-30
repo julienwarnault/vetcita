@@ -7,13 +7,11 @@ import { GetClients } from '#clients/queries/get_clients'
 export default class ListClientsController {
   constructor(private readonly getClients: GetClients) {}
 
-  async render({ request, inertia, auth }: HttpContext) {
+  async render({ request, inertia, tenantId }: HttpContext) {
     const search = request.input('search', undefined)
 
-    const user = auth.getUserOrFail()
-
     const { clients } = await this.getClients.execute({
-      tenantId: user.tenantId,
+      tenantId,
       search,
     })
 
@@ -22,13 +20,11 @@ export default class ListClientsController {
     })
   }
 
-  async api({ request, serialize, auth }: HttpContext) {
+  async api({ request, serialize, tenantId }: HttpContext) {
     const search = request.input('search', undefined)
 
-    const user = auth.getUserOrFail()
-
     const { clients } = await this.getClients.execute({
-      tenantId: user.tenantId,
+      tenantId,
       search,
     })
 

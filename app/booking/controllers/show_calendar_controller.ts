@@ -24,10 +24,8 @@ export default class ShowCalendarController {
     private readonly getAppointments: GetAppointments
   ) {}
 
-  async render({ inertia, request, response, auth }: HttpContext) {
+  async render({ inertia, request, response, tenantId }: HttpContext) {
     const params = await request.validateUsing(ShowCalendarController.validator)
-
-    const user = auth.getUserOrFail()
 
     const defaultDate = DateTime.now().setZone(DEFAULT_TIMEZONE).toFormat('yyyy-MM-dd')
     const defaultView = '3_day'
@@ -45,10 +43,10 @@ export default class ShowCalendarController {
       this.getAppointments.execute({
         from: range.start,
         to: range.end,
-        tenantId: user.tenantId,
+        tenantId,
         agendaIds: params.agendaIds,
       }),
-      this.getAgendas.execute({ tenantId: user.tenantId }),
+      this.getAgendas.execute({ tenantId }),
     ])
 
     return inertia.render('calendar', {

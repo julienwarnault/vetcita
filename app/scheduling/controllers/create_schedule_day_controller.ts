@@ -26,17 +26,15 @@ export default class CreateScheduleDayController {
     private readonly createScheduleDay: CreateScheduleDay
   ) {}
 
-  async render({ inertia, auth, request }: HttpContext) {
+  async render({ inertia, tenantId, request }: HttpContext) {
     const agendaId = request.input('agendaId', null)
     const date = request.input('date', null)
-
-    const user = auth.getUserOrFail()
 
     const from = DateTime.fromISO(date)
 
     const [{ agenda }, { workingHours }] = await Promise.all([
-      this.getAgenda.execute({ id: agendaId, tenantId: user.tenantId }),
-      this.getWorkingHours.execute({ tenantId: user.tenantId, dayOfWeek: from.weekday, agendaIds: [agendaId] }),
+      this.getAgenda.execute({ id: agendaId, tenantId }),
+      this.getWorkingHours.execute({ tenantId, dayOfWeek: from.weekday, agendaIds: [agendaId] }),
     ])
 
     return inertia.render('shifts/schedule_day_form', {
@@ -46,13 +44,11 @@ export default class CreateScheduleDayController {
     })
   }
 
-  async execute({ request, response, auth }: HttpContext) {
+  async execute({ request, response, tenantId }: HttpContext) {
     const payload = await request.validateUsing(CreateScheduleDayController.validator)
 
-    const user = auth.getUserOrFail()
-
     await withTransaction(() => {
-      return this.createScheduleDay.execute({ ...payload, tenantId: user.tenantId })
+      return this.createScheduleDay.execute({ ...payload, tenantId })
     })
 
     return response.redirect().back()

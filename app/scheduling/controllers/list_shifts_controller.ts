@@ -30,10 +30,8 @@ export default class ListShiftsController {
     private readonly getShifts: GetShifts
   ) {}
 
-  async render({ request, inertia, response, auth }: HttpContext) {
+  async render({ request, inertia, response, tenantId }: HttpContext) {
     const params = await request.validateUsing(ListShiftsController.validator)
-
-    const user = auth.getUserOrFail()
 
     const defaultDate = DateTime.now().setZone(DEFAULT_TIMEZONE).toFormat('yyyy-MM-dd')
 
@@ -47,11 +45,11 @@ export default class ListShiftsController {
     const to = DateTime.fromISO(date).endOf('week')
 
     const [{ agendas }, { shifts }, { closedDates }, { scheduleDays }, { timeOffs }] = await Promise.all([
-      this.getAgendas.execute({ tenantId: user.tenantId }),
-      this.getShifts.execute({ tenantId: user.tenantId, from, to }),
-      this.getClosedDates.execute({ tenantId: user.tenantId, from, to }),
-      this.getScheduleDays.execute({ tenantId: user.tenantId, from, to }),
-      this.getTimeOffs.execute({ tenantId: user.tenantId, from, to }),
+      this.getAgendas.execute({ tenantId }),
+      this.getShifts.execute({ tenantId, from, to }),
+      this.getClosedDates.execute({ tenantId, from, to }),
+      this.getScheduleDays.execute({ tenantId, from, to }),
+      this.getTimeOffs.execute({ tenantId, from, to }),
     ])
 
     return inertia.render('shifts/list', {

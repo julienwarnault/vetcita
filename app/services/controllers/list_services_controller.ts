@@ -7,13 +7,11 @@ import { GetServices } from '#services/queries/get_services'
 export default class ListServicesController {
   constructor(private readonly getServices: GetServices) {}
 
-  async render({ request, inertia, auth }: HttpContext) {
+  async render({ request, inertia, tenantId }: HttpContext) {
     const search = request.input('search', undefined)
 
-    const user = auth.getUserOrFail()
-
     const { services } = await this.getServices.execute({
-      tenantId: user.tenantId,
+      tenantId,
       search,
     })
 

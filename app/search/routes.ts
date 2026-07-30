@@ -6,4 +6,4 @@ router
   .group(() => {
     router.get('search', [controllers.search.Search, 'render'])
   })
-  .use([middleware.auth()])
+  .use([middleware.auth(), middleware.requireTenant()])

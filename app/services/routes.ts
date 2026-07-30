@@ -10,4 +10,4 @@ router
     router.get('services/edit/:id', [controllers.services.UpdateService, 'render'])
     router.put('services/:id', [controllers.services.UpdateService, 'execute'])
   })
-  .use([middleware.auth()])
+  .use([middleware.auth(), middleware.requireTenant()])

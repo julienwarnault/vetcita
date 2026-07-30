@@ -24,13 +24,11 @@ export default class CreateClosedDateController {
     })
   }
 
-  async execute({ request, response, auth }: HttpContext) {
+  async execute({ request, response, tenantId }: HttpContext) {
     const payload = await request.validateUsing(CreateClosedDateController.validator)
 
-    const user = auth.getUserOrFail()
-
     await withTransaction(() => {
-      return this.createClosedDate.execute({ ...payload, tenantId: user.tenantId })
+      return this.createClosedDate.execute({ ...payload, tenantId })
     })
 
     return response.redirect().back()

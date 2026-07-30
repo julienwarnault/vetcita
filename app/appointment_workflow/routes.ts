@@ -12,4 +12,4 @@ router
     router.post('settings/statuses/:id/move', [controllers.appointmentWorkflow.MoveAppointmentStatus, 'execute'])
     router.delete('settings/statuses/:id', [controllers.appointmentWorkflow.DeleteAppointmentStatus, 'execute'])
   })
-  .use([middleware.auth()])
+  .use([middleware.auth(), middleware.requireTenant()])

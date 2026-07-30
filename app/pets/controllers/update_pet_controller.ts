@@ -34,11 +34,9 @@ export default class UpdatePetController {
     private readonly updatePet: UpdatePet
   ) {}
 
-  async render({ inertia, auth, params }: HttpContext) {
-    const user = auth.getUserOrFail()
-
+  async render({ inertia, tenantId, params }: HttpContext) {
     const [{ pet }, { species }] = await Promise.all([
-      this.getPet.execute({ id: params.id, tenantId: user.tenantId }),
+      this.getPet.execute({ id: params.id, tenantId }),
       this.getSpecies.execute(),
     ])
 

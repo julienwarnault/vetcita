@@ -29,15 +29,13 @@ export default class CreateAppointmentController {
     private readonly createAppointment: CreateAppointment
   ) {}
 
-  async render({ auth, inertia, request }: HttpContext) {
-    const user = auth.getUserOrFail()
-
+  async render({ tenantId, inertia, request }: HttpContext) {
     const clientId = request.input('clientId', undefined) as UUID | undefined
     const petId = request.input('petId', undefined) as UUID | undefined
 
     const [{ services }, { statuses }] = await Promise.all([
-      this.getServices.execute({ tenantId: user.tenantId }),
-      this.getAppointmentStatuses.execute({ tenantId: user.tenantId }),
+      this.getServices.execute({ tenantId }),
+      this.getAppointmentStatuses.execute({ tenantId }),
     ])
 
     return inertia.render('appointments/form', {
@@ -48,13 +46,11 @@ export default class CreateAppointmentController {
     })
   }
 
-  async execute({ request, response, auth }: HttpContext) {
+  async execute({ request, response, tenantId }: HttpContext) {
     const payload = await request.validateUsing(CreateAppointmentController.validator)
 
-    const user = auth.getUserOrFail()
-
     await withTransaction(() => {
-      return this.createAppointment.execute({ ...payload, tenantId: user.tenantId })
+      return this.createAppointment.execute({ ...payload, tenantId })
     })
 
     return response.redirect().back()

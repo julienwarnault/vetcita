@@ -25,11 +25,9 @@ export default class UpdateAgendaController {
     private readonly updateAgenda: UpdateAgenda
   ) {}
 
-  async render({ inertia, params, auth }: HttpContext) {
-    const user = auth.getUserOrFail()
-
-    const { services } = await this.getServices.execute({ tenantId: user.tenantId })
-    const { agenda } = await this.getAgenda.execute({ tenantId: user.tenantId, id: params.id })
+  async render({ inertia, params, tenantId }: HttpContext) {
+    const { services } = await this.getServices.execute({ tenantId })
+    const { agenda } = await this.getAgenda.execute({ tenantId, id: params.id })
 
     return inertia.render('agendas/form', {
       agenda: AgendaTransformer.transform(agenda),

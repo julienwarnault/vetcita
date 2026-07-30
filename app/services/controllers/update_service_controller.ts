@@ -29,11 +29,9 @@ export default class UpdateServiceController {
     private readonly updateService: UpdateService
   ) {}
 
-  async render({ inertia, params, auth }: HttpContext) {
-    const user = auth.getUserOrFail()
-
+  async render({ inertia, params, tenantId }: HttpContext) {
     const { service } = await this.getService.execute({ id: params.id })
-    const { agendas } = await this.getAgendas.execute({ tenantId: user.tenantId })
+    const { agendas } = await this.getAgendas.execute({ tenantId })
 
     return inertia.render('services/form', {
       service: ServiceTransformer.transform(service),

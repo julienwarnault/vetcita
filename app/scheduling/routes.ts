@@ -23,7 +23,7 @@ router
     router.put('schedule-days/:id', [controllers.scheduling.UpdateScheduleDay, 'execute'])
     router.delete('schedule-days/:id', [controllers.scheduling.DeleteScheduleDay, 'execute'])
   })
-  .use([middleware.auth()])
+  .use([middleware.auth(), middleware.requireTenant()])
 
 router.get('api/bookable-days', [controllers.scheduling.GetBookableDays, 'render'])
 router.get('api/bookable-slots', [controllers.scheduling.GetBookableSlots, 'render'])

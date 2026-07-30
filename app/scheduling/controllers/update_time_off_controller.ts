@@ -29,12 +29,10 @@ export default class UpdateTimeOffController {
     private readonly updateTimeOff: UpdateTimeOff
   ) {}
 
-  async render({ inertia, auth, params }: HttpContext) {
-    const user = auth.getUserOrFail()
-
+  async render({ inertia, tenantId, params }: HttpContext) {
     const [{ timeOff }, { agendas }] = await Promise.all([
-      this.getTimeOff.execute({ tenantId: user.tenantId, id: params.id }),
-      await this.getAgendas.execute({ tenantId: user.tenantId }),
+      this.getTimeOff.execute({ tenantId, id: params.id }),
+      await this.getAgendas.execute({ tenantId }),
     ])
 
     return inertia.render('shifts/time_off_form', {

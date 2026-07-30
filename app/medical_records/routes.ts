@@ -14,4 +14,4 @@ router
     router.get('pets/:petId/vaccines/:id', [controllers.medicalRecords.UpdateVaccine, 'render'])
     router.put('pets/:petId/vaccines/:id', [controllers.medicalRecords.UpdateVaccine, 'execute'])
   })
-  .use([middleware.auth()])
+  .use([middleware.auth(), middleware.requireTenant()])

@@ -26,13 +26,11 @@ export default class CreateTimeOffController {
     private readonly createTimeOff: CreateTimeOff
   ) {}
 
-  async render({ inertia, request, auth }: HttpContext) {
+  async render({ inertia, request, tenantId }: HttpContext) {
     const initialDate = request.input('initialDate', null)
     const initialAgendaId = request.input('initialAgendaId', null)
 
-    const user = auth.getUserOrFail()
-
-    const { agendas } = await this.getAgendas.execute({ tenantId: user.tenantId })
+    const { agendas } = await this.getAgendas.execute({ tenantId })
 
     return inertia.render('shifts/time_off_form', {
       initialDate,
@@ -41,13 +39,11 @@ export default class CreateTimeOffController {
     })
   }
 
-  async execute({ request, response, auth }: HttpContext) {
+  async execute({ request, response, tenantId }: HttpContext) {
     const payload = await request.validateUsing(CreateTimeOffController.validator)
 
-    const user = auth.getUserOrFail()
-
     await withTransaction(() => {
-      return this.createTimeOff.execute({ ...payload, tenantId: user.tenantId })
+      return this.createTimeOff.execute({ ...payload, tenantId })
     })
 
     return response.redirect().back()

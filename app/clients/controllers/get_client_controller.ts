@@ -15,20 +15,18 @@ export default class ShowClientController {
     private readonly getPets: GetClientPets
   ) {}
 
-  async render({ inertia, params, auth }: HttpContext) {
-    const user = auth.getUserOrFail()
-
+  async render({ inertia, params, tenantId }: HttpContext) {
     const [{ client }, { appointments }, { pets }] = await Promise.all([
       this.getClient.execute({
         id: params.id,
-        tenantId: user.tenantId,
+        tenantId,
       }),
       this.getAppointments.execute({
-        tenantId: user.tenantId,
+        tenantId,
         clientId: params.id,
       }),
       this.getPets.execute({
-        tenantId: user.tenantId,
+        tenantId,
         clientId: params.id,
       }),
     ])
@@ -40,12 +38,10 @@ export default class ShowClientController {
     })
   }
 
-  async api({ serialize, params, auth }: HttpContext) {
-    const user = auth.getUserOrFail()
-
+  async api({ serialize, params, tenantId }: HttpContext) {
     const { client } = await this.getClient.execute({
       id: params.id,
-      tenantId: user.tenantId,
+      tenantId,
     })
 
     return await serialize.withoutWrapping(ClientTransformer.transform(client))

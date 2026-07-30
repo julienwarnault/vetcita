@@ -23,22 +23,18 @@ export default class UpdateClientController {
     private readonly updateClient: UpdateClient
   ) {}
 
-  async render({ inertia, params, auth }: HttpContext) {
-    const user = auth.getUserOrFail()
-
-    const { client } = await this.getClient.execute({ id: params.id, tenantId: user.tenantId })
+  async render({ inertia, params, tenantId }: HttpContext) {
+    const { client } = await this.getClient.execute({ id: params.id, tenantId })
 
     return inertia.render('clients/form', {
       client: ClientTransformer.transform(client),
     })
   }
 
-  async execute({ request, params, response, auth }: HttpContext) {
+  async execute({ request, params, response, tenantId }: HttpContext) {
     const payload = await request.validateUsing(UpdateClientController.validator)
-    const user = auth.getUserOrFail()
-
     await withTransaction(() => {
-      return this.updateClient.execute({ id: params.id, tenantId: user.tenantId, ...payload })
+      return this.updateClient.execute({ id: params.id, tenantId, ...payload })
     })
 
     return response.redirect().back()

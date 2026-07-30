@@ -7,11 +7,9 @@ import { GetAppointmentStatuses } from '#appointment_workflow/queries/get_appoin
 export default class ListAppointmentStatusesController {
   constructor(private readonly getAppointmentStatuses: GetAppointmentStatuses) {}
 
-  async render({ inertia, auth }: HttpContext) {
-    const user = auth.getUserOrFail()
-
+  async render({ inertia, tenantId }: HttpContext) {
     const { statuses } = await this.getAppointmentStatuses.execute({
-      tenantId: user.tenantId,
+      tenantId,
     })
 
     return inertia.render('appointment_statuses/list', {

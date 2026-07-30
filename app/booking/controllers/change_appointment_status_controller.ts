@@ -14,15 +14,13 @@ export default class ChangeAppointmentStatusController {
 
   constructor(private readonly changeAppointmentStatus: ChangeAppointmentStatus) {}
 
-  async execute({ request, response, params, auth }: HttpContext) {
+  async execute({ request, response, params, tenantId }: HttpContext) {
     const payload = await request.validateUsing(ChangeAppointmentStatusController.validator)
-
-    const user = auth.getUserOrFail()
 
     await withTransaction(() => {
       return this.changeAppointmentStatus.execute({
         id: params.id,
-        tenantId: user.tenantId,
+        tenantId,
         statusId: payload.statusId,
       })
     })

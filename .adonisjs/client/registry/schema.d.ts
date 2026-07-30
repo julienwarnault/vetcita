@@ -405,7 +405,7 @@ export interface Registry {
   }
   'update_tenant.render': {
     methods: ["GET","HEAD"]
-    pattern: '/tenant/edit'
+    pattern: '/settings/tenant/edit'
     types: {
       body: {}
       paramsTuple: []
@@ -417,7 +417,7 @@ export interface Registry {
   }
   'update_tenant.execute': {
     methods: ["PUT"]
-    pattern: '/tenant'
+    pattern: '/settings/tenant'
     types: {
       body: ExtractBody<InferInput<(typeof import('#app/tenants/controllers/update_tenant_controller').default)['validator']>>
       paramsTuple: []

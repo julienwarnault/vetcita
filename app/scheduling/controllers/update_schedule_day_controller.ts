@@ -22,11 +22,9 @@ export default class UpdateScheduleDayController {
     private readonly updateScheduleDay: UpdateScheduleDay
   ) {}
 
-  async render({ inertia, auth, params }: HttpContext) {
-    const user = auth.getUserOrFail()
-
-    const { scheduleDay } = await this.getScheduleDay.execute({ id: params.id, tenantId: user.tenantId })
-    const { agenda } = await this.getAgenda.execute({ id: scheduleDay.agendaId, tenantId: user.tenantId })
+  async render({ inertia, tenantId, params }: HttpContext) {
+    const { scheduleDay } = await this.getScheduleDay.execute({ id: params.id, tenantId })
+    const { agenda } = await this.getAgenda.execute({ id: scheduleDay.agendaId, tenantId })
 
     return inertia.render('shifts/schedule_day_form', {
       date: scheduleDay.date.toISODate()!,

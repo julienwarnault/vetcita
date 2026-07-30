@@ -21,23 +21,19 @@ export default class UpdateTenantController {
     private readonly updateTenant: UpdateTenant
   ) {}
 
-  async render({ inertia, auth }: HttpContext) {
-    const user = auth.getUserOrFail()
-
-    const { tenant } = await this.getTenant.execute({ id: user.tenantId })
+  async render({ inertia, tenantId }: HttpContext) {
+    const { tenant } = await this.getTenant.execute({ id: tenantId })
 
     return inertia.render('tenants/form', {
       tenant: TenantTransformer.transform(tenant),
     })
   }
 
-  async execute({ request, response, auth }: HttpContext) {
+  async execute({ request, response, tenantId }: HttpContext) {
     const payload = await request.validateUsing(UpdateTenantController.validator)
 
-    const user = auth.getUserOrFail()
-
     await withTransaction(() => {
-      return this.updateTenant.execute({ id: user.tenantId, ...payload })
+      return this.updateTenant.execute({ id: tenantId, ...payload })
     })
 
     return response.redirect().toRoute('settings')

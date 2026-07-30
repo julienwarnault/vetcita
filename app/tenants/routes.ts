@@ -4,7 +4,7 @@ import { middleware } from '#start/kernel'
 
 router
   .group(() => {
-    router.get('tenant/edit', [controllers.tenants.UpdateTenant, 'render'])
-    router.put('tenant', [controllers.tenants.UpdateTenant, 'execute'])
+    router.get('settings/tenant/edit', [controllers.tenants.UpdateTenant, 'render'])
+    router.put('settings/tenant', [controllers.tenants.UpdateTenant, 'execute'])
   })
-  .use([middleware.auth()])
+  .use([middleware.auth(), middleware.requireTenant()])
