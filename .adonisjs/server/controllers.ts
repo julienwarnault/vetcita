@@ -38,6 +38,11 @@ export const controllers = {
     Logout: () => import('#app/identity/controllers/logout_controller'),
     Signup: () => import('#app/identity/controllers/signup_controller'),
   },
+  medicalRecords: {
+    CreateConsultation: () => import('#app/medical_records/controllers/create_consultation_controller'),
+    ListConsultations: () => import('#app/medical_records/controllers/list_consultations_controller'),
+    UpdateConsultation: () => import('#app/medical_records/controllers/update_consultation_controller'),
+  },
   pets: {
     CreatePet: () => import('#app/pets/controllers/create_pet_controller'),
     DeletePet: () => import('#app/pets/controllers/delete_pet_controller'),

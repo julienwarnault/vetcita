@@ -168,6 +168,17 @@ export interface ApiDefinition {
     render: typeof routes['update_pet.render']
     execute: typeof routes['update_pet.execute']
   }
+  listConsultations: {
+    render: typeof routes['list_consultations.render']
+  }
+  createConsultation: {
+    render: typeof routes['create_consultation.render']
+    execute: typeof routes['create_consultation.execute']
+  }
+  updateConsultation: {
+    render: typeof routes['update_consultation.render']
+    execute: typeof routes['update_consultation.execute']
+  }
   eventStream: typeof routes['event_stream']
   subscribe: typeof routes['subscribe']
   unsubscribe: typeof routes['unsubscribe']

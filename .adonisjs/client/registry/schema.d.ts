@@ -895,6 +895,66 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/pets/controllers/get_pet_controller').default['api']>>>
     }
   }
+  'list_consultations.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/consultations'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/medical_records/controllers/list_consultations_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/medical_records/controllers/list_consultations_controller').default['render']>>>
+    }
+  }
+  'create_consultation.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/pets/:petId/consultations/new'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { petId: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/medical_records/controllers/create_consultation_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/medical_records/controllers/create_consultation_controller').default['render']>>>
+    }
+  }
+  'create_consultation.execute': {
+    methods: ["POST"]
+    pattern: '/pets/:petId/consultations'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#app/medical_records/controllers/create_consultation_controller').default)['validator']>>
+      paramsTuple: [ParamValue]
+      params: { petId: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#app/medical_records/controllers/create_consultation_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/medical_records/controllers/create_consultation_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/medical_records/controllers/create_consultation_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'update_consultation.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/pets/:petId/consultations/:id/edit'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue, ParamValue]
+      params: { petId: ParamValue; id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/medical_records/controllers/update_consultation_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/medical_records/controllers/update_consultation_controller').default['render']>>>
+    }
+  }
+  'update_consultation.execute': {
+    methods: ["PUT"]
+    pattern: '/pets/:petId/consultations/:id'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#app/medical_records/controllers/update_consultation_controller').default)['validator']>>
+      paramsTuple: [ParamValue, ParamValue]
+      params: { petId: ParamValue; id: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#app/medical_records/controllers/update_consultation_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/medical_records/controllers/update_consultation_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/medical_records/controllers/update_consultation_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
   'event_stream': {
     methods: ["GET","HEAD"]
     pattern: '/__transmit/events'

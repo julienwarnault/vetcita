@@ -43,7 +43,7 @@ export function PanelAppointments(props: PanelAppointmentsProps) {
                     <Badge color={appointment.status?.color}>{appointment.status?.name}</Badge>
                   </div>
                   <div className="text-[13px]/4 font-normal text-muted">
-                    {startDate.setLocale(DEFAULT_LOCALE).toFormat('ccc. d LLL')}
+                    {startDate.setLocale(DEFAULT_LOCALE).toFormat('ccc. d LLL yyyy')}
                   </div>
                 </div>
                 <div>

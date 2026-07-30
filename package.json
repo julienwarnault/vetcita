@@ -23,6 +23,7 @@
     "#booking/*": "./app/booking/*.js",
     "#clients/*": "./app/clients/*.js",
     "#identity/*": "./app/identity/*.js",
+    "#medical_records/*": "./app/medical_records/*.js",
     "#notifications/*": "./app/notifications/*.js",
     "#pets/*": "./app/pets/*.js",
     "#scheduling/*": "./app/scheduling/*.js",

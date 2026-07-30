@@ -8,6 +8,7 @@ import { Avatar } from '~/components/ui/avatar'
 import { Button } from '~/components/ui/button'
 import { Drawer } from '~/components/ui/drawer'
 import { formatPhoneNumber } from '~/lib/utils'
+import { Badge } from '~/components/ui/badge'
 import { Menu } from '~/components/ui/menu'
 import { Tabs } from '~/components/ui/tabs'
 import { InertiaProps } from '~/types'
@@ -81,15 +82,15 @@ export default function ShowClient(props: PageProps) {
                   <Tabs.Trigger value="details">Datos del cliente</Tabs.Trigger>
                   <Tabs.Trigger value="appointments">
                     Citas
-                    <div className="flex items-center justify-center bg-white h-5 px-1.5 rounded-full border">
-                      <span className="text-[13px]/4 text-muted font-medium">{appointments?.length ?? 0}</span>
-                    </div>
+                    <Badge size="sm" variant="secondary">
+                      {appointments?.length ?? 0}
+                    </Badge>
                   </Tabs.Trigger>
                   <Tabs.Trigger value="pets">
                     Mascotas
-                    <div className="flex items-center justify-center bg-white h-5 px-1.5 rounded-full border">
-                      <span className="text-[13px]/4 text-muted font-medium">{pets?.length ?? 0}</span>
-                    </div>
+                    <Badge size="sm" variant="secondary">
+                      {pets?.length ?? 0}
+                    </Badge>
                   </Tabs.Trigger>
                 </Tabs.List>
               </Drawer.Menu>

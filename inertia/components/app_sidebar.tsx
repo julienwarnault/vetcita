@@ -29,6 +29,11 @@ const NAVIGATION = [
     navigationIcon: 'paw-print',
   },
   {
+    name: 'Consultas',
+    route: 'list_consultations.render',
+    navigationIcon: 'stethoscope',
+  },
+  {
     name: 'Servicios',
     route: 'list_services.render',
     navigationIcon: 'book-open',

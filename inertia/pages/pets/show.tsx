@@ -2,11 +2,13 @@ import { Data } from '@generated/data'
 import { useModalStack } from '@inertiaui/modal-react'
 import { PanelDetails as PanelClient } from '~/components/client/panel_details'
 import { PanelAppointments } from '~/components/client/panel_appointments'
+import { PanelConsultations } from '~/components/pet/panel_consultations'
 import { PanelDetails } from '~/components/pet/panel_details'
 import { InertiaDrawer } from '~/components/inertia_drawer'
 import { Avatar } from '~/components/ui/avatar'
 import { Button } from '~/components/ui/button'
 import { Drawer } from '~/components/ui/drawer'
+import { Badge } from '~/components/ui/badge'
 import { Menu } from '~/components/ui/menu'
 import { Tabs } from '~/components/ui/tabs'
 import { InertiaProps } from '~/types'
@@ -15,10 +17,11 @@ import { urlFor } from '~/lib/tuyau'
 type PageProps = InertiaProps<{
   pet: Data.Pets.Pet
   appointments: Data.Booking.Appointment[]
+  consultations: Data.MedicalRecords.Consultation[]
 }>
 
 export default function ShowPet(props: PageProps) {
-  const { pet, appointments } = props
+  const { pet, appointments, consultations } = props
 
   const { visitModal, closeAll } = useModalStack()
 
@@ -54,6 +57,15 @@ export default function ShowPet(props: PageProps) {
                           >
                             Editar datos de la mascota
                           </Menu.Item>
+                          <Menu.Item
+                            onClick={() => {
+                              visitModal(urlFor('create_consultation.render', { petId: pet.id }), {
+                                onClose: reload,
+                              })
+                            }}
+                          >
+                            Añadir una consulta
+                          </Menu.Item>
                         </Menu>
                         <Button
                           onClick={() => {
@@ -84,11 +96,17 @@ export default function ShowPet(props: PageProps) {
                   <Tabs.Trigger value="details">Datos de la mascota</Tabs.Trigger>
                   <Tabs.Trigger value="appointments">
                     Citas
-                    <div className="flex items-center justify-center bg-white h-5 px-1.5 rounded-full border">
-                      <span className="text-[13px]/4 text-muted font-medium">{appointments?.length ?? 0}</span>
-                    </div>
+                    <Badge size="sm" variant="secondary">
+                      {appointments?.length ?? 0}
+                    </Badge>
                   </Tabs.Trigger>
                   <Tabs.Trigger value="client">Datos del cliente</Tabs.Trigger>
+                  <Tabs.Trigger value="consultations">
+                    Consultas
+                    <Badge size="sm" variant="secondary">
+                      {consultations.length ?? 0}
+                    </Badge>
+                  </Tabs.Trigger>
                 </Tabs.List>
               </Drawer.Menu>
             </div>
@@ -104,6 +122,10 @@ export default function ShowPet(props: PageProps) {
 
           <Tabs.Content value="client">
             <PanelClient client={pet.client!} />
+          </Tabs.Content>
+
+          <Tabs.Content value="consultations">
+            <PanelConsultations consultations={consultations} />
           </Tabs.Content>
         </Tabs>
       )}

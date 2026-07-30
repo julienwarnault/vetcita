@@ -450,6 +450,36 @@ const routes = {
     tokens: [{"old":"/api/pets/:id","type":0,"val":"api","end":""},{"old":"/api/pets/:id","type":0,"val":"pets","end":""},{"old":"/api/pets/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['get_pet.api']['types'],
   },
+  'list_consultations.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/consultations',
+    tokens: [{"old":"/consultations","type":0,"val":"consultations","end":""}],
+    types: placeholder as Registry['list_consultations.render']['types'],
+  },
+  'create_consultation.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/pets/:petId/consultations/new',
+    tokens: [{"old":"/pets/:petId/consultations/new","type":0,"val":"pets","end":""},{"old":"/pets/:petId/consultations/new","type":1,"val":"petId","end":""},{"old":"/pets/:petId/consultations/new","type":0,"val":"consultations","end":""},{"old":"/pets/:petId/consultations/new","type":0,"val":"new","end":""}],
+    types: placeholder as Registry['create_consultation.render']['types'],
+  },
+  'create_consultation.execute': {
+    methods: ["POST"],
+    pattern: '/pets/:petId/consultations',
+    tokens: [{"old":"/pets/:petId/consultations","type":0,"val":"pets","end":""},{"old":"/pets/:petId/consultations","type":1,"val":"petId","end":""},{"old":"/pets/:petId/consultations","type":0,"val":"consultations","end":""}],
+    types: placeholder as Registry['create_consultation.execute']['types'],
+  },
+  'update_consultation.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/pets/:petId/consultations/:id/edit',
+    tokens: [{"old":"/pets/:petId/consultations/:id/edit","type":0,"val":"pets","end":""},{"old":"/pets/:petId/consultations/:id/edit","type":1,"val":"petId","end":""},{"old":"/pets/:petId/consultations/:id/edit","type":0,"val":"consultations","end":""},{"old":"/pets/:petId/consultations/:id/edit","type":1,"val":"id","end":""},{"old":"/pets/:petId/consultations/:id/edit","type":0,"val":"edit","end":""}],
+    types: placeholder as Registry['update_consultation.render']['types'],
+  },
+  'update_consultation.execute': {
+    methods: ["PUT"],
+    pattern: '/pets/:petId/consultations/:id',
+    tokens: [{"old":"/pets/:petId/consultations/:id","type":0,"val":"pets","end":""},{"old":"/pets/:petId/consultations/:id","type":1,"val":"petId","end":""},{"old":"/pets/:petId/consultations/:id","type":0,"val":"consultations","end":""},{"old":"/pets/:petId/consultations/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['update_consultation.execute']['types'],
+  },
   'event_stream': {
     methods: ["GET","HEAD"],
     pattern: '/__transmit/events',

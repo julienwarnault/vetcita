@@ -11,7 +11,9 @@ import '#booking/routes'
 import '#scheduling/routes'
 import '#search/routes'
 import '#pets/routes'
+import '#medical_records/routes'
 
 transmit.registerRoutes()
 
 router.where('id', router.matchers.uuid())
+router.where('petId', router.matchers.uuid())

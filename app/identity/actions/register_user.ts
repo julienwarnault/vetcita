@@ -43,6 +43,7 @@ export class RegisterUser {
       name: params.fullName,
       color: '#97c6f0',
       tenantId: tenant.id,
+      userId: user.id,
     })
 
     // Create services

@@ -6,6 +6,7 @@ interface UpdateAgendaParams {
   id: UUID
   name: string
   color: string
+  userId?: UUID
   serviceIds?: UUID[]
 }
 
@@ -18,6 +19,7 @@ export class UpdateAgenda {
     agenda.merge({
       name: params.name,
       color: params.color,
+      userId: params.userId ?? agenda.userId,
     })
 
     await agenda.useTransaction(trx!).save()

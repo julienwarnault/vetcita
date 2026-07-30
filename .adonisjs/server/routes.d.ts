@@ -78,6 +78,11 @@ export type ScannedRoutes = {
     'update_pet.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'list_pets.api': { paramsTuple?: []; params?: {} }
     'get_pet.api': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'list_consultations.render': { paramsTuple?: []; params?: {} }
+    'create_consultation.render': { paramsTuple: [ParamValue]; params: {'petId': ParamValue} }
+    'create_consultation.execute': { paramsTuple: [ParamValue]; params: {'petId': ParamValue} }
+    'update_consultation.render': { paramsTuple: [ParamValue,ParamValue]; params: {'petId': ParamValue,'id': ParamValue} }
+    'update_consultation.execute': { paramsTuple: [ParamValue,ParamValue]; params: {'petId': ParamValue,'id': ParamValue} }
     'event_stream': { paramsTuple?: []; params?: {} }
     'subscribe': { paramsTuple?: []; params?: {} }
     'unsubscribe': { paramsTuple?: []; params?: {} }
@@ -126,6 +131,9 @@ export type ScannedRoutes = {
     'update_pet.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'list_pets.api': { paramsTuple?: []; params?: {} }
     'get_pet.api': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'list_consultations.render': { paramsTuple?: []; params?: {} }
+    'create_consultation.render': { paramsTuple: [ParamValue]; params: {'petId': ParamValue} }
+    'update_consultation.render': { paramsTuple: [ParamValue,ParamValue]; params: {'petId': ParamValue,'id': ParamValue} }
     'event_stream': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
@@ -172,6 +180,9 @@ export type ScannedRoutes = {
     'update_pet.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'list_pets.api': { paramsTuple?: []; params?: {} }
     'get_pet.api': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'list_consultations.render': { paramsTuple?: []; params?: {} }
+    'create_consultation.render': { paramsTuple: [ParamValue]; params: {'petId': ParamValue} }
+    'update_consultation.render': { paramsTuple: [ParamValue,ParamValue]; params: {'petId': ParamValue,'id': ParamValue} }
     'event_stream': { paramsTuple?: []; params?: {} }
   }
   POST: {
@@ -189,6 +200,7 @@ export type ScannedRoutes = {
     'create_time_off.execute': { paramsTuple?: []; params?: {} }
     'create_schedule_day.execute': { paramsTuple?: []; params?: {} }
     'create_pet.execute': { paramsTuple?: []; params?: {} }
+    'create_consultation.execute': { paramsTuple: [ParamValue]; params: {'petId': ParamValue} }
     'subscribe': { paramsTuple?: []; params?: {} }
     'unsubscribe': { paramsTuple?: []; params?: {} }
   }
@@ -204,6 +216,7 @@ export type ScannedRoutes = {
     'update_working_hours.execute': { paramsTuple: [ParamValue]; params: {'agendaId': ParamValue} }
     'update_schedule_day.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_pet.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'update_consultation.execute': { paramsTuple: [ParamValue,ParamValue]; params: {'petId': ParamValue,'id': ParamValue} }
   }
   DELETE: {
     'delete_appointment_status.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }

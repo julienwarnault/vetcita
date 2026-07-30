@@ -11,6 +11,7 @@ export default class extends BaseSchema {
       table.string('name').notNullable()
       table.string('color', 7).notNullable()
       table.uuid('tenant_id').notNullable().references('id').inTable('tenants').onDelete('CASCADE')
+      table.uuid('user_id').nullable().references('id').inTable('users').onDelete('SET NULL')
       table.index(['tenant_id', 'name'])
     })
   }

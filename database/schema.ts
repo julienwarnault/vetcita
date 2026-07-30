@@ -22,7 +22,7 @@ export class AgendaServiceSchema extends BaseModel {
 }
 
 export class AgendaSchema extends BaseModel {
-  static $columns = ['color', 'createdAt', 'id', 'name', 'tenantId', 'updatedAt'] as const
+  static $columns = ['color', 'createdAt', 'id', 'name', 'tenantId', 'updatedAt', 'userId'] as const
   $columns = AgendaSchema.$columns
   @column()
   declare color: string
@@ -36,6 +36,8 @@ export class AgendaSchema extends BaseModel {
   declare tenantId: UUID
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+  @column()
+  declare userId: UUID | null
 }
 
 export class AppointmentStatusSchema extends BaseModel {
@@ -132,6 +134,45 @@ export class ClosedDateSchema extends BaseModel {
   declare tenantId: UUID
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+}
+
+export class ConsultationSchema extends BaseModel {
+  static $columns = ['agendaId', 'appointmentId', 'createdAt', 'diagnosis', 'heartRate', 'id', 'petId', 'prescription', 'recordType', 'respiratoryRate', 'symptoms', 'temperature', 'tenantId', 'treatment', 'updatedAt', 'visitReason', 'weight'] as const
+  $columns = ConsultationSchema.$columns
+  @column()
+  declare agendaId: UUID | null
+  @column()
+  declare appointmentId: UUID | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare diagnosis: string | null
+  @column()
+  declare heartRate: number | null
+  @column({ isPrimary: true })
+  declare id: UUID
+  @column()
+  declare petId: UUID
+  @column()
+  declare prescription: string | null
+  @column()
+  declare recordType: string
+  @column()
+  declare respiratoryRate: number | null
+  @column()
+  declare symptoms: string | null
+  @column()
+  declare temperature: number | null
+  @column()
+  declare tenantId: UUID
+  @column()
+  declare treatment: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare visitReason: string | null
+  @column()
+  declare weight: number | null
 }
 
 export class PetSchema extends BaseModel {

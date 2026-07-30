@@ -6,6 +6,7 @@ import type { UUID } from '#shared/types'
 interface CreateAgendaParams {
   name: string
   color: string
+  userId?: UUID
   serviceIds?: UUID[]
   tenantId: UUID
 }
@@ -19,6 +20,7 @@ export class CreateAgenda {
       {
         name: params.name,
         color: params.color,
+        userId: params.userId,
         tenantId: params.tenantId,
       },
       { client: trx }

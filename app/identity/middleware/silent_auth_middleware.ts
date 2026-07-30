@@ -11,8 +11,9 @@ export default class SilentAuthMiddleware {
   async handle(ctx: HttpContext, next: NextFn) {
     await ctx.auth.check()
 
-    // Preload tenant
-    if (ctx.auth.user && !ctx.auth.user.$preloaded.tenant) {
+    // Preload tenant and agenda
+    if (ctx.auth.user) {
+      await ctx.auth.user.load('agenda')
       await ctx.auth.user.load('tenant')
     }
 

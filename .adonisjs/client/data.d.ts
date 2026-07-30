@@ -11,6 +11,7 @@ import type AppointmentWorkflowAppointmentStatusTransformer from '#app/appointme
 import type BookingAppointmentTransformer from '#app/booking/transformers/appointment_transformer'
 import type ClientsClientTransformer from '#app/clients/transformers/client_transformer'
 import type IdentityUserTransformer from '#app/identity/transformers/user_transformer'
+import type MedicalRecordsConsultationTransformer from '#app/medical_records/transformers/consultation_transformer'
 import type PetsPetTransformer from '#app/pets/transformers/pet_transformer'
 import type PetsSpeciesTransformer from '#app/pets/transformers/species_transformer'
 import type SchedulingClosedDateTransformer from '#app/scheduling/transformers/closed_date_transformer'
@@ -51,6 +52,12 @@ export namespace Data {
     export type User = InferData<IdentityUserTransformer>
     export namespace User {
       export type Variants = InferVariants<IdentityUserTransformer>
+    }
+  }
+  export namespace MedicalRecords {
+    export type Consultation = InferData<MedicalRecordsConsultationTransformer>
+    export namespace Consultation {
+      export type Variants = InferVariants<MedicalRecordsConsultationTransformer>
     }
   }
   export namespace Pets {

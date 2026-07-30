@@ -10,6 +10,7 @@ const badge = tv({
       accent: 'bg-accent text-white',
     },
     size: {
+      sm: 'px-1.5 min-block-5 text-[13px]/4 font-medium [&_svg]:size-2',
       md: 'px-3 min-block-6 text-[13px]/4 font-medium [&_svg]:size-3',
       lg: 'px-3 min-block-8 text-[14px]/4 font-medium [&_svg]:size-4',
     },
