@@ -330,6 +330,37 @@ export class UserSchema extends BaseModel {
   declare updatedAt: DateTime | null
 }
 
+export class VaccineSchema extends BaseModel {
+  static $columns = ['agendaId', 'appointmentId', 'batchNumber', 'createdAt', 'date', 'id', 'manufacturer', 'name', 'nextDueDate', 'notes', 'petId', 'tenantId', 'updatedAt'] as const
+  $columns = VaccineSchema.$columns
+  @column()
+  declare agendaId: UUID | null
+  @column()
+  declare appointmentId: UUID | null
+  @column()
+  declare batchNumber: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column.date()
+  declare date: DateTime
+  @column({ isPrimary: true })
+  declare id: UUID
+  @column()
+  declare manufacturer: string | null
+  @column()
+  declare name: string
+  @column.date()
+  declare nextDueDate: DateTime | null
+  @column()
+  declare notes: string | null
+  @column()
+  declare petId: UUID
+  @column()
+  declare tenantId: UUID
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class WorkingHourSchema extends BaseModel {
   static $columns = ['agendaId', 'createdAt', 'dayOfWeek', 'endTime', 'id', 'startTime', 'tenantId', 'updatedAt'] as const
   $columns = WorkingHourSchema.$columns

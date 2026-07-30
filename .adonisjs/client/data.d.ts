@@ -12,6 +12,7 @@ import type BookingAppointmentTransformer from '#app/booking/transformers/appoin
 import type ClientsClientTransformer from '#app/clients/transformers/client_transformer'
 import type IdentityUserTransformer from '#app/identity/transformers/user_transformer'
 import type MedicalRecordsConsultationTransformer from '#app/medical_records/transformers/consultation_transformer'
+import type MedicalRecordsVaccineTransformer from '#app/medical_records/transformers/vaccine_transformer'
 import type PetsPetTransformer from '#app/pets/transformers/pet_transformer'
 import type PetsSpeciesTransformer from '#app/pets/transformers/species_transformer'
 import type SchedulingClosedDateTransformer from '#app/scheduling/transformers/closed_date_transformer'
@@ -58,6 +59,10 @@ export namespace Data {
     export type Consultation = InferData<MedicalRecordsConsultationTransformer>
     export namespace Consultation {
       export type Variants = InferVariants<MedicalRecordsConsultationTransformer>
+    }
+    export type Vaccine = InferData<MedicalRecordsVaccineTransformer>
+    export namespace Vaccine {
+      export type Variants = InferVariants<MedicalRecordsVaccineTransformer>
     }
   }
   export namespace Pets {

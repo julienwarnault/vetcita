@@ -48,8 +48,10 @@ export function PanelAppointments(props: PanelAppointmentsProps) {
                 </div>
                 <div>
                   <div className="text-[15px]/5 font-medium">{appointment.service?.name}</div>
-                  <div className="text-[13px]/4 font-normal text-muted">
-                    {`${startDate.toFormat('h:mma').toLowerCase()} • ${formatDuration(appointment.duration)} • ${appointment.agenda?.name}`}
+                  <div className="flex text-[13px]/4 font-normal text-muted separator-dot">
+                    <span>{startDate.toFormat('h:mma').toLowerCase()}</span>
+                    <span>{formatDuration(appointment.duration)}</span>
+                    <span>{appointment.agenda?.name}</span>
                   </div>
                 </div>
               </Card>

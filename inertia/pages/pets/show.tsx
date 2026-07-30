@@ -3,6 +3,7 @@ import { useModalStack } from '@inertiaui/modal-react'
 import { PanelDetails as PanelClient } from '~/components/client/panel_details'
 import { PanelAppointments } from '~/components/client/panel_appointments'
 import { PanelConsultations } from '~/components/pet/panel_consultations'
+import { PanelVaccines } from '~/components/pet/panel_vaccines'
 import { PanelDetails } from '~/components/pet/panel_details'
 import { InertiaDrawer } from '~/components/inertia_drawer'
 import { Avatar } from '~/components/ui/avatar'
@@ -18,10 +19,11 @@ type PageProps = InertiaProps<{
   pet: Data.Pets.Pet
   appointments: Data.Booking.Appointment[]
   consultations: Data.MedicalRecords.Consultation[]
+  vaccines: Data.MedicalRecords.Vaccine[]
 }>
 
 export default function ShowPet(props: PageProps) {
-  const { pet, appointments, consultations } = props
+  const { pet, appointments, consultations, vaccines } = props
 
   const { visitModal, closeAll } = useModalStack()
 
@@ -66,6 +68,15 @@ export default function ShowPet(props: PageProps) {
                           >
                             Añadir una consulta
                           </Menu.Item>
+                          <Menu.Item
+                            onClick={() => {
+                              visitModal(`/pets/${pet.id}/vaccines/new`, {
+                                onClose: reload,
+                              })
+                            }}
+                          >
+                            Añadir una vacuna
+                          </Menu.Item>
                         </Menu>
                         <Button
                           onClick={() => {
@@ -107,6 +118,12 @@ export default function ShowPet(props: PageProps) {
                       {consultations.length ?? 0}
                     </Badge>
                   </Tabs.Trigger>
+                  <Tabs.Trigger value="vaccines">
+                    Vacunas
+                    <Badge size="sm" variant="secondary">
+                      {vaccines.length ?? 0}
+                    </Badge>
+                  </Tabs.Trigger>
                 </Tabs.List>
               </Drawer.Menu>
             </div>
@@ -126,6 +143,10 @@ export default function ShowPet(props: PageProps) {
 
           <Tabs.Content value="consultations">
             <PanelConsultations consultations={consultations} />
+          </Tabs.Content>
+
+          <Tabs.Content value="vaccines">
+            <PanelVaccines vaccines={vaccines} />
           </Tabs.Content>
         </Tabs>
       )}

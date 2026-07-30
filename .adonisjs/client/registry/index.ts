@@ -480,6 +480,30 @@ const routes = {
     tokens: [{"old":"/pets/:petId/consultations/:id","type":0,"val":"pets","end":""},{"old":"/pets/:petId/consultations/:id","type":1,"val":"petId","end":""},{"old":"/pets/:petId/consultations/:id","type":0,"val":"consultations","end":""},{"old":"/pets/:petId/consultations/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['update_consultation.execute']['types'],
   },
+  'create_vaccine.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/pets/:petId/vaccines/new',
+    tokens: [{"old":"/pets/:petId/vaccines/new","type":0,"val":"pets","end":""},{"old":"/pets/:petId/vaccines/new","type":1,"val":"petId","end":""},{"old":"/pets/:petId/vaccines/new","type":0,"val":"vaccines","end":""},{"old":"/pets/:petId/vaccines/new","type":0,"val":"new","end":""}],
+    types: placeholder as Registry['create_vaccine.render']['types'],
+  },
+  'create_vaccine.execute': {
+    methods: ["POST"],
+    pattern: '/pets/:petId/vaccines',
+    tokens: [{"old":"/pets/:petId/vaccines","type":0,"val":"pets","end":""},{"old":"/pets/:petId/vaccines","type":1,"val":"petId","end":""},{"old":"/pets/:petId/vaccines","type":0,"val":"vaccines","end":""}],
+    types: placeholder as Registry['create_vaccine.execute']['types'],
+  },
+  'update_vaccine.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/pets/:petId/vaccines/:id',
+    tokens: [{"old":"/pets/:petId/vaccines/:id","type":0,"val":"pets","end":""},{"old":"/pets/:petId/vaccines/:id","type":1,"val":"petId","end":""},{"old":"/pets/:petId/vaccines/:id","type":0,"val":"vaccines","end":""},{"old":"/pets/:petId/vaccines/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['update_vaccine.render']['types'],
+  },
+  'update_vaccine.execute': {
+    methods: ["PUT"],
+    pattern: '/pets/:petId/vaccines/:id',
+    tokens: [{"old":"/pets/:petId/vaccines/:id","type":0,"val":"pets","end":""},{"old":"/pets/:petId/vaccines/:id","type":1,"val":"petId","end":""},{"old":"/pets/:petId/vaccines/:id","type":0,"val":"vaccines","end":""},{"old":"/pets/:petId/vaccines/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['update_vaccine.execute']['types'],
+  },
   'event_stream': {
     methods: ["GET","HEAD"],
     pattern: '/__transmit/events',

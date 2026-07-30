@@ -955,6 +955,54 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/medical_records/controllers/update_consultation_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
+  'create_vaccine.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/pets/:petId/vaccines/new'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { petId: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/medical_records/controllers/create_vaccine_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/medical_records/controllers/create_vaccine_controller').default['render']>>>
+    }
+  }
+  'create_vaccine.execute': {
+    methods: ["POST"]
+    pattern: '/pets/:petId/vaccines'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#app/medical_records/controllers/create_vaccine_controller').default)['validator']>>
+      paramsTuple: [ParamValue]
+      params: { petId: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#app/medical_records/controllers/create_vaccine_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/medical_records/controllers/create_vaccine_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/medical_records/controllers/create_vaccine_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'update_vaccine.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/pets/:petId/vaccines/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue, ParamValue]
+      params: { petId: ParamValue; id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/medical_records/controllers/update_vaccine_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/medical_records/controllers/update_vaccine_controller').default['render']>>>
+    }
+  }
+  'update_vaccine.execute': {
+    methods: ["PUT"]
+    pattern: '/pets/:petId/vaccines/:id'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#app/medical_records/controllers/update_vaccine_controller').default)['validator']>>
+      paramsTuple: [ParamValue, ParamValue]
+      params: { petId: ParamValue; id: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#app/medical_records/controllers/update_vaccine_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/medical_records/controllers/update_vaccine_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/medical_records/controllers/update_vaccine_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
   'event_stream': {
     methods: ["GET","HEAD"]
     pattern: '/__transmit/events'
