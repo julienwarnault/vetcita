@@ -19,18 +19,18 @@ export type AppointmentForm = InertiaPrecognitiveFormProps<AppointmentData>
 export const STEPS = [
   {
     key: 'service',
-    fields: ['serviceId'],
+    fields: ['serviceId'] as string[],
     canContinue: (d: AppointmentData) => Boolean(d.serviceId),
   },
   {
     key: 'datetime',
-    fields: ['startDate', 'agendaId'],
+    fields: ['startDate', 'agendaId'] as string[],
     canContinue: (d: AppointmentData) => Boolean(d.startDate && d.agendaId),
   },
   {
     key: 'review',
-    fields: [],
-    canContinue: (d: AppointmentData) => Boolean(d.clientId),
+    fields: ['petId'] as string[],
+    canContinue: (d: AppointmentData) => Boolean(d.clientId && d.petId),
   },
 ] as const
 
@@ -109,7 +109,7 @@ export function useAppointmentForm(params: UseAppointmentFormParams) {
     }
 
     form.validate({
-      only: fields,
+      only: fields as any[],
       onSuccess: () => {
         setStepIndex((i) => i + 1)
       },

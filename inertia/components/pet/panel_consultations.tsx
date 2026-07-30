@@ -10,10 +10,11 @@ import { Card } from '../ui/card'
 
 interface PanelConsultationsProps {
   consultations: Data.MedicalRecords.Consultation[]
+  reload: () => void
 }
 
 export function PanelConsultations(props: PanelConsultationsProps) {
-  const { consultations } = props
+  const { consultations, reload } = props
 
   const { visitModal } = useModalStack()
 
@@ -33,7 +34,9 @@ export function PanelConsultations(props: PanelConsultationsProps) {
                 size="lg"
                 className="flex flex-col gap-4 cursor-pointer hover:border-border-strong"
                 onClick={() => {
-                  visitModal(urlFor('update_consultation.render', { id: consultation.id, petId: consultation.petId }))
+                  visitModal(urlFor('update_consultation.render', { id: consultation.id, petId: consultation.petId }), {
+                    onClose: reload,
+                  })
                 }}
               >
                 <div>

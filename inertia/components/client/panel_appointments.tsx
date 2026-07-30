@@ -11,10 +11,11 @@ import { Card } from '../ui/card'
 
 interface PanelAppointmentsProps {
   appointments: Data.Booking.Appointment[]
+  reload: () => void
 }
 
 export function PanelAppointments(props: PanelAppointmentsProps) {
-  const { appointments } = props
+  const { appointments, reload } = props
 
   const { visitModal } = useModalStack()
 
@@ -34,7 +35,9 @@ export function PanelAppointments(props: PanelAppointmentsProps) {
                 size="lg"
                 className="flex flex-col gap-4 cursor-pointer hover:border-border-strong"
                 onClick={() => {
-                  visitModal(urlFor('update_appointment.render', { id: appointment.id }))
+                  visitModal(urlFor('update_appointment.render', { id: appointment.id }), {
+                    onClose: reload,
+                  })
                 }}
               >
                 <div>

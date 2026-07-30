@@ -134,7 +134,7 @@ export default function ShowPet(props: PageProps) {
           </Tabs.Content>
 
           <Tabs.Content value="appointments">
-            <PanelAppointments appointments={appointments} />
+            <PanelAppointments appointments={appointments} reload={reload} />
           </Tabs.Content>
 
           <Tabs.Content value="client">
@@ -142,11 +142,11 @@ export default function ShowPet(props: PageProps) {
           </Tabs.Content>
 
           <Tabs.Content value="consultations">
-            <PanelConsultations consultations={consultations} />
+            <PanelConsultations consultations={consultations} reload={reload} />
           </Tabs.Content>
 
           <Tabs.Content value="vaccines">
-            <PanelVaccines vaccines={vaccines} />
+            <PanelVaccines vaccines={vaccines} reload={reload} />
           </Tabs.Content>
         </Tabs>
       )}

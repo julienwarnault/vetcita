@@ -8,10 +8,11 @@ import { Card } from '../ui/card'
 
 interface PanelPetsProps {
   pets: Data.Pets.Pet[]
+  reload: () => void
 }
 
 export function PanelPets(props: PanelPetsProps) {
-  const { pets } = props
+  const { pets, reload } = props
 
   const { visitModal } = useModalStack()
 
@@ -29,7 +30,9 @@ export function PanelPets(props: PanelPetsProps) {
                 size="lg"
                 className="flex flex-row items-center gap-4 cursor-pointer hover:border-border-strong"
                 onClick={() => {
-                  visitModal(urlFor('get_pet.render', { id: pet.id }))
+                  visitModal(urlFor('get_pet.render', { id: pet.id }), {
+                    onClose: reload,
+                  })
                 }}
               >
                 <Avatar src={pet.species?.illustrationUrl} />

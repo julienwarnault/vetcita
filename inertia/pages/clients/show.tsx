@@ -102,11 +102,11 @@ export default function ShowClient(props: PageProps) {
           </Tabs.Content>
 
           <Tabs.Content value="appointments">
-            <PanelAppointments appointments={appointments} />
+            <PanelAppointments appointments={appointments} reload={reload} />
           </Tabs.Content>
 
           <Tabs.Content value="pets">
-            <PanelPets pets={pets} />
+            <PanelPets pets={pets} reload={reload} />
           </Tabs.Content>
         </Tabs>
       )}

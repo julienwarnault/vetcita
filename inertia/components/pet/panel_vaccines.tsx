@@ -10,10 +10,11 @@ import { Card } from '../ui/card'
 
 interface PanelVaccinesProps {
   vaccines: Data.MedicalRecords.Vaccine[]
+  reload: () => void
 }
 
 export function PanelVaccines(props: PanelVaccinesProps) {
-  const { vaccines } = props
+  const { vaccines, reload } = props
   const { visitModal } = useModalStack()
 
   return (
@@ -33,7 +34,9 @@ export function PanelVaccines(props: PanelVaccinesProps) {
                 size="lg"
                 className="flex flex-col gap-4 cursor-pointer hover:border-border-strong"
                 onClick={() => {
-                  visitModal(urlFor('update_vaccine.render', { id: vaccine.id, petId: vaccine.petId }))
+                  visitModal(urlFor('update_vaccine.render', { id: vaccine.id, petId: vaccine.petId }), {
+                    onClose: reload,
+                  })
                 }}
               >
                 <div>
