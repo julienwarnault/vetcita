@@ -5,6 +5,7 @@ import { Column, ListTable } from '~/components/ui/list_table'
 import { DEFAULT_LOCALE, DEFAULT_TIMEZONE } from '~/lib/date'
 import { ViewHeader } from '~/components/view_header'
 import { Button } from '~/components/ui/button'
+import { Avatar } from '~/components/ui/avatar'
 import { InertiaProps } from '~/types'
 import { urlFor } from '~/lib/tuyau'
 
@@ -21,7 +22,14 @@ export default function List(props: PageProps) {
     {
       header: 'Nombre de la mascota',
       width: '20%',
-      accessor: 'name',
+      accessor: (pet) => {
+        return (
+          <div className="flex items-center gap-2">
+            <Avatar src={pet.species?.illustrationUrl} />
+            <div className="text-[15px]/5 font-semibold">{pet.name}</div>
+          </div>
+        )
+      },
     },
     {
       header: 'Cliente',
