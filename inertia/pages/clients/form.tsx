@@ -11,10 +11,11 @@ import { InertiaProps } from '~/types'
 
 type PageProps = InertiaProps<{
   client?: Data.Clients.Client
+  initialName?: string
 }>
 
 export default function ShowForm(props: PageProps) {
-  const { client } = props
+  const { client, initialName } = props
 
   const isEdit = !!client
   const title = client ? `Editar ${client.firstName}` : 'Añadir un cliente'
@@ -30,7 +31,7 @@ export default function ShowForm(props: PageProps) {
                 <Button size="lg" variant="secondary" onClick={close}>
                   Cerrar
                 </Button>
-                <Button type="submit" size="lg" form="form">
+                <Button type="submit" size="lg" form="client-form">
                   {isEdit ? 'Guardar' : 'Añadir'}
                 </Button>
               </>
@@ -43,12 +44,12 @@ export default function ShowForm(props: PageProps) {
             </div>
 
             <Form
-              id="form"
+              id="client-form"
               route={isEdit ? 'update_client.execute' : 'create_client.execute'}
               routeParams={isEdit ? { id: client.id } : undefined}
               className="gap-16 pb-24"
               onSuccess={(data: any) => {
-                !isEdit && emit('onCreate', data.props.flash.clientId)
+                !isEdit && emit('onCreate', data.props.flash.clientId, data.props.flash.client)
                 close()
               }}
             >
@@ -59,7 +60,7 @@ export default function ShowForm(props: PageProps) {
                 <div className="grid grid-cols-6 w-full gap-x-4 gap-y-6 pt-6">
                   <Field name="firstName">
                     <Field.Label>Nombre *</Field.Label>
-                    <Input defaultValue={client?.firstName ?? ''} />
+                    <Input defaultValue={client?.firstName ?? initialName ?? ''} />
                     <Field.Error />
                   </Field>
 

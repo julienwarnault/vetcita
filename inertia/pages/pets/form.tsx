@@ -6,9 +6,9 @@ import { InputGroup } from '~/components/ui/input_group'
 import { FormHeader } from '~/components/form_header'
 import { Textarea } from '~/components/ui/textarea'
 import { Button } from '~/components/ui/button'
+import { Switch } from '~/components/ui/switch'
 import { Field } from '~/components/ui/field'
 import { Input } from '~/components/ui/input'
-import { Switch } from '~/components/ui/switch'
 import MinimalLayout from '~/layouts/minimal'
 import { Form } from '~/components/ui/form'
 import { InertiaProps } from '~/types'
@@ -36,7 +36,7 @@ export default function ShowForm(props: PageProps) {
                 <Button size="lg" variant="secondary" onClick={close}>
                   Cerrar
                 </Button>
-                <Button type="submit" size="lg" form="form">
+                <Button type="submit" size="lg" form="pet-form">
                   {isEdit ? 'Guardar' : 'Añadir'}
                 </Button>
               </>
@@ -49,7 +49,7 @@ export default function ShowForm(props: PageProps) {
             </div>
 
             <Form
-              id="form"
+              id="pet-form"
               route={isEdit ? 'update_pet.execute' : 'create_pet.execute'}
               routeParams={isEdit ? { id: pet.id } : undefined}
               className="gap-16 pb-24"

@@ -1,12 +1,13 @@
-import { useState } from 'react'
 import { cn, tv } from 'tailwind-variants'
+import { Fragment, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { useDebounce } from '@uidotdev/usehooks'
-import { ChevronDownIcon, XIcon } from 'lucide-react'
+import { useModalStack } from '@inertiaui/modal-react'
+import { ChevronDownIcon, PlusIcon, XIcon } from 'lucide-react'
 import { Autocomplete } from '@base-ui/react/autocomplete'
 import { formatPhoneNumber } from '~/lib/utils'
+import { query, urlFor } from '~/lib/tuyau'
 import { baseInput } from './ui/input'
-import { query } from '~/lib/tuyau'
 import { Card } from './ui/card'
 
 const clientSelector = tv({
@@ -32,6 +33,7 @@ interface ClientSelectorProps {
 export function ClientSelector(props: ClientSelectorProps) {
   const { className, defaultValue, defaultName, disabled, name = 'clientId' } = props
 
+  const { visitModal } = useModalStack()
   const classes = clientSelector()
 
   const [label, setLabel] = useState(defaultName ?? '')
@@ -40,18 +42,31 @@ export function ClientSelector(props: ClientSelectorProps) {
   const debouncedSearch = useDebounce(search, 300)
   const shouldSearch = Boolean(debouncedSearch && debouncedSearch !== label)
 
-  const { data, isFetching } = useQuery(
+  const { data, isFetching, isEnabled } = useQuery(
     query.listClients.api.queryOptions(
       { query: { search: debouncedSearch } },
       { enabled: shouldSearch, staleTime: 5_000 }
     )
   )
 
-  const clients = data ?? []
+  const clients = [...(data ?? []), ...(isEnabled && debouncedSearch.length > 3 ? [null] : [])]
 
   function selectClient(client: any) {
     setLabel(client.fullName)
     setValue(client.id)
+  }
+
+  function createClient() {
+    visitModal(urlFor('create_client.render', {}, { qs: { name: debouncedSearch } }), {
+      listeners: {
+        onCreate(clientId: string, client?: any) {
+          if (client) {
+            setValue(clientId)
+            setSearch(client.fullName)
+          }
+        },
+      } as any,
+    })
   }
 
   return (
@@ -64,7 +79,7 @@ export function ClientSelector(props: ClientSelectorProps) {
         onValueChange={(value) => {
           setSearch(value)
         }}
-        itemToStringValue={(client) => client.fullName}
+        itemToStringValue={(client) => client?.fullName || ''}
         filter={null}
         disabled={disabled}
       >
@@ -92,28 +107,44 @@ export function ClientSelector(props: ClientSelectorProps) {
               aria-busy={isFetching || undefined}
               render={<Card className={classes.popup({ className })} />}
             >
-              <Autocomplete.Empty>
-                <div className="py-2 text-sm leading-4 text-foreground">No se han encontrado resultados</div>
-              </Autocomplete.Empty>
+              {debouncedSearch.length === 0 && (
+                <Autocomplete.Empty>
+                  <div className="py-2 text-sm leading-4 text-foreground">No se han encontrado resultados</div>
+                </Autocomplete.Empty>
+              )}
 
               <Autocomplete.List>
-                {(client: any) => (
-                  <Autocomplete.Item
-                    key={client.id}
-                    value={client}
-                    onClick={() => {
-                      selectClient(client)
-                    }}
-                    className={classes.item()}
-                  >
-                    <div className="flex flex-col">
-                      <div className="pb-1 text-[15px]/5 font-medium">{client.fullName}</div>
-                      <div className="text-[13px]/4 text-muted">
-                        {!!client.phone && formatPhoneNumber(client.phone)}
+                {(client: any | null) => {
+                  if (!client)
+                    return (
+                      <Fragment key="add-item">
+                        {search.length > 0 && (
+                          <Autocomplete.Item onClick={createClient} className={classes.item()}>
+                            <PlusIcon />
+                            <span>Añadir "{debouncedSearch}"</span>
+                          </Autocomplete.Item>
+                        )}
+                      </Fragment>
+                    )
+
+                  return (
+                    <Autocomplete.Item
+                      key={client.id}
+                      value={client}
+                      onClick={() => {
+                        selectClient(client)
+                      }}
+                      className={classes.item()}
+                    >
+                      <div className="flex flex-col">
+                        <div className="pb-1 text-[15px]/5 font-medium">{client.fullName}</div>
+                        <div className="text-[13px]/4 text-muted">
+                          {!!client.phone && formatPhoneNumber(client.phone)}
+                        </div>
                       </div>
-                    </div>
-                  </Autocomplete.Item>
-                )}
+                    </Autocomplete.Item>
+                  )
+                }}
               </Autocomplete.List>
             </Autocomplete.Popup>
           </Autocomplete.Positioner>
