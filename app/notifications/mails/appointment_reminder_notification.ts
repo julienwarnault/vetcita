@@ -1,10 +1,9 @@
 import { BaseMail } from '@adonisjs/mail'
-import { DEFAULT_TIMEZONE } from '#shared/services/time_service'
+import { urlFor } from '@adonisjs/core/services/url_builder'
 import type Appointment from '#booking/models/appointment'
+import { appUrl } from '#config/app'
 
 export default class AppointmentReminderNotification extends BaseMail {
-  subject = 'Recordatorio de su cita'
-
   constructor(
     private appointment: Appointment,
     private to: string
@@ -13,14 +12,22 @@ export default class AppointmentReminderNotification extends BaseMail {
   }
 
   prepare() {
-    const { client, tenant, service, startDate, bookingRef } = this.appointment
+    const { id, client, tenant, pet, service, localStartDate, bookingRef, tenantId } = this.appointment
 
-    this.message.to(this.to).htmlView('emails/appointment_reminder', {
-      client,
-      companyName: tenant.name,
-      service: service.name,
-      startDate: startDate.setZone(DEFAULT_TIMEZONE).toFormat('dd/MM/yyyy h:mma'),
-      bookingRef,
-    })
+    const formatedDate = localStartDate.toFormat('dd/MM/yyyy h:mma')
+    const confirmUrl = urlFor('confirm_appointment.render', { appointmentId: id, tenantId }, { prefixUrl: appUrl })
+
+    this.message
+      .to(this.to)
+      .subject(`Recordatorio de cita: su cita es el ${formatedDate}`)
+      .htmlView('emails/appointment_reminder', {
+        client,
+        tenantName: tenant.name,
+        petName: pet.name,
+        service: service.name,
+        startDate: formatedDate,
+        bookingRef,
+        confirmUrl,
+      })
   }
 }

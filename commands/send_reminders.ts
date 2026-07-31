@@ -14,6 +14,9 @@ export default class SendReminders extends BaseCommand {
     const queue = await this.app.container.make('queue.manager')
     await queue.loadJobs()
 
+    const router = await this.app.container.make('router')
+    router.commit()
+
     await SendAppointmentRemindersJob.dispatch({})
 
     this.logger.success('Reminders processing completed')

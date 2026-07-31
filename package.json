@@ -92,6 +92,7 @@
     "libphonenumber-js": "^1.13.2",
     "lucide-react": "^1.16.0",
     "luxon": "^3.7.2",
+    "mjml": "^5.4.0",
     "pg": "^8.20.0",
     "qrcode": "^1.5.4",
     "react": "^19.2.5",
