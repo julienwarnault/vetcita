@@ -333,7 +333,7 @@ export class UserSchema extends BaseModel {
 }
 
 export class VaccineSchema extends BaseModel {
-  static $columns = ['agendaId', 'appointmentId', 'batchNumber', 'createdAt', 'date', 'id', 'manufacturer', 'name', 'nextDueDate', 'notes', 'petId', 'tenantId', 'updatedAt'] as const
+  static $columns = ['agendaId', 'appointmentId', 'batchNumber', 'createdAt', 'date', 'id', 'manufacturer', 'name', 'nextDueDate', 'notes', 'petId', 'reminderSentAt', 'tenantId', 'updatedAt'] as const
   $columns = VaccineSchema.$columns
   @column()
   declare agendaId: UUID | null
@@ -357,6 +357,8 @@ export class VaccineSchema extends BaseModel {
   declare notes: string | null
   @column()
   declare petId: UUID
+  @column.dateTime()
+  declare reminderSentAt: DateTime | null
   @column()
   declare tenantId: UUID
   @column.dateTime({ autoCreate: true, autoUpdate: true })

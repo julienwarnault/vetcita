@@ -25,6 +25,7 @@ export class UpdateVaccine {
       .where('tenant_id', params.tenantId)
       .where('petId', params.petId)
       .firstOrFail()
+    const previousNextDueDate = vaccine.nextDueDate
 
     vaccine.merge({
       appointmentId: params.appointmentId ?? null,
@@ -35,6 +36,10 @@ export class UpdateVaccine {
       manufacturer: params.manufacturer || null,
       notes: params.notes || null,
     })
+
+    if (vaccine.nextDueDate?.toISODate() !== previousNextDueDate?.toISODate()) {
+      vaccine.reminderSentAt = null
+    }
 
     await vaccine.useTransaction(trx!).save()
 

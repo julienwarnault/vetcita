@@ -14,6 +14,7 @@ export default class VaccineTransformer extends BaseTransformer<Vaccine> {
         'name',
         'date',
         'nextDueDate',
+        'reminderSentAt',
         'batchNumber',
         'manufacturer',
         'notes',

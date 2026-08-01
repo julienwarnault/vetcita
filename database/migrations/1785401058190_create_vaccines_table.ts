@@ -18,8 +18,10 @@ export default class extends BaseSchema {
       table.string('batch_number').nullable()
       table.string('manufacturer').nullable()
       table.text('notes').nullable()
+      table.timestamp('reminder_sent_at').nullable()
       table.index(['tenant_id', 'pet_id', 'created_at'])
       table.index(['appointment_id'])
+      table.index(['next_due_date', 'reminder_sent_at'])
     })
   }
 
