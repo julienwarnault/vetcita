@@ -475,18 +475,6 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/booking/controllers/show_calendar_controller').default['render']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'booking_link.render': {
-    methods: ["GET","HEAD"]
-    pattern: '/settings/booking-link'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#app/booking/controllers/booking_link_controller').default['render']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/booking/controllers/booking_link_controller').default['render']>>>
-    }
-  }
   'create_appointment.render': {
     methods: ["GET","HEAD"]
     pattern: '/appointments/new'
@@ -545,6 +533,18 @@ export interface Registry {
       query: ExtractQuery<InferInput<(typeof import('#app/booking/controllers/change_appointment_status_controller').default)['validator']>>
       response: ExtractResponse<Awaited<ReturnType<import('#app/booking/controllers/change_appointment_status_controller').default['execute']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/booking/controllers/change_appointment_status_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'booking_link.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/settings/booking-link'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/booking/controllers/booking_link_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/booking/controllers/booking_link_controller').default['render']>>>
     }
   }
   'list_shifts.render': {

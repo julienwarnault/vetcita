@@ -37,33 +37,43 @@ const NAVIGATION = [
     name: 'Servicios',
     route: 'list_services.render',
     navigationIcon: 'book-open',
+    roles: ['owner'],
   },
   {
     name: 'Equipo',
     route: 'list_agendas.render',
     navigationIcon: 'users',
+    roles: ['owner'],
   },
   {
     name: 'Horarios',
     route: 'list_shifts.render',
     navigationIcon: 'calendar-clock',
+    roles: ['owner'],
   },
   {
     name: 'Ajustes',
     route: 'settings',
     navigationIcon: 'settings',
+    roles: ['owner'],
   },
 ] as const
 
 export function AppSidebar() {
-  const { url } = usePage<Data.SharedProps>()
+  const { url, props } = usePage<Data.SharedProps>()
+
+  const userRole = props?.user?.agenda?.role ?? 'none'
 
   const [calendarView] = useLocalStorage<Record<string, any>>('calendar_view', {})
+
+  const visibleItems = NAVIGATION.filter((item: any) => {
+    return !item.roles || item.roles.includes(userRole)
+  })
 
   return (
     <aside className="flex h-full w-18 shrink-0 flex-col bg-primary">
       <div className="flex flex-1 flex-col items-center overflow-x-hidden overflow-y-auto py-2">
-        {NAVIGATION.map((item, index) => {
+        {visibleItems.map((item, index) => {
           const isActive = url.startsWith(urlFor(item.route))
           const isCalendar = item.route == 'show_calendar.render'
 

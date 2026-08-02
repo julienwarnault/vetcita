@@ -89,9 +89,6 @@ export interface ApiDefinition {
   showCalendar: {
     render: typeof routes['show_calendar.render']
   }
-  bookingLink: {
-    render: typeof routes['booking_link.render']
-  }
   createAppointment: {
     render: typeof routes['create_appointment.render']
     execute: typeof routes['create_appointment.execute']
@@ -102,6 +99,9 @@ export interface ApiDefinition {
   }
   changeAppointmentStatus: {
     execute: typeof routes['change_appointment_status.execute']
+  }
+  bookingLink: {
+    render: typeof routes['booking_link.render']
   }
   listShifts: {
     render: typeof routes['list_shifts.render']

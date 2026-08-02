@@ -43,12 +43,12 @@ export type ScannedRoutes = {
     'book_appointment.execute': { paramsTuple: [ParamValue]; params: {'tenantId': ParamValue} }
     'confirm_appointment.render': { paramsTuple: [ParamValue,ParamValue]; params: {'tenantId': ParamValue,'appointmentId': ParamValue} }
     'show_calendar.render': { paramsTuple?: []; params?: {} }
-    'booking_link.render': { paramsTuple?: []; params?: {} }
     'create_appointment.render': { paramsTuple?: []; params?: {} }
     'create_appointment.execute': { paramsTuple?: []; params?: {} }
     'update_appointment.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_appointment.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'change_appointment_status.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'booking_link.render': { paramsTuple?: []; params?: {} }
     'list_shifts.render': { paramsTuple?: []; params?: {} }
     'create_closed_date.render': { paramsTuple?: []; params?: {} }
     'create_closed_date.execute': { paramsTuple?: []; params?: {} }
@@ -115,9 +115,9 @@ export type ScannedRoutes = {
     'book_appointment.render': { paramsTuple: [ParamValue]; params: {'tenantId': ParamValue} }
     'confirm_appointment.render': { paramsTuple: [ParamValue,ParamValue]; params: {'tenantId': ParamValue,'appointmentId': ParamValue} }
     'show_calendar.render': { paramsTuple?: []; params?: {} }
-    'booking_link.render': { paramsTuple?: []; params?: {} }
     'create_appointment.render': { paramsTuple?: []; params?: {} }
     'update_appointment.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'booking_link.render': { paramsTuple?: []; params?: {} }
     'list_shifts.render': { paramsTuple?: []; params?: {} }
     'create_closed_date.render': { paramsTuple?: []; params?: {} }
     'update_closed_date.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -166,9 +166,9 @@ export type ScannedRoutes = {
     'book_appointment.render': { paramsTuple: [ParamValue]; params: {'tenantId': ParamValue} }
     'confirm_appointment.render': { paramsTuple: [ParamValue,ParamValue]; params: {'tenantId': ParamValue,'appointmentId': ParamValue} }
     'show_calendar.render': { paramsTuple?: []; params?: {} }
-    'booking_link.render': { paramsTuple?: []; params?: {} }
     'create_appointment.render': { paramsTuple?: []; params?: {} }
     'update_appointment.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'booking_link.render': { paramsTuple?: []; params?: {} }
     'list_shifts.render': { paramsTuple?: []; params?: {} }
     'create_closed_date.render': { paramsTuple?: []; params?: {} }
     'update_closed_date.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }

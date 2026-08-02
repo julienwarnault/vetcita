@@ -240,12 +240,6 @@ const routes = {
     tokens: [{"old":"/calendar","type":0,"val":"calendar","end":""}],
     types: placeholder as Registry['show_calendar.render']['types'],
   },
-  'booking_link.render': {
-    methods: ["GET","HEAD"],
-    pattern: '/settings/booking-link',
-    tokens: [{"old":"/settings/booking-link","type":0,"val":"settings","end":""},{"old":"/settings/booking-link","type":0,"val":"booking-link","end":""}],
-    types: placeholder as Registry['booking_link.render']['types'],
-  },
   'create_appointment.render': {
     methods: ["GET","HEAD"],
     pattern: '/appointments/new',
@@ -275,6 +269,12 @@ const routes = {
     pattern: '/appointments/:id/status',
     tokens: [{"old":"/appointments/:id/status","type":0,"val":"appointments","end":""},{"old":"/appointments/:id/status","type":1,"val":"id","end":""},{"old":"/appointments/:id/status","type":0,"val":"status","end":""}],
     types: placeholder as Registry['change_appointment_status.execute']['types'],
+  },
+  'booking_link.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/settings/booking-link',
+    tokens: [{"old":"/settings/booking-link","type":0,"val":"settings","end":""},{"old":"/settings/booking-link","type":0,"val":"booking-link","end":""}],
+    types: placeholder as Registry['booking_link.render']['types'],
   },
   'list_shifts.render': {
     methods: ["GET","HEAD"],

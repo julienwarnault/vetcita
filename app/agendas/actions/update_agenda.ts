@@ -1,5 +1,5 @@
 import { transactionContext } from '#shared/contexts/transaction_context'
-import Agenda, { AgendaRole } from '#agendas/models/agenda'
+import Agenda, { type AgendaRole } from '#agendas/models/agenda'
 import type { UUID } from '#shared/types'
 
 interface UpdateAgendaParams {
@@ -21,9 +21,9 @@ export class UpdateAgenda {
     agenda.merge({
       name: params.name,
       email: params.email ?? null,
-      role: agenda.role === AgendaRole.owner ? agenda.role : params.role,
+      role: agenda.role === 'owner' ? agenda.role : params.role,
       color: params.color,
-      userId: params.userId ?? agenda.userId,
+      userId: params.role === 'none' ? null : (params.userId ?? agenda.userId),
     })
 
     await agenda.useTransaction(trx!).save()

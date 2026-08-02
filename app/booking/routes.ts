@@ -9,11 +9,16 @@ router.get(':tenantId/booking/:appointmentId/confirm', [controllers.booking.Conf
 router
   .group(() => {
     router.get('calendar', [controllers.booking.ShowCalendar, 'render'])
-    router.get('settings/booking-link', [controllers.booking.BookingLink, 'render'])
     router.get('appointments/new', [controllers.booking.CreateAppointment, 'render'])
     router.post('appointments', [controllers.booking.CreateAppointment, 'execute'])
     router.get('appointments/edit/:id', [controllers.booking.UpdateAppointment, 'render'])
     router.put('appointments/:id', [controllers.booking.UpdateAppointment, 'execute'])
     router.patch('appointments/:id/status', [controllers.booking.ChangeAppointmentStatus, 'execute'])
+
+    router
+      .group(() => {
+        router.get('settings/booking-link', [controllers.booking.BookingLink, 'render'])
+      })
+      .use([middleware.requireRole({ roles: ['owner'] })])
   })
   .use([middleware.auth(), middleware.requireTenant()])

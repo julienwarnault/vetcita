@@ -6,7 +6,6 @@ import { withTransaction } from '#shared/utils/with_transaction'
 import { CreateAgenda } from '#agendas/actions/create_agenda'
 import { GetServices } from '#services/queries/get_services'
 import { emailSchema, uuidSchema } from '#shared/validators'
-import { AgendaRole } from '#agendas/models/agenda'
 
 @inject()
 export default class CreateAgendaController {
@@ -14,7 +13,7 @@ export default class CreateAgendaController {
     vine.object({
       name: vine.string(),
       email: emailSchema().optional().requiredWhen('role', '!=', 'none'),
-      role: vine.enum(AgendaRole),
+      role: vine.enum(['owner', 'staff', 'none']),
       color: vine.string(),
       serviceIds: vine.array(uuidSchema()).optional(),
     })
