@@ -1,6 +1,7 @@
 import { transactionContext } from '#shared/contexts/transaction_context'
 import Agenda, { type AgendaRole } from '#agendas/models/agenda'
 import WorkingHour from '#scheduling/models/working_hour'
+import Tenant from '#tenants/models/tenant'
 import type { UUID } from '#shared/types'
 
 interface CreateAgendaParams {
@@ -16,6 +17,8 @@ interface CreateAgendaParams {
 export class CreateAgenda {
   async execute(params: CreateAgendaParams) {
     const trx = transactionContext.get()
+
+    const tenant = await Tenant.findOrFail(params.tenantId, { client: trx })
 
     // Create agenda
     const agenda = await Agenda.create(
@@ -35,13 +38,17 @@ export class CreateAgenda {
 
     // Init working hours
     await WorkingHour.createMany(
-      [1, 2, 3, 4, 5].map((dayOfWeek) => ({
-        tenantId: params.tenantId,
-        agendaId: agenda.id,
-        dayOfWeek,
-        startTime: dayOfWeek === 5 ? '09:00' : '09:00',
-        endTime: dayOfWeek === 5 ? '14:00' : '18:00',
-      })),
+      tenant.openingHours
+        .map((day, dayOfWeek) => {
+          return day.map(({ startTime, endTime }) => ({
+            tenantId: params.tenantId,
+            agendaId: agenda.id,
+            dayOfWeek: dayOfWeek + 1,
+            startTime,
+            endTime,
+          }))
+        })
+        .flat(),
       { client: trx }
     )
 

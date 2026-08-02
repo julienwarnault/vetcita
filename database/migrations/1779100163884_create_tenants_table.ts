@@ -18,6 +18,7 @@ export default class extends BaseSchema {
       table.string('state').nullable()
       table.string('postal_code').nullable()
       table.string('country_code').notNullable().defaultTo('MX')
+      table.jsonb('opening_hours').notNullable()
     })
   }
 

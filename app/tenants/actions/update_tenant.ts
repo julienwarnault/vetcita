@@ -33,6 +33,7 @@ export class UpdateTenant {
       state: params.state || null,
       postalCode: params.postalCode || null,
       countryCode: params.countryCode || 'MX',
+      openingHours: tenant.openingHours,
     })
 
     await tenant.save()

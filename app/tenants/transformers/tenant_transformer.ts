@@ -15,6 +15,7 @@ export default class TenantTransformer extends BaseTransformer<Tenant> {
       'state',
       'postalCode',
       'countryCode',
+      'openingHours',
       'createdAt',
       'updatedAt',
     ])

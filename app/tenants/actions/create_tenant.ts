@@ -18,6 +18,11 @@ export class CreateTenant {
   async execute(params: CreateTenantParams) {
     const trx = transactionContext.get()
 
+    // Opening hours
+    const openingHours = [1, 2, 3, 4, 5, 6].map((dayOfWeek) => [
+      { startTime: '09:00', endTime: dayOfWeek === 6 ? '14:00' : '18:00' },
+    ])
+
     const tenant = await Tenant.create(
       {
         name: params.name,
@@ -30,6 +35,7 @@ export class CreateTenant {
         state: params.state || null,
         postalCode: params.postalCode || null,
         countryCode: params.countryCode || 'MX',
+        openingHours: openingHours,
       },
       { client: trx }
     )

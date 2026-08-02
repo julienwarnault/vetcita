@@ -270,7 +270,7 @@ export class SpeciesSchema extends BaseModel {
 }
 
 export class TenantSchema extends BaseModel {
-  static $columns = ['address', 'city', 'countryCode', 'createdAt', 'email', 'id', 'name', 'phone', 'postalCode', 'slug', 'state', 'updatedAt', 'website'] as const
+  static $columns = ['address', 'city', 'countryCode', 'createdAt', 'email', 'id', 'name', 'openingHours', 'phone', 'postalCode', 'slug', 'state', 'updatedAt', 'website'] as const
   $columns = TenantSchema.$columns
   @column()
   declare address: string | null
@@ -286,6 +286,8 @@ export class TenantSchema extends BaseModel {
   declare id: UUID
   @column()
   declare name: string
+  @column()
+  declare openingHours: any
   @column()
   declare phone: string | null
   @column()
