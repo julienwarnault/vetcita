@@ -18,6 +18,7 @@ export default function List(props: PageProps) {
 
   const roleLabels = {
     owner: 'Propietario',
+    staff: 'Empleado',
     none: 'Sin acceso',
   }
 

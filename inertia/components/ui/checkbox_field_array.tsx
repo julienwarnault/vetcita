@@ -19,7 +19,9 @@ const checkboxFieldArray = tv({
 interface CheckboxFieldArrayProps<T> {
   name: string
   items: T[]
+  value?: string[]
   defaultValue?: string[]
+  onChange?: (value: string[]) => void
   className?: string
   disabled?: boolean
   selectAllLabel?: ReactNode
@@ -36,7 +38,9 @@ export function CheckboxFieldArray<T>(props: CheckboxFieldArrayProps<T>) {
     selectAllLabel = 'Seleccionar todo',
     getValue,
     renderItem,
+    value,
     defaultValue,
+    onChange,
   } = props
 
   const classes = checkboxFieldArray()
@@ -44,7 +48,14 @@ export function CheckboxFieldArray<T>(props: CheckboxFieldArrayProps<T>) {
 
   return (
     <Field name={name} className={className}>
-      <CheckboxGroup allValues={values} defaultValue={defaultValue} disabled={disabled} className={classes.container()}>
+      <CheckboxGroup
+        allValues={values}
+        value={value}
+        defaultValue={defaultValue}
+        onValueChange={onChange}
+        disabled={disabled}
+        className={classes.container()}
+      >
         {items.length > 0 && (
           <Field.Item>
             <Field.Label className={classes.item()}>

@@ -9,6 +9,7 @@ import Tenant from '#tenants/models/tenant'
 
 export enum AgendaRole {
   owner = 'owner',
+  staff = 'staff',
   none = 'none',
 }
 
