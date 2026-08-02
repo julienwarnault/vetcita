@@ -4,6 +4,14 @@ import Tenant from '#tenants/models/tenant'
 
 interface CreateTenantParams {
   name: string
+  email?: string
+  phone?: string
+  website?: string
+  address?: string
+  city?: string
+  state?: string
+  postalCode?: string
+  countryCode?: string
 }
 
 export class CreateTenant {
@@ -14,6 +22,14 @@ export class CreateTenant {
       {
         name: params.name,
         slug: string.slug(params.name),
+        email: params.email?.trim().toLowerCase() || null,
+        phone: params.phone || null,
+        website: params.website || null,
+        address: params.address || null,
+        city: params.city || null,
+        state: params.state || null,
+        postalCode: params.postalCode || null,
+        countryCode: params.countryCode || 'MX',
       },
       { client: trx }
     )

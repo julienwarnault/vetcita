@@ -270,10 +270,18 @@ export class SpeciesSchema extends BaseModel {
 }
 
 export class TenantSchema extends BaseModel {
-  static $columns = ['createdAt', 'id', 'name', 'phone', 'slug', 'updatedAt', 'website'] as const
+  static $columns = ['address', 'city', 'countryCode', 'createdAt', 'email', 'id', 'name', 'phone', 'postalCode', 'slug', 'state', 'updatedAt', 'website'] as const
   $columns = TenantSchema.$columns
+  @column()
+  declare address: string | null
+  @column()
+  declare city: string | null
+  @column()
+  declare countryCode: string
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
+  @column()
+  declare email: string | null
   @column({ isPrimary: true })
   declare id: UUID
   @column()
@@ -281,7 +289,11 @@ export class TenantSchema extends BaseModel {
   @column()
   declare phone: string | null
   @column()
+  declare postalCode: string | null
+  @column()
   declare slug: string
+  @column()
+  declare state: string | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
   @column()

@@ -26,6 +26,7 @@ export class RegisterUser {
     // Create tenant
     const { tenant } = await this.createTenant.execute({
       name: params.tenantName,
+      email: params.email,
     })
 
     // Create user

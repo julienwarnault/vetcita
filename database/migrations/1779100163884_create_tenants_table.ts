@@ -10,8 +10,14 @@ export default class extends BaseSchema {
       table.timestamp('updated_at').nullable()
       table.string('name').notNullable()
       table.string('slug').notNullable().unique()
+      table.string('email').nullable()
       table.string('phone').nullable()
       table.string('website').nullable()
+      table.string('address').nullable()
+      table.string('city').nullable()
+      table.string('state').nullable()
+      table.string('postal_code').nullable()
+      table.string('country_code').notNullable().defaultTo('MX')
     })
   }
 

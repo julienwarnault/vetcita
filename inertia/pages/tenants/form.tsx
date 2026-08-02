@@ -1,4 +1,6 @@
 import { Data } from '@generated/data'
+import { EarthIcon } from 'lucide-react'
+import { NativeSelect } from '~/components/ui/native_select'
 import { InputGroup } from '~/components/ui/input_group'
 import { ButtonLink } from '~/components/ui/button_link'
 import { FormHeader } from '~/components/form_header'
@@ -8,7 +10,6 @@ import { Input } from '~/components/ui/input'
 import { Field } from '~/components/ui/field'
 import { Form } from '~/components/ui/form'
 import { InertiaProps } from '~/types'
-import { EarthIcon } from 'lucide-react'
 
 type PageProps = InertiaProps<{
   tenant?: Data.Tenants.Tenant
@@ -57,6 +58,53 @@ export default function ShowForm(props: PageProps) {
               <Field name="phone">
                 <Field.Label>Teléfono del centro</Field.Label>
                 <Input defaultValue={tenant?.phone ?? ''} />
+                <Field.Error />
+              </Field>
+
+              <Field name="email">
+                <Field.Label>Correo electrónico</Field.Label>
+                <Input type="email" defaultValue={tenant?.email ?? ''} />
+                <Field.Error />
+              </Field>
+            </div>
+          </div>
+
+          <hr />
+
+          <div>
+            <h2 className="text-2xl font-semibold">Dirección</h2>
+            <p className="text-[15px]/5 text-muted">Define la dirección del negocio.</p>
+
+            <div className="grid grid-cols-6 w-full gap-x-4 gap-y-6 pt-6">
+              <Field name="address" className="col-span-6">
+                <Field.Label>Dirección</Field.Label>
+                <Input defaultValue={tenant?.address ?? ''} />
+                <Field.Error />
+              </Field>
+
+              <Field name="city">
+                <Field.Label>Ciudad</Field.Label>
+                <Input defaultValue={tenant?.city ?? ''} />
+                <Field.Error />
+              </Field>
+
+              <Field name="state">
+                <Field.Label>Estado</Field.Label>
+                <Input defaultValue={tenant?.state ?? ''} />
+                <Field.Error />
+              </Field>
+
+              <Field name="postalCode">
+                <Field.Label>Código postal</Field.Label>
+                <Input defaultValue={tenant?.postalCode ?? ''} />
+                <Field.Error />
+              </Field>
+
+              <Field name="countryCode">
+                <Field.Label>País</Field.Label>
+                <NativeSelect defaultValue={tenant?.countryCode ?? 'MX'} disabled>
+                  <NativeSelect.Option value="MX">México</NativeSelect.Option>
+                </NativeSelect>
                 <Field.Error />
               </Field>
             </div>
