@@ -1003,6 +1003,30 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/medical_records/controllers/update_vaccine_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
+  'show_onboarding.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/onboarding'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/onboarding/controllers/show_onboarding_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/onboarding/controllers/show_onboarding_controller').default['render']>>>
+    }
+  }
+  'update_onboarding.execute': {
+    methods: ["POST"]
+    pattern: '/onboarding'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#app/onboarding/controllers/update_onboarding_controller').default)['validator']>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#app/onboarding/controllers/update_onboarding_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/onboarding/controllers/update_onboarding_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/onboarding/controllers/update_onboarding_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
   'event_stream': {
     methods: ["GET","HEAD"]
     pattern: '/__transmit/events'

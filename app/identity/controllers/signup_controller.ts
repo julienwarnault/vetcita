@@ -9,9 +9,11 @@ import { RegisterUser } from '#identity/actions/register_user'
 export default class SignupController {
   static validator = vine.create(
     vine.object({
-      fullName: vine.string(),
+      firstName: vine.string(),
+      lastName: vine.string(),
       tenantName: vine.string(),
       email: emailSchema(),
+      phone: vine.string().phone(),
       password: passwordSchema().confirmed({ confirmationField: 'passwordConfirmation' }),
     })
   )
@@ -30,6 +32,7 @@ export default class SignupController {
     })
 
     await auth.use('web').login(user)
-    response.redirect().toRoute('dashboard.render')
+
+    response.redirect('/onboarding')
   }
 }

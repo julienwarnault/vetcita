@@ -19,6 +19,7 @@ export default class extends BaseSchema {
       table.string('postal_code').nullable()
       table.string('country_code').notNullable().defaultTo('MX')
       table.jsonb('opening_hours').notNullable()
+      table.string('onboarding_status').notNullable().defaultTo('pending')
     })
   }
 

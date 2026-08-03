@@ -10,6 +10,11 @@
   max-width: 800px;
 }
 
+@utility container-lg {
+  @apply container;
+  max-width: 1056px;
+}
+
 @utility container-xl {
   @apply container;
   max-width: 1440px;

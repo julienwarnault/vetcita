@@ -3,7 +3,7 @@ import { ChevronDownIcon } from 'lucide-react'
 import { Menu as BaseMenu } from '@base-ui/react/menu'
 import { ComponentProps, isValidElement, ReactNode } from 'react'
 
-const menu = tv({
+export const menu = tv({
   slots: {
     icon: 'group-data-[popup-open]:rotate-180',
     positioner: 'z-200',

@@ -24,16 +24,14 @@ export function StepReview(props: StepReviewProps) {
   return (
     <Card shadow={false} className="divide-y">
       <div className="p-4">
-        <div className="text-sm text-muted-foreground">Consultorio</div>
+        <div className="text-sm text-muted-foreground">Negocio</div>
         <div className="font-semibold text-lg">{tenant.name}</div>
       </div>
 
       {['datetime', 'infos', 'pet', 'review'].includes(stepKey) && (
         <div className="flex flex-col p-4">
           <div className="font-semibold text-lg">{service?.name}</div>
-          <div className="text-sm text-muted-foreground mt-1">
-            Duración: {formatDuration(service?.duration || 0)}
-          </div>
+          <div className="text-sm text-muted-foreground mt-1">Duración: {formatDuration(service?.duration || 0)}</div>
         </div>
       )}
 

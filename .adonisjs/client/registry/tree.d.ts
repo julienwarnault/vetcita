@@ -187,6 +187,12 @@ export interface ApiDefinition {
     render: typeof routes['update_vaccine.render']
     execute: typeof routes['update_vaccine.execute']
   }
+  showOnboarding: {
+    render: typeof routes['show_onboarding.render']
+  }
+  updateOnboarding: {
+    execute: typeof routes['update_onboarding.execute']
+  }
   eventStream: typeof routes['event_stream']
   subscribe: typeof routes['subscribe']
   unsubscribe: typeof routes['unsubscribe']

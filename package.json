@@ -25,6 +25,7 @@
     "#identity/*": "./app/identity/*.js",
     "#medical_records/*": "./app/medical_records/*.js",
     "#notifications/*": "./app/notifications/*.js",
+    "#onboarding/*": "./app/onboarding/*.js",
     "#pets/*": "./app/pets/*.js",
     "#scheduling/*": "./app/scheduling/*.js",
     "#search/*": "./app/search/*.js",

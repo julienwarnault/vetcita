@@ -21,8 +21,8 @@ export default function Login() {
         </div>
       </header>
 
-      <main className="container-xl py-14">
-        <div className="flex w-full max-w-120 mx-auto">
+      <main className="container-xl pt-24 pb-14">
+        <div className="flex w-full max-w-150 mx-auto">
           <div className="w-full">
             <Card size="xl">
               <div className="pb-8 text-center">

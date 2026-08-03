@@ -21,8 +21,8 @@ export default function Signup() {
         </div>
       </header>
 
-      <main className="container-xl py-14">
-        <div className="flex w-full max-w-120 mx-auto">
+      <main className="container-xl pb-14">
+        <div className="flex w-full max-w-150 mx-auto">
           <div className="w-full">
             <Card size="xl">
               <div className="pb-8 text-center">
@@ -31,21 +31,35 @@ export default function Signup() {
               </div>
 
               <Form route="signup.execute" className="gap-6">
-                <Field name="fullName">
-                  <Field.Label>Nombre completo</Field.Label>
-                  <Input placeholder="Introduce un nombre completo" autoComplete="name" />
-                  <Field.Error />
-                </Field>
-
                 <Field name="tenantName">
-                  <Field.Label htmlFor="email">Nombre del consultorio</Field.Label>
+                  <Field.Label>Nombre del negocio</Field.Label>
                   <Input placeholder="Introduce un nombre" autoComplete="organization" />
                   <Field.Error />
                 </Field>
 
+                <div className="flex gap-4">
+                  <Field name="firstName" className="w-full">
+                    <Field.Label>Nombre</Field.Label>
+                    <Input placeholder="Introduce un nombre" autoComplete="given-name" />
+                    <Field.Error />
+                  </Field>
+
+                  <Field name="lastName" className="w-full">
+                    <Field.Label>Apellido</Field.Label>
+                    <Input placeholder="Introduce un apellido" autoComplete="family-name" />
+                    <Field.Error />
+                  </Field>
+                </div>
+
                 <Field name="email">
-                  <Field.Label htmlFor="email">Correo electrónico</Field.Label>
-                  <Input type="email" placeholder="Introduce un correo" autoComplete="email" />
+                  <Field.Label>Correo electrónico</Field.Label>
+                  <Input placeholder="Introduce un correo" autoComplete="email" />
+                  <Field.Error />
+                </Field>
+
+                <Field name="phone">
+                  <Field.Label htmlFor="phone">Teléfono</Field.Label>
+                  <Input placeholder="Introduce un teléfono" autoComplete="phone" />
                   <Field.Error />
                 </Field>
 

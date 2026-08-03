@@ -87,6 +87,8 @@ export type ScannedRoutes = {
     'create_vaccine.execute': { paramsTuple: [ParamValue]; params: {'petId': ParamValue} }
     'update_vaccine.render': { paramsTuple: [ParamValue,ParamValue]; params: {'petId': ParamValue,'id': ParamValue} }
     'update_vaccine.execute': { paramsTuple: [ParamValue,ParamValue]; params: {'petId': ParamValue,'id': ParamValue} }
+    'show_onboarding.render': { paramsTuple?: []; params?: {} }
+    'update_onboarding.execute': { paramsTuple?: []; params?: {} }
     'event_stream': { paramsTuple?: []; params?: {} }
     'subscribe': { paramsTuple?: []; params?: {} }
     'unsubscribe': { paramsTuple?: []; params?: {} }
@@ -140,6 +142,7 @@ export type ScannedRoutes = {
     'update_consultation.render': { paramsTuple: [ParamValue,ParamValue]; params: {'petId': ParamValue,'id': ParamValue} }
     'create_vaccine.render': { paramsTuple: [ParamValue]; params: {'petId': ParamValue} }
     'update_vaccine.render': { paramsTuple: [ParamValue,ParamValue]; params: {'petId': ParamValue,'id': ParamValue} }
+    'show_onboarding.render': { paramsTuple?: []; params?: {} }
     'event_stream': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
@@ -191,6 +194,7 @@ export type ScannedRoutes = {
     'update_consultation.render': { paramsTuple: [ParamValue,ParamValue]; params: {'petId': ParamValue,'id': ParamValue} }
     'create_vaccine.render': { paramsTuple: [ParamValue]; params: {'petId': ParamValue} }
     'update_vaccine.render': { paramsTuple: [ParamValue,ParamValue]; params: {'petId': ParamValue,'id': ParamValue} }
+    'show_onboarding.render': { paramsTuple?: []; params?: {} }
     'event_stream': { paramsTuple?: []; params?: {} }
   }
   POST: {
@@ -210,6 +214,7 @@ export type ScannedRoutes = {
     'create_pet.execute': { paramsTuple?: []; params?: {} }
     'create_consultation.execute': { paramsTuple: [ParamValue]; params: {'petId': ParamValue} }
     'create_vaccine.execute': { paramsTuple: [ParamValue]; params: {'petId': ParamValue} }
+    'update_onboarding.execute': { paramsTuple?: []; params?: {} }
     'subscribe': { paramsTuple?: []; params?: {} }
     'unsubscribe': { paramsTuple?: []; params?: {} }
   }

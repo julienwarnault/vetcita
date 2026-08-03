@@ -504,6 +504,18 @@ const routes = {
     tokens: [{"old":"/pets/:petId/vaccines/:id","type":0,"val":"pets","end":""},{"old":"/pets/:petId/vaccines/:id","type":1,"val":"petId","end":""},{"old":"/pets/:petId/vaccines/:id","type":0,"val":"vaccines","end":""},{"old":"/pets/:petId/vaccines/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['update_vaccine.execute']['types'],
   },
+  'show_onboarding.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/onboarding',
+    tokens: [{"old":"/onboarding","type":0,"val":"onboarding","end":""}],
+    types: placeholder as Registry['show_onboarding.render']['types'],
+  },
+  'update_onboarding.execute': {
+    methods: ["POST"],
+    pattern: '/onboarding',
+    tokens: [{"old":"/onboarding","type":0,"val":"onboarding","end":""}],
+    types: placeholder as Registry['update_onboarding.execute']['types'],
+  },
   'event_stream': {
     methods: ["GET","HEAD"],
     pattern: '/__transmit/events',

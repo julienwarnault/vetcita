@@ -45,6 +45,10 @@ export const controllers = {
     UpdateConsultation: () => import('#app/medical_records/controllers/update_consultation_controller'),
     UpdateVaccine: () => import('#app/medical_records/controllers/update_vaccine_controller'),
   },
+  onboarding: {
+    ShowOnboarding: () => import('#app/onboarding/controllers/show_onboarding_controller'),
+    UpdateOnboarding: () => import('#app/onboarding/controllers/update_onboarding_controller'),
+  },
   pets: {
     CreatePet: () => import('#app/pets/controllers/create_pet_controller'),
     DeletePet: () => import('#app/pets/controllers/delete_pet_controller'),

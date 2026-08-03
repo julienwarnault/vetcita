@@ -24,6 +24,10 @@ export default class RequireTenantMiddleware {
       throw new Error('Tenant context is required for this route')
     }
 
+    if (ctx.tenant.onboardingStatus === 'pending' && !ctx.request.url().startsWith('/onboarding')) {
+      return ctx.response.redirect('/onboarding')
+    }
+
     return next()
   }
 }

@@ -12,6 +12,7 @@ import '#scheduling/routes'
 import '#search/routes'
 import '#pets/routes'
 import '#medical_records/routes'
+import '#onboarding/routes'
 
 transmit.registerRoutes()
 
