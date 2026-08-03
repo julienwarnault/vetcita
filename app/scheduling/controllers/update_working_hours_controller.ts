@@ -2,6 +2,7 @@ import vine from '@vinejs/vine'
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
 import WorkingHourTransformer from '#scheduling/transformers/working_hour_transformer'
+import { weekShiftsSchema } from '#scheduling/validators/week_shifts_validator'
 import { UpdateWorkingHours } from '#scheduling/actions/update_working_hours'
 import AgendaTransformer from '#agendas/transformers/agenda_transformer'
 import { GetWorkingHours } from '#scheduling/queries/get_working_hours'
@@ -12,9 +13,7 @@ import { GetAgenda } from '#agendas/queries/get_agenda'
 export default class UpdateWorkingHoursController {
   static validator = vine.create(
     vine.object({
-      weekShifts: vine
-        .array(vine.array(vine.object({ startTime: vine.string(), endTime: vine.string() })))
-        .fixedLength(7),
+      weekShifts: weekShiftsSchema(),
     })
   )
 

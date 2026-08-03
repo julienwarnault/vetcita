@@ -14,7 +14,9 @@
       "confirmed": "El campo {originalField} y el campo {otherField} deben coincidir",
       "phone": "El número de teléfono no es válido",
       "email": "Formato del correo no válido",
-      "url": "Introduce una URL de {field} válida"
+      "url": "Introduce una URL de {field} válida",
+      "overlappingShift": "El turno coincide con otro",
+      "invalidShiftRange": "La hora de finalización debe ser posterior a la hora de inicio"
     }
   }
 }
