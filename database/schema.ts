@@ -66,7 +66,7 @@ export class AppointmentStatusSchema extends BaseModel {
 }
 
 export class AppointmentSchema extends BaseModel {
-  static $columns = ['agendaId', 'bookingRef', 'clientId', 'createdAt', 'duration', 'endDate', 'id', 'petId', 'reminderSentAt', 'serviceId', 'startDate', 'statusId', 'tenantId', 'updatedAt'] as const
+  static $columns = ['agendaId', 'bookingRef', 'clientId', 'createdAt', 'duration', 'endDate', 'id', 'isOnline', 'petId', 'reminderSentAt', 'serviceId', 'startDate', 'statusId', 'tenantId', 'updatedAt'] as const
   $columns = AppointmentSchema.$columns
   @column()
   declare agendaId: UUID
@@ -82,6 +82,8 @@ export class AppointmentSchema extends BaseModel {
   declare endDate: DateTime
   @column({ isPrimary: true })
   declare id: UUID
+  @column()
+  declare isOnline: boolean
   @column()
   declare petId: UUID
   @column.dateTime()

@@ -19,6 +19,7 @@ interface CreateAppointmentParams {
   petId: UUID
   startDate: string
   tenantId: UUID
+  isOnline?: boolean
 }
 
 @inject()
@@ -63,6 +64,7 @@ export class CreateAppointment {
         duration: service.duration,
         tenantId: params.tenantId,
         bookingRef: bookingRef,
+        isOnline: params.isOnline ?? false,
         statusId: AppointmentStatus.BOOKED,
       },
       { client: trx }

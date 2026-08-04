@@ -48,6 +48,7 @@ export class BookAppointment {
       clientId: client.id,
       petId: pet.id,
       startDate: params.startDate,
+      isOnline: true,
     })
   }
 }
