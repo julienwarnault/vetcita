@@ -3,8 +3,8 @@ import { Data } from '@generated/data'
 import { cn } from 'tailwind-variants'
 import { router } from '@inertiajs/react'
 import { CheckIcon, TrashIcon } from 'lucide-react'
+import { DEFAULT_LOCALE, DEFAULT_TIMEZONE } from '~/lib/date'
 import { AppointmentForm } from './use_appointment_form'
-import { DEFAULT_LOCALE } from '~/lib/date'
 import { capitalize } from '~/lib/utils'
 import { Drawer } from '../ui/drawer'
 import { Button } from '../ui/button'
@@ -26,7 +26,9 @@ export function PanelReview(props: PanelReviewProps) {
   const { form, service, statuses, status, canContinue, next, goToStep, close } = props
   const { data, setData, isDirty } = form
 
-  const startDate = DateTime.fromISO(data.startDate)
+  console.log('startDate', data.startDate)
+
+  const startDate = DateTime.fromISO(data.startDate, { zone: DEFAULT_TIMEZONE })
   const endDate = startDate.plus({ minutes: service?.duration || 0 })
 
   return (
