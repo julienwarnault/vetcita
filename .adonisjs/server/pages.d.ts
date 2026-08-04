@@ -47,5 +47,6 @@ declare module '@adonisjs/inertia/types' {
     'shifts/working_hours_form': ExtractProps<(typeof import('../../inertia/pages/shifts/working_hours_form.tsx'))['default']>
     'tenants/form': ExtractProps<(typeof import('../../inertia/pages/tenants/form.tsx'))['default']>
     'vaccines/forms': ExtractProps<(typeof import('../../inertia/pages/vaccines/forms.tsx'))['default']>
+    'prescriptions/forms': ExtractProps<(typeof import('../../inertia/pages/prescriptions/forms.tsx'))['default']>
   }
 }

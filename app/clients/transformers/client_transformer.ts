@@ -1,5 +1,5 @@
 import { BaseTransformer } from '@adonisjs/core/transformers'
-import PetTransformer from '#app/pets/transformers/pet_transformer'
+import PetTransformer from '#pets/transformers/pet_transformer'
 import type Client from '#clients/models/client'
 
 export default class ClientTransformer extends BaseTransformer<Client> {

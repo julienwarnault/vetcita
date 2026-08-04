@@ -87,6 +87,10 @@ export type ScannedRoutes = {
     'create_vaccine.execute': { paramsTuple: [ParamValue]; params: {'petId': ParamValue} }
     'update_vaccine.render': { paramsTuple: [ParamValue,ParamValue]; params: {'petId': ParamValue,'id': ParamValue} }
     'update_vaccine.execute': { paramsTuple: [ParamValue,ParamValue]; params: {'petId': ParamValue,'id': ParamValue} }
+    'create_prescription.render': { paramsTuple: [ParamValue]; params: {'petId': ParamValue} }
+    'create_prescription.execute': { paramsTuple: [ParamValue]; params: {'petId': ParamValue} }
+    'update_prescription.render': { paramsTuple: [ParamValue,ParamValue]; params: {'petId': ParamValue,'id': ParamValue} }
+    'update_prescription.execute': { paramsTuple: [ParamValue,ParamValue]; params: {'petId': ParamValue,'id': ParamValue} }
     'show_onboarding.render': { paramsTuple?: []; params?: {} }
     'update_onboarding.execute': { paramsTuple?: []; params?: {} }
     'event_stream': { paramsTuple?: []; params?: {} }
@@ -142,6 +146,8 @@ export type ScannedRoutes = {
     'update_consultation.render': { paramsTuple: [ParamValue,ParamValue]; params: {'petId': ParamValue,'id': ParamValue} }
     'create_vaccine.render': { paramsTuple: [ParamValue]; params: {'petId': ParamValue} }
     'update_vaccine.render': { paramsTuple: [ParamValue,ParamValue]; params: {'petId': ParamValue,'id': ParamValue} }
+    'create_prescription.render': { paramsTuple: [ParamValue]; params: {'petId': ParamValue} }
+    'update_prescription.render': { paramsTuple: [ParamValue,ParamValue]; params: {'petId': ParamValue,'id': ParamValue} }
     'show_onboarding.render': { paramsTuple?: []; params?: {} }
     'event_stream': { paramsTuple?: []; params?: {} }
   }
@@ -194,6 +200,8 @@ export type ScannedRoutes = {
     'update_consultation.render': { paramsTuple: [ParamValue,ParamValue]; params: {'petId': ParamValue,'id': ParamValue} }
     'create_vaccine.render': { paramsTuple: [ParamValue]; params: {'petId': ParamValue} }
     'update_vaccine.render': { paramsTuple: [ParamValue,ParamValue]; params: {'petId': ParamValue,'id': ParamValue} }
+    'create_prescription.render': { paramsTuple: [ParamValue]; params: {'petId': ParamValue} }
+    'update_prescription.render': { paramsTuple: [ParamValue,ParamValue]; params: {'petId': ParamValue,'id': ParamValue} }
     'show_onboarding.render': { paramsTuple?: []; params?: {} }
     'event_stream': { paramsTuple?: []; params?: {} }
   }
@@ -214,6 +222,7 @@ export type ScannedRoutes = {
     'create_pet.execute': { paramsTuple?: []; params?: {} }
     'create_consultation.execute': { paramsTuple: [ParamValue]; params: {'petId': ParamValue} }
     'create_vaccine.execute': { paramsTuple: [ParamValue]; params: {'petId': ParamValue} }
+    'create_prescription.execute': { paramsTuple: [ParamValue]; params: {'petId': ParamValue} }
     'update_onboarding.execute': { paramsTuple?: []; params?: {} }
     'subscribe': { paramsTuple?: []; params?: {} }
     'unsubscribe': { paramsTuple?: []; params?: {} }
@@ -232,6 +241,7 @@ export type ScannedRoutes = {
     'update_pet.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_consultation.execute': { paramsTuple: [ParamValue,ParamValue]; params: {'petId': ParamValue,'id': ParamValue} }
     'update_vaccine.execute': { paramsTuple: [ParamValue,ParamValue]; params: {'petId': ParamValue,'id': ParamValue} }
+    'update_prescription.execute': { paramsTuple: [ParamValue,ParamValue]; params: {'petId': ParamValue,'id': ParamValue} }
   }
   DELETE: {
     'delete_appointment_status.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }

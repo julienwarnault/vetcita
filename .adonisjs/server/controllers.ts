@@ -44,6 +44,8 @@ export const controllers = {
     ListConsultations: () => import('#app/medical_records/controllers/list_consultations_controller'),
     UpdateConsultation: () => import('#app/medical_records/controllers/update_consultation_controller'),
     UpdateVaccine: () => import('#app/medical_records/controllers/update_vaccine_controller'),
+    CreatePrescription: () => import('#app/medical_records/controllers/create_prescription_controller'),
+    UpdatePrescription: () => import('#app/medical_records/controllers/update_prescription_controller'),
   },
   onboarding: {
     ShowOnboarding: () => import('#app/onboarding/controllers/show_onboarding_controller'),

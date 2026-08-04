@@ -1,7 +1,9 @@
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
+import PrescriptionTransformer from '#medical_records/transformers/prescription_transformer'
 import ConsultationTransformer from '#medical_records/transformers/consultation_transformer'
 import { GetPetConsultations } from '#medical_records/queries/get_pet_consultations'
+import { GetPetPrescriptions } from '#medical_records/queries/get_pet_prescriptions'
 import VaccineTransformer from '#medical_records/transformers/vaccine_transformer'
 import AppointmentTransformer from '#booking/transformers/appointment_transformer'
 import { GetPetVaccines } from '#medical_records/queries/get_pet_vaccines'
@@ -15,11 +17,12 @@ export default class ShowPetController {
     private readonly getPet: GetPet,
     private readonly getAppointments: GetPetAppointments,
     private readonly getPetConsultations: GetPetConsultations,
-    private readonly getPetVaccines: GetPetVaccines
+    private readonly getPetVaccines: GetPetVaccines,
+    private readonly getPetPrescriptions: GetPetPrescriptions
   ) {}
 
   async render({ inertia, params, tenantId }: HttpContext) {
-    const [{ pet }, { appointments }, { consultations }, { vaccines }] = await Promise.all([
+    const [{ pet }, { appointments }, { consultations }, { vaccines }, { prescriptions }] = await Promise.all([
       this.getPet.execute({
         id: params.id,
         tenantId,
@@ -36,6 +39,10 @@ export default class ShowPetController {
         tenantId,
         petId: params.id,
       }),
+      this.getPetPrescriptions.execute({
+        tenantId,
+        petId: params.id,
+      }),
     ])
 
     return inertia.render('pets/show', {
@@ -43,6 +50,7 @@ export default class ShowPetController {
       appointments: AppointmentTransformer.transform(appointments),
       consultations: ConsultationTransformer.transform(consultations),
       vaccines: VaccineTransformer.transform(vaccines),
+      prescriptions: PrescriptionTransformer.transform(prescriptions),
     })
   }
 

@@ -218,6 +218,31 @@ export class PetSchema extends BaseModel {
   declare weight: number | null
 }
 
+export class PrescriptionSchema extends BaseModel {
+  static $columns = ['createdAt', 'date', 'id', 'intervalDays', 'name', 'notes', 'petId', 'tenantId', 'type', 'updatedAt'] as const
+  $columns = PrescriptionSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column.date()
+  declare date: DateTime
+  @column({ isPrimary: true })
+  declare id: UUID
+  @column()
+  declare intervalDays: number | null
+  @column()
+  declare name: string
+  @column()
+  declare notes: string | null
+  @column()
+  declare petId: UUID
+  @column()
+  declare tenantId: UUID
+  @column()
+  declare type: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class ScheduleDaySchema extends BaseModel {
   static $columns = ['agendaId', 'createdAt', 'date', 'id', 'shifts', 'tenantId', 'updatedAt'] as const
   $columns = ScheduleDaySchema.$columns

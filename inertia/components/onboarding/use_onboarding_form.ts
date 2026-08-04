@@ -32,7 +32,7 @@ type UseOnboardingFormParams = {
 }
 
 export function useOnboardingForm(params: UseOnboardingFormParams) {
-  const { tenant, services, submitUrl } = params
+  const { tenant, submitUrl } = params
   const [stepIndex, setStepIndex] = useState(0)
 
   const form = useForm<OnboardingData>({

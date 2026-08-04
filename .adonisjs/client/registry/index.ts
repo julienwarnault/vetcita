@@ -504,6 +504,30 @@ const routes = {
     tokens: [{"old":"/pets/:petId/vaccines/:id","type":0,"val":"pets","end":""},{"old":"/pets/:petId/vaccines/:id","type":1,"val":"petId","end":""},{"old":"/pets/:petId/vaccines/:id","type":0,"val":"vaccines","end":""},{"old":"/pets/:petId/vaccines/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['update_vaccine.execute']['types'],
   },
+  'create_prescription.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/pets/:petId/prescriptions/new',
+    tokens: [{"old":"/pets/:petId/prescriptions/new","type":0,"val":"pets","end":""},{"old":"/pets/:petId/prescriptions/new","type":1,"val":"petId","end":""},{"old":"/pets/:petId/prescriptions/new","type":0,"val":"prescriptions","end":""},{"old":"/pets/:petId/prescriptions/new","type":0,"val":"new","end":""}],
+    types: placeholder as Registry['create_prescription.render']['types'],
+  },
+  'create_prescription.execute': {
+    methods: ["POST"],
+    pattern: '/pets/:petId/prescriptions',
+    tokens: [{"old":"/pets/:petId/prescriptions","type":0,"val":"pets","end":""},{"old":"/pets/:petId/prescriptions","type":1,"val":"petId","end":""},{"old":"/pets/:petId/prescriptions","type":0,"val":"prescriptions","end":""}],
+    types: placeholder as Registry['create_prescription.execute']['types'],
+  },
+  'update_prescription.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/pets/:petId/prescriptions/:id',
+    tokens: [{"old":"/pets/:petId/prescriptions/:id","type":0,"val":"pets","end":""},{"old":"/pets/:petId/prescriptions/:id","type":1,"val":"petId","end":""},{"old":"/pets/:petId/prescriptions/:id","type":0,"val":"prescriptions","end":""},{"old":"/pets/:petId/prescriptions/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['update_prescription.render']['types'],
+  },
+  'update_prescription.execute': {
+    methods: ["PUT"],
+    pattern: '/pets/:petId/prescriptions/:id',
+    tokens: [{"old":"/pets/:petId/prescriptions/:id","type":0,"val":"pets","end":""},{"old":"/pets/:petId/prescriptions/:id","type":1,"val":"petId","end":""},{"old":"/pets/:petId/prescriptions/:id","type":0,"val":"prescriptions","end":""},{"old":"/pets/:petId/prescriptions/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['update_prescription.execute']['types'],
+  },
   'show_onboarding.render': {
     methods: ["GET","HEAD"],
     pattern: '/onboarding',
