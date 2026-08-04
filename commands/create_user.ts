@@ -14,7 +14,8 @@ export default class CreateUser extends BaseCommand {
   async run() {
     const registerUser = await this.app.container.make(RegisterUser)
 
-    const fullName = await this.prompt.ask('Full name?')
+    const firstName = await this.prompt.ask('First name?')
+    const lastName = await this.prompt.ask('Last name?')
     const email = await this.prompt.ask('Email?')
     const password = await this.prompt.secure('Password?')
     const passwordConfirmation = await this.prompt.secure('Confirm password?')
@@ -29,8 +30,10 @@ export default class CreateUser extends BaseCommand {
     try {
       const { user } = await withTransaction(() => {
         return registerUser.execute({
-          fullName,
+          firstName,
+          lastName,
           email,
+          phone: '',
           password,
           tenantName,
         })

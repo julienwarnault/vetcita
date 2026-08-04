@@ -102,22 +102,10 @@ export function CalendarToolbar(props: CalendarToolbarProps) {
             />
           </ButtonGroup>
 
-          <Menu
-            trigger={
-              <Button>
-                Añadir <Menu.TriggerIcon />
-              </Button>
-            }
-          >
-            <Menu.Item
-              onClick={() => {
-                visitModal(urlFor('create_appointment.render'))
-              }}
-            >
-              <CalendarPlusIcon />
-              Cita
-            </Menu.Item>
-          </Menu>
+          <Button onClick={() => visitModal(urlFor('create_appointment.render'))}>
+            <CalendarPlusIcon />
+            Añadir cita
+          </Button>
         </div>
       </div>
     </div>

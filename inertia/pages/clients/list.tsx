@@ -32,6 +32,11 @@ export default function List(props: PageProps) {
       },
     },
     {
+      header: 'Mascotas',
+      width: '10%',
+      accessor: ({ pets }) => pets?.length ?? '-',
+    },
+    {
       header: 'Creado el',
       width: '15%',
       accessor: ({ createdAt }) => {

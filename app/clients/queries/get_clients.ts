@@ -8,7 +8,7 @@ interface GetClientsParams {
 
 export class GetClients {
   async execute(params: GetClientsParams) {
-    const query = Client.query().where('tenantId', params.tenantId)
+    const query = Client.query().where('tenantId', params.tenantId).preload('pets')
 
     if (params.search) {
       const term = `%${params.search}%`

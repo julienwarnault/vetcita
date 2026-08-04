@@ -77,7 +77,7 @@ export default function ShowForm(props: PageProps) {
               <h1 className="text-[40px]/11 font-bold">{title}</h1>
             </div>
 
-            <Form id="form" onSubmit={handleSubmit} errors={form.errors} className="gap-16 pb-24">
+            <Form id="form" onSubmit={handleSubmit} errors={form.errors} className="flex flex-col gap-16 pb-24">
               <div>
                 <h2 className="text-2xl font-semibold">Información básica</h2>
                 <p className="text-[15px]/5 text-muted">Gestiona el agenda</p>
