@@ -53,8 +53,6 @@ export default function List(props: PageProps) {
     },
   ]
 
-  console.log(consultations?.[0])
-
   return (
     <div className="flex">
       <div className="container-xl p-10">

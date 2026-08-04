@@ -26,8 +26,6 @@ export function PanelReview(props: PanelReviewProps) {
   const { form, service, statuses, status, canContinue, next, goToStep, close } = props
   const { data, setData, isDirty } = form
 
-  console.log('startDate', data.startDate)
-
   const startDate = DateTime.fromISO(data.startDate, { zone: DEFAULT_TIMEZONE })
   const endDate = startDate.plus({ minutes: service?.duration || 0 })
 
