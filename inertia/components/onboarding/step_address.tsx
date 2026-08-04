@@ -14,7 +14,7 @@ export function StepAddress(props: StepAddressProps) {
   return (
     <Card size="lg">
       <p className="text-[15px]/5 text-muted mb-6">
-        Indica la dirección principal donde atiendes. Podrás modificarla más tarde desde los ajustes del negocio.
+        Indica la dirección principal donde atiendes. Podrás modificarla más tarde desde los ajustes de la clínica.
       </p>
 
       <div className="grid grid-cols-6 w-full gap-x-4 gap-y-6">

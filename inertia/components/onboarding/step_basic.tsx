@@ -18,7 +18,7 @@ export function StepBasic(props: StepBasicProps) {
 
       <div className="grid grid-cols-6 w-full gap-x-4 gap-y-6">
         <Field name="name" className="col-span-6">
-          <Field.Label>Nombre del negocio *</Field.Label>
+          <Field.Label>Nombre de la clínica *</Field.Label>
           <Input value={form.data.name} onChange={(e) => form.setData('name', e.target.value)} />
           <Field.Error />
         </Field>

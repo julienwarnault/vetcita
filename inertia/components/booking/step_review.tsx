@@ -24,7 +24,7 @@ export function StepReview(props: StepReviewProps) {
   return (
     <Card shadow={false} className="divide-y">
       <div className="p-4">
-        <div className="text-sm text-muted-foreground">Negocio</div>
+        <div className="text-sm text-muted-foreground">Clínica</div>
         <div className="font-semibold text-lg">{tenant.name}</div>
       </div>
 

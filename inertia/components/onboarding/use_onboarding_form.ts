@@ -18,7 +18,7 @@ export type OnboardingForm = InertiaFormProps<OnboardingData>
 export const STEPS = [
   {
     key: 'basic',
-    title: 'Empecemos por identificar tu negocio',
+    title: 'Empecemos por identificar tu clínica',
     description: 'Datos principales y ubicación.',
     fields: ['name', 'phone', 'email', 'address', 'city', 'state', 'postalCode', 'countryCode'] as string[],
     canContinue: (data: OnboardingData) => Boolean(data.name),

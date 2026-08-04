@@ -57,7 +57,7 @@ export default function ClosedDateForm(props: PageProps) {
               <h1 className="text-[40px]/11 font-bold">{title}</h1>
             </div>
 
-            <Banner icon="circle-alert">No se pueden hacer reservas online cuando el negocio está cerrado</Banner>
+            <Banner icon="circle-alert">No se pueden hacer reservas online cuando la clínica está cerrada</Banner>
 
             <Form
               id="form"

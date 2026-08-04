@@ -32,7 +32,7 @@ export default function Signup() {
 
               <Form route="signup.execute" className="gap-6">
                 <Field name="tenantName">
-                  <Field.Label>Nombre del negocio</Field.Label>
+                  <Field.Label>Nombre de la clínica</Field.Label>
                   <Input placeholder="Introduce un nombre" autoComplete="organization" />
                   <Field.Error />
                 </Field>

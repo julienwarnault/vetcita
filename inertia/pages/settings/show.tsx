@@ -23,8 +23,8 @@ export default function Settings() {
           <div className="grid grid-cols-3 gap-6">
             <CardItem
               icon="building-2"
-              title="Configuración del negocio"
-              description="Personaliza los datos del negocio."
+              title="Configuración de la clínica"
+              description="Personaliza los datos de la clínica."
               href={urlFor('update_tenant.render')}
             />
             <CardItem
