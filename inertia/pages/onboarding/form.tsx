@@ -14,8 +14,8 @@ import { Avatar } from '~/components/ui/avatar'
 import MinimalLayout from '~/layouts/minimal'
 import { Badge } from '~/components/ui/badge'
 import { menu } from '~/components/ui/menu'
+import { Logo } from '~/components/Logo'
 import { InertiaProps } from '~/types'
-import { appName } from '~/app/app'
 
 type PageProps = InertiaProps<{
   tenant: Data.Tenants.Tenant
@@ -41,7 +41,7 @@ export default function OnboardingForm(props: PageProps) {
   return (
     <>
       <FormHeader
-        leftElement={<h1 className="text-xl font-bold">{appName}</h1>}
+        leftElement={<Logo />}
         rightElement={
           <Popover
             align="end"

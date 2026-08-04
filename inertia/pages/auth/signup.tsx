@@ -5,15 +5,15 @@ import { Field } from '~/components/ui/field'
 import { Input } from '~/components/ui/input'
 import { Form } from '~/components/ui/form'
 import { Card } from '~/components/ui/card'
+import { Logo } from '~/components/Logo'
 import AuthLayout from '~/layouts/auth'
-import { appName } from '~/app/app'
 
 export default function Signup() {
   return (
     <div className="bg-background min-h-screen">
       <header className="container-xl py-6">
         <div className="flex items-center justify-between">
-          <div className="text-xl font-bold">{appName}</div>
+          <Logo />
 
           <ButtonLink route="login.render" size="lg" variant="secondary">
             Iniciar sesión

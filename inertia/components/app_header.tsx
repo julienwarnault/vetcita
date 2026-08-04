@@ -5,7 +5,7 @@ import { Popover } from './ui/popover'
 import { Avatar } from './ui/avatar'
 import { Button } from './ui/button'
 import { urlFor } from '~/lib/tuyau'
-import { appName } from '~/app/app'
+import { Logo } from './Logo'
 
 interface AppHeaderProps {
   fullName?: string
@@ -20,7 +20,7 @@ export function AppHeader(props: AppHeaderProps) {
   return (
     <header className="flex h-16 items-center justify-between border-b bg-surface px-4">
       <Link route="dashboard.render">
-        <h1 className="text-xl font-bold">{appName}</h1>
+        <Logo />
       </Link>
       <div className="flex items-center">
         <Button

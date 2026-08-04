@@ -1,7 +1,7 @@
 import { Head } from '@inertiajs/react'
 import type { ReactElement } from 'react'
 import { ButtonLink } from '~/components/ui/button_link'
-import { appName } from '~/app/app'
+import { Logo } from '~/components/Logo'
 
 export default function ServerError() {
   return (
@@ -11,7 +11,7 @@ export default function ServerError() {
       <div className="flex min-h-dvh flex-col bg-background">
         <header className="container-xl py-6">
           <div className="flex items-center justify-between">
-            <div className="text-xl font-bold">{appName}</div>
+            <Logo />
           </div>
         </header>
 

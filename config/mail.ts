@@ -31,9 +31,15 @@ const mailConfig = defineConfig({
    * options.
    */
   mailers: {
-    brevo: transports.brevo({
-      key: env.get('BREVO_API_KEY'),
-      baseUrl: 'https://api.brevo.com/v3',
+    smtp: transports.smtp({
+      host: env.get('SMTP_HOST'),
+      port: env.get('SMTP_PORT'),
+      auth: {
+        type: 'login',
+        user: env.get('SMTP_USERNAME'),
+        pass: env.get('SMTP_PASSWORD'),
+      },
+      secure: false,
     }),
   },
 })
