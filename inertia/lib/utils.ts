@@ -65,3 +65,12 @@ export function groupBy<T>(items: Array<T>, key: (item: T) => string) {
   }
   return map
 }
+
+export function formatPrice(price: number, digits = 0) {
+  return new Intl.NumberFormat('es-MX', {
+    style: 'currency',
+    currency: 'MXN',
+    minimumFractionDigits: digits,
+    maximumFractionDigits: digits,
+  }).format(price)
+}

@@ -139,9 +139,7 @@ export default function ShowForm(props: PageProps) {
                     <div className="text-[17px]/6 font-medium">{agenda.name}</div>
                   </div>
                 )}
-                defaultValue={
-                  service ? service.agendas!.map((agenda) => agenda.id) : agendas.map(({ id }) => id)
-                }
+                defaultValue={service ? service.agendas!.map((agenda) => agenda.id) : agendas.map(({ id }) => id)}
               />
             </div>
           </div>

@@ -1,8 +1,8 @@
 import { Data } from '@generated/data'
 import { cn } from 'tailwind-variants'
+import { formatDuration, formatPrice } from '~/lib/utils'
 import { AppointmentForm } from './use_appointment_form'
 import { Breadcrumb } from '../ui/breadcrumbs'
-import { formatDuration } from '~/lib/utils'
 import { Drawer } from '../ui/drawer'
 import { Button } from '../ui/button'
 
@@ -45,12 +45,17 @@ export function PanelService(props: PanelServiceProps) {
                     setData('startDate', '')
                   }}
                   className={cn(
-                    'flex items-center justify-between bg-white border rounded-2xl p-4 w-full hover:bg-background',
+                    'flex items-start bg-white border rounded-2xl p-4 w-full hover:bg-background',
                     data.serviceId === service.id && 'outline-2 -outline-offset-1 outline-accent'
                   )}
                 >
-                  <div className="font-medium text-base">{service.name}</div>
-                  <div className="text-sm text-muted-foreground">{formatDuration(service.duration)}</div>
+                  <div className="flex flex-col items-start">
+                    <p className="text-[17px]/6 font-medium mb-0.5">{service.name}</p>
+                    <p className="text-[15px]/5 text-muted">{formatDuration(service.duration)}</p>
+                  </div>
+                  <div className="ml-auto">
+                    <div className="text-[15px]/5 font-medium">{formatPrice(service.price ?? 0)}</div>
+                  </div>
                 </button>
               </li>
             ))}

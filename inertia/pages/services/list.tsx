@@ -1,9 +1,9 @@
 import { Data } from '@generated/data'
 import { router } from '@inertiajs/react'
 import { Column, ListTable } from '~/components/ui/list_table'
+import { formatDuration, formatPrice } from '~/lib/utils'
 import { ButtonLink } from '~/components/ui/button_link'
 import { ViewHeader } from '~/components/view_header'
-import { formatDuration } from '~/lib/utils'
 import { InertiaProps } from '~/types'
 import { urlFor } from '~/lib/tuyau'
 
@@ -28,7 +28,7 @@ export default function List(props: PageProps) {
     {
       header: 'Precio',
       width: '15%',
-      accessor: ({ price }) => (price ? `$${price} MXN` : '-'),
+      accessor: ({ price }) => (price ? formatPrice(price) : '-'),
     },
   ]
 

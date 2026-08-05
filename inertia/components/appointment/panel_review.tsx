@@ -5,7 +5,7 @@ import { router } from '@inertiajs/react'
 import { CheckIcon, TrashIcon } from 'lucide-react'
 import { DEFAULT_LOCALE, DEFAULT_TIMEZONE } from '~/lib/date'
 import { AppointmentForm } from './use_appointment_form'
-import { capitalize } from '~/lib/utils'
+import { capitalize, formatPrice } from '~/lib/utils'
 import { Drawer } from '../ui/drawer'
 import { Button } from '../ui/button'
 import { urlFor } from '~/lib/tuyau'
@@ -106,7 +106,26 @@ export function PanelReview(props: PanelReviewProps) {
           </div>
         </div>
       </Drawer.Body>
-      <Drawer.Footer className="px-8 py-4">
+      <Drawer.Footer className="flex flex-col gap-3 px-8 py-4">
+        {service && service.price && (
+          <div className="flex flex-col gap-0.5">
+            <div className="flex flex-col gap-0.5 pb-1">
+              <div className="flex items-center justify-between">
+                <div className="text-[15px]/5 text-muted">Subtotal</div>
+                <div className="text-[15px]/5 text-muted">{formatPrice(service.price * (1 - 0.16), 2)}</div>
+              </div>
+              <div className="flex items-center justify-between">
+                <div className="text-[15px]/5 text-muted">IVA (16%)</div>
+                <div className="text-[15px]/5 text-muted">{formatPrice(service.price * 0.16, 2)}</div>
+              </div>
+            </div>
+            <hr className="my-3" />
+            <div className="flex items-center justify-between">
+              <div className="text-[17px]/6 font-semibold">A pagar</div>
+              <div className="text-[17px]/6 font-semibold">{formatPrice(service.price, 2)}</div>
+            </div>
+          </div>
+        )}
         <Button
           type="button"
           onClick={next}

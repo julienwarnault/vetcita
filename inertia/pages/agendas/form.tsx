@@ -6,12 +6,12 @@ import { InertiaModal, InertiaModalRef } from '~/components/inertia_modal'
 import { CheckboxFieldArray } from '~/components/ui/checkbox_field_array'
 import { COLORS_LIGHT, ColorSelect } from '~/components/ui/color_select'
 import { NativeSelect } from '~/components/ui/native_select'
+import { formatDuration, formatPrice } from '~/lib/utils'
 import { FormHeader } from '~/components/form_header'
 import { Button } from '~/components/ui/button'
 import MinimalLayout from '~/layouts/minimal'
 import { Input } from '~/components/ui/input'
 import { Field } from '~/components/ui/field'
-import { formatDuration } from '~/lib/utils'
 import { InertiaProps } from '~/types'
 import { urlFor } from '~/lib/tuyau'
 
@@ -135,7 +135,7 @@ export default function ShowForm(props: PageProps) {
                           <div className="text-[17px]/6 font-medium">{service.name}</div>
                           <div className="text-muted">{formatDuration(service.duration)}</div>
                         </div>
-                        {service.price && <div className="text-[17px]/6 font-medium">{service.price} MXN</div>}
+                        {service.price && <div className="text-[17px]/6 font-medium">{formatPrice(service.price)}</div>}
                       </div>
                     )}
                   />

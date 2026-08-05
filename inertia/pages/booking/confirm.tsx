@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { Data } from '@generated/data'
 import { CalendarSyncIcon, CalendarXIcon, CheckCircleIcon, ChevronRightIcon } from 'lucide-react'
-import { capitalize, formatDuration } from '~/lib/utils'
+import { capitalize, formatDuration, formatPrice } from '~/lib/utils'
 import { FormHeader } from '~/components/form_header'
 import { DEFAULT_TIMEZONE } from '~/lib/date'
 import MinimalLayout from '~/layouts/minimal'
@@ -50,9 +50,7 @@ export default function Confirm(props: PageProps) {
                     <div className="text-[16px]">{service?.name}</div>
                     <div className="text-sm/5 text-muted">{formatDuration(appointment?.duration)}</div>
                   </div>
-                  {service?.price && (
-                    <div className="text-[16px] font-semibold">{service?.price} MXN</div>
-                  )}
+                  {service?.price && <div className="text-[16px] font-semibold">{formatPrice(service.price)}</div>}
                 </div>
               </div>
 
