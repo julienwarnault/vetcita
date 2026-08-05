@@ -44,7 +44,7 @@ export function PanelPets(props: PanelPetsProps) {
             <Empty
               heading="No hay mascotas"
               description="No se han creado mascotas para este cliente"
-              illustration="/illustrations/calendar.png"
+              illustration="/illustrations/pets_illustration.png"
               border={true}
             />
           )}

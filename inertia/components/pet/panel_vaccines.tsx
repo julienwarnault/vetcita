@@ -74,7 +74,7 @@ export function PanelVaccines(props: PanelVaccinesProps) {
             <Empty
               heading="No hay vacunas"
               description="No se han registrado vacunas para esta mascota"
-              illustration="/illustrations/calendar.png"
+              illustration="/illustrations/documents_illustration.png"
               border={true}
             />
           )}

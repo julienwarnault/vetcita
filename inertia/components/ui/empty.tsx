@@ -5,9 +5,9 @@ import { cn, tv, VariantProps } from 'tailwind-variants'
 const empty = tv({
   slots: {
     container: 'flex flex-col items-center px-6 py-16',
-    illustration: 'aspect-square h-14 [&_img]:inline-size-full',
-    heading: 'text-[20px]/7 font-semibold',
-    description: 'text-muted text-[15px]/5',
+    illustration: 'aspect-square h-18 [&_img]:inline-size-full',
+    heading: 'text-[20px]/7 font-semibold text-center',
+    description: 'text-muted text-[15px]/5 text-center',
   },
   variants: {
     border: {

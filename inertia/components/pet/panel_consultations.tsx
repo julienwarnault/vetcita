@@ -67,9 +67,9 @@ export function PanelConsultations(props: PanelConsultationsProps) {
           })}
           {consultations.length == 0 && (
             <Empty
-              heading="No hay citas"
-              description="No se han creado citas para este mascota"
-              illustration="/illustrations/calendar.png"
+              heading="No hay consultas"
+              description="No se han registrado consultas para esta mascota"
+              illustration="/illustrations/documents_illustration.png"
               border={true}
             />
           )}
