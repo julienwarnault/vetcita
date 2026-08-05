@@ -6,6 +6,7 @@ import { DEFAULT_LOCALE, DEFAULT_TIMEZONE } from '~/lib/date'
 import { ViewHeader } from '~/components/view_header'
 import { Button } from '~/components/ui/button'
 import { Avatar } from '~/components/ui/avatar'
+import { Empty } from '~/components/ui/empty'
 import { InertiaProps } from '~/types'
 import { urlFor } from '~/lib/tuyau'
 
@@ -69,9 +70,9 @@ export default function List(props: PageProps) {
   ]
 
   return (
-    <div className="flex">
-      <div className="container-xl p-10">
-        <ViewHeader title="Lista de mascotas" badge={pets.length.toString()}>
+    <div className="flex max-h-full min-h-full">
+      <div className="container-xl flex flex-col p-10">
+        <ViewHeader title="Mascotas" badge={pets.length.toString()}>
           <Button
             onClick={() => {
               closeAll()
@@ -90,6 +91,24 @@ export default function List(props: PageProps) {
             closeAll(true)
             visitModal(urlFor('get_pet.render', { id: pet.id }))
           }}
+        />
+
+        <Empty
+          heading="No hay mascotas"
+          description="Añade la primera mascota para empezar a crear su historial clínico."
+          visible={pets.length === 0}
+          className="grow"
+          primaryAction={
+            <Button
+              onClick={() => {
+                closeAll()
+                visitModal(urlFor('create_pet.render'))
+              }}
+              size="lg"
+            >
+              Añadir una mascota
+            </Button>
+          }
         />
       </div>
     </div>

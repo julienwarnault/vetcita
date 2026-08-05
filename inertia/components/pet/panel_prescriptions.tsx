@@ -72,7 +72,6 @@ export function PanelPrescriptions(props: PanelPrescriptionsProps) {
             <Empty
               heading="No hay prescripciones"
               description="No se han registrado prescripciones para esta mascota"
-              illustration="/illustrations/documents_illustration.png"
               border={true}
             />
           )}

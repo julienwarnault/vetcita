@@ -4,6 +4,7 @@ import { useModalStack } from '@inertiaui/modal-react'
 import { Column, ListTable } from '~/components/ui/list_table'
 import { DEFAULT_LOCALE, DEFAULT_TIMEZONE } from '~/lib/date'
 import { ViewHeader } from '~/components/view_header'
+import { Empty } from '~/components/ui/empty'
 import { InertiaProps } from '~/types'
 import { urlFor } from '~/lib/tuyau'
 
@@ -54,8 +55,8 @@ export default function List(props: PageProps) {
   ]
 
   return (
-    <div className="flex">
-      <div className="container-xl p-10">
+    <div className="flex max-h-full min-h-full">
+      <div className="container-xl flex flex-col p-10">
         <ViewHeader title="Consultas" badge={consultations.length.toString()} />
 
         <ListTable
@@ -69,6 +70,13 @@ export default function List(props: PageProps) {
             closeAll(true)
             visitModal(urlFor('update_consultation.render', { id: consultation.id, petId: consultation.petId }))
           }}
+        />
+
+        <Empty
+          heading="No hay consultas"
+          description="Las consultas aparecerán aquí cuando registres el historial clínico de una mascota."
+          visible={consultations.length === 0}
+          className="grow"
         />
       </div>
     </div>

@@ -48,8 +48,8 @@ export default function List(props: PageProps) {
   ]
 
   return (
-    <div className="flex">
-      <div className="container-xl p-10">
+    <div className="flex max-h-full min-h-full">
+      <div className="container-xl flex flex-col p-10">
         <ViewHeader title="Equipo" badge={agendas.length.toString()}>
           <Button onClick={() => visitModal(urlFor('create_agenda.render'))} size="lg">
             Añadir

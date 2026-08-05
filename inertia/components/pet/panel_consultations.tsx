@@ -69,7 +69,6 @@ export function PanelConsultations(props: PanelConsultationsProps) {
             <Empty
               heading="No hay consultas"
               description="No se han registrado consultas para esta mascota"
-              illustration="/illustrations/documents_illustration.png"
               border={true}
             />
           )}

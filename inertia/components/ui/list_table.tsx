@@ -29,55 +29,51 @@ export function ListTable<T extends Record<string, any>>(props: ListTableProps<T
     return row[column.accessor]
   }
 
+  const isEmpty = data.length === 0
+
   return (
-    <div className="flex flex-col pb-20">
-      <div className="flex flex-col">
-        <FiltersBar />
+    <div className="flex flex-col">
+      <FiltersBar />
 
-        <table className="relative w-full">
-          <colgroup>
-            {columns.map((column, i) => (
-              <col key={i} style={{ width: column.width, ...column.style }} />
-            ))}
-          </colgroup>
-          <thead className="border-b">
-            <tr>
+      {!isEmpty && (
+        <div className="grow">
+          <table className="relative w-full">
+            <colgroup>
               {columns.map((column, i) => (
-                <th key={i} className="px-2 py-4 first:pl-6 last:pr-6">
-                  <div className="flex items-center flex-start">
-                    <div className="text-[15px]/5 font-semibold">{column.header}</div>
-                  </div>
-                </th>
+                <col key={i} style={{ width: column.width, ...column.style }} />
               ))}
-            </tr>
-          </thead>
-        </table>
-      </div>
-
-      <table className="">
-        <colgroup>
-          {columns.map((column, index) => (
-            <col key={index} style={{ width: column.width, ...column.style }} />
-          ))}
-        </colgroup>
-        <tbody>
-          {data.map((row, i) => {
-            return (
-              <tr
-                key={i}
-                className={cn('bg-white', !!onRowClick && 'border-b hover:bg-background cursor-pointer')}
-                onClick={() => onRowClick?.(row)}
-              >
-                {columns.map((column, j) => (
-                  <td key={j} className="px-2 py-4 first:pl-6 last:pr-6">
-                    <div className="text-[15px]/5">{getCellValue(row, column)}</div>
-                  </td>
+            </colgroup>
+            <thead className="border-b">
+              <tr>
+                {columns.map((column, i) => (
+                  <th key={i} className="px-2 py-4 first:pl-6 last:pr-6">
+                    <div className="flex items-center flex-start">
+                      <div className="text-[15px]/5 font-semibold">{column.header}</div>
+                    </div>
+                  </th>
                 ))}
               </tr>
-            )
-          })}
-        </tbody>
-      </table>
+            </thead>
+            <tbody>
+              {data.map((row, i) => {
+                return (
+                  <tr
+                    key={i}
+                    className={cn('bg-white', !!onRowClick && 'border-b hover:bg-background cursor-pointer')}
+                    onClick={() => onRowClick?.(row)}
+                  >
+                    {columns.map((column, j) => (
+                      <td key={j} className="px-2 py-4 first:pl-6 last:pr-6">
+                        <div className="text-[15px]/5">{getCellValue(row, column)}</div>
+                      </td>
+                    ))}
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   )
 }

@@ -122,7 +122,7 @@ export default function Dashboard(props: PageProps) {
                   ))}
                   {todayAppointments.length == 0 && (
                     <Empty
-                      icon="calendar-clock"
+                      illustration="calendar"
                       heading="No hay citas hoy"
                       description={
                         <div>

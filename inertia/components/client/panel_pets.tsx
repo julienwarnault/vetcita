@@ -41,12 +41,7 @@ export function PanelPets(props: PanelPetsProps) {
             )
           })}
           {pets.length == 0 && (
-            <Empty
-              heading="No hay mascotas"
-              description="No se han creado mascotas para este cliente"
-              illustration="/illustrations/pets_illustration.png"
-              border={true}
-            />
+            <Empty heading="No hay mascotas" description="No se han creado mascotas para este cliente" border={true} />
           )}
         </div>
       </Drawer.Body>

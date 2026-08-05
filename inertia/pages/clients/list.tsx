@@ -6,6 +6,7 @@ import { DEFAULT_LOCALE, DEFAULT_TIMEZONE } from '~/lib/date'
 import { ViewHeader } from '~/components/view_header'
 import { formatPhoneNumber } from '~/lib/utils'
 import { Button } from '~/components/ui/button'
+import { Empty } from '~/components/ui/empty'
 import { InertiaProps } from '~/types'
 import { urlFor } from '~/lib/tuyau'
 
@@ -49,8 +50,8 @@ export default function List(props: PageProps) {
   ]
 
   return (
-    <div className="flex">
-      <div className="container-xl p-10">
+    <div className="flex max-h-full min-h-full">
+      <div className="container-xl flex flex-col p-10">
         <ViewHeader title="Clientes" badge={clients.length.toString()}>
           <Button
             onClick={() => {
@@ -70,6 +71,24 @@ export default function List(props: PageProps) {
             closeAll(true)
             visitModal(urlFor('get_client.render', { id: row.id }))
           }}
+        />
+
+        <Empty
+          heading="No hay clientes"
+          description="Añade tu primer cliente para registrar sus mascotas y próximas citas."
+          visible={clients.length === 0}
+          className="grow"
+          primaryAction={
+            <Button
+              onClick={() => {
+                closeAll()
+                visitModal(urlFor('create_client.render'))
+              }}
+              size="lg"
+            >
+              Añadir un cliente
+            </Button>
+          }
         />
       </div>
     </div>

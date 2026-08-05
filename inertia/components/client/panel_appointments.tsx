@@ -61,12 +61,7 @@ export function PanelAppointments(props: PanelAppointmentsProps) {
             )
           })}
           {appointments.length == 0 && (
-            <Empty
-              heading="No hay citas"
-              description="No se han creado citas para este cliente"
-              illustration="/illustrations/calendar_illustration.png"
-              border={true}
-            />
+            <Empty heading="No hay citas" description="No se han creado citas para este cliente" border={true} />
           )}
         </div>
       </Drawer.Body>
