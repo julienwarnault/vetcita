@@ -4,88 +4,85 @@ import { Button } from '~/components/ui/button'
 import { Field } from '~/components/ui/field'
 import { Input } from '~/components/ui/input'
 import { Form } from '~/components/ui/form'
-import { Card } from '~/components/ui/card'
 import { Logo } from '~/components/Logo'
 import AuthLayout from '~/layouts/auth'
+import { Link } from '@adonisjs/inertia/react'
 
 export default function Signup() {
   return (
-    <div className="bg-background min-h-screen">
-      <header className="container-xl py-6">
+    <>
+      <header className="px-6 py-6 lg:px-10">
         <div className="flex items-center justify-between">
-          <Logo />
-
+          <Link href="/" aria-label="Ir al inicio">
+            <Logo />
+          </Link>
           <ButtonLink route="login.render" size="lg" variant="secondary">
             Iniciar sesión
           </ButtonLink>
         </div>
       </header>
 
-      <main className="container-xl pb-14">
-        <div className="flex w-full max-w-150 mx-auto">
-          <div className="w-full">
-            <Card size="xl">
-              <div className="pb-8 text-center">
-                <h1 className="text-2xl/8 font-semibold">Crear cuenta</h1>
-                <p className="text-[15px] text-muted">Completa tus datos para empezar</p>
-              </div>
-
-              <Form route="signup.execute" className="gap-6">
-                <Field name="tenantName">
-                  <Field.Label>Nombre de la clínica</Field.Label>
-                  <Input placeholder="Introduce un nombre" autoComplete="organization" />
-                  <Field.Error />
-                </Field>
-
-                <div className="flex gap-4">
-                  <Field name="firstName" className="w-full">
-                    <Field.Label>Nombre</Field.Label>
-                    <Input placeholder="Introduce un nombre" autoComplete="given-name" />
-                    <Field.Error />
-                  </Field>
-
-                  <Field name="lastName" className="w-full">
-                    <Field.Label>Apellido</Field.Label>
-                    <Input placeholder="Introduce un apellido" autoComplete="family-name" />
-                    <Field.Error />
-                  </Field>
-                </div>
-
-                <Field name="email">
-                  <Field.Label>Correo electrónico</Field.Label>
-                  <Input placeholder="Introduce un correo" autoComplete="email" />
-                  <Field.Error />
-                </Field>
-
-                <Field name="phone">
-                  <Field.Label htmlFor="phone">Teléfono</Field.Label>
-                  <Input placeholder="Introduce un teléfono" autoComplete="phone" />
-                  <Field.Error />
-                </Field>
-
-                <Field name="password">
-                  <Field.Label>Contraseña</Field.Label>
-                  <InputPassword placeholder="Introduce una contraseña" autoComplete="new-password" />
-                  <Field.Error />
-                </Field>
-
-                <Field name="passwordConfirmation">
-                  <Field.Label>Confirmar contraseña</Field.Label>
-                  <InputPassword placeholder="Confirma tu contraseña" autoComplete="new-password" />
-                  <Field.Error />
-                </Field>
-
-                <div>
-                  <Button type="submit" size="lg" className="w-full">
-                    Crear una cuenta
-                  </Button>
-                </div>
-              </Form>
-            </Card>
+      <main className="flex flex-1 justify-center px-6 py-14">
+        <div className="w-full max-w-120">
+          <div className="pb-10 text-center">
+            <h1 className="text-[40px]/11 font-bold">Crear cuenta</h1>
+            <p className="text-[16px] text-muted">Completa tus datos para empezar</p>
           </div>
+
+          <Form route="signup.execute" className="gap-6">
+            <Field name="tenantName">
+              <Field.Label>Nombre de la clínica</Field.Label>
+              <Input placeholder="Introduce un nombre" autoComplete="organization" />
+              <Field.Error />
+            </Field>
+
+            <div className="flex flex-col gap-4 sm:flex-row">
+              <Field name="firstName" className="w-full">
+                <Field.Label>Nombre</Field.Label>
+                <Input placeholder="Introduce un nombre" autoComplete="given-name" />
+                <Field.Error />
+              </Field>
+
+              <Field name="lastName" className="w-full">
+                <Field.Label>Apellido</Field.Label>
+                <Input placeholder="Introduce un apellido" autoComplete="family-name" />
+                <Field.Error />
+              </Field>
+            </div>
+
+            <Field name="email">
+              <Field.Label>Correo electrónico</Field.Label>
+              <Input placeholder="Introduce un correo" autoComplete="email" />
+              <Field.Error />
+            </Field>
+
+            <Field name="phone">
+              <Field.Label htmlFor="phone">Teléfono</Field.Label>
+              <Input placeholder="Introduce un teléfono" autoComplete="phone" />
+              <Field.Error />
+            </Field>
+
+            <Field name="password">
+              <Field.Label>Contraseña</Field.Label>
+              <InputPassword placeholder="Introduce una contraseña" autoComplete="new-password" />
+              <Field.Error />
+            </Field>
+
+            <Field name="passwordConfirmation">
+              <Field.Label>Confirmar contraseña</Field.Label>
+              <InputPassword placeholder="Confirma tu contraseña" autoComplete="new-password" />
+              <Field.Error />
+            </Field>
+
+            <div>
+              <Button type="submit" size="lg" className="w-full mt-6">
+                Crear una cuenta
+              </Button>
+            </div>
+          </Form>
         </div>
       </main>
-    </div>
+    </>
   )
 }
 

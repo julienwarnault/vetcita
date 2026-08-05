@@ -1,5 +1,5 @@
 import { Toaster } from 'sonner'
-import { ReactElement } from 'react'
+import type { ReactElement } from 'react'
 import { useFlashToasts } from '~/hooks/use_flash'
 
 interface AuthLayoutProps {
@@ -11,7 +11,13 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
 
   return (
     <>
-      {children}
+      <div className="grid h-screen overflow-y-auto bg-white lg:grid-cols-[2fr_1fr]">
+        <div className="flex min-h-screen flex-col">{children}</div>
+
+        <aside className="sticky top-0 hidden h-screen p-4 lg:block">
+          <img src="/images/auth.jpg" alt="" className="h-full w-full rounded-3xl object-cover object-center" />
+        </aside>
+      </div>
       <Toaster position="top-center" richColors />
     </>
   )
