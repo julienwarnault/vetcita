@@ -7,6 +7,7 @@ import type { UUID } from '#shared/types'
 interface SearchAppointmentsParams {
   tenantId: UUID
   clientIds?: UUID[]
+  petIds?: UUID[]
   search?: string
   limit: number
 }
@@ -27,11 +28,23 @@ export class SearchAppointments {
       .orderBy('start_date', 'asc')
       .limit(params.limit)
 
-    if (params.clientIds) {
-      query.whereIn('client_id', params.clientIds)
+    if (params.clientIds || params.petIds) {
+      query.where((builder) => {
+        if (params.clientIds) {
+          builder.whereIn('client_id', params.clientIds)
+        }
+
+        if (params.petIds) {
+          if (params.clientIds) {
+            builder.orWhereIn('pet_id', params.petIds)
+          } else {
+            builder.whereIn('pet_id', params.petIds)
+          }
+        }
+      })
     }
 
-    if (!params.clientIds && params.search) {
+    if (!params.clientIds && !params.petIds && params.search) {
       const ref = `%${params.search}%`
       query.whereILike('booking_ref', ref)
     }
