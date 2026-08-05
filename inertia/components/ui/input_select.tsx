@@ -3,6 +3,7 @@ import { ChevronDownIcon } from 'lucide-react'
 import { Select as BaseSelect } from '@base-ui/react/select'
 import { baseInput } from './input'
 import { Card } from './card'
+import { ReactNode } from 'react'
 
 const select = tv({
   slots: {
@@ -16,7 +17,7 @@ const select = tv({
 })
 
 interface InputSelectProps {
-  items: { label: string; value: string }[]
+  items: { label: string | ReactNode; value: string }[]
   value?: string | null
   defaultValue?: string | null
   onValueChange?: (value: string | null) => void

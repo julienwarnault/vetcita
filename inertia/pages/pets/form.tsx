@@ -84,7 +84,12 @@ export default function ShowForm(props: PageProps) {
                     <Field.Label>Especie *</Field.Label>
                     <InputSelect
                       items={species.map((item) => ({
-                        label: item.name,
+                        label: (
+                          <div className="flex items-center gap-2">
+                            <img src={item.illustrationUrl} className="size-7 rounded-full" />
+                            <span>{item.name}</span>
+                          </div>
+                        ),
                         value: item.id,
                       }))}
                       defaultValue={pet?.speciesId}

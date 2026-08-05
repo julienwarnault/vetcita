@@ -286,7 +286,7 @@ export class ServiceSchema extends BaseModel {
 }
 
 export class SpeciesSchema extends BaseModel {
-  static $columns = ['id', 'illustrationUrl', 'name'] as const
+  static $columns = ['id', 'illustrationUrl', 'name', 'order'] as const
   $columns = SpeciesSchema.$columns
   @column({ isPrimary: true })
   declare id: UUID
@@ -294,6 +294,8 @@ export class SpeciesSchema extends BaseModel {
   declare illustrationUrl: string
   @column()
   declare name: string
+  @column()
+  declare order: number
 }
 
 export class TenantSchema extends BaseModel {
