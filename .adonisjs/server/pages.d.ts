@@ -35,6 +35,7 @@ declare module '@adonisjs/inertia/types' {
     'pets/form': ExtractProps<(typeof import('../../inertia/pages/pets/form.tsx'))['default']>
     'pets/list': ExtractProps<(typeof import('../../inertia/pages/pets/list.tsx'))['default']>
     'pets/show': ExtractProps<(typeof import('../../inertia/pages/pets/show.tsx'))['default']>
+    'prescriptions/forms': ExtractProps<(typeof import('../../inertia/pages/prescriptions/forms.tsx'))['default']>
     'search': ExtractProps<(typeof import('../../inertia/pages/search.tsx'))['default']>
     'services/form': ExtractProps<(typeof import('../../inertia/pages/services/form.tsx'))['default']>
     'services/list': ExtractProps<(typeof import('../../inertia/pages/services/list.tsx'))['default']>
@@ -47,6 +48,5 @@ declare module '@adonisjs/inertia/types' {
     'shifts/working_hours_form': ExtractProps<(typeof import('../../inertia/pages/shifts/working_hours_form.tsx'))['default']>
     'tenants/form': ExtractProps<(typeof import('../../inertia/pages/tenants/form.tsx'))['default']>
     'vaccines/forms': ExtractProps<(typeof import('../../inertia/pages/vaccines/forms.tsx'))['default']>
-    'prescriptions/forms': ExtractProps<(typeof import('../../inertia/pages/prescriptions/forms.tsx'))['default']>
   }
 }

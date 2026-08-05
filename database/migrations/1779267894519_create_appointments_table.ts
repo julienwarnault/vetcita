@@ -16,7 +16,7 @@ export default class extends BaseSchema {
       table.timestamp('end_date').notNullable()
       table.integer('duration').notNullable()
       table.string('booking_ref', 8).notNullable().unique()
-      table.boolean('is_online').notNullable().defaultTo(false)
+      table.string('booking_mode').notNullable()
       table.timestamp('reminder_sent_at', { useTz: true }).nullable()
       table.index(['tenant_id', 'agenda_id', 'start_date', 'end_date'])
       table.index(['tenant_id', 'client_id', 'start_date'])

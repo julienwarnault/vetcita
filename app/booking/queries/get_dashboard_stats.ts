@@ -1,8 +1,8 @@
 import type { DateTime } from 'luxon'
 import { inject } from '@adonisjs/core'
 import { AppointmentStatus } from '#appointment_workflow/enums/appointment_status'
+import Appointment, { BookingMode } from '#booking/models/appointment'
 import { TimeService } from '#shared/services/time_service'
-import Appointment from '#booking/models/appointment'
 import type { UUID } from '#shared/types'
 
 interface GetDashboardStatsParams {
@@ -40,7 +40,7 @@ export class GetDashboardStats {
         from: now.startOf('month'),
         to: now.endOf('month'),
         excludedStatus: AppointmentStatus.CANCELLED,
-        isOnline: true,
+        bookingMode: 'web',
       }),
     ])
 
@@ -60,7 +60,7 @@ export class GetDashboardStats {
     to: DateTime
     status?: AppointmentStatus
     excludedStatus?: AppointmentStatus
-    isOnline?: boolean
+    bookingMode?: BookingMode
   }) {
     const query = Appointment.query()
       .where('tenant_id', params.tenantId)
@@ -75,8 +75,8 @@ export class GetDashboardStats {
       query.whereNot('status_id', params.excludedStatus)
     }
 
-    if (params.isOnline !== undefined) {
-      query.where('is_online', params.isOnline)
+    if (params.bookingMode) {
+      query.where('booking_mode', params.bookingMode)
     }
 
     const result = await query.count('* as total').first()

@@ -6,8 +6,8 @@ import { CheckSlotBookable } from '#scheduling/actions/check_slot_bookable'
 import { dispatchAfterCommit } from '#shared/utils/dispatch_after_commit'
 import { transactionContext } from '#shared/contexts/transaction_context'
 import { BookingRefService } from '#booking/services/booking_ref_service'
+import Appointment, { BookingMode } from '#booking/models/appointment'
 import { DEFAULT_TIMEZONE } from '#shared/services/time_service'
-import Appointment from '#booking/models/appointment'
 import Service from '#services/models/service'
 import { events } from '#generated/events'
 import type { UUID } from '#shared/types'
@@ -19,7 +19,7 @@ interface CreateAppointmentParams {
   petId: UUID
   startDate: string
   tenantId: UUID
-  isOnline?: boolean
+  bookingMode?: BookingMode
 }
 
 @inject()
@@ -64,7 +64,7 @@ export class CreateAppointment {
         duration: service.duration,
         tenantId: params.tenantId,
         bookingRef: bookingRef,
-        isOnline: params.isOnline ?? false,
+        bookingMode: params.bookingMode ?? 'phone',
         statusId: AppointmentStatus.BOOKED,
       },
       { client: trx }

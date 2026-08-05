@@ -11,7 +11,11 @@ import Tenant from '#tenants/models/tenant'
 import Agenda from '#agendas/models/agenda'
 import Pet from '#pets/models/pet'
 
+export type BookingMode = 'web' | 'phone'
+
 export default class Appointment extends compose(AppointmentSchema, WithPrimaryUuid) {
+  declare bookingMode: BookingMode
+
   @belongsTo(() => Service)
   declare service: BelongsTo<typeof Service>
 
