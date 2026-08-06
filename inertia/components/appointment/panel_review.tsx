@@ -1,21 +1,30 @@
+import { useRef } from 'react'
 import { DateTime } from 'luxon'
 import { Data } from '@generated/data'
 import { cn } from 'tailwind-variants'
 import { router } from '@inertiajs/react'
-import { CheckIcon, TrashIcon } from 'lucide-react'
-import { DEFAULT_LOCALE, DEFAULT_TIMEZONE } from '~/lib/date'
+import { useQuery } from '@tanstack/react-query'
+import { PopoverRootActions } from '@base-ui/react'
+import { CircleAlertIcon, TrashIcon } from 'lucide-react'
+import { DEFAULT_LOCALE, DEFAULT_TIMEZONE, generateTimeSlots } from '~/lib/date'
 import { AppointmentForm } from './use_appointment_form'
 import { capitalize, formatPrice } from '~/lib/utils'
+import { DatePicker } from '../ui/date_picker'
+import { query, urlFor } from '~/lib/tuyau'
+import { Popover } from '../ui/popover'
 import { Drawer } from '../ui/drawer'
 import { Button } from '../ui/button'
-import { urlFor } from '~/lib/tuyau'
-import { Menu } from '../ui/menu'
+import { Avatar } from '../ui/avatar'
+import { Select } from '../ui/select'
+import { Badge } from '../ui/badge'
 
 interface PanelReviewProps {
   form: AppointmentForm
   service?: Data.Services.Service
+  agenda?: Data.Agendas.Agenda
   status?: Data.AppointmentWorkflow.AppointmentStatus
   statuses: Data.AppointmentWorkflow.AppointmentStatus[]
+  agendas: Data.Agendas.Agenda[]
   canContinue: boolean
   goToStep(step: number): void
   next(): void
@@ -23,11 +32,58 @@ interface PanelReviewProps {
 }
 
 export function PanelReview(props: PanelReviewProps) {
-  const { form, service, statuses, status, canContinue, next, goToStep, close } = props
+  const { form, service, statuses, status, agenda, agendas, canContinue, next, goToStep, close } = props
   const { data, setData, isDirty } = form
 
+  const pickerActionsRef = useRef<PopoverRootActions>(null)
+
+  const date = DateTime.fromISO(data.startDate, { zone: DEFAULT_TIMEZONE }).startOf('day')
   const startDate = DateTime.fromISO(data.startDate, { zone: DEFAULT_TIMEZONE })
   const endDate = startDate.plus({ minutes: service?.duration || 0 })
+
+  const { data: slots, isLoading: isLoadingSlots } = useQuery(
+    query.getBookableSlots.render.queryOptions(
+      {
+        query: {
+          tenantId: data.tenantId,
+          serviceId: service!.id,
+          date: date.toFormat('yyyy-MM-dd'),
+          ...(data?.id && { appointmentId: data?.id }),
+        },
+      },
+      { enabled: Boolean(date && service) }
+    )
+  )
+
+  const availableSlots = slots?.slots ?? []
+  const availableTimeValues = new Set(
+    availableSlots.map((slot) => DateTime.fromISO(slot.at, { zone: DEFAULT_TIMEZONE }).toFormat('HH:mm:00'))
+  )
+  const currentSlot = availableSlots.find((slot) => DateTime.fromISO(slot.at).toMillis() === startDate.toMillis())
+  const isSelectedAgendaAvailable = agenda ? !!currentSlot?.availableAgendaIds.includes(agenda.id) : true
+  const selectedTimeValue = startDate.toFormat('HH:mm:00')
+
+  const changeDay = (newDay: DateTime) => {
+    const nextStartDate = startDate.set({
+      year: newDay.year,
+      month: newDay.month,
+      day: newDay.day,
+    })
+
+    setData('startDate', nextStartDate.toISO()!)
+  }
+
+  const changeTime = (value: string) => {
+    const [hour, minute, second] = value.split(':').map(Number)
+    const nextStartDate = startDate.set({
+      hour,
+      minute,
+      second,
+      millisecond: 0,
+    })
+
+    setData('startDate', nextStartDate.toISO()!)
+  }
 
   return (
     <Drawer.MainPanel className="grid grid-rows-[auto_1fr_auto]">
@@ -37,39 +93,76 @@ export function PanelReview(props: PanelReviewProps) {
           style={{ backgroundColor: data.id && status ? status.color : '#fff' }}
         >
           <div className="flex flex-col">
-            <h1 className="text-[28px]/9 font-semibold">
-              {capitalize(startDate.setLocale(DEFAULT_LOCALE).toFormat('ccc. d LLL'))}
-            </h1>
+            <Popover
+              actionsRef={pickerActionsRef}
+              trigger={
+                <button className="flex items-center gap-1">
+                  <div className="text-[28px]/9 font-semibold">
+                    {capitalize(startDate.setLocale(DEFAULT_LOCALE).toFormat('ccc. d LLL'))}
+                  </div>
+                  <Popover.TriggerIcon />
+                </button>
+              }
+            >
+              <DatePicker
+                initialMonth={date.startOf('month')}
+                selectedDays={date}
+                numberOfMonths={1}
+                onDayClick={(newDay) => {
+                  changeDay(newDay)
+                  pickerActionsRef.current?.close()
+                }}
+              />
+            </Popover>
+            <Select
+              align="start"
+              value={selectedTimeValue}
+              onValueChange={(value) => {
+                if (value) changeTime(value)
+              }}
+              trigger={
+                <button className="flex items-center gap-1">
+                  <div className="text-sm font-normal">{startDate.toFormat('h:mma').toLowerCase()}</div>
+                  <Popover.TriggerIcon />
+                </button>
+              }
+              items={generateTimeSlots(15).map(({ label, value }) => {
+                const isUnavailable = !isLoadingSlots && !availableTimeValues.has(value)
 
-            <div className="text-sm font-normal">{startDate.toFormat('h:mma').toLowerCase()}</div>
+                return {
+                  label,
+                  value,
+                  rightElement: isUnavailable ? <div className="size-2 rounded-full bg-warning" /> : undefined,
+                }
+              })}
+            />
           </div>
           {data.id && status && (
             <div>
-              <Menu
+              <Select
+                value={status.id}
+                onValueChange={(value) => {
+                  if (!value || value === status.id) return
+
+                  router.patch(
+                    urlFor('change_appointment_status.execute', { id: data.id }),
+                    { statusId: value },
+                    { onFinish: close }
+                  )
+                }}
                 trigger={
-                  <Button variant="secondary" className="text-white border-white bg-transparent">
-                    {status.name} <Menu.TriggerIcon />
+                  <Button variant="secondary" className="text-white border-white bg-transparent hover:bg-white/20">
+                    {status.name}
+                    <Select.TriggerIcon />
                   </Button>
                 }
                 align="end"
-              >
-                {statuses.map((s) => (
-                  <Menu.Item
-                    className="flex justify-between"
-                    key={s.id}
-                    onClick={() => {
-                      router.patch(
-                        urlFor('change_appointment_status.execute', { id: data.id }),
-                        { statusId: s.id },
-                        { onFinish: close }
-                      )
-                    }}
-                  >
-                    {s.name}
-                    {status.id == s.id && <CheckIcon className="size-5!" />}
-                  </Menu.Item>
-                ))}
-              </Menu>
+                items={statuses.map((s) => ({
+                  label: s.name,
+                  value: s.id,
+                  leftElement: <div className="size-2 rounded-full" style={{ backgroundColor: s.color }} />,
+                }))}
+              />
             </div>
           )}
         </div>
@@ -82,26 +175,58 @@ export function PanelReview(props: PanelReviewProps) {
               className="w-1 h-auto rounded-full self-stretch shrink-0"
               style={{ backgroundColor: service!.color }}
             />
-            <div className="flex flex-1 flex-col gap-1 py-2">
-              <div className="text-[17px]/6 font-medium">{service!.name}</div>
+            <div className="flex flex-col grow">
+              <div className="flex items-start gap-4">
+                <div className="flex flex-1 flex-col gap-1 py-2">
+                  <div className="text-[17px]/6 font-medium">{service!.name}</div>
 
-              <div className="text-[15px]/5 text-muted">
-                {`${startDate.toFormat('h:mma')} - ${endDate.toFormat('h:mma')}`.toLowerCase()}
+                  <div className="text-[15px]/5 text-muted">
+                    {`${startDate.toFormat('h:mma')} - ${endDate.toFormat('h:mma')}`.toLowerCase()}
+                  </div>
+                </div>
+                <div className="ml-auto">
+                  <Button
+                    size="icon-sm"
+                    variant="secondary"
+                    onClick={() => {
+                      setData('serviceId', '')
+                      setData('startDate', '')
+                      setData('agendaId', '')
+                      goToStep(0)
+                    }}
+                  >
+                    <TrashIcon />
+                  </Button>
+                </div>
               </div>
-            </div>
-            <div>
-              <Button
-                size="icon-sm"
-                variant="secondary"
-                onClick={() => {
-                  setData('serviceId', '')
-                  setData('startDate', '')
-                  setData('agendaId', '')
-                  goToStep(0)
-                }}
-              >
-                <TrashIcon />
-              </Button>
+              <div className="flex flex-col gap-2 items-start mt-2">
+                <Select
+                  align="start"
+                  className="min-w-85 w-85"
+                  value={agenda?.id}
+                  trigger={
+                    <Button variant="secondary" className="pl-0.5 gap-3">
+                      <Avatar fullName={agenda?.name} size="xs" />
+                      <span className="text-[14px]/4">{agenda?.name}</span>
+                      <Popover.TriggerIcon />
+                    </Button>
+                  }
+                  onValueChange={(value) => {
+                    if (value) setData('agendaId', value)
+                  }}
+                  items={agendas?.map((item) => ({
+                    label: item.name,
+                    value: item.id,
+                    leftElement: <Avatar fullName={item.name} size="xs" />,
+                  }))}
+                />
+                {isSelectedAgendaAvailable === false && (
+                  <Badge variant="warning">
+                    <CircleAlertIcon />
+                    El miembro del equipo no está disponible
+                  </Badge>
+                )}
+              </div>
             </div>
           </div>
         </div>

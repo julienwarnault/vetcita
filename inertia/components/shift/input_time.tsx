@@ -1,6 +1,6 @@
 import React from 'react'
-import { DateTime } from 'luxon'
 import { NativeSelect } from '../ui/native_select'
+import { generateTimeSlots } from '~/lib/date'
 
 interface InputTimeProps {
   value?: string
@@ -22,16 +22,12 @@ interface TimeOptionsProps {
 }
 
 export const TimeOptions = React.memo(function TimeOptions({ stepMinutes = 5 }: TimeOptionsProps) {
-  const count = (24 * 60) / stepMinutes
-
   return (
     <>
-      {[...Array(count)].map((_, k) => {
-        const dt = DateTime.fromObject({ hour: 0, minute: 0 }).plus({ minutes: k * stepMinutes })
-        const value = dt.toFormat('HH:mm:00')
+      {generateTimeSlots(stepMinutes).map(({ label, value }) => {
         return (
           <NativeSelect.Option key={value} value={value}>
-            {dt.toFormat('hh:mma').toLowerCase()}
+            {label}
           </NativeSelect.Option>
         )
       })}

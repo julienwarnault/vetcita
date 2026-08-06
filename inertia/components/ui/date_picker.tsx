@@ -9,7 +9,7 @@ import { capitalize } from '~/lib/utils'
 const datePicker = tv({
   slots: {
     container: 'relative min-h-94 min-w-[calc(7*var(--months)*44px)]',
-    navigation: 'pointer-events-none absolute inset-x-0 top-0 z-10 flex justify-between',
+    navigation: 'pointer-events-none absolute inset-x-0 top-0 z-200 flex justify-between',
     navigationButton:
       'pointer-events-auto flex size-10 items-center justify-center rounded-full hover:bg-background focus-visible:ring-2 focus-visible:ring-accent disabled:pointer-events-none disabled:opacity-30',
     monthList: 'flex flex-row gap-8',

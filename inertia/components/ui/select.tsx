@@ -1,31 +1,33 @@
 import { tv } from 'tailwind-variants'
-import { ChevronDownIcon } from 'lucide-react'
 import { isValidElement, JSX, ReactNode } from 'react'
+import { CheckIcon, ChevronDownIcon } from 'lucide-react'
 import { Select as BaseSelect } from '@base-ui/react/select'
 
 const select = tv({
   slots: {
     trigger: 'text-sm',
-    icon: 'inline-flex data-[popup-open]:rotate-180',
-    positioner: 'z-50',
-    popup: 'min-w-50 rounded-xl border bg-surface px-5 py-2 shadow-xl',
+    icon: 'inline-flex group-data-[popup-open]:rotate-180',
+    positioner: 'z-200',
+    popup: 'min-w-50 rounded-xl border bg-surface px-5 py-2 shadow-xl max-h-72 overflow-auto overscroll-none',
     list: 'overflow-visible!',
-    item: 'mx-[-0.75rem] flex min-h-10 cursor-pointer items-center gap-3 rounded-lg px-3 py-2 text-[15px] font-medium hover:bg-background data-[selected]:bg-accent-faded [&_svg]:size-4',
+    item: 'mx-[-0.75rem] flex min-h-10 cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-[15px] font-medium hover:bg-background [&_svg]:size-4',
+    itemContent: 'flex items-center gap-2 grow',
   },
 })
 
 interface SelectProps {
   trigger?: ReactNode
-  items: { label: string; value: string; leftElement?: JSX.Element }[]
+  items: { label: string; value: string; leftElement?: JSX.Element; rightElement?: JSX.Element }[]
   value?: string
   open?: boolean
   onOpenChange?: (open: boolean) => void
   onValueChange?: (value: string | null) => void
   align?: BaseSelect.Positioner.Props['align']
+  className?: string
 }
 
 export function Select(props: SelectProps) {
-  const { trigger, value, items, open, align = 'end', onOpenChange, onValueChange } = props
+  const { trigger, value, items, open, align = 'end', className, onOpenChange, onValueChange } = props
 
   const classes = select({})
 
@@ -48,12 +50,18 @@ export function Select(props: SelectProps) {
           alignItemWithTrigger={false}
           className={classes.positioner()}
         >
-          <BaseSelect.Popup className={classes.popup()}>
+          <BaseSelect.Popup className={classes.popup({ className })}>
             <BaseSelect.List className={classes.list()}>
-              {items.map(({ leftElement: LeftElement, label, value }) => (
+              {items.map(({ leftElement: LeftElement, rightElement: RightElement, label, value }) => (
                 <BaseSelect.Item key={value} value={value} className={classes.item()}>
-                  {LeftElement}
-                  <span>{label}</span>
+                  <div className={classes.itemContent()}>
+                    {LeftElement}
+                    <span className="grow">{label}</span>
+                    {RightElement}
+                  </div>
+                  <BaseSelect.ItemIndicator>
+                    <CheckIcon className="size-5!" />
+                  </BaseSelect.ItemIndicator>
                 </BaseSelect.Item>
               ))}
             </BaseSelect.List>
@@ -63,3 +71,9 @@ export function Select(props: SelectProps) {
     </BaseSelect.Root>
   )
 }
+
+function SelectTriggerIcon() {
+  return <ChevronDownIcon className={select().icon()} size={16} />
+}
+
+Select.TriggerIcon = SelectTriggerIcon

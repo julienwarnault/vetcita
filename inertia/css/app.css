@@ -16,6 +16,7 @@
   --color-accent-faded: #dfe1ff;
   --color-success: #1f8900;
   --color-destructive: #ea4a5a;
+  --color-warning: #dc860e;
 }
 
 @layer base {

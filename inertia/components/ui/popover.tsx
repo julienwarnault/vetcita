@@ -6,7 +6,7 @@ import { Card } from './card'
 
 const popover = tv({
   slots: {
-    positioner: 'z-50',
+    positioner: 'z-200',
     popup: 'max-h-[var(--available-height)] overscroll-none',
     icon: 'group-data-[popup-open]:rotate-180',
   },
@@ -21,15 +21,26 @@ interface PopoverProps {
   align?: BasePopover.Positioner.Props['align']
   alignOffset?: BasePopover.Positioner.Props['alignOffset']
   sideOffset?: BasePopover.Positioner.Props['sideOffset']
+  actionsRef?: BasePopover.Root.Props['actionsRef']
 }
 
 export function Popover(props: PopoverProps) {
-  const { trigger, className, children, open, onOpenChange, align = 'center', alignOffset, sideOffset = 8 } = props
+  const {
+    trigger,
+    className,
+    children,
+    open,
+    onOpenChange,
+    align = 'center',
+    alignOffset,
+    sideOffset = 8,
+    actionsRef,
+  } = props
 
   const classes = popover({})
 
   return (
-    <BasePopover.Root open={open} onOpenChange={onOpenChange}>
+    <BasePopover.Root actionsRef={actionsRef} open={open} onOpenChange={onOpenChange}>
       {trigger && isValidElement(trigger) && <BasePopover.Trigger render={trigger} />}
 
       <BasePopover.Portal>

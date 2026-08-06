@@ -1,10 +1,6 @@
 import { DateTime } from 'luxon'
-import { inject } from '@adonisjs/core'
-import { SlotNotBookableException } from '#scheduling/exceptions/slot_not_bookable_exception'
-import { CheckSlotBookable } from '#scheduling/actions/check_slot_bookable'
 import { dispatchAfterCommit } from '#shared/utils/dispatch_after_commit'
 import { transactionContext } from '#shared/contexts/transaction_context'
-import { DEFAULT_TIMEZONE } from '#shared/services/time_service'
 import Appointment from '#booking/models/appointment'
 import Service from '#services/models/service'
 import { events } from '#generated/events'
@@ -20,10 +16,7 @@ interface UpdateAppointmentParams {
   startDate: string
 }
 
-@inject()
 export class UpdateAppointment {
-  constructor(private readonly checkSlotBookable: CheckSlotBookable) {}
-
   async execute(params: UpdateAppointmentParams) {
     const trx = transactionContext.get()
 
@@ -40,14 +33,6 @@ export class UpdateAppointment {
     const startDate = DateTime.fromISO(params.startDate)
     const endDate = startDate.plus({ minutes: service.duration })
 
-    const isBookable = await this.checkSlotBookable.execute({
-      tenantId: appointment.tenantId,
-      serviceId: params.serviceId,
-      agendaId: params.agendaId,
-      start: startDate.setZone(DEFAULT_TIMEZONE),
-      appointmentId: params.id,
-    })
-
     appointment.merge({
       serviceId: params.serviceId,
       clientId: params.clientId,
@@ -59,10 +44,6 @@ export class UpdateAppointment {
     })
 
     const hasScheduleChanges = this.#hasScheduleChanges(appointment)
-
-    if (hasScheduleChanges && !isBookable) {
-      throw new SlotNotBookableException()
-    }
 
     await appointment.useTransaction(trx!).save()
 

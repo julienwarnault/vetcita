@@ -7,7 +7,7 @@ export const menu = tv({
   slots: {
     icon: 'group-data-[popup-open]:rotate-180',
     positioner: 'z-200',
-    popup: 'min-w-50 rounded-xl border bg-surface px-5 py-2 shadow-xl',
+    popup: 'min-w-50 rounded-xl border bg-surface px-5 py-2 shadow-xl max-h-72 overflow-auto overscroll-none',
     item: 'mx-[-0.75rem] flex min-h-10 cursor-pointer items-center gap-3 rounded-lg px-3 py-2 text-[15px] font-medium hover:bg-background data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:size-4',
   },
   variants: {
@@ -25,10 +25,11 @@ interface MenuProps {
   open?: boolean
   onOpenChange?: (open: boolean) => void
   align?: BaseMenu.Positioner.Props['align']
+  className?: string
 }
 
 export function Menu(props: MenuProps) {
-  const { trigger, align = 'end', children, open, onOpenChange } = props
+  const { trigger, align = 'end', children, className, open, onOpenChange } = props
 
   const classes = menu()
 
@@ -38,7 +39,7 @@ export function Menu(props: MenuProps) {
 
       <BaseMenu.Portal>
         <BaseMenu.Positioner side="bottom" align={align} sideOffset={8} className={classes.positioner()}>
-          <BaseMenu.Popup className={classes.popup()}>{children}</BaseMenu.Popup>
+          <BaseMenu.Popup className={classes.popup({ className })}>{children}</BaseMenu.Popup>
         </BaseMenu.Positioner>
       </BaseMenu.Portal>
     </BaseMenu.Root>

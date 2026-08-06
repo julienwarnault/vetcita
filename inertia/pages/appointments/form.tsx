@@ -15,12 +15,13 @@ type PageProps = InertiaProps<{
   clientId?: string
   petId?: string
   appointment?: Data.Booking.Appointment
+  agendas: Data.Agendas.Agenda[]
   services: Data.Services.Service[]
   statuses: Data.AppointmentWorkflow.AppointmentStatus[]
 }>
 
 export default function ShowForm(props: PageProps) {
-  const { clientId, petId, appointment, services, statuses } = props
+  const { clientId, petId, appointment, services, statuses, agendas } = props
 
   const isEdit = !!appointment
 
@@ -42,6 +43,7 @@ export default function ShowForm(props: PageProps) {
 
   const selectedService = services.find(({ id }) => id === form.data.serviceId)
   const selectedStatus = statuses.find(({ id }) => id === appointment?.statusId)
+  const selectedAgenda = agendas.find(({ id }) => id === form?.data.agendaId)
 
   return (
     <InertiaDrawer ref={drawerRef}>
@@ -78,7 +80,9 @@ export default function ShowForm(props: PageProps) {
           canContinue={canContinue}
           service={selectedService!}
           status={selectedStatus}
+          agenda={selectedAgenda}
           statuses={statuses}
+          agendas={agendas}
           close={() => drawerRef.current?.close()}
         />
       )}

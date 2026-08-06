@@ -58,3 +58,13 @@ export function containsDay(interval: Interval, date: DateTime): boolean {
   const day = date.startOf('day')
   return day >= interval.start!.startOf('day') && day <= interval.end!.startOf('day')
 }
+
+export function generateTimeSlots(stepMinutes = 5) {
+  const count = (24 * 60) / stepMinutes
+
+  return [...Array(count)].map((_, k) => {
+    const dt = DateTime.fromObject({ hour: 0, minute: 0 }).plus({ minutes: k * stepMinutes })
+    const value = dt.toFormat('HH:mm:00')
+    return { label: dt.toFormat('hh:mma').toLowerCase(), value: value }
+  })
+}

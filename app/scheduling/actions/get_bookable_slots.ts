@@ -50,6 +50,7 @@ export class GetBookableSlots {
 
     const slots = (availability.get(params.date) ?? []).map((slot) => ({
       agendaId: slot.agendaId,
+      availableAgendaIds: slot.availableAgendaIds,
       time: slot.start.toFormat('hh:mma').toLowerCase(),
       at: slot.start.toISO()!,
     }))

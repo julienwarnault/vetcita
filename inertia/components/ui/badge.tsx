@@ -8,6 +8,7 @@ const badge = tv({
       primary: 'bg-primary text-white',
       secondary: 'border border-border bg-white',
       accent: 'bg-accent text-white',
+      warning: 'bg-warning/10 text-warning',
     },
     size: {
       sm: 'px-1.5 min-block-5 text-[13px]/4 font-medium [&_svg]:size-2',

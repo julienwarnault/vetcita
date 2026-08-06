@@ -1,8 +1,6 @@
 import { DateTime } from 'luxon'
 import { inject } from '@adonisjs/core'
-import { SlotNotBookableException } from '#scheduling/exceptions/slot_not_bookable_exception'
 import { AppointmentStatus } from '#appointment_workflow/enums/appointment_status'
-import { CheckSlotBookable } from '#scheduling/actions/check_slot_bookable'
 import { dispatchAfterCommit } from '#shared/utils/dispatch_after_commit'
 import { transactionContext } from '#shared/contexts/transaction_context'
 import { BookingRefService } from '#booking/services/booking_ref_service'
@@ -24,10 +22,7 @@ interface CreateAppointmentParams {
 
 @inject()
 export class CreateAppointment {
-  constructor(
-    private readonly bookingRef: BookingRefService,
-    private readonly checkSlotBookable: CheckSlotBookable
-  ) {}
+  constructor(private readonly bookingRef: BookingRefService) {}
 
   async execute(params: CreateAppointmentParams) {
     const trx = transactionContext.get()
@@ -39,17 +34,6 @@ export class CreateAppointment {
 
     const startDate = DateTime.fromISO(params.startDate, { zone: DEFAULT_TIMEZONE })
     const endDate = startDate.plus({ minutes: service.duration })
-
-    const isBookable = await this.checkSlotBookable.execute({
-      tenantId: params.tenantId,
-      serviceId: params.serviceId,
-      agendaId: params.agendaId,
-      start: startDate,
-    })
-
-    if (!isBookable) {
-      throw new SlotNotBookableException()
-    }
 
     const bookingRef = await this.bookingRef.generateUnique()
 

@@ -5,10 +5,12 @@ import AppointmentStatusTransformer from '#appointment_workflow/transformers/app
 import { GetAppointmentStatuses } from '#appointment_workflow/queries/get_appointment_statuses'
 import AppointmentTransformer from '#booking/transformers/appointment_transformer'
 import ServiceTransformer from '#services/transformers/service_transformer'
+import AgendaTransformer from '#agendas/transformers/agenda_transformer'
 import { UpdateAppointment } from '#booking/actions/update_appointment'
 import { GetAppointment } from '#booking/queries/get_appointment'
 import { withTransaction } from '#shared/utils/with_transaction'
 import { GetServices } from '#services/queries/get_services'
+import { GetAgendas } from '#agendas/queries/get_agendas'
 import { uuidSchema } from '#shared/validators'
 
 @inject()
@@ -26,20 +28,23 @@ export default class UpdateAppointmentController {
   constructor(
     private readonly getAppointment: GetAppointment,
     private readonly getServices: GetServices,
+    private readonly getAgendas: GetAgendas,
     private readonly getAppointmentStatuses: GetAppointmentStatuses,
     private readonly updateAppointment: UpdateAppointment
   ) {}
 
   async render({ params, inertia, tenantId }: HttpContext) {
-    const [{ appointment }, { services }, { statuses }] = await Promise.all([
+    const [{ appointment }, { services }, { agendas }, { statuses }] = await Promise.all([
       this.getAppointment.execute({ id: params.id, tenantId }),
       this.getServices.execute({ tenantId }),
+      this.getAgendas.execute({ tenantId }),
       this.getAppointmentStatuses.execute({ tenantId }),
     ])
 
     return inertia.render('appointments/form', {
       appointment: AppointmentTransformer.transform(appointment),
       services: ServiceTransformer.transform(services),
+      agendas: AgendaTransformer.transform(agendas),
       statuses: AppointmentStatusTransformer.transform(statuses),
     })
   }

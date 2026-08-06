@@ -17,6 +17,7 @@ interface BookableSlot {
   start: DateTime
   end: DateTime
   agendaId: UUID
+  availableAgendaIds: UUID[]
 }
 
 interface GetBookableSlotsParams {
@@ -99,6 +100,7 @@ export class ScheduleService {
             start: cursor,
             end: slotEnd,
             agendaId: period.agendaId,
+            availableAgendaIds: [period.agendaId],
             available: this.#isSlotAvailable(cursor, slotEnd, agendaBlocking),
           })
         }
@@ -124,7 +126,18 @@ export class ScheduleService {
       const slotLoad = loadByAgenda.get(slot.agendaId) ?? 0
       const currentLoad = current ? (loadByAgenda.get(current.agendaId) ?? 0) : Infinity
 
-      if (slotLoad < currentLoad) best.set(key, slot)
+      if (!current) {
+        best.set(key, { ...slot, availableAgendaIds: [slot.agendaId] })
+        continue
+      }
+
+      if (!current.availableAgendaIds.includes(slot.agendaId)) {
+        current.availableAgendaIds.push(slot.agendaId)
+      }
+
+      if (slotLoad < currentLoad) {
+        best.set(key, { ...slot, availableAgendaIds: current.availableAgendaIds })
+      }
     }
 
     return [...best.values()].sort((a, b) => a.start.toMillis() - b.start.toMillis())
