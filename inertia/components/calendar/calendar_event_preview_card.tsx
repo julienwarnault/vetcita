@@ -1,5 +1,6 @@
 import { cn } from 'tailwind-variants'
 import { PreviewCard } from '@base-ui/react'
+import { DynamicIcon, IconName } from 'lucide-react/dynamic'
 import { isValidElement, ReactNode, useRef, useState } from 'react'
 import { formatDuration, formatPhoneNumber } from '~/lib/utils'
 import { Event } from '~/lib/calendar'
@@ -67,7 +68,17 @@ export function CalendarEventPreviewCard(props: CalendarEventPreviewCardProps) {
                 <div className="text-sm font-medium text-white">
                   {`${event.start.toFormat('h:mma')} - ${event.end.toFormat('h:mma')}`.toLowerCase()}
                 </div>
-                <div className="text-sm font-medium text-white">{event.status.name}</div>
+                <div className="flex gap-2 items-center">
+                  <div className="text-sm font-medium text-white">{event.status.name}</div>
+                  {!event.status.isDefault && (
+                    <DynamicIcon
+                      size={20}
+                      strokeWidth={1.5}
+                      name={event.status.icon as IconName}
+                      className="text-white"
+                    />
+                  )}
+                </div>
               </div>
               <div className="flex flex-col gap-4 p-5">
                 <div className="flex items-center gap-4">

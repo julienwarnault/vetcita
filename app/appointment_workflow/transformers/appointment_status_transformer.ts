@@ -7,6 +7,7 @@ export default class AppointmentStatusTransformer extends BaseTransformer<Appoin
       'id',
       'name',
       'color',
+      'icon',
       'isCustom',
       'sortOrder',
       'tenantId',

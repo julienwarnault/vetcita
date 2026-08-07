@@ -53,6 +53,8 @@ export default function ShowCalendar(props: PageProps) {
             status: {
               name: appointment.status!.name,
               color: appointment.status!.color,
+              icon: appointment.status!.icon,
+              isDefault: appointment.status!.sortOrder === 1,
             },
             typeName: appointment.service!.name,
             color: appointment.service!.color,

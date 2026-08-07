@@ -1,4 +1,4 @@
-import { tv } from 'tailwind-variants'
+import { cn, tv } from 'tailwind-variants'
 import { isValidElement, JSX, ReactNode } from 'react'
 import { CheckIcon, ChevronDownIcon } from 'lucide-react'
 import { Select as BaseSelect } from '@base-ui/react/select'
@@ -17,17 +17,24 @@ const select = tv({
 
 interface SelectProps {
   trigger?: ReactNode
-  items: { label: string; value: string; leftElement?: JSX.Element; rightElement?: JSX.Element }[]
+  items: {
+    label: string
+    value: string
+    leftElement?: JSX.Element
+    rightElement?: JSX.Element
+    variant?: 'destructive'
+  }[]
   value?: string
   open?: boolean
   onOpenChange?: (open: boolean) => void
   onValueChange?: (value: string | null) => void
   align?: BaseSelect.Positioner.Props['align']
+  sideOffset?: BaseSelect.Positioner.Props['sideOffset']
   className?: string
 }
 
 export function Select(props: SelectProps) {
-  const { trigger, value, items, open, align = 'end', className, onOpenChange, onValueChange } = props
+  const { trigger, value, items, open, align = 'end', sideOffset = 8, className, onOpenChange, onValueChange } = props
 
   const classes = select({})
 
@@ -45,15 +52,19 @@ export function Select(props: SelectProps) {
       <BaseSelect.Portal>
         <BaseSelect.Positioner
           side="bottom"
-          sideOffset={8}
+          sideOffset={sideOffset}
           align={align}
           alignItemWithTrigger={false}
           className={classes.positioner()}
         >
           <BaseSelect.Popup className={classes.popup({ className })}>
             <BaseSelect.List className={classes.list()}>
-              {items.map(({ leftElement: LeftElement, rightElement: RightElement, label, value }) => (
-                <BaseSelect.Item key={value} value={value} className={classes.item()}>
+              {items.map(({ leftElement: LeftElement, rightElement: RightElement, label, value, variant }) => (
+                <BaseSelect.Item
+                  key={value}
+                  value={value}
+                  className={cn(classes.item(), variant === 'destructive' && 'text-destructive')}
+                >
                   <div className={classes.itemContent()}>
                     {LeftElement}
                     <span className="grow">{label}</span>

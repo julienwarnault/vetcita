@@ -6,6 +6,7 @@ interface UpdateAppointmentStatusParams {
   id: UUID
   name: string
   color: string
+  icon: string
   tenantId: UUID
 }
 
@@ -22,6 +23,7 @@ export class UpdateAppointmentStatus {
     status.merge({
       name: params.name,
       color: params.color,
+      icon: params.icon,
     })
 
     await status.useTransaction(trx!).save()

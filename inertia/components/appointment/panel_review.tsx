@@ -6,6 +6,7 @@ import { router } from '@inertiajs/react'
 import { useQuery } from '@tanstack/react-query'
 import { PopoverRootActions } from '@base-ui/react'
 import { CircleAlertIcon, TrashIcon } from 'lucide-react'
+import { DynamicIcon, IconName } from 'lucide-react/dynamic'
 import { DEFAULT_LOCALE, DEFAULT_TIMEZONE, generateTimeSlots } from '~/lib/date'
 import { AppointmentForm } from './use_appointment_form'
 import { capitalize, formatPrice } from '~/lib/utils'
@@ -160,7 +161,8 @@ export function PanelReview(props: PanelReviewProps) {
                 items={statuses.map((s) => ({
                   label: s.name,
                   value: s.id,
-                  leftElement: <div className="size-2 rounded-full" style={{ backgroundColor: s.color }} />,
+                  leftElement: <DynamicIcon name={s.icon as IconName} size={22} />,
+                  variant: s.sortOrder > 100 ? 'destructive' : undefined,
                 }))}
               />
             </div>

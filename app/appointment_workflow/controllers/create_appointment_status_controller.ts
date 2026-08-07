@@ -10,6 +10,7 @@ export default class CreateAppointmentStatusController {
     vine.object({
       name: vine.string(),
       color: vine.string(),
+      icon: vine.string(),
     })
   )
 

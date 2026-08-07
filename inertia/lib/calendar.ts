@@ -21,7 +21,9 @@ export type Event = {
   }
   status: {
     name: string
+    icon: string
     color: string
+    isDefault: boolean
   }
   typeName: string
   color: string

@@ -7,6 +7,7 @@ const START_OFFSET = 1
 interface CreateAppointmentStatusParams {
   name: string
   color: string
+  icon: string
   tenantId: UUID
 }
 
@@ -27,6 +28,7 @@ export class CreateAppointmentStatus {
       {
         name: params.name,
         color: params.color,
+        icon: params.icon,
         sortOrder: nextSortOrder,
         isCustom: true,
         tenantId: params.tenantId,

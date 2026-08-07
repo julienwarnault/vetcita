@@ -1,6 +1,8 @@
 import { Data } from '@generated/data'
+import { IconName } from 'lucide-react/dynamic'
 import { COLORS_DARK, ColorSelect } from '~/components/ui/color_select'
 import { ButtonLink } from '~/components/ui/button_link'
+import { InputIcon } from '~/components/ui/input_icon'
 import { FormHeader } from '~/components/form_header'
 import { Button } from '~/components/ui/button'
 import MinimalLayout from '~/layouts/minimal'
@@ -50,11 +52,19 @@ export default function ShowForm(props: PageProps) {
             <h2 className="text-2xl font-semibold">Información del estado</h2>
 
             <div className="grid grid-cols-6 w-full gap-x-4 gap-y-6 pt-6">
-              <Field name="name" className="col-span-6">
-                <Field.Label>Nombre del estado *</Field.Label>
-                <Input placeholder="Añade un nombre para el estado" defaultValue={status?.name ?? ''} />
-                <Field.Error />
-              </Field>
+              <div className="flex gap-3 col-span-6">
+                <Field name="icon">
+                  <Field.Label>Icono *</Field.Label>
+                  <InputIcon defaultValue={(status?.icon as IconName) ?? 'calendar-plus-2'} />
+                  <Field.Error />
+                </Field>
+
+                <Field name="name" className="w-full">
+                  <Field.Label>Nombre del estado *</Field.Label>
+                  <Input placeholder="Añade un nombre para el estado" defaultValue={status?.name ?? ''} />
+                  <Field.Error />
+                </Field>
+              </div>
 
               <Field name="color" className="col-span-6">
                 <Field.Label>Selecciona un color para el estado *</Field.Label>

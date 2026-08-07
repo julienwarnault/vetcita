@@ -1,6 +1,7 @@
 import { cn } from 'tailwind-variants'
 import { Data } from '@generated/data'
 import { router } from '@inertiajs/react'
+import { DynamicIcon, IconName } from 'lucide-react/dynamic'
 import { LockIcon, ChevronUpIcon, ChevronDownIcon, Trash2Icon, PencilIcon } from 'lucide-react'
 import { ButtonLink } from '~/components/ui/button_link'
 import { ViewHeader } from '~/components/view_header'
@@ -53,7 +54,7 @@ export default function List(props: PageProps) {
             <div
               key={status.id}
               className={cn(
-                'relative overflow-hidden bg-white flex items-center justify-between px-8 py-5 border rounded-xl min-h-24',
+                'relative overflow-hidden bg-white flex gap-3 items-center justify-between px-6 py-5 border rounded-xl',
                 status.isCustom && 'hover:bg-background'
               )}
             >
@@ -68,14 +69,21 @@ export default function List(props: PageProps) {
                   }}
                 />
               )}
+
               <div>
+                <div className="flex items-center justify-center size-11.5 rounded-lg bg-background">
+                  <DynamicIcon name={status.icon as IconName} size={22} />
+                </div>
+              </div>
+
+              <div className="grow">
                 <div className="absolute w-1.5 inset-0 rounded-full" style={{ backgroundColor: status.color }} />
-                <div className="flex-1 text-[17px]/6 font-semibold">{status.name}</div>
+                <div className="flex-1 text-[15px]/5 font-semibold">{status.name}</div>
               </div>
 
               <div className="relative z-1 gap-2 ml-3">
                 {!status.isCustom ? (
-                  <LockIcon size={24} />
+                  <LockIcon size={22} />
                 ) : (
                   <Menu
                     trigger={

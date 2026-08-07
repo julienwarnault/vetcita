@@ -45,12 +45,14 @@ export class AgendaSchema extends BaseModel {
 }
 
 export class AppointmentStatusSchema extends BaseModel {
-  static $columns = ['color', 'createdAt', 'id', 'isCustom', 'name', 'sortOrder', 'tenantId', 'updatedAt'] as const
+  static $columns = ['color', 'createdAt', 'icon', 'id', 'isCustom', 'name', 'sortOrder', 'tenantId', 'updatedAt'] as const
   $columns = AppointmentStatusSchema.$columns
   @column()
   declare color: string
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
+  @column()
+  declare icon: string
   @column()
   declare id: string
   @column()
