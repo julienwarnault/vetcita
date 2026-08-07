@@ -15,13 +15,12 @@ import { urlFor } from '~/lib/tuyau'
 
 type PageProps = InertiaProps<{
   search: string
-  clients: Data.Clients.Client[]
   pets: Data.Pets.Pet[]
   appointments: Data.Booking.Appointment[]
 }>
 
 export default function Search(props: PageProps) {
-  const { search: initialSearch = '', appointments, clients, pets } = props
+  const { search: initialSearch = '', appointments, pets } = props
 
   const modalRef = useRef<InertiaModalRef>(null)
 
@@ -65,7 +64,7 @@ export default function Search(props: PageProps) {
           <p className="text-[15px]/5 text-muted">
             Buscar por nombre de cliente, mascota, teléfono móvil, email o referencia de la reserva
           </p>
-          <div className="grid gap-10 pt-12 lg:grid-cols-3">
+          <div className="grid gap-10 pt-12 lg:grid-cols-2">
             <div className="flex flex-col flex-1">
               <div className="text-[20px]/7 font-semibold pb-3.5">Próximas citas</div>
               {appointments?.length > 0 ? (
@@ -94,30 +93,7 @@ export default function Search(props: PageProps) {
                       <div className="flex flex-col items-start">
                         <div className="text-[15px]/5">{pet.name}</div>
                         <div className="text-[15px]/5 text-muted">{pet.client?.fullName}</div>
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-[15px]/5 text-muted">Ninguno encontrado</p>
-              )}
-            </div>
-            <div className="flex flex-col flex-1">
-              <div className="text-[20px]/7 font-semibold pb-3.5">
-                {`Clientes ${!initialSearch ? '(añadidos recientemente)' : ''}`.trim()}
-              </div>
-              {clients?.length > 0 ? (
-                <div className="flex-1">
-                  {clients.map((client) => (
-                    <button
-                      key={client.id}
-                      className="flex items-center pl-4 pr-6 py-4 gap-3 hover:bg-background w-full rounded-xl"
-                      onClick={() => visitModal(urlFor('get_client.render', { id: client.id }))}
-                    >
-                      <Avatar size="xl" fullName={client.fullName} />
-                      <div className="flex flex-col items-start">
-                        <div className="text-[15px]/5">{client.fullName}</div>
-                        <div className="text-[15px]/5 text-muted">{formatPhoneNumber(client.phone)}</div>
+                        <div className="text-[15px]/5 text-muted">{formatPhoneNumber(pet.client?.phone ?? '')}</div>
                       </div>
                     </button>
                   ))}

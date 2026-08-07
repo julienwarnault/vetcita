@@ -18,7 +18,16 @@ export class SearchPets {
 
     if (params.search) {
       const term = `%${params.search}%`
-      query.whereILike('name', term)
+
+      query.where((builder) => {
+        builder.whereILike('name', term).orWhereHas('owner', (ownerQuery) => {
+          ownerQuery
+            .whereILike('phone', term)
+            .orWhereILike('email', term)
+            .orWhereRaw(`CONCAT(first_name, ' ', last_name) ILIKE ?`, [term])
+            .orWhereRaw(`CONCAT(last_name, ' ', first_name) ILIKE ?`, [term])
+        })
+      })
     }
 
     const pets = await query

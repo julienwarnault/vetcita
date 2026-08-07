@@ -26,7 +26,7 @@ export function ListTable<T extends Record<string, any>>(props: ListTableProps<T
       return column.accessor(row)
     }
 
-    return row[column.accessor]
+    return row[column.accessor] ?? '-'
   }
 
   const isEmpty = data.length === 0

@@ -40,7 +40,7 @@ export default function List(props: PageProps) {
     {
       header: 'Especias',
       width: '10%',
-      accessor: ({ species }) => species?.name,
+      accessor: ({ species }) => species?.name ?? '-',
     },
     {
       header: 'Sexo',

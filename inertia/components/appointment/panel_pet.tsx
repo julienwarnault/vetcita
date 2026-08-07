@@ -62,6 +62,13 @@ export function PanelPet(props: PanelPetProps) {
                       >
                         Editar los datos de la mascota
                       </Menu.Item>
+                      <Menu.Item
+                        onClick={() =>
+                          visitModal(urlFor('update_client.render', { id: pet.clientId }), { onClose: refetch })
+                        }
+                      >
+                        Editar los datos del cliente
+                      </Menu.Item>
                     </Menu>
                     <Button
                       variant="secondary"
