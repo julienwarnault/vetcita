@@ -110,39 +110,38 @@ export default function ShowPet(props: PageProps) {
                     </div>
 
                     <hr className="my-4" />
+
+                    <Tabs.List className="px-8">
+                      <Tabs.Trigger value="details">Datos de la mascota</Tabs.Trigger>
+                      <Tabs.Trigger value="appointments">
+                        Citas
+                        <Badge size="sm" variant="secondary">
+                          {appointments?.length ?? 0}
+                        </Badge>
+                      </Tabs.Trigger>
+                      <Tabs.Trigger value="client">Datos del cliente</Tabs.Trigger>
+                      <Tabs.Trigger value="consultations">
+                        Consultas
+                        <Badge size="sm" variant="secondary">
+                          {consultations.length ?? 0}
+                        </Badge>
+                      </Tabs.Trigger>
+                      <Tabs.Trigger value="vaccines">
+                        Vacunas
+                        <Badge size="sm" variant="secondary">
+                          {vaccines.length ?? 0}
+                        </Badge>
+                      </Tabs.Trigger>
+                      <Tabs.Trigger value="prescriptions">
+                        Prescripciones
+                        <Badge size="sm" variant="secondary">
+                          {prescriptions.length ?? 0}
+                        </Badge>
+                      </Tabs.Trigger>
+                    </Tabs.List>
                   </div>
                 </Drawer.Body>
               </div>
-              <Drawer.Menu>
-                <Tabs.List>
-                  <Tabs.Trigger value="details">Datos de la mascota</Tabs.Trigger>
-                  <Tabs.Trigger value="appointments">
-                    Citas
-                    <Badge size="sm" variant="secondary">
-                      {appointments?.length ?? 0}
-                    </Badge>
-                  </Tabs.Trigger>
-                  <Tabs.Trigger value="client">Datos del cliente</Tabs.Trigger>
-                  <Tabs.Trigger value="consultations">
-                    Consultas
-                    <Badge size="sm" variant="secondary">
-                      {consultations.length ?? 0}
-                    </Badge>
-                  </Tabs.Trigger>
-                  <Tabs.Trigger value="vaccines">
-                    Vacunas
-                    <Badge size="sm" variant="secondary">
-                      {vaccines.length ?? 0}
-                    </Badge>
-                  </Tabs.Trigger>
-                  <Tabs.Trigger value="prescriptions">
-                    Prescripciones
-                    <Badge size="sm" variant="secondary">
-                      {prescriptions.length ?? 0}
-                    </Badge>
-                  </Tabs.Trigger>
-                </Tabs.List>
-              </Drawer.Menu>
             </div>
           </Drawer.LeftPanel>
 

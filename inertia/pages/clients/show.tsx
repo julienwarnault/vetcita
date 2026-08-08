@@ -74,26 +74,25 @@ export default function ShowClient(props: PageProps) {
                     </div>
 
                     <hr className="my-4" />
+
+                    <Tabs.List className="px-8">
+                      <Tabs.Trigger value="details">Datos del cliente</Tabs.Trigger>
+                      <Tabs.Trigger value="appointments">
+                        Citas
+                        <Badge size="sm" variant="secondary">
+                          {appointments?.length ?? 0}
+                        </Badge>
+                      </Tabs.Trigger>
+                      <Tabs.Trigger value="pets">
+                        Mascotas
+                        <Badge size="sm" variant="secondary">
+                          {pets?.length ?? 0}
+                        </Badge>
+                      </Tabs.Trigger>
+                    </Tabs.List>
                   </div>
                 </Drawer.Body>
               </div>
-              <Drawer.Menu>
-                <Tabs.List>
-                  <Tabs.Trigger value="details">Datos del cliente</Tabs.Trigger>
-                  <Tabs.Trigger value="appointments">
-                    Citas
-                    <Badge size="sm" variant="secondary">
-                      {appointments?.length ?? 0}
-                    </Badge>
-                  </Tabs.Trigger>
-                  <Tabs.Trigger value="pets">
-                    Mascotas
-                    <Badge size="sm" variant="secondary">
-                      {pets?.length ?? 0}
-                    </Badge>
-                  </Tabs.Trigger>
-                </Tabs.List>
-              </Drawer.Menu>
             </div>
           </Drawer.LeftPanel>
 

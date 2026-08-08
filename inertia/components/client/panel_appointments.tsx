@@ -1,7 +1,6 @@
 import { DateTime } from 'luxon'
 import { Data } from '@generated/data'
 import { useModalStack } from '@inertiaui/modal-react'
-import { formatDuration } from '~/lib/utils'
 import { DEFAULT_LOCALE } from '~/lib/date'
 import { Drawer } from '../ui/drawer'
 import { urlFor } from '~/lib/tuyau'
@@ -42,19 +41,16 @@ export function PanelAppointments(props: PanelAppointmentsProps) {
               >
                 <div>
                   <div className="flex justify-between">
-                    <div className="text-[17px]/6 font-semibold">Cita</div>
+                    <div className="text-[17px]/6 font-semibold">{appointment.service?.name}</div>
                     <Badge color={appointment.status?.color}>{appointment.status?.name}</Badge>
                   </div>
                   <div className="text-[13px]/4 font-normal text-muted">
-                    {startDate.setLocale(DEFAULT_LOCALE).toFormat('ccc. d LLL yyyy')}
+                    {startDate.setLocale(DEFAULT_LOCALE).toFormat('ccc. d LLL yyyy • h:mma')}
                   </div>
                 </div>
                 <div>
-                  <div className="text-[15px]/5 font-medium">{appointment.service?.name}</div>
-                  <div className="flex text-[13px]/4 font-normal text-muted separator-dot">
-                    <span>{startDate.toFormat('h:mma').toLowerCase()}</span>
-                    <span>{formatDuration(appointment.duration)}</span>
-                    <span>{appointment.agenda?.name}</span>
+                  <div className="flex text-[13px]/4 font-normal text-muted">
+                    <span>Veterinario : {appointment.agenda?.name}</span>
                   </div>
                 </div>
               </Card>

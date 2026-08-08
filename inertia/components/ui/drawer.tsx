@@ -68,13 +68,8 @@ function DrawerFooter({ className, ...props }: ComponentProps<'div'>) {
   return <div className={cn('px-8 py-4 sticky z-10 bg-surface bottom-0 border-t', className)} {...props} />
 }
 
-function DrawerMenu({ className, ...props }: ComponentProps<'div'>) {
-  return <div className={cn('h-full w-54 border-l-12 px-6 py-8', className)} {...props} />
-}
-
 Drawer.LeftPanel = LeftPanel
 Drawer.MainPanel = MainPanel
 Drawer.Header = DrawerHeader
 Drawer.Body = DrawerBody
 Drawer.Footer = DrawerFooter
-Drawer.Menu = DrawerMenu
