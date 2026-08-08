@@ -57,7 +57,7 @@ export default function ShowClient(props: PageProps) {
                               })
                             }}
                           >
-                            Editar datos del cliente
+                            Editar
                           </Menu.Item>
                         </Menu>
                         <Button
@@ -97,15 +97,15 @@ export default function ShowClient(props: PageProps) {
           </Drawer.LeftPanel>
 
           <Tabs.Content value="details">
-            <PanelDetails client={client} />
+            <PanelDetails client={client} reload={reload} />
           </Tabs.Content>
 
           <Tabs.Content value="appointments">
-            <PanelAppointments appointments={appointments} reload={reload} />
+            <PanelAppointments clientId={client.id} appointments={appointments} reload={reload} />
           </Tabs.Content>
 
           <Tabs.Content value="pets">
-            <PanelPets pets={pets} reload={reload} />
+            <PanelPets clientId={client.id} pets={pets} reload={reload} />
           </Tabs.Content>
         </Tabs>
       )}

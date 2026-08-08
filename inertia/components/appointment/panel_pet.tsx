@@ -70,11 +70,8 @@ export function PanelPet(props: PanelPetProps) {
                         Editar los datos del cliente
                       </Menu.Item>
                     </Menu>
-                    <Button
-                      variant="secondary"
-                      onClick={() => visitModal(urlFor('get_pet.render', { id: pet.id }), { onClose: refetch })}
-                    >
-                      Ver ficha
+                    <Button onClick={() => visitModal(urlFor('get_pet.render', { id: pet.id }), { onClose: refetch })}>
+                      Ver expediente
                     </Button>
                   </div>
                 </div>

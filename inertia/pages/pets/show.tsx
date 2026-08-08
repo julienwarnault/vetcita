@@ -1,6 +1,5 @@
 import { Data } from '@generated/data'
 import { useModalStack } from '@inertiaui/modal-react'
-import { PanelDetails as PanelClient } from '~/components/client/panel_details'
 import { PanelAppointments } from '~/components/client/panel_appointments'
 import { PanelConsultations } from '~/components/pet/panel_consultations'
 import { PanelPrescriptions } from '~/components/pet/panel_prescriptions'
@@ -59,34 +58,16 @@ export default function ShowPet(props: PageProps) {
                               })
                             }}
                           >
-                            Editar datos de la mascota
+                            Editar
                           </Menu.Item>
                           <Menu.Item
                             onClick={() => {
-                              visitModal(urlFor('create_consultation.render', { petId: pet.id }), {
+                              visitModal(urlFor('get_client.render', { id: pet.clientId }), {
                                 onClose: reload,
                               })
                             }}
                           >
-                            Añadir una consulta
-                          </Menu.Item>
-                          <Menu.Item
-                            onClick={() => {
-                              visitModal(`/pets/${pet.id}/vaccines/new`, {
-                                onClose: reload,
-                              })
-                            }}
-                          >
-                            Añadir una vacuna
-                          </Menu.Item>
-                          <Menu.Item
-                            onClick={() => {
-                              visitModal(`/pets/${pet.id}/prescriptions/new`, {
-                                onClose: reload,
-                              })
-                            }}
-                          >
-                            Añadir una prescripción
+                            Ver cliente
                           </Menu.Item>
                         </Menu>
                         <Button
@@ -119,7 +100,6 @@ export default function ShowPet(props: PageProps) {
                           {appointments?.length ?? 0}
                         </Badge>
                       </Tabs.Trigger>
-                      <Tabs.Trigger value="client">Datos del cliente</Tabs.Trigger>
                       <Tabs.Trigger value="consultations">
                         Consultas
                         <Badge size="sm" variant="secondary">
@@ -146,27 +126,23 @@ export default function ShowPet(props: PageProps) {
           </Drawer.LeftPanel>
 
           <Tabs.Content value="details">
-            <PanelDetails pet={pet} />
+            <PanelDetails pet={pet} reload={reload} />
           </Tabs.Content>
 
           <Tabs.Content value="appointments">
-            <PanelAppointments appointments={appointments} reload={reload} />
-          </Tabs.Content>
-
-          <Tabs.Content value="client">
-            <PanelClient client={pet.client!} />
+            <PanelAppointments petId={pet.id} clientId={pet.clientId} appointments={appointments} reload={reload} />
           </Tabs.Content>
 
           <Tabs.Content value="consultations">
-            <PanelConsultations consultations={consultations} reload={reload} />
+            <PanelConsultations petId={pet.id} consultations={consultations} reload={reload} />
           </Tabs.Content>
 
           <Tabs.Content value="vaccines">
-            <PanelVaccines vaccines={vaccines} reload={reload} />
+            <PanelVaccines petId={pet.id} vaccines={vaccines} reload={reload} />
           </Tabs.Content>
 
           <Tabs.Content value="prescriptions">
-            <PanelPrescriptions prescriptions={prescriptions} reload={reload} />
+            <PanelPrescriptions petId={pet.id} prescriptions={prescriptions} reload={reload} />
           </Tabs.Content>
         </Tabs>
       )}

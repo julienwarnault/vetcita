@@ -2,6 +2,7 @@ import { DateTime } from 'luxon'
 import { Data } from '@generated/data'
 import { useModalStack } from '@inertiaui/modal-react'
 import { DEFAULT_LOCALE } from '~/lib/date'
+import { Button } from '../ui/button'
 import { Drawer } from '../ui/drawer'
 import { urlFor } from '~/lib/tuyau'
 import { Badge } from '../ui/badge'
@@ -9,6 +10,7 @@ import { Empty } from '../ui/empty'
 import { Card } from '../ui/card'
 
 interface PanelPrescriptionsProps {
+  petId: string
   prescriptions: Data.MedicalRecords.Prescription[]
   reload: () => void
 }
@@ -23,13 +25,21 @@ const PRESCRIPTION_TYPE_LABELS: Record<string, string> = {
 }
 
 export function PanelPrescriptions(props: PanelPrescriptionsProps) {
-  const { prescriptions, reload } = props
+  const { petId, prescriptions, reload } = props
   const { visitModal } = useModalStack()
 
   return (
     <Drawer.MainPanel className="grid grid-rows-[auto_1fr]">
       <Drawer.Header className="bg-background border-none px-8 pt-8">
-        <h1 className="text-[28px]/9 font-semibold">Prescripciones</h1>
+        <div className="flex items-center justify-between gap-4">
+          <h1 className="text-[28px]/9 font-semibold">Prescripciones</h1>
+          <Button
+            variant="secondary"
+            onClick={() => visitModal(urlFor('create_prescription.render', { petId }), { onClose: reload })}
+          >
+            Añadir
+          </Button>
+        </div>
       </Drawer.Header>
       <Drawer.Body className="bg-background">
         <div className="flex flex-col gap-2 w-full">

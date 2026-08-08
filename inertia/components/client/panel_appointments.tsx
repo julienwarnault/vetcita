@@ -2,6 +2,7 @@ import { DateTime } from 'luxon'
 import { Data } from '@generated/data'
 import { useModalStack } from '@inertiaui/modal-react'
 import { DEFAULT_LOCALE } from '~/lib/date'
+import { Button } from '../ui/button'
 import { Drawer } from '../ui/drawer'
 import { urlFor } from '~/lib/tuyau'
 import { Badge } from '../ui/badge'
@@ -9,19 +10,31 @@ import { Empty } from '../ui/empty'
 import { Card } from '../ui/card'
 
 interface PanelAppointmentsProps {
+  clientId?: string
+  petId?: string
   appointments: Data.Booking.Appointment[]
   reload: () => void
 }
 
 export function PanelAppointments(props: PanelAppointmentsProps) {
-  const { appointments, reload } = props
+  const { clientId, petId, appointments, reload } = props
 
   const { visitModal } = useModalStack()
 
   return (
     <Drawer.MainPanel className="grid grid-rows-[auto_1fr]">
       <Drawer.Header className="bg-background border-none px-8 pt-8">
-        <h1 className="text-[28px]/9 font-semibold">Citas</h1>
+        <div className="flex items-center justify-between gap-4">
+          <h1 className="text-[28px]/9 font-semibold">Citas</h1>
+          <Button
+            variant="secondary"
+            onClick={() =>
+              visitModal(urlFor('create_appointment.render', {}, { qs: { clientId, petId } }), { onClose: reload })
+            }
+          >
+            Añadir
+          </Button>
+        </div>
       </Drawer.Header>
       <Drawer.Body className="bg-background">
         <div className="flex flex-col gap-2 w-full">
@@ -57,7 +70,13 @@ export function PanelAppointments(props: PanelAppointmentsProps) {
             )
           })}
           {appointments.length == 0 && (
-            <Empty heading="No hay citas" description="No se han creado citas para este cliente" border={true} />
+            <Empty
+              heading="No hay citas"
+              description={
+                petId ? 'No se han creado citas para esta mascota' : 'No se han creado citas para este cliente'
+              }
+              border={true}
+            />
           )}
         </div>
       </Drawer.Body>
