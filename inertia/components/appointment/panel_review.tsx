@@ -225,7 +225,7 @@ export function PanelReview(props: PanelReviewProps) {
                 {isSelectedAgendaAvailable === false && (
                   <Badge variant="warning">
                     <CircleAlertIcon />
-                    El miembro del equipo no está disponible
+                    El veterinario no está disponible
                   </Badge>
                 )}
               </div>

@@ -1,8 +1,5 @@
 import { CSSProperties } from 'react'
 import { cn } from 'tailwind-variants'
-import { router } from '@inertiajs/react'
-import useSearchParams from '~/hooks/use_search_params'
-import { SearchField } from './search_field'
 
 export type Column<T> = {
   id?: string
@@ -19,7 +16,7 @@ interface ListTableProps<T> {
 }
 
 export function ListTable<T extends Record<string, any>>(props: ListTableProps<T>) {
-  const { columns, data, onRowClick } = props
+  const { columns, data = [], onRowClick } = props
 
   const getCellValue = (row: T, column: Column<T>) => {
     if (typeof column.accessor === 'function') {
@@ -29,74 +26,45 @@ export function ListTable<T extends Record<string, any>>(props: ListTableProps<T
     return row[column.accessor] ?? '-'
   }
 
-  const isEmpty = data.length === 0
+  if (data.length === 0) return null
 
   return (
-    <div className="flex flex-col">
-      <FiltersBar />
-
-      {!isEmpty && (
-        <div className="grow">
-          <table className="relative w-full">
-            <colgroup>
-              {columns.map((column, i) => (
-                <col key={i} style={{ width: column.width, ...column.style }} />
-              ))}
-            </colgroup>
-            <thead className="border-b">
-              <tr>
-                {columns.map((column, i) => (
-                  <th key={i} className="px-2 py-4 first:pl-6 last:pr-6">
-                    <div className="flex items-center flex-start">
-                      <div className="text-[15px]/5 font-semibold">{column.header}</div>
-                    </div>
-                  </th>
+    <div className="grow">
+      <table className="relative w-full">
+        <colgroup>
+          {columns.map((column, i) => (
+            <col key={i} style={{ width: column.width, ...column.style }} />
+          ))}
+        </colgroup>
+        <thead className="border-b">
+          <tr>
+            {columns.map((column, i) => (
+              <th key={i} className="px-2 py-4 first:pl-6 last:pr-6">
+                <div className="flex items-center justify-start">
+                  <div className="text-[15px]/5 font-semibold">{column.header}</div>
+                </div>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((row, i) => {
+            return (
+              <tr
+                key={i}
+                className={cn('bg-white', !!onRowClick && 'border-b hover:bg-background cursor-pointer')}
+                onClick={() => onRowClick?.(row)}
+              >
+                {columns.map((column, j) => (
+                  <td key={j} className="px-2 py-4 first:pl-6 last:pr-6">
+                    <div className="text-[15px]/5">{getCellValue(row, column)}</div>
+                  </td>
                 ))}
               </tr>
-            </thead>
-            <tbody>
-              {data.map((row, i) => {
-                return (
-                  <tr
-                    key={i}
-                    className={cn('bg-white', !!onRowClick && 'border-b hover:bg-background cursor-pointer')}
-                    onClick={() => onRowClick?.(row)}
-                  >
-                    {columns.map((column, j) => (
-                      <td key={j} className="px-2 py-4 first:pl-6 last:pr-6">
-                        <div className="text-[15px]/5">{getCellValue(row, column)}</div>
-                      </td>
-                    ))}
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
-        </div>
-      )}
-    </div>
-  )
-}
-
-interface FiltersBarProps {
-  searchPlaceholder?: string
-}
-
-function FiltersBar(props: FiltersBarProps) {
-  const { searchPlaceholder } = props
-
-  const { search = '' } = useSearchParams()
-
-  return (
-    <div className="grid grid-cols-3 gap-3 p-4 mb-4 rounded-xl bg-background">
-      <SearchField
-        placeholder={searchPlaceholder}
-        defaultValue={search}
-        onValueChange={(value) => {
-          router.reload({ data: { search: value || undefined } })
-        }}
-      />
-      <div />
+            )
+          })}
+        </tbody>
+      </table>
     </div>
   )
 }

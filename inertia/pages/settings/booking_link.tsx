@@ -1,7 +1,6 @@
-import { CheckCircleIcon, CopyIcon, ExternalLinkIcon, ScanQrCodeIcon, XIcon } from 'lucide-react'
-import { ButtonLink } from '~/components/ui/button_link'
-import { FormHeader } from '~/components/form_header'
-import MinimalLayout from '~/layouts/minimal'
+import { CopyIcon, ExternalLinkIcon, ScanQrCodeIcon } from 'lucide-react'
+import { SettingsHeader } from '~/components/settings_header'
+import { ViewHeader } from '~/components/view_header'
 import { Card } from '~/components/ui/card'
 import { downloadFile } from '~/lib/utils'
 import { InertiaProps } from '~/types'
@@ -15,31 +14,16 @@ export default function BookingLink(props: PageProps) {
   const { publicUrl, qrDataUrl } = props
 
   return (
-    <>
-      <FormHeader
-        leftElement={
-          <ButtonLink size="icon-lg" variant="secondary" route="settings">
-            <XIcon />
-          </ButtonLink>
-        }
-        rightElement={
-          <ButtonLink size="lg" variant="secondary" route="settings">
-            OK
-          </ButtonLink>
-        }
-        className="border-b"
-      />
+    <div className="flex-1 h-auto bg-background">
+      <div className="container-lg pb-10">
+        <SettingsHeader title="Enlace de reservas" />
 
-      <div className="container-sm">
-        <div className="flex flex-col gap-8 mx-auto max-w-110 w-full py-12">
-          <div className="flex flex-col items-center text-center">
-            <CheckCircleIcon size={90} strokeWidth={1.5} className="inline-flex mb-5 text-success" />
-            <h3 className="text-2xl/8 font-semibold mb-4">Tu enlace está listo</h3>
-            <p className="text-[15px]/5 text-muted">
-              Has creado un enlace de reserva. Ahora puedes compartirlo con tus pacientes para que puedan reservar sus
-              citas fácilmente.
-            </p>
-          </div>
+        <ViewHeader
+          title="Enlace de reservas"
+          subtitle="Comparte este enlace o código QR para que tus clientes puedan reservar citas en línea."
+        />
+
+        <div className="mx-auto max-w-110 w-full py-12">
           <Card size="lg">
             <img src={qrDataUrl} alt="Booking Qr" className="size-60 mx-auto mt-6 mb-12" />
 
@@ -74,8 +58,6 @@ export default function BookingLink(props: PageProps) {
           </Card>
         </div>
       </div>
-    </>
+    </div>
   )
 }
-
-BookingLink.layout = (page: React.ReactElement) => <MinimalLayout>{page}</MinimalLayout>

@@ -15,7 +15,7 @@ export function StepPetInfos({ species, form }: StepPetInfosProps) {
   return (
     <>
       <Field name="petSpeciesId" className="col-span-6">
-        <Field.Label>Especias *</Field.Label>
+        <Field.Label>Especie *</Field.Label>
         <InputSelect
           items={species.map((s) => ({ label: s.name, value: s.id }))}
           value={data.petSpeciesId}

@@ -3,6 +3,7 @@ import { Data } from '@generated/data'
 import { useModalStack } from '@inertiaui/modal-react'
 import { Column, ListTable } from '~/components/ui/list_table'
 import { DEFAULT_LOCALE, DEFAULT_TIMEZONE } from '~/lib/date'
+import { FiltersBar } from '~/components/filters_bar'
 import { ViewHeader } from '~/components/view_header'
 import { Empty } from '~/components/ui/empty'
 import { InertiaProps } from '~/types'
@@ -43,12 +44,12 @@ export default function List(props: PageProps) {
       accessor: 'recordType',
     },
     {
-      header: 'Agenda',
+      header: 'Veterinario',
       width: '15%',
       accessor: ({ agenda }) => agenda?.name ?? '-',
     },
     {
-      header: 'Diagnostico',
+      header: 'Diagnóstico',
       width: '20%',
       accessor: ({ diagnosis }) => diagnosis || '-',
     },
@@ -58,6 +59,8 @@ export default function List(props: PageProps) {
     <div className="flex max-h-full min-h-full">
       <div className="container-xl flex flex-col p-10">
         <ViewHeader title="Consultas" badge={consultations.length.toString()} />
+
+        <FiltersBar />
 
         <ListTable
           columns={columns}

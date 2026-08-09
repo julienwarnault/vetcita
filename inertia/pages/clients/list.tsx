@@ -3,6 +3,7 @@ import { Data } from '@generated/data'
 import { useModalStack } from '@inertiaui/modal-react'
 import { Column, ListTable } from '~/components/ui/list_table'
 import { DEFAULT_LOCALE, DEFAULT_TIMEZONE } from '~/lib/date'
+import { FiltersBar } from '~/components/filters_bar'
 import { ViewHeader } from '~/components/view_header'
 import { formatPhoneNumber } from '~/lib/utils'
 import { Button } from '~/components/ui/button'
@@ -63,6 +64,8 @@ export default function List(props: PageProps) {
             Añadir
           </Button>
         </ViewHeader>
+
+        <FiltersBar />
 
         <ListTable
           columns={columns}

@@ -1,9 +1,13 @@
 import { Data } from '@generated/data'
 import { useModalStack } from '@inertiaui/modal-react'
-import { Column, ListTable } from '~/components/ui/list_table'
+import { SettingsHeader } from '~/components/settings_header'
 import { ViewHeader } from '~/components/view_header'
+import { FiltersBar } from '~/components/filters_bar'
 import { Avatar } from '~/components/ui/avatar'
 import { Button } from '~/components/ui/button'
+import { Empty } from '~/components/ui/empty'
+import { Badge } from '~/components/ui/badge'
+import { Card } from '~/components/ui/card'
 import { InertiaProps } from '~/types'
 import { urlFor } from '~/lib/tuyau'
 
@@ -22,44 +26,55 @@ export default function List(props: PageProps) {
     none: 'Sin acceso',
   }
 
-  const columns: Column<Data.Agendas.Agenda>[] = [
-    {
-      header: 'Nombre',
-      width: '45%',
-      accessor: (agenda) => {
-        return (
-          <div className="flex items-center gap-2">
-            <Avatar fullName={agenda.name} color={agenda.color} />
-            <div className="text-[15px]/5 font-semibold">{agenda.name}</div>
-          </div>
-        )
-      },
-    },
-    {
-      header: 'Contacto',
-      width: '30%',
-      accessor: (agenda) => agenda.email ?? '-',
-    },
-    {
-      header: 'Rol de permisos',
-      width: '25%',
-      accessor: (agenda) => roleLabels[agenda.role as keyof typeof roleLabels] ?? agenda.role,
-    },
-  ]
-
   return (
-    <div className="flex max-h-full min-h-full">
-      <div className="container-xl flex flex-col p-10">
-        <ViewHeader title="Equipo" badge={agendas.length.toString()}>
+    <div className="flex-1 h-auto bg-background">
+      <div className="container-lg pb-10">
+        <SettingsHeader title="Equipo" />
+
+        <ViewHeader
+          title="Equipo"
+          subtitle="Gestiona los miembros del equipo, su acceso y los servicios que pueden realizar."
+          badge={agendas.length.toString()}
+        >
           <Button onClick={() => visitModal(urlFor('create_agenda.render'))} size="lg">
             Añadir
           </Button>
         </ViewHeader>
 
-        <ListTable
-          columns={columns}
-          data={agendas}
-          onRowClick={(row) => visitModal(urlFor('update_agenda.render', { id: row.id }))}
+        <FiltersBar className="bg-white border" />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mt-6">
+          {agendas.map((agenda) => (
+            <Card
+              key={agenda.id}
+              size="lg"
+              className="relative flex flex-col items-center gap-5 text-center hover:bg-background cursor-pointer"
+              onClick={() => visitModal(urlFor('update_agenda.render', { id: agenda.id }))}
+            >
+              <Avatar size="4xl" fullName={agenda.name} color={agenda.color} />
+
+              <div className="flex flex-col gap-1">
+                <div className="text-[17px]/6 font-semibold">{agenda.name}</div>
+                <div className="text-[15px]/5 text-muted">{agenda.email || 'Sin correo electrónico'}</div>
+              </div>
+
+              <Badge variant={agenda.role === 'owner' ? 'accent' : 'secondary'}>
+                {roleLabels[agenda.role as keyof typeof roleLabels] ?? agenda.role}
+              </Badge>
+            </Card>
+          ))}
+        </div>
+
+        <Empty
+          heading="No hay miembros del equipo"
+          description="Añade el primer miembro para asignarle servicios y configurar sus horarios."
+          visible={agendas.length === 0}
+          className="grow"
+          primaryAction={
+            <Button onClick={() => visitModal(urlFor('create_agenda.render'))} size="lg">
+              Añadir un miembro
+            </Button>
+          }
         />
       </div>
     </div>

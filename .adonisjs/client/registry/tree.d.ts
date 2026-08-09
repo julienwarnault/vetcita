@@ -75,6 +75,9 @@ export interface ApiDefinition {
   deleteClient: {
     execute: typeof routes['delete_client.execute']
   }
+  showTenant: {
+    render: typeof routes['show_tenant.render']
+  }
   updateTenant: {
     render: typeof routes['update_tenant.render']
     execute: typeof routes['update_tenant.execute']

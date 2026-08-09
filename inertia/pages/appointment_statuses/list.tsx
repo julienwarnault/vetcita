@@ -3,6 +3,7 @@ import { Data } from '@generated/data'
 import { router } from '@inertiajs/react'
 import { DynamicIcon, IconName } from 'lucide-react/dynamic'
 import { LockIcon, ChevronUpIcon, ChevronDownIcon, Trash2Icon, PencilIcon } from 'lucide-react'
+import { SettingsHeader } from '~/components/settings_header'
 import { ButtonLink } from '~/components/ui/button_link'
 import { ViewHeader } from '~/components/view_header'
 import { Button } from '~/components/ui/button'
@@ -42,14 +43,16 @@ export default function List(props: PageProps) {
 
   return (
     <div className="flex-1 h-auto bg-background">
-      <div className="container-sm p-10">
-        <ViewHeader title="Estados de las citas" subtitle="Crea y gestiona estados de cita personalizados">
+      <div className="container-lg pb-10">
+        <SettingsHeader title="Estados de las citas" />
+
+        <ViewHeader title="Estados de las citas" subtitle="Crea y gestiona estados de cita personalizados.">
           <ButtonLink route="create_appointment_status.render" size="lg">
             Añadir
           </ButtonLink>
         </ViewHeader>
 
-        <div className="flex flex-col gap-4 mt-6">
+        <div className="flex flex-col gap-4">
           {statuses.map((status, index) => (
             <div
               key={status.id}

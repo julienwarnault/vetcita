@@ -34,24 +34,6 @@ const NAVIGATION = [
     navigationIcon: 'stethoscope',
   },
   {
-    name: 'Servicios',
-    route: 'list_services.render',
-    navigationIcon: 'book-open',
-    roles: ['owner'],
-  },
-  {
-    name: 'Equipo',
-    route: 'list_agendas.render',
-    navigationIcon: 'users',
-    roles: ['owner'],
-  },
-  {
-    name: 'Horarios',
-    route: 'list_shifts.render',
-    navigationIcon: 'calendar-clock',
-    roles: ['owner'],
-  },
-  {
     name: 'Ajustes',
     route: 'settings',
     navigationIcon: 'settings',

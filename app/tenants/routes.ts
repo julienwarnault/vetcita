@@ -6,6 +6,7 @@ router
   .group(() => {
     router
       .group(() => {
+        router.get('settings/tenant', [controllers.tenants.ShowTenant, 'render'])
         router.get('settings/tenant/edit', [controllers.tenants.UpdateTenant, 'render'])
         router.put('settings/tenant', [controllers.tenants.UpdateTenant, 'execute'])
       })

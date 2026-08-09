@@ -4,6 +4,7 @@ import { useModalStack } from '@inertiaui/modal-react'
 import { Column, ListTable } from '~/components/ui/list_table'
 import { DEFAULT_LOCALE, DEFAULT_TIMEZONE } from '~/lib/date'
 import { ViewHeader } from '~/components/view_header'
+import { FiltersBar } from '~/components/filters_bar'
 import { Button } from '~/components/ui/button'
 import { Avatar } from '~/components/ui/avatar'
 import { Empty } from '~/components/ui/empty'
@@ -38,7 +39,7 @@ export default function List(props: PageProps) {
       accessor: ({ client }) => client?.fullName,
     },
     {
-      header: 'Especias',
+      header: 'Especie',
       width: '10%',
       accessor: ({ species }) => species?.name ?? '-',
     },
@@ -83,6 +84,8 @@ export default function List(props: PageProps) {
             Añadir
           </Button>
         </ViewHeader>
+
+        <FiltersBar />
 
         <ListTable
           columns={columns}

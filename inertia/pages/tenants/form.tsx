@@ -26,7 +26,7 @@ export default function ShowForm(props: PageProps) {
         title={title}
         rightElement={
           <>
-            <ButtonLink size="lg" variant="secondary" route="settings">
+            <ButtonLink size="lg" variant="secondary" route="show_tenant.render">
               Cerrar
             </ButtonLink>
             <Button type="submit" size="lg" form="form">
@@ -56,7 +56,7 @@ export default function ShowForm(props: PageProps) {
               </Field>
 
               <Field name="phone">
-                <Field.Label>Teléfono del centro</Field.Label>
+                <Field.Label>Teléfono de la clínica</Field.Label>
                 <Input defaultValue={tenant?.phone ?? ''} />
                 <Field.Error />
               </Field>
@@ -115,7 +115,7 @@ export default function ShowForm(props: PageProps) {
           <div>
             <h2 className="text-2xl font-semibold">Enlaces externos</h2>
             <p className="text-[15px]/5 text-muted">
-              Añade el sitio web de tu empresa y los enlaces a tus perfiles de redes sociales para compartirlos con los
+              Añade el sitio web de tu clínica y los enlaces a tus perfiles de redes sociales para compartirlos con los
               clientes.
             </p>
 

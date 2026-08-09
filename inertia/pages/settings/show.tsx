@@ -12,7 +12,7 @@ export default function Settings() {
 
   return (
     <div className="flex-1 h-auto bg-background">
-      <div className="container pb-24 h-full">
+      <div className="container-lg pb-24 h-full">
         <ViewHeader
           title="Ajustes del workspace"
           subtitle={`Gestiona los ajustes de ${user?.agenda?.tenant?.name}.`}
@@ -20,27 +20,45 @@ export default function Settings() {
         />
 
         <div className="flex flex-col gap-16">
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             <CardItem
               icon="building-2"
               title="Configuración de la clínica"
               description="Personaliza los datos de la clínica."
-              href={urlFor('update_tenant.render')}
+              href={urlFor('show_tenant.render')}
+            />
+            <CardItem
+              icon="users"
+              title="Equipo"
+              description="Gestiona veterinarios, permisos y servicios asignados."
+              href={urlFor('list_agendas.render')}
+            />
+            <CardItem
+              icon="book-open"
+              title="Servicios"
+              description="Define los servicios, precios, duración y veterinarios asociados."
+              href={urlFor('list_services.render')}
+            />
+            <CardItem
+              icon="calendar-clock"
+              title="Horarios"
+              description="Administra turnos, días libres y cierres de la clínica."
+              href={urlFor('list_shifts.render')}
             />
             <CardItem
               icon="calendar"
               title="Gestión de citas"
-              description="Configura tu estados de las citas."
+              description="Configura los estados usados para seguir cada cita."
               href={urlFor('list_appointment_statuses.render')}
             />
           </div>
 
           <div className="flex flex-col gap-4">
             <h2 className="text-2xl/8 font-semibold">Presencia online</h2>
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
               <CardItem
-                title="Generador de enlaces"
-                description="Crea enlaces de reserva y códigos QR que se puedan compartir."
+                title="Enlace de reservas"
+                description="Comparte la página pública de reservas y su código QR."
                 href={urlFor('booking_link.render')}
               />
             </div>
@@ -63,7 +81,7 @@ function CardItem(props: CardItemProps) {
 
   return (
     <Link href={href}>
-      <Card size="lg" className={cn('flex flex-col gap-4 hover:bg-background', !icon && 'justify-between')}>
+      <Card size="lg" className={cn('flex flex-col gap-4 hover:bg-background h-full', !icon && 'justify-between')}>
         {icon && <DynamicIcon name={icon} size={26} strokeWidth={1.5} className="text-accent" />}
 
         <div>
@@ -71,8 +89,8 @@ function CardItem(props: CardItemProps) {
           <div className="text-muted text-[15px]/5">{description}</div>
         </div>
 
-        <div className="flex gap-2 items-center">
-          <div className="font-[15px]/20 font-semibold">Ver</div>
+        <div className="flex gap-2 items-center mt-auto">
+          <div className="text-[15px]/5 font-semibold">Ver</div>
           <ArrowRightIcon size={18} />
         </div>
       </Card>

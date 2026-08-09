@@ -67,6 +67,8 @@ export function groupBy<T>(items: Array<T>, key: (item: T) => string) {
 }
 
 export function formatPrice(price: number, digits = 0) {
+  if (price === 0) return 'Gratis'
+
   return new Intl.NumberFormat('es-MX', {
     style: 'currency',
     currency: 'MXN',

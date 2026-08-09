@@ -43,6 +43,6 @@ export default class UpdateTenantController {
       return this.updateTenant.execute({ id: tenantId, ...payload })
     })
 
-    return response.redirect().toRoute('settings')
+    return response.redirect().toRoute('show_tenant.render')
   }
 }

@@ -4,6 +4,7 @@ import { Data } from '@generated/data'
 import { router } from '@inertiajs/react'
 import { useModalStack } from '@inertiaui/modal-react'
 import { CalendarDatePicker } from '~/components/calendar/calendar_date_picker'
+import { SettingsHeader } from '~/components/settings_header'
 import { ShiftTable } from '~/components/shift/shifts_table'
 import { ViewHeader } from '~/components/view_header'
 import { Button } from '~/components/ui/button'
@@ -41,9 +42,11 @@ export default function List(props: PageProps) {
   }
 
   return (
-    <div className="flex">
-      <div className="container-xl p-10">
-        <ViewHeader title="Horarios">
+    <div className="flex-1 h-auto bg-background">
+      <div className="container-xl pb-10">
+        <SettingsHeader title="Horarios" />
+
+        <ViewHeader title="Horarios" subtitle="Organiza turnos, ausencias y cierres para controlar la disponibilidad.">
           <Menu
             trigger={
               <Button size="lg">
@@ -53,12 +56,13 @@ export default function List(props: PageProps) {
           >
             <Menu.Item onClick={() => visitModal(urlFor('create_time_off.render'))}>Días libres</Menu.Item>
             <Menu.Item onClick={() => visitModal(urlFor('create_closed_date.render'))}>Fechas de cierre</Menu.Item>
-            <Menu.Item onClick={() => visitModal(urlFor('create_agenda.render'))}>Nueva agenda</Menu.Item>
+            <Menu.Item onClick={() => visitModal(urlFor('create_agenda.render'))}>Nuevo veterinario</Menu.Item>
           </Menu>
         </ViewHeader>
+
         <div className="flex flex-col pb-20">
           <div className="flex flex-col">
-            <div className="flex justify-between gap-3 p-4 mb-4 rounded-xl bg-background">
+            <div className="flex justify-between gap-3 p-4 mb-4 rounded-xl bg-white border">
               <div className="flex items-center gap-2">
                 <Button variant="secondary" onClick={() => onChangeDate(today())}>
                   Esta semana

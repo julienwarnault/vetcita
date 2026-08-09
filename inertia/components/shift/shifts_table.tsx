@@ -79,7 +79,7 @@ export function ShiftTable(props: ShiftTableProps) {
         <tr>
           <th className="px-4">
             <div className="text-left mb-1">
-              <div className="text-[15px]/5 font-semibold">Agendas</div>
+              <div className="text-[15px]/5 font-semibold">Veterinarios</div>
             </div>
           </th>
           {dates.map((date) => (
@@ -107,7 +107,7 @@ export function ShiftTable(props: ShiftTableProps) {
           const isFirstAgenda = agendaIndex === 0
 
           return (
-            <tr key={agenda.id} className="group">
+            <tr key={agenda.id} className="group bg-white">
               <td
                 className="content-start border-l border-r border-b p-4 cursor-pointer hover:bg-background group-first:border-t group-first:rounded-tl-xl group-last:rounded-bl-xl"
                 onClick={() => visitModal(urlFor('update_working_hours.render', { agendaId: agenda.id }))}

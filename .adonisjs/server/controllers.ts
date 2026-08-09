@@ -87,5 +87,6 @@ export const controllers = {
   },
   tenants: {
     UpdateTenant: () => import('#app/tenants/controllers/update_tenant_controller'),
+    ShowTenant: () => import('#app/tenants/controllers/show_tenant_controller'),
   },
 }

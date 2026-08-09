@@ -60,7 +60,7 @@ export class CompleteOnboarding {
         { name: 'Vacunación', duration: 20, price: 250, color: '#c5e89c', tenantId: tenant.id },
         { name: 'Cirugía', duration: 120, price: 1500, color: '#e85d6f', tenantId: tenant.id },
         { name: 'Baño y estética', duration: 60, price: 350, color: '#f6a2e4', tenantId: tenant.id },
-        { name: 'Desparasitación', duration: 15, price: 200, color: '#c5e89c', tenantId: tenant.id },
+        { name: 'Desparasitación', duration: 15, price: 200, color: '#97c6f0', tenantId: tenant.id },
         { name: 'Emergencia', duration: 60, price: 800, color: '#ffa175', tenantId: tenant.id },
       ],
       { client: trx }

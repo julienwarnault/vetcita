@@ -26,7 +26,7 @@ export default function ShowForm(props: PageProps) {
   const modalRef = useRef<InertiaModalRef>(null)
 
   const isEdit = !!agenda
-  const title = agenda ? `Editar ${agenda.name}` : 'Añadir un agenda'
+  const title = agenda ? `Editar ${agenda.name}` : 'Añadir un veterinario'
 
   const isOwner = agenda?.role === 'owner'
 
@@ -80,7 +80,7 @@ export default function ShowForm(props: PageProps) {
             <Form id="form" onSubmit={handleSubmit} errors={form.errors} className="flex flex-col gap-16 pb-24">
               <div>
                 <h2 className="text-2xl font-semibold">Información básica</h2>
-                <p className="text-[15px]/5 text-muted">Gestiona el agenda</p>
+                <p className="text-[15px]/5 text-muted">Gestiona los datos del veterinario.</p>
 
                 <div className="grid grid-cols-6 w-full gap-x-4 gap-y-6 pt-6">
                   <Field name="name" className="col-span-3">
@@ -119,7 +119,7 @@ export default function ShowForm(props: PageProps) {
 
               <div>
                 <h2 className="text-2xl font-semibold">Servicios</h2>
-                <p className="text-[15px]/5 text-muted">Indica los servicios que presta este agenda</p>
+                <p className="text-[15px]/5 text-muted">Indica los servicios que presta este veterinario.</p>
 
                 <div className="grid grid-cols-6 w-full gap-x-4 gap-y-6 pt-6">
                   <CheckboxFieldArray
@@ -135,7 +135,9 @@ export default function ShowForm(props: PageProps) {
                           <div className="text-[17px]/6 font-medium">{service.name}</div>
                           <div className="text-muted">{formatDuration(service.duration)}</div>
                         </div>
-                        {service.price && <div className="text-[17px]/6 font-medium">{formatPrice(service.price)}</div>}
+                        {service.price !== null && service.price !== undefined && (
+                          <div className="text-[17px]/6 font-medium">{formatPrice(service.price)}</div>
+                        )}
                       </div>
                     )}
                   />

@@ -37,7 +37,7 @@
 @utility separator {
   & > *:not(:last-child)::after {
     content: var(--separator, '•');
-    @apply mx-1 text-gray-400;
+    @apply mx-1.5 text-gray-400;
   }
 }
 

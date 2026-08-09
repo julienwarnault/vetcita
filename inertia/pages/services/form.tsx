@@ -124,8 +124,8 @@ export default function ShowForm(props: PageProps) {
           </div>
 
           <div>
-            <h2 className="text-2xl font-semibold">Agendas necesarios</h2>
-            <p className="text-[15px]/5 text-muted">Elige qué agenda realizarán este servicio</p>
+            <h2 className="text-2xl font-semibold">Veterinarios necesarios</h2>
+            <p className="text-[15px]/5 text-muted">Elige qué veterinarios realizarán este servicio.</p>
 
             <div className="grid grid-cols-6 w-full gap-x-4 gap-y-6 pt-6">
               <CheckboxFieldArray

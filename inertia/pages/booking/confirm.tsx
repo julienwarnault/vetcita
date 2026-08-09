@@ -50,7 +50,9 @@ export default function Confirm(props: PageProps) {
                     <div className="text-[16px]">{service?.name}</div>
                     <div className="text-sm/5 text-muted">{formatDuration(appointment?.duration)}</div>
                   </div>
-                  {service?.price && <div className="text-[16px] font-semibold">{formatPrice(service.price)}</div>}
+                  {service?.price !== null && service?.price !== undefined && (
+                    <div className="text-[16px] font-semibold">{formatPrice(service.price)}</div>
+                  )}
                 </div>
               </div>
 

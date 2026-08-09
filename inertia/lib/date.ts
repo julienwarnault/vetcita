@@ -27,6 +27,11 @@ export function getMinutesInDay(date: DateTime) {
   return date.hour * 60 + date.minute
 }
 
+export function parseDate(date: string | null) {
+  if (!date) return undefined
+  return DateTime.fromISO(date + '', { zone: DEFAULT_TIMEZONE }).setLocale(DEFAULT_LOCALE)
+}
+
 export function eachDayOfInterval({ start, end }: { start: DateTime; end: DateTime }) {
   const days = []
   let cursor = start.startOf('day')

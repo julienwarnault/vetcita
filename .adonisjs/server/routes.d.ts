@@ -37,6 +37,7 @@ export type ScannedRoutes = {
     'delete_client.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'list_clients.api': { paramsTuple?: []; params?: {} }
     'get_client.api': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'show_tenant.render': { paramsTuple?: []; params?: {} }
     'update_tenant.render': { paramsTuple?: []; params?: {} }
     'update_tenant.execute': { paramsTuple?: []; params?: {} }
     'book_appointment.render': { paramsTuple: [ParamValue]; params: {'tenantId': ParamValue} }
@@ -117,6 +118,7 @@ export type ScannedRoutes = {
     'get_client.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'list_clients.api': { paramsTuple?: []; params?: {} }
     'get_client.api': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'show_tenant.render': { paramsTuple?: []; params?: {} }
     'update_tenant.render': { paramsTuple?: []; params?: {} }
     'book_appointment.render': { paramsTuple: [ParamValue]; params: {'tenantId': ParamValue} }
     'confirm_appointment.render': { paramsTuple: [ParamValue,ParamValue]; params: {'tenantId': ParamValue,'appointmentId': ParamValue} }
@@ -171,6 +173,7 @@ export type ScannedRoutes = {
     'get_client.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'list_clients.api': { paramsTuple?: []; params?: {} }
     'get_client.api': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'show_tenant.render': { paramsTuple?: []; params?: {} }
     'update_tenant.render': { paramsTuple?: []; params?: {} }
     'book_appointment.render': { paramsTuple: [ParamValue]; params: {'tenantId': ParamValue} }
     'confirm_appointment.render': { paramsTuple: [ParamValue,ParamValue]; params: {'tenantId': ParamValue,'appointmentId': ParamValue} }

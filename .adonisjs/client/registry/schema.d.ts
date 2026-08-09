@@ -93,7 +93,7 @@ export interface Registry {
   }
   'list_agendas.render': {
     methods: ["GET","HEAD"]
-    pattern: '/agendas'
+    pattern: '/settings/agendas'
     types: {
       body: {}
       paramsTuple: []
@@ -105,7 +105,7 @@ export interface Registry {
   }
   'create_agenda.render': {
     methods: ["GET","HEAD"]
-    pattern: '/agendas/new'
+    pattern: '/settings/agendas/new'
     types: {
       body: {}
       paramsTuple: []
@@ -117,7 +117,7 @@ export interface Registry {
   }
   'create_agenda.execute': {
     methods: ["POST"]
-    pattern: '/agendas'
+    pattern: '/settings/agendas'
     types: {
       body: ExtractBody<InferInput<(typeof import('#app/agendas/controllers/create_agenda_controller').default)['validator']>>
       paramsTuple: []
@@ -129,7 +129,7 @@ export interface Registry {
   }
   'update_agenda.render': {
     methods: ["GET","HEAD"]
-    pattern: '/agendas/edit/:id'
+    pattern: '/settings/agendas/edit/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
@@ -141,7 +141,7 @@ export interface Registry {
   }
   'update_agenda.execute': {
     methods: ["PUT"]
-    pattern: '/agendas/:id'
+    pattern: '/settings/agendas/:id'
     types: {
       body: ExtractBody<InferInput<(typeof import('#app/agendas/controllers/update_agenda_controller').default)['validator']>>
       paramsTuple: [ParamValue]
@@ -153,7 +153,7 @@ export interface Registry {
   }
   'list_services.render': {
     methods: ["GET","HEAD"]
-    pattern: '/services'
+    pattern: '/settings/services'
     types: {
       body: {}
       paramsTuple: []
@@ -165,7 +165,7 @@ export interface Registry {
   }
   'create_service.render': {
     methods: ["GET","HEAD"]
-    pattern: '/services/new'
+    pattern: '/settings/services/new'
     types: {
       body: {}
       paramsTuple: []
@@ -177,7 +177,7 @@ export interface Registry {
   }
   'create_service.execute': {
     methods: ["POST"]
-    pattern: '/services'
+    pattern: '/settings/services'
     types: {
       body: ExtractBody<InferInput<(typeof import('#app/services/controllers/create_service_controller').default)['validator']>>
       paramsTuple: []
@@ -189,7 +189,7 @@ export interface Registry {
   }
   'update_service.render': {
     methods: ["GET","HEAD"]
-    pattern: '/services/edit/:id'
+    pattern: '/settings/services/edit/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
@@ -201,7 +201,7 @@ export interface Registry {
   }
   'update_service.execute': {
     methods: ["PUT"]
-    pattern: '/services/:id'
+    pattern: '/settings/services/:id'
     types: {
       body: ExtractBody<InferInput<(typeof import('#app/services/controllers/update_service_controller').default)['validator']>>
       paramsTuple: [ParamValue]
@@ -403,6 +403,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/clients/controllers/get_client_controller').default['api']>>>
     }
   }
+  'show_tenant.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/settings/tenant'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/tenants/controllers/show_tenant_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/tenants/controllers/show_tenant_controller').default['render']>>>
+    }
+  }
   'update_tenant.render': {
     methods: ["GET","HEAD"]
     pattern: '/settings/tenant/edit'
@@ -549,7 +561,7 @@ export interface Registry {
   }
   'list_shifts.render': {
     methods: ["GET","HEAD"]
-    pattern: '/shifts'
+    pattern: '/settings/shifts'
     types: {
       body: {}
       paramsTuple: []
@@ -561,7 +573,7 @@ export interface Registry {
   }
   'create_closed_date.render': {
     methods: ["GET","HEAD"]
-    pattern: '/closed-dates/new'
+    pattern: '/settings/closed-dates/new'
     types: {
       body: {}
       paramsTuple: []
@@ -573,7 +585,7 @@ export interface Registry {
   }
   'create_closed_date.execute': {
     methods: ["POST"]
-    pattern: '/closed-dates'
+    pattern: '/settings/closed-dates'
     types: {
       body: ExtractBody<InferInput<(typeof import('#app/scheduling/controllers/create_closed_date_controller').default)['validator']>>
       paramsTuple: []
@@ -585,7 +597,7 @@ export interface Registry {
   }
   'update_closed_date.render': {
     methods: ["GET","HEAD"]
-    pattern: '/closed-dates/edit/:id'
+    pattern: '/settings/closed-dates/edit/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
@@ -597,7 +609,7 @@ export interface Registry {
   }
   'update_closed_date.execute': {
     methods: ["PUT"]
-    pattern: '/closed-dates/:id'
+    pattern: '/settings/closed-dates/:id'
     types: {
       body: ExtractBody<InferInput<(typeof import('#app/scheduling/controllers/update_closed_date_controller').default)['validator']>>
       paramsTuple: [ParamValue]
@@ -609,7 +621,7 @@ export interface Registry {
   }
   'delete_closed_date.execute': {
     methods: ["DELETE"]
-    pattern: '/closed-dates/:id'
+    pattern: '/settings/closed-dates/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
@@ -621,7 +633,7 @@ export interface Registry {
   }
   'create_time_off.render': {
     methods: ["GET","HEAD"]
-    pattern: '/time-offs/new'
+    pattern: '/settings/time-offs/new'
     types: {
       body: {}
       paramsTuple: []
@@ -633,7 +645,7 @@ export interface Registry {
   }
   'create_time_off.execute': {
     methods: ["POST"]
-    pattern: '/time-offs'
+    pattern: '/settings/time-offs'
     types: {
       body: ExtractBody<InferInput<(typeof import('#app/scheduling/controllers/create_time_off_controller').default)['validator']>>
       paramsTuple: []
@@ -645,7 +657,7 @@ export interface Registry {
   }
   'update_time_off.render': {
     methods: ["GET","HEAD"]
-    pattern: '/time-offs/edit/:id'
+    pattern: '/settings/time-offs/edit/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
@@ -657,7 +669,7 @@ export interface Registry {
   }
   'update_time_off.execute': {
     methods: ["PUT"]
-    pattern: '/time-offs/:id'
+    pattern: '/settings/time-offs/:id'
     types: {
       body: ExtractBody<InferInput<(typeof import('#app/scheduling/controllers/update_time_off_controller').default)['validator']>>
       paramsTuple: [ParamValue]
@@ -669,7 +681,7 @@ export interface Registry {
   }
   'delete_time_off.execute': {
     methods: ["DELETE"]
-    pattern: '/time-offs/:id'
+    pattern: '/settings/time-offs/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
@@ -681,7 +693,7 @@ export interface Registry {
   }
   'update_working_hours.render': {
     methods: ["GET","HEAD"]
-    pattern: '/working-hours/:agendaId'
+    pattern: '/settings/working-hours/:agendaId'
     types: {
       body: {}
       paramsTuple: [ParamValue]
@@ -693,7 +705,7 @@ export interface Registry {
   }
   'update_working_hours.execute': {
     methods: ["PUT"]
-    pattern: '/working-hours/:agendaId'
+    pattern: '/settings/working-hours/:agendaId'
     types: {
       body: ExtractBody<InferInput<(typeof import('#app/scheduling/controllers/update_working_hours_controller').default)['validator']>>
       paramsTuple: [ParamValue]
@@ -705,7 +717,7 @@ export interface Registry {
   }
   'create_schedule_day.render': {
     methods: ["GET","HEAD"]
-    pattern: '/schedule-days/new'
+    pattern: '/settings/schedule-days/new'
     types: {
       body: {}
       paramsTuple: []
@@ -717,7 +729,7 @@ export interface Registry {
   }
   'create_schedule_day.execute': {
     methods: ["POST"]
-    pattern: '/schedule-days'
+    pattern: '/settings/schedule-days'
     types: {
       body: ExtractBody<InferInput<(typeof import('#app/scheduling/controllers/create_schedule_day_controller').default)['validator']>>
       paramsTuple: []
@@ -729,7 +741,7 @@ export interface Registry {
   }
   'update_schedule_day.render': {
     methods: ["GET","HEAD"]
-    pattern: '/schedule-days/edit/:id'
+    pattern: '/settings/schedule-days/edit/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
@@ -741,7 +753,7 @@ export interface Registry {
   }
   'update_schedule_day.execute': {
     methods: ["PUT"]
-    pattern: '/schedule-days/:id'
+    pattern: '/settings/schedule-days/:id'
     types: {
       body: ExtractBody<InferInput<(typeof import('#app/scheduling/controllers/update_schedule_day_controller').default)['validator']>>
       paramsTuple: [ParamValue]
@@ -753,7 +765,7 @@ export interface Registry {
   }
   'delete_schedule_day.execute': {
     methods: ["DELETE"]
-    pattern: '/schedule-days/:id'
+    pattern: '/settings/schedule-days/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]

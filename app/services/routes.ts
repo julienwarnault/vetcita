@@ -6,11 +6,11 @@ router
   .group(() => {
     router
       .group(() => {
-        router.get('services', [controllers.services.ListServices, 'render'])
-        router.get('services/new', [controllers.services.CreateService, 'render'])
-        router.post('services', [controllers.services.CreateService, 'execute'])
-        router.get('services/edit/:id', [controllers.services.UpdateService, 'render'])
-        router.put('services/:id', [controllers.services.UpdateService, 'execute'])
+        router.get('settings/services', [controllers.services.ListServices, 'render'])
+        router.get('settings/services/new', [controllers.services.CreateService, 'render'])
+        router.post('settings/services', [controllers.services.CreateService, 'execute'])
+        router.get('settings/services/edit/:id', [controllers.services.UpdateService, 'render'])
+        router.put('settings/services/:id', [controllers.services.UpdateService, 'execute'])
       })
       .use([middleware.requireRole({ roles: ['owner'] })])
   })

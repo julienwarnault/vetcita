@@ -73,7 +73,7 @@ export default function TimeOffForm(props: PageProps) {
             >
               <div className="grid grid-cols-12 w-full gap-x-4 gap-y-6 pt-6">
                 <Field name="agendaId" className="col-span-6">
-                  <Field.Label>Agenda</Field.Label>
+                  <Field.Label>Veterinario</Field.Label>
                   <NativeSelect defaultValue={timeOff?.agendaId ?? initialAgendaId ?? undefined}>
                     {agendas.map((agenda) => (
                       <NativeSelect.Option key={agenda.id} value={agenda.id}>
