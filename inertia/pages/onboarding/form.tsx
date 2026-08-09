@@ -14,7 +14,7 @@ import { Avatar } from '~/components/ui/avatar'
 import MinimalLayout from '~/layouts/minimal'
 import { Badge } from '~/components/ui/badge'
 import { menu } from '~/components/ui/menu'
-import { Logo } from '~/components/Logo'
+import { Logo } from '~/components/logo'
 import { InertiaProps } from '~/types'
 
 type PageProps = InertiaProps<{

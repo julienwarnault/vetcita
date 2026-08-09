@@ -1,12 +1,12 @@
+import { Link } from '@adonisjs/inertia/react'
 import { InputPassword } from '~/components/ui/input_password'
 import { ButtonLink } from '~/components/ui/button_link'
 import { Button } from '~/components/ui/button'
 import { Field } from '~/components/ui/field'
 import { Input } from '~/components/ui/input'
 import { Form } from '~/components/ui/form'
-import { Logo } from '~/components/Logo'
+import { Logo } from '~/components/logo'
 import AuthLayout from '~/layouts/auth'
-import { Link } from '@adonisjs/inertia/react'
 
 export default function Login() {
   return (

@@ -1,7 +1,7 @@
 import { Head } from '@inertiajs/react'
 import type { ReactElement } from 'react'
 import { ButtonLink } from '~/components/ui/button_link'
-import { Logo } from '~/components/Logo'
+import { Logo } from '~/components/logo'
 
 export default function ServerError() {
   return (

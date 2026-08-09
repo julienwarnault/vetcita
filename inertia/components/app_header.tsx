@@ -5,7 +5,7 @@ import { Popover } from './ui/popover'
 import { Avatar } from './ui/avatar'
 import { Button } from './ui/button'
 import { urlFor } from '~/lib/tuyau'
-import { Logo } from './Logo'
+import { Logo } from './logo'
 
 interface AppHeaderProps {
   fullName?: string
