@@ -125,7 +125,7 @@ function DrawerPortal(props: DrawerPortalProps) {
   return (
     <Portal>
       <div ref={wrapperRef} role="dialog" className="fixed top-0 right-0 h-full z-100 transition-[filter] duration-300">
-        <div className="flex flex-row bg-white shadow-xl block-full">
+        <div className="flex flex-row bg-white shadow-2xl block-full">
           <div className="absolute -translate-x-full flex items-start p-3">
             <Button type="button" variant="secondary" size="icon-lg" className="shadow-lg" onClick={onClose}>
               <XIcon />

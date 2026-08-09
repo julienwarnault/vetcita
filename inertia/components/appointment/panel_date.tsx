@@ -21,7 +21,7 @@ export function PanelDate(props: PanelDateProps) {
         <Breadcrumb>
           <Breadcrumb.List>
             <Breadcrumb.Item>
-              <Breadcrumb.Link render={<button onClick={() => goToStep(0)} />}>Servicio</Breadcrumb.Link>
+              <Breadcrumb.Link render={<button onClick={() => goToStep(0)} />}>Servicios</Breadcrumb.Link>
             </Breadcrumb.Item>
             <Breadcrumb.Separator />
             <Breadcrumb.Item>

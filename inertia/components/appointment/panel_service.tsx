@@ -23,7 +23,7 @@ export function PanelService(props: PanelServiceProps) {
         <Breadcrumb>
           <Breadcrumb.List>
             <Breadcrumb.Item>
-              <Breadcrumb.Page>Servicio</Breadcrumb.Page>
+              <Breadcrumb.Page>Servicios</Breadcrumb.Page>
             </Breadcrumb.Item>
             <Breadcrumb.Separator />
             <Breadcrumb.Item>

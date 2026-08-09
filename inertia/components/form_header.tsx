@@ -27,7 +27,7 @@ export function FormHeader(props: FormHeaderProps) {
     >
       <div className="container-xl flex items-center justify-between gap-2">
         <div className="flex items-center gap-4 truncate">
-          <div className="flex gap-3">{leftElement}</div>
+          {leftElement && <div className="flex gap-3">{leftElement}</div>}
           <div className={cn('transition-opacity', isScrolled ? 'opacity-100' : 'opacity-0')}>
             <div className="text-[16px] md:text-[22px] font-semibold">{title}</div>
           </div>
