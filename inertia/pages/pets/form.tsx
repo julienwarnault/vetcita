@@ -53,8 +53,8 @@ export default function ShowForm(props: PageProps) {
               route={isEdit ? 'update_pet.execute' : 'create_pet.execute'}
               routeParams={isEdit ? { id: pet.id } : undefined}
               className="gap-16 pb-24"
-              onSuccess={(data: any) => {
-                !isEdit && emit('onCreate', data.props.flash.petId)
+              onSuccess={(data) => {
+                !isEdit && emit('onCreate', data.flash.petId)
                 close()
               }}
             >

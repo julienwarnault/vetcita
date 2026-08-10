@@ -1,14 +1,13 @@
 import { toast } from 'sonner'
 import { useEffect } from 'react'
 import { usePage } from '@inertiajs/react'
-import usePageProps from './use_page_props'
 
 export function useFlashToasts() {
-  const { flash } = usePageProps()
+  const { flash, url } = usePage()
 
   useEffect(() => {
     toast.dismiss()
-  }, [usePage().url])
+  }, [url])
 
   useEffect(() => {
     if (flash.error) {

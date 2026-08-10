@@ -14,7 +14,7 @@ export function Form<Route extends keyof typeof routes>(props: FormProps<Route>)
           render={<div />}
           className={cn('flex w-full flex-col gap-4', className)}
         >
-          {typeof children === 'function' ? children(slotProps) : children}
+          {typeof children === 'function' ? (children as any)(slotProps) : children}
         </FormPrimitive>
       )}
     </InertiaForm>

@@ -48,8 +48,8 @@ export default function ShowForm(props: PageProps) {
               route={isEdit ? 'update_client.execute' : 'create_client.execute'}
               routeParams={isEdit ? { id: client.id } : undefined}
               className="gap-16 pb-24"
-              onSuccess={(data: any) => {
-                !isEdit && emit('onCreate', data.props.flash.clientId, data.props.flash.client)
+              onSuccess={(data) => {
+                !isEdit && emit('onCreate', data.flash.clientId, data.flash.client)
                 close()
               }}
             >
