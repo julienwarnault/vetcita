@@ -1,6 +1,7 @@
 import { transactionContext } from '#shared/contexts/transaction_context'
 import Consultation from '#medical_records/models/consultation'
 import type { UUID } from '#shared/types'
+import Pet from '#pets/models/pet'
 
 interface UpdateConsultationParams {
   id: UUID
@@ -29,6 +30,11 @@ export class UpdateConsultation {
       .where('petId', params.petId)
       .firstOrFail()
 
+    const pet = await Pet.query({ client: trx })
+      .where('id', params.petId)
+      .where('tenantId', params.tenantId)
+      .firstOrFail()
+
     consultation.merge({
       appointmentId: params.appointmentId ?? null,
       recordType: params.recordType ?? consultation.recordType,
@@ -44,6 +50,11 @@ export class UpdateConsultation {
     })
 
     await consultation.useTransaction(trx!).save()
+
+    if (params.weight !== undefined) {
+      pet.merge({ weight: params.weight })
+      await pet.useTransaction(trx!).save()
+    }
 
     return { consultation }
   }

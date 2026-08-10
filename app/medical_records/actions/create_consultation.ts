@@ -1,6 +1,7 @@
 import { transactionContext } from '#shared/contexts/transaction_context'
 import Consultation from '#medical_records/models/consultation'
 import type { UUID } from '#shared/types'
+import Pet from '#pets/models/pet'
 
 interface CreateConsultationParams {
   petId: UUID
@@ -23,6 +24,11 @@ export class CreateConsultation {
   async execute(params: CreateConsultationParams) {
     const trx = transactionContext.get()
 
+    const pet = await Pet.query({ client: trx })
+      .where('id', params.petId)
+      .where('tenantId', params.tenantId)
+      .firstOrFail()
+
     const consultation = await Consultation.create(
       {
         tenantId: params.tenantId,
@@ -42,6 +48,11 @@ export class CreateConsultation {
       },
       { client: trx }
     )
+
+    if (params.weight !== undefined) {
+      pet.merge({ weight: params.weight })
+      await pet.useTransaction(trx!).save()
+    }
 
     return { consultation }
   }
