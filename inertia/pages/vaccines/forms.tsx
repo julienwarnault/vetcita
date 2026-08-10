@@ -1,6 +1,4 @@
-import { DateTime } from 'luxon'
 import { Data } from '@generated/data'
-import { NativeSelect } from '~/components/ui/native_select'
 import { InertiaDrawer } from '~/components/inertia_drawer'
 import { Textarea } from '~/components/ui/textarea'
 import { Button } from '~/components/ui/button'
@@ -8,22 +6,16 @@ import { Drawer } from '~/components/ui/drawer'
 import { Field } from '~/components/ui/field'
 import { Input } from '~/components/ui/input'
 import { Form } from '~/components/ui/form'
-import { DEFAULT_LOCALE } from '~/lib/date'
 import { InertiaProps } from '~/types'
+import { today } from '~/lib/date'
 
 type PageProps = InertiaProps<{
   pet: Data.Pets.Pet
-  appointments: Data.Booking.Appointment[]
   vaccine?: Data.MedicalRecords.Vaccine
 }>
 
-function dateInputValue(value?: string | Date | null) {
-  if (!value) return ''
-  return DateTime.fromISO(value + '').toFormat('yyyy-MM-dd')
-}
-
 export default function VaccineForm(props: PageProps) {
-  const { pet, appointments, vaccine } = props
+  const { pet, vaccine } = props
 
   const isEdit = !!vaccine
   const title = isEdit ? 'Editar vacuna' : 'Añadir una vacuna'
@@ -56,31 +48,13 @@ export default function VaccineForm(props: PageProps) {
 
                 <Field name="date">
                   <Field.Label>Fecha de aplicación *</Field.Label>
-                  <Input type="date" defaultValue={dateInputValue(vaccine?.date)} />
+                  <Input type="date" defaultValue={vaccine?.date ?? today().toFormat('yyyy-MM-dd')} />
                   <Field.Error />
                 </Field>
 
                 <Field name="nextDueDate">
                   <Field.Label>Próxima aplicación</Field.Label>
-                  <Input type="date" defaultValue={dateInputValue(vaccine?.nextDueDate)} />
-                  <Field.Error />
-                </Field>
-
-                <Field name="appointmentId" className="col-span-6">
-                  <Field.Label>Cita relacionada</Field.Label>
-                  <NativeSelect defaultValue={vaccine?.appointmentId ?? ''}>
-                    <NativeSelect.Option value="">Sin cita relacionada</NativeSelect.Option>
-                    {appointments.map((appointment) => {
-                      const startDate = DateTime.fromISO(appointment.localStartDate!)
-
-                      return (
-                        <NativeSelect.Option key={appointment.id} value={appointment.id}>
-                          {startDate.setLocale(DEFAULT_LOCALE).toFormat('ccc. d LLL yyyy')} -{' '}
-                          {appointment.service?.name}
-                        </NativeSelect.Option>
-                      )
-                    })}
-                  </NativeSelect>
+                  <Input type="date" defaultValue={vaccine?.nextDueDate ?? undefined} />
                   <Field.Error />
                 </Field>
 

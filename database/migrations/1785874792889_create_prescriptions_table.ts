@@ -10,6 +10,7 @@ export default class extends BaseSchema {
       table.timestamp('updated_at').nullable()
       table.uuid('tenant_id').notNullable().references('id').inTable('tenants').onDelete('CASCADE')
       table.uuid('pet_id').notNullable().references('id').inTable('pets').onDelete('CASCADE')
+      table.uuid('agenda_id').nullable().references('id').inTable('agendas').onDelete('SET NULL')
       table.string('name').notNullable()
       table.text('notes').nullable()
       table.string('type').notNullable()

@@ -1,5 +1,5 @@
 import { BaseTransformer } from '@adonisjs/core/transformers'
-import AppointmentTransformer from '#booking/transformers/appointment_transformer'
+import AgendaTransformer from '#agendas/transformers/agenda_transformer'
 import PetTransformer from '#pets/transformers/pet_transformer'
 import type Vaccine from '#medical_records/models/vaccine'
 
@@ -10,9 +10,8 @@ export default class VaccineTransformer extends BaseTransformer<Vaccine> {
         'id',
         'tenantId',
         'petId',
-        'appointmentId',
+        'agendaId',
         'name',
-        'date',
         'nextDueDate',
         'reminderSentAt',
         'batchNumber',
@@ -21,8 +20,10 @@ export default class VaccineTransformer extends BaseTransformer<Vaccine> {
         'createdAt',
         'updatedAt',
       ]),
+      date: this.resource.date.toFormat('yyyy-MM-dd'),
+      nextDueDate: this.resource.nextDueDate?.toFormat('yyyy-MM-dd'),
       pet: PetTransformer.transform(this.whenLoaded(this.resource.pet)),
-      appointment: AppointmentTransformer.transform(this.whenLoaded(this.resource.appointment)),
+      agenda: AgendaTransformer.transform(this.whenLoaded(this.resource.agenda)),
     }
   }
 }

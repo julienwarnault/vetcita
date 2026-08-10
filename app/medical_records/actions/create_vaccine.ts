@@ -4,10 +4,9 @@ import Vaccine from '#medical_records/models/vaccine'
 import type { UUID } from '#shared/types'
 
 interface CreateVaccineParams {
-  tenantId: UUID
   petId: UUID
-  appointmentId?: UUID
   agendaId?: UUID
+  tenantId: UUID
   name: string
   date: DateTime
   nextDueDate?: DateTime
@@ -24,7 +23,6 @@ export class CreateVaccine {
       {
         tenantId: params.tenantId,
         petId: params.petId,
-        appointmentId: params.appointmentId ?? null,
         agendaId: params.agendaId ?? null,
         name: params.name,
         date: params.date,

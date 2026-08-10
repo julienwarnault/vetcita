@@ -1,21 +1,17 @@
 import vine from '@vinejs/vine'
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
-import AppointmentTransformer from '#booking/transformers/appointment_transformer'
 import VaccineTransformer from '#medical_records/transformers/vaccine_transformer'
-import { GetPetAppointments } from '#booking/queries/get_pet_appointments'
 import { UpdateVaccine } from '#medical_records/actions/update_vaccine'
 import { GetVaccine } from '#medical_records/queries/get_vaccine'
 import { withTransaction } from '#shared/utils/with_transaction'
 import PetTransformer from '#pets/transformers/pet_transformer'
-import { uuidSchema } from '#shared/validators'
 import { GetPet } from '#pets/queries/get_pet'
 
 @inject()
 export default class UpdateVaccineController {
   static validator = vine.create(
     vine.object({
-      appointmentId: uuidSchema().optional(),
       name: vine.string(),
       date: vine.date(),
       nextDueDate: vine.date().optional(),
@@ -27,21 +23,18 @@ export default class UpdateVaccineController {
 
   constructor(
     private readonly getPet: GetPet,
-    private readonly getPetAppointments: GetPetAppointments,
     private readonly getVaccine: GetVaccine,
     private readonly updateVaccine: UpdateVaccine
   ) {}
 
   async render({ inertia, params, tenantId }: HttpContext) {
-    const [{ pet }, { appointments }, { vaccine }] = await Promise.all([
+    const [{ pet }, { vaccine }] = await Promise.all([
       this.getPet.execute({ id: params.petId, tenantId }),
-      this.getPetAppointments.execute({ petId: params.petId, tenantId }),
       this.getVaccine.execute({ id: params.id, tenantId }),
     ])
 
     return inertia.render('vaccines/forms', {
       pet: PetTransformer.transform(pet),
-      appointments: AppointmentTransformer.transform(appointments),
       vaccine: VaccineTransformer.transform(vaccine),
     })
   }

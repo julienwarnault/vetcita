@@ -12,6 +12,7 @@ export class GetPetConsultations {
       .where('tenantId', params.tenantId)
       .where('petId', params.petId)
       .preload('agenda')
+      .orderBy('date', 'desc')
       .orderBy('createdAt', 'desc')
 
     return { consultations }

@@ -1,7 +1,6 @@
-import { DateTime } from 'luxon'
 import { Data } from '@generated/data'
 import { useModalStack } from '@inertiaui/modal-react'
-import { DEFAULT_LOCALE } from '~/lib/date'
+import { parseDate } from '~/lib/date'
 import { Button } from '../ui/button'
 import { Drawer } from '../ui/drawer'
 import { urlFor } from '~/lib/tuyau'
@@ -43,40 +42,36 @@ export function PanelPrescriptions(props: PanelPrescriptionsProps) {
       </Drawer.Header>
       <Drawer.Body className="bg-background">
         <div className="flex flex-col gap-2 w-full">
-          {prescriptions.map((prescription) => {
-            const date = DateTime.fromISO(prescription.date + '')
+          {prescriptions.map((prescription) => (
+            <Card
+              key={prescription.id}
+              size="lg"
+              className="flex flex-col gap-4 cursor-pointer hover:border-border-strong"
+              onClick={() => {
+                visitModal(urlFor('update_prescription.render', { id: prescription.id, petId: prescription.petId }), {
+                  onClose: reload,
+                })
+              }}
+            >
+              <div>
+                <div className="flex justify-between gap-4">
+                  <div className="text-[17px]/6 font-semibold">{prescription.name}</div>
+                  <Badge>{parseDate(prescription.date)?.toFormat('ccc. d LLL yyyy')}</Badge>
+                </div>
+              </div>
 
-            return (
-              <Card
-                key={prescription.id}
-                size="lg"
-                className="flex flex-col gap-4 cursor-pointer hover:border-border-strong"
-                onClick={() => {
-                  visitModal(urlFor('update_prescription.render', { id: prescription.id, petId: prescription.petId }), {
-                    onClose: reload,
-                  })
-                }}
-              >
-                <div>
-                  <div className="flex justify-between gap-4">
-                    <div className="text-[17px]/6 font-semibold">{prescription.name}</div>
-                    <Badge>{date.setLocale(DEFAULT_LOCALE).toFormat('ccc. d LLL yyyy')}</Badge>
-                  </div>
+              <div className="flex flex-col gap-3">
+                <div className="flex text-[13px]/4 font-normal text-muted separator-dot">
+                  <span>{PRESCRIPTION_TYPE_LABELS[prescription.type] || prescription.type}</span>
+                  {prescription.intervalDays && <span>Cada {prescription.intervalDays} días</span>}
                 </div>
 
-                <div className="flex flex-col gap-3">
-                  <div className="flex text-[13px]/4 font-normal text-muted separator-dot">
-                    <span>{PRESCRIPTION_TYPE_LABELS[prescription.type] || prescription.type}</span>
-                    {prescription.intervalDays && <span>Cada {prescription.intervalDays} días</span>}
-                  </div>
-
-                  {prescription.notes && (
-                    <div className="text-[13px]/4 font-normal text-muted line-clamp-2">{prescription.notes}</div>
-                  )}
-                </div>
-              </Card>
-            )
-          })}
+                {prescription.notes && (
+                  <div className="text-[13px]/4 font-normal text-muted line-clamp-2">{prescription.notes}</div>
+                )}
+              </div>
+            </Card>
+          ))}
 
           {prescriptions.length === 0 && (
             <Empty

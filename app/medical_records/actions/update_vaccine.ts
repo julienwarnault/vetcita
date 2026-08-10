@@ -5,9 +5,8 @@ import type { UUID } from '#shared/types'
 
 interface UpdateVaccineParams {
   id: UUID
-  tenantId: UUID
   petId: UUID
-  appointmentId?: UUID
+  tenantId: UUID
   name: string
   date: DateTime
   nextDueDate?: DateTime
@@ -28,7 +27,6 @@ export class UpdateVaccine {
     const previousNextDueDate = vaccine.nextDueDate
 
     vaccine.merge({
-      appointmentId: params.appointmentId ?? null,
       name: params.name,
       date: params.date,
       nextDueDate: params.nextDueDate ?? null,

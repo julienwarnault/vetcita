@@ -1,6 +1,4 @@
-import { DateTime } from 'luxon'
 import { Data } from '@generated/data'
-import { NativeSelect } from '~/components/ui/native_select'
 import { InputSelect } from '~/components/ui/input_select'
 import { InertiaModal } from '~/components/inertia_modal'
 import { InputGroup } from '~/components/ui/input_group'
@@ -9,18 +7,18 @@ import { Textarea } from '~/components/ui/textarea'
 import { Button } from '~/components/ui/button'
 import MinimalLayout from '~/layouts/minimal'
 import { Field } from '~/components/ui/field'
+import { Input } from '~/components/ui/input'
 import { Form } from '~/components/ui/form'
-import { DEFAULT_LOCALE } from '~/lib/date'
 import { InertiaProps } from '~/types'
+import { today } from '~/lib/date'
 
 type PageProps = InertiaProps<{
   pet: Data.Pets.Pet
-  appointments: Data.Booking.Appointment[]
   consultation?: Data.MedicalRecords.Consultation
 }>
 
 export default function ShowForm(props: PageProps) {
-  const { pet, appointments, consultation } = props
+  const { pet, consultation } = props
 
   const isEdit = !!consultation
   const title = consultation ? 'Editar consulta' : 'Añadir una consulta'
@@ -142,21 +140,9 @@ export default function ShowForm(props: PageProps) {
                         <Field.Error />
                       </Field>
 
-                      <Field name="appointmentId" className="col-span-1">
-                        <Field.Label>Cita relacionada</Field.Label>
-                        <NativeSelect defaultValue={consultation?.appointmentId ?? ''}>
-                          {appointments.map((appointment) => {
-                            const startDate = DateTime.fromISO(appointment.localStartDate!)
-
-                            return (
-                              <NativeSelect.Option key={appointment.id} value={appointment.id}>
-                                {startDate.setLocale(DEFAULT_LOCALE).toFormat('ccc. d LLL yyyy')} -{' '}
-                                {appointment.service?.name}
-                              </NativeSelect.Option>
-                            )
-                          })}
-                        </NativeSelect>
-
+                      <Field name="date" className="col-span-1">
+                        <Field.Label>Fecha *</Field.Label>
+                        <Input type="date" defaultValue={consultation?.date ?? today()?.toFormat('yyyy-MM-dd')} />
                         <Field.Error />
                       </Field>
                     </div>

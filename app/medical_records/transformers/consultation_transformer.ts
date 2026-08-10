@@ -1,5 +1,4 @@
 import { BaseTransformer } from '@adonisjs/core/transformers'
-import AppointmentTransformer from '#booking/transformers/appointment_transformer'
 import AgendaTransformer from '#agendas/transformers/agenda_transformer'
 import TenantTransformer from '#tenants/transformers/tenant_transformer'
 import type Consultation from '#medical_records/models/consultation'
@@ -20,17 +19,16 @@ export default class ConsultationTransformer extends BaseTransformer<Consultatio
         'diagnosis',
         'treatment',
         'prescription',
-        'appointmentId',
         'petId',
         'agendaId',
         'tenantId',
         'createdAt',
         'updatedAt',
       ]),
+      date: this.resource.date.toFormat('yyyy-MM-dd'),
       pet: PetTransformer.transform(this.whenLoaded(this.resource.pet))?.depth(2),
       tenant: TenantTransformer.transform(this.whenLoaded(this.resource.tenant)),
       agenda: AgendaTransformer.transform(this.whenLoaded(this.resource.agenda)),
-      appointment: AppointmentTransformer.transform(this.whenLoaded(this.resource.appointment)),
     }
   }
 }

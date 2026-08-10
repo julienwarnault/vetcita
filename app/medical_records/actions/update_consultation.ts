@@ -1,3 +1,4 @@
+import type { DateTime } from 'luxon'
 import { transactionContext } from '#shared/contexts/transaction_context'
 import Consultation from '#medical_records/models/consultation'
 import type { UUID } from '#shared/types'
@@ -7,7 +8,7 @@ interface UpdateConsultationParams {
   id: UUID
   petId: UUID
   tenantId: UUID
-  appointmentId?: UUID
+  date: DateTime
   recordType?: string
   weight?: number
   temperature?: number
@@ -36,7 +37,7 @@ export class UpdateConsultation {
       .firstOrFail()
 
     consultation.merge({
-      appointmentId: params.appointmentId ?? null,
+      date: params.date,
       recordType: params.recordType ?? consultation.recordType,
       weight: params.weight ?? null,
       temperature: params.temperature ?? null,

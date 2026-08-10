@@ -1,4 +1,3 @@
-import { DateTime } from 'luxon'
 import { Data } from '@generated/data'
 import { NativeSelect } from '~/components/ui/native_select'
 import { InertiaDrawer } from '~/components/inertia_drawer'
@@ -9,25 +8,14 @@ import { Field } from '~/components/ui/field'
 import { Input } from '~/components/ui/input'
 import { Form } from '~/components/ui/form'
 import { InertiaProps } from '~/types'
+import { today } from '~/lib/date'
 
 type PageProps = InertiaProps<{
   pet: Data.Pets.Pet
   prescription?: Data.MedicalRecords.Prescription
 }>
 
-function dateInputValue(value?: string | Date | null) {
-  if (!value) return ''
-  return DateTime.fromISO(value + '').toFormat('yyyy-MM-dd')
-}
-
-const PRESCRIPTION_TYPES = [
-  'Vacunacion',
-  'Desparasitacion',
-  'Chequeo general',
-  'Estetica',
-  'Dental',
-  'Otro',
-]
+const PRESCRIPTION_TYPES = ['Vacunacion', 'Desparasitacion', 'Chequeo general', 'Estetica', 'Dental', 'Otro']
 
 export default function PrescriptionForm(props: PageProps) {
   const { pet, prescription } = props
@@ -76,7 +64,7 @@ export default function PrescriptionForm(props: PageProps) {
 
                 <Field name="date" className="col-span-3">
                   <Field.Label>Fecha *</Field.Label>
-                  <Input type="date" defaultValue={dateInputValue(prescription?.date)} />
+                  <Input type="date" defaultValue={prescription?.date ?? today()?.toFormat('yyyy-MM-dd')} />
                   <Field.Error />
                 </Field>
 
@@ -88,7 +76,10 @@ export default function PrescriptionForm(props: PageProps) {
 
                 <Field name="notes" className="col-span-6">
                   <Field.Label>Notas</Field.Label>
-                  <Textarea placeholder="Añadir observaciones sobre la prescripción" defaultValue={prescription?.notes ?? ''} />
+                  <Textarea
+                    placeholder="Añadir observaciones sobre la prescripción"
+                    defaultValue={prescription?.notes ?? ''}
+                  />
                   <Field.Error />
                 </Field>
               </div>

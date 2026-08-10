@@ -4,8 +4,9 @@ import Prescription from '#medical_records/models/prescription'
 import type { UUID } from '#shared/types'
 
 interface CreatePrescriptionParams {
-  tenantId: UUID
   petId: UUID
+  agendaId: UUID
+  tenantId: UUID
   name: string
   notes?: string
   type: string
@@ -20,6 +21,7 @@ export class CreatePrescription {
     const prescription = await Prescription.create(
       {
         tenantId: params.tenantId,
+        agendaId: params.agendaId ?? null,
         petId: params.petId,
         name: params.name,
         notes: params.notes,

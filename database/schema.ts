@@ -145,14 +145,14 @@ export class ClosedDateSchema extends BaseModel {
 }
 
 export class ConsultationSchema extends BaseModel {
-  static $columns = ['agendaId', 'appointmentId', 'createdAt', 'diagnosis', 'heartRate', 'id', 'petId', 'prescription', 'recordType', 'respiratoryRate', 'symptoms', 'temperature', 'tenantId', 'treatment', 'updatedAt', 'visitReason', 'weight'] as const
+  static $columns = ['agendaId', 'createdAt', 'date', 'diagnosis', 'heartRate', 'id', 'petId', 'prescription', 'recordType', 'respiratoryRate', 'symptoms', 'temperature', 'tenantId', 'treatment', 'updatedAt', 'visitReason', 'weight'] as const
   $columns = ConsultationSchema.$columns
   @column()
   declare agendaId: UUID | null
-  @column()
-  declare appointmentId: UUID | null
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
+  @column.date()
+  declare date: DateTime
   @column()
   declare diagnosis: string | null
   @column()
@@ -221,8 +221,10 @@ export class PetSchema extends BaseModel {
 }
 
 export class PrescriptionSchema extends BaseModel {
-  static $columns = ['createdAt', 'date', 'id', 'intervalDays', 'name', 'notes', 'petId', 'tenantId', 'type', 'updatedAt'] as const
+  static $columns = ['agendaId', 'createdAt', 'date', 'id', 'intervalDays', 'name', 'notes', 'petId', 'tenantId', 'type', 'updatedAt'] as const
   $columns = PrescriptionSchema.$columns
+  @column()
+  declare agendaId: UUID | null
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
   @column.date()
@@ -380,12 +382,10 @@ export class UserSchema extends BaseModel {
 }
 
 export class VaccineSchema extends BaseModel {
-  static $columns = ['agendaId', 'appointmentId', 'batchNumber', 'createdAt', 'date', 'id', 'manufacturer', 'name', 'nextDueDate', 'notes', 'petId', 'reminderSentAt', 'tenantId', 'updatedAt'] as const
+  static $columns = ['agendaId', 'batchNumber', 'createdAt', 'date', 'id', 'manufacturer', 'name', 'nextDueDate', 'notes', 'petId', 'reminderSentAt', 'tenantId', 'updatedAt'] as const
   $columns = VaccineSchema.$columns
   @column()
   declare agendaId: UUID | null
-  @column()
-  declare appointmentId: UUID | null
   @column()
   declare batchNumber: string | null
   @column.dateTime({ autoCreate: true })

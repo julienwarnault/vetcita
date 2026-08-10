@@ -5,8 +5,8 @@ import type { UUID } from '#shared/types'
 
 interface UpdatePrescriptionParams {
   id: UUID
-  tenantId: UUID
   petId: UUID
+  tenantId: UUID
   name: string
   notes?: string
   type: string

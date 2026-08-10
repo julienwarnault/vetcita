@@ -1,11 +1,10 @@
-import { DateTime } from 'luxon'
 import { Data } from '@generated/data'
 import { useModalStack } from '@inertiaui/modal-react'
 import { Column, ListTable } from '~/components/ui/list_table'
-import { DEFAULT_LOCALE, DEFAULT_TIMEZONE } from '~/lib/date'
 import { FiltersBar } from '~/components/filters_bar'
 import { ViewHeader } from '~/components/view_header'
 import { Empty } from '~/components/ui/empty'
+import { parseDate } from '~/lib/date'
 import { InertiaProps } from '~/types'
 import { urlFor } from '~/lib/tuyau'
 
@@ -22,11 +21,7 @@ export default function List(props: PageProps) {
     {
       header: 'Fecha',
       width: '10%',
-      accessor: ({ createdAt }) =>
-        DateTime.fromISO(createdAt + '')
-          .setZone(DEFAULT_TIMEZONE)
-          .setLocale(DEFAULT_LOCALE)
-          .toFormat('d ccc. yyyy'),
+      accessor: ({ date }) => parseDate(date)?.toFormat('d ccc. yyyy'),
     },
     {
       header: 'Mascota',

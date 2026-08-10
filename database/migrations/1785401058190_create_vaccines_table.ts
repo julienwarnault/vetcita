@@ -11,7 +11,6 @@ export default class extends BaseSchema {
       table.uuid('tenant_id').notNullable().references('id').inTable('tenants').onDelete('CASCADE')
       table.uuid('pet_id').notNullable().references('id').inTable('pets').onDelete('CASCADE')
       table.uuid('agenda_id').nullable().references('id').inTable('agendas').onDelete('SET NULL')
-      table.uuid('appointment_id').nullable().references('id').inTable('appointments').onDelete('SET NULL')
       table.string('name').notNullable()
       table.date('date').notNullable()
       table.date('next_due_date').nullable()
@@ -20,7 +19,6 @@ export default class extends BaseSchema {
       table.text('notes').nullable()
       table.timestamp('reminder_sent_at').nullable()
       table.index(['tenant_id', 'pet_id', 'created_at'])
-      table.index(['appointment_id'])
       table.index(['next_due_date', 'reminder_sent_at'])
     })
   }

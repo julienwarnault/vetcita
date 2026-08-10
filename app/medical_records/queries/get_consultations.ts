@@ -12,6 +12,7 @@ export class GetConsultations {
       .where('tenant_id', params.tenantId)
       .preload('pet', (q) => q.preload('owner'))
       .preload('agenda')
+      .orderBy('date', 'desc')
       .orderBy('createdAt', 'desc')
 
     if (params.search) {

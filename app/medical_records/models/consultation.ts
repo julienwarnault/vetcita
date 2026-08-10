@@ -3,15 +3,11 @@ import { compose } from '@adonisjs/core/helpers'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import { WithPrimaryUuid } from '#shared/mixins/with_primary_uuid'
 import { ConsultationSchema } from '#database/schema'
-import Appointment from '#booking/models/appointment'
 import Tenant from '#tenants/models/tenant'
 import Agenda from '#agendas/models/agenda'
 import Pet from '#pets/models/pet'
 
 export default class Consultation extends compose(ConsultationSchema, WithPrimaryUuid) {
-  @belongsTo(() => Appointment)
-  declare appointment: BelongsTo<typeof Appointment>
-
   @belongsTo(() => Pet)
   declare pet: BelongsTo<typeof Pet>
 

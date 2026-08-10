@@ -31,7 +31,7 @@ export default class CreatePrescriptionController {
     })
   }
 
-  async execute({ request, response, params, tenantId }: HttpContext) {
+  async execute({ request, response, params, tenantId, agenda }: HttpContext) {
     const payload = await request.validateUsing(CreatePrescriptionController.validator)
     await this.getPet.execute({ id: params.petId, tenantId })
 
@@ -40,6 +40,7 @@ export default class CreatePrescriptionController {
         ...payload,
         petId: params.petId,
         tenantId,
+        agendaId: agenda.id,
       })
     })
 
