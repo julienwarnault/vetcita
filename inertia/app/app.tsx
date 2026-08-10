@@ -10,8 +10,6 @@ import { createInertiaApp, type ResolvedComponent } from '@inertiajs/react'
 import { client, queryClient } from '~/lib/tuyau'
 import Layout from '~/layouts/default'
 
-import.meta.glob(['../resources/favicon/**'])
-
 export const appName = import.meta.env.VITE_APP_NAME || 'Vetcita'
 
 createInertiaApp({

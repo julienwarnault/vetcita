@@ -7,7 +7,11 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
     react(),
-    adonisjs({ entryPoints: ['inertia/app/app.tsx'], reload: ['resources/views/**/*.edge'] }),
+    adonisjs({
+      entryPoints: ['inertia/app/app.tsx'],
+      reload: ['resources/views/**/*.edge'],
+      assets: ['resources/favicon/**'],
+    }),
   ],
 
   /**
