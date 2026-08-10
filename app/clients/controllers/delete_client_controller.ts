@@ -12,6 +12,6 @@ export default class DeleteClientController {
       return this.deleteClient.execute({ id: params.id, tenantId })
     })
 
-    return response.noContent()
+    return response.redirect().back()
   }
 }

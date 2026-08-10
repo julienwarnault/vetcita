@@ -16,11 +16,13 @@ export type ScannedRoutes = {
     'create_agenda.execute': { paramsTuple?: []; params?: {} }
     'update_agenda.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_agenda.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'delete_agenda.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'list_services.render': { paramsTuple?: []; params?: {} }
     'create_service.render': { paramsTuple?: []; params?: {} }
     'create_service.execute': { paramsTuple?: []; params?: {} }
     'update_service.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_service.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'delete_service.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'list_appointment_statuses.render': { paramsTuple?: []; params?: {} }
     'create_appointment_status.render': { paramsTuple?: []; params?: {} }
     'create_appointment_status.execute': { paramsTuple?: []; params?: {} }
@@ -77,6 +79,7 @@ export type ScannedRoutes = {
     'get_pet.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_pet.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_pet.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'delete_pet.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'list_pets.api': { paramsTuple?: []; params?: {} }
     'get_pet.api': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'list_consultations.render': { paramsTuple?: []; params?: {} }
@@ -247,11 +250,14 @@ export type ScannedRoutes = {
     'update_prescription.execute': { paramsTuple: [ParamValue,ParamValue]; params: {'petId': ParamValue,'id': ParamValue} }
   }
   DELETE: {
+    'delete_agenda.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'delete_service.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'delete_appointment_status.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'delete_client.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'delete_closed_date.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'delete_time_off.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'delete_schedule_day.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'delete_pet.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   PATCH: {
     'change_appointment_status.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }

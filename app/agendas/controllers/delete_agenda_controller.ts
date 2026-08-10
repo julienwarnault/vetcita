@@ -12,6 +12,6 @@ export default class DeleteAgendaController {
       return this.deleteAgenda.execute({ id: params.id })
     })
 
-    return response.noContent()
+    return response.redirect().back()
   }
 }

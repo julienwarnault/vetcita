@@ -1,12 +1,16 @@
 import { Data } from '@generated/data'
+import { router } from '@inertiajs/core'
 import { useModalStack } from '@inertiaui/modal-react'
+import { MoreVerticalIcon, Trash2Icon } from 'lucide-react'
 import { SettingsHeader } from '~/components/settings_header'
+import { ConfirmDialog } from '~/components/ui/confirm_dialog'
 import { ViewHeader } from '~/components/view_header'
 import { FiltersBar } from '~/components/filters_bar'
 import { Avatar } from '~/components/ui/avatar'
 import { Button } from '~/components/ui/button'
 import { Empty } from '~/components/ui/empty'
 import { Badge } from '~/components/ui/badge'
+import { Menu } from '~/components/ui/menu'
 import { Card } from '~/components/ui/card'
 import { InertiaProps } from '~/types'
 import { urlFor } from '~/lib/tuyau'
@@ -24,6 +28,19 @@ export default function List(props: PageProps) {
     owner: 'Propietario',
     staff: 'Empleado',
     none: 'Sin acceso',
+  }
+
+  const handleDelete = async (agendaId: string) => {
+    await ConfirmDialog.call({
+      title: 'Eliminar miembro del equipo',
+      mutationFn: async (call) => {
+        router.delete(urlFor('delete_agenda.execute', { id: agendaId }), {
+          onSuccess: () => {
+            call.end(true)
+          },
+        })
+      },
+    })
   }
 
   return (
@@ -51,6 +68,28 @@ export default function List(props: PageProps) {
               className="relative flex flex-col items-center gap-5 text-center hover:bg-background cursor-pointer"
               onClick={() => visitModal(urlFor('update_agenda.render', { id: agenda.id }))}
             >
+              <div className="absolute top-4 right-4 z-10">
+                <Menu
+                  trigger={
+                    <Button variant="tertiary" size="sm" onClick={(e) => e.stopPropagation()}>
+                      <MoreVerticalIcon size={16} />
+                    </Button>
+                  }
+                  align="end"
+                >
+                  <Menu.Item
+                    variant="destructive"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      handleDelete(agenda.id)
+                    }}
+                  >
+                    <Trash2Icon size={16} />
+                    Eliminar
+                  </Menu.Item>
+                </Menu>
+              </div>
+
               <Avatar size="4xl" fullName={agenda.name} color={agenda.color} />
 
               <div className="flex flex-col gap-1">

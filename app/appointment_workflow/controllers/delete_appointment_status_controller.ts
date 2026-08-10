@@ -12,6 +12,6 @@ export default class DeleteAppointmentStatusController {
       return this.deleteAppointmentStatus.execute({ id: params.id, tenantId })
     })
 
-    return response.redirect().toRoute('list_appointment_statuses.render')
+    return response.redirect().back()
   }
 }

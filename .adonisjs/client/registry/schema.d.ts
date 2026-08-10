@@ -151,6 +151,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/agendas/controllers/update_agenda_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
+  'delete_agenda.execute': {
+    methods: ["DELETE"]
+    pattern: '/settings/agendas/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/agendas/controllers/delete_agenda_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/agendas/controllers/delete_agenda_controller').default['execute']>>>
+    }
+  }
   'list_services.render': {
     methods: ["GET","HEAD"]
     pattern: '/settings/services'
@@ -209,6 +221,18 @@ export interface Registry {
       query: ExtractQuery<InferInput<(typeof import('#app/services/controllers/update_service_controller').default)['validator']>>
       response: ExtractResponse<Awaited<ReturnType<import('#app/services/controllers/update_service_controller').default['execute']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/services/controllers/update_service_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'delete_service.execute': {
+    methods: ["DELETE"]
+    pattern: '/settings/services/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/services/controllers/delete_service_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/services/controllers/delete_service_controller').default['execute']>>>
     }
   }
   'list_appointment_statuses.render': {
@@ -881,6 +905,18 @@ export interface Registry {
       query: ExtractQuery<InferInput<(typeof import('#app/pets/controllers/update_pet_controller').default)['validator']>>
       response: ExtractResponse<Awaited<ReturnType<import('#app/pets/controllers/update_pet_controller').default['execute']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/pets/controllers/update_pet_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'delete_pet.execute': {
+    methods: ["DELETE"]
+    pattern: '/pets/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/pets/controllers/delete_pet_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/pets/controllers/delete_pet_controller').default['execute']>>>
     }
   }
   'list_pets.api': {

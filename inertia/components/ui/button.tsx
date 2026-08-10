@@ -10,6 +10,7 @@ const button = tv({
       primary: 'bg-primary text-white hover:bg-primary/90',
       secondary: 'border border-border bg-white hover:bg-background hover:border-input',
       tertiary: 'bg-transparent hover:bg-background',
+      destructive: 'bg-destructive text-white hover:bg-destructive/90',
     },
     size: {
       'sm': 'h-9 px-4 text-[15px] font-medium [&_svg]:size-4',

@@ -2,11 +2,13 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import adonisjs from '@adonisjs/vite/client'
+import reactCall from 'react-call/vite'
 
 export default defineConfig({
   plugins: [
     tailwindcss(),
     react(),
+    reactCall(),
     adonisjs({
       entryPoints: ['inertia/app/app.tsx'],
       reload: ['resources/views/**/*.edge'],

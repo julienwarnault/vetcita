@@ -2,7 +2,8 @@ import { cn } from 'tailwind-variants'
 import { Data } from '@generated/data'
 import { router } from '@inertiajs/react'
 import { DynamicIcon, IconName } from 'lucide-react/dynamic'
-import { LockIcon, ChevronUpIcon, ChevronDownIcon, Trash2Icon, PencilIcon } from 'lucide-react'
+import { LockIcon, ChevronUpIcon, ChevronDownIcon, Trash2Icon, PencilIcon, MoreVerticalIcon } from 'lucide-react'
+import { ConfirmDialog } from '~/components/ui/confirm_dialog'
 import { SettingsHeader } from '~/components/settings_header'
 import { ButtonLink } from '~/components/ui/button_link'
 import { ViewHeader } from '~/components/view_header'
@@ -22,10 +23,16 @@ export default function List(props: PageProps) {
     router.post(urlFor('move_appointment_status.execute', { id: statusId }), { direction }, { preserveState: false })
   }
 
-  const handleDelete = (statusId: string) => {
-    router.delete(urlFor('delete_appointment_status.execute', { id: statusId }), {
-      preserveState: true,
-      preserveScroll: true,
+  const handleDelete = async (statusId: string) => {
+    await ConfirmDialog.call({
+      title: 'Eliminar estado',
+      mutationFn: async (call) => {
+        router.delete(urlFor('delete_appointment_status.execute', { id: statusId }), {
+          onSuccess: () => {
+            call.end(true)
+          },
+        })
+      },
     })
   }
 
@@ -90,8 +97,8 @@ export default function List(props: PageProps) {
                 ) : (
                   <Menu
                     trigger={
-                      <Button variant="secondary" size="sm">
-                        Acciones <Menu.TriggerIcon />
+                      <Button variant="tertiary" size="sm">
+                        <MoreVerticalIcon size={16} />
                       </Button>
                     }
                     align="end"

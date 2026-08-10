@@ -1,11 +1,15 @@
 import { Data } from '@generated/data'
 import { router } from '@inertiajs/react'
+import { MoreVerticalIcon, Trash2Icon } from 'lucide-react'
+import { ConfirmDialog } from '~/components/ui/confirm_dialog'
 import { SettingsHeader } from '~/components/settings_header'
 import { formatDuration, formatPrice } from '~/lib/utils'
 import { ButtonLink } from '~/components/ui/button_link'
 import { ViewHeader } from '~/components/view_header'
 import { FiltersBar } from '~/components/filters_bar'
+import { Button } from '~/components/ui/button'
 import { Empty } from '~/components/ui/empty'
+import { Menu } from '~/components/ui/menu'
 import { InertiaProps } from '~/types'
 import { urlFor } from '~/lib/tuyau'
 
@@ -15,6 +19,19 @@ type PageProps = InertiaProps<{
 
 export default function List(props: PageProps) {
   const { services } = props
+
+  const handleDelete = async (serviceId: string) => {
+    await ConfirmDialog.call({
+      title: 'Eliminar servicio',
+      mutationFn: async (call) => {
+        router.delete(urlFor('delete_service.execute', { id: serviceId }), {
+          onSuccess: () => {
+            call.end(true)
+          },
+        })
+      },
+    })
+  }
 
   return (
     <div className="flex-1 h-auto bg-background">
@@ -55,8 +72,27 @@ export default function List(props: PageProps) {
                   <div className="text-[15px]/5 text-muted">{formatDuration(service.duration)}</div>
                   {service.description && <div className="text-[15px]/5 text-muted">{service.description}</div>}
                 </div>
-                <div className="flex gap-2">
+                <div className="flex gap-2 items-center relative z-10">
                   <div className="text-[15px]/5 font-medium">{formatPrice(service.price ?? 0)}</div>
+                  <Menu
+                    trigger={
+                      <Button variant="tertiary" size="sm" onClick={(e) => e.stopPropagation()}>
+                        <MoreVerticalIcon size={16} />
+                      </Button>
+                    }
+                    align="end"
+                  >
+                    <Menu.Item
+                      variant="destructive"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleDelete(service.id)
+                      }}
+                    >
+                      <Trash2Icon size={16} />
+                      Eliminar
+                    </Menu.Item>
+                  </Menu>
                 </div>
               </div>
             </div>

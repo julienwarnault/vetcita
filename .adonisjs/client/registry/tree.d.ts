@@ -28,6 +28,9 @@ export interface ApiDefinition {
     render: typeof routes['update_agenda.render']
     execute: typeof routes['update_agenda.execute']
   }
+  deleteAgenda: {
+    execute: typeof routes['delete_agenda.execute']
+  }
   listServices: {
     render: typeof routes['list_services.render']
   }
@@ -38,6 +41,9 @@ export interface ApiDefinition {
   updateService: {
     render: typeof routes['update_service.render']
     execute: typeof routes['update_service.execute']
+  }
+  deleteService: {
+    execute: typeof routes['delete_service.execute']
   }
   listAppointmentStatuses: {
     render: typeof routes['list_appointment_statuses.render']
@@ -170,6 +176,9 @@ export interface ApiDefinition {
   updatePet: {
     render: typeof routes['update_pet.render']
     execute: typeof routes['update_pet.execute']
+  }
+  deletePet: {
+    execute: typeof routes['delete_pet.execute']
   }
   listConsultations: {
     render: typeof routes['list_consultations.render']

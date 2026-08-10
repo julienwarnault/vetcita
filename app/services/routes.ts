@@ -11,6 +11,7 @@ router
         router.post('settings/services', [controllers.services.CreateService, 'execute'])
         router.get('settings/services/edit/:id', [controllers.services.UpdateService, 'render'])
         router.put('settings/services/:id', [controllers.services.UpdateService, 'execute'])
+        router.delete('settings/services/:id', [controllers.services.DeleteService, 'execute'])
       })
       .use([middleware.requireRole({ roles: ['owner'] })])
   })

@@ -1,5 +1,6 @@
 import { Toaster } from 'sonner'
 import { ReactElement } from 'react'
+import { ConfirmDialog } from '~/components/ui/confirm_dialog'
 import { AppSidebar } from '~/components/app_sidebar'
 import { AppHeader } from '~/components/app_header'
 import { useFlashToasts } from '~/hooks/use_flash'
@@ -19,6 +20,9 @@ export default function Layout({ children }: { children: ReactElement }) {
           <main className="flex flex-1 flex-col overflow-y-auto bg-white">{children}</main>
         </div>
       </div>
+
+      <ConfirmDialog />
+
       <Toaster position="top-center" richColors />
     </>
   )

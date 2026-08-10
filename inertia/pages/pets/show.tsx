@@ -1,9 +1,11 @@
 import { Data } from '@generated/data'
+import { router } from '@inertiajs/core'
 import { useModalStack } from '@inertiaui/modal-react'
 import { PanelAppointments } from '~/components/client/panel_appointments'
 import { PanelConsultations } from '~/components/pet/panel_consultations'
 import { PanelPrescriptions } from '~/components/pet/panel_prescriptions'
 import { PanelVaccines } from '~/components/pet/panel_vaccines'
+import { ConfirmDialog } from '~/components/ui/confirm_dialog'
 import { PanelDetails } from '~/components/pet/panel_details'
 import { InertiaDrawer } from '~/components/inertia_drawer'
 import { Avatar } from '~/components/ui/avatar'
@@ -27,6 +29,20 @@ export default function ShowPet(props: PageProps) {
   const { pet, appointments, consultations, vaccines, prescriptions } = props
 
   const { visitModal, closeAll } = useModalStack()
+
+  const handleDelete = async () => {
+    await ConfirmDialog.call({
+      title: 'Eliminar mascota',
+      mutationFn: async (call) => {
+        router.delete(urlFor('delete_pet.execute', { id: pet.id }), {
+          onSuccess: () => {
+            call.end(true)
+            closeAll()
+          },
+        })
+      },
+    })
+  }
 
   return (
     <InertiaDrawer>
@@ -68,6 +84,9 @@ export default function ShowPet(props: PageProps) {
                             }}
                           >
                             Ver cliente
+                          </Menu.Item>
+                          <Menu.Item variant="destructive" onClick={handleDelete}>
+                            Eliminar mascota
                           </Menu.Item>
                         </Menu>
                         <Button

@@ -11,6 +11,7 @@ router
         router.post('settings/agendas', [controllers.agendas.CreateAgenda, 'execute'])
         router.get('settings/agendas/edit/:id', [controllers.agendas.UpdateAgenda, 'render'])
         router.put('settings/agendas/:id', [controllers.agendas.UpdateAgenda, 'execute'])
+        router.delete('settings/agendas/:id', [controllers.agendas.DeleteAgenda, 'execute'])
       })
       .use([middleware.requireRole({ roles: ['owner'] })])
   })

@@ -78,6 +78,12 @@ const routes = {
     tokens: [{"old":"/settings/agendas/:id","type":0,"val":"settings","end":""},{"old":"/settings/agendas/:id","type":0,"val":"agendas","end":""},{"old":"/settings/agendas/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['update_agenda.execute']['types'],
   },
+  'delete_agenda.execute': {
+    methods: ["DELETE"],
+    pattern: '/settings/agendas/:id',
+    tokens: [{"old":"/settings/agendas/:id","type":0,"val":"settings","end":""},{"old":"/settings/agendas/:id","type":0,"val":"agendas","end":""},{"old":"/settings/agendas/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['delete_agenda.execute']['types'],
+  },
   'list_services.render': {
     methods: ["GET","HEAD"],
     pattern: '/settings/services',
@@ -107,6 +113,12 @@ const routes = {
     pattern: '/settings/services/:id',
     tokens: [{"old":"/settings/services/:id","type":0,"val":"settings","end":""},{"old":"/settings/services/:id","type":0,"val":"services","end":""},{"old":"/settings/services/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['update_service.execute']['types'],
+  },
+  'delete_service.execute': {
+    methods: ["DELETE"],
+    pattern: '/settings/services/:id',
+    tokens: [{"old":"/settings/services/:id","type":0,"val":"settings","end":""},{"old":"/settings/services/:id","type":0,"val":"services","end":""},{"old":"/settings/services/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['delete_service.execute']['types'],
   },
   'list_appointment_statuses.render': {
     methods: ["GET","HEAD"],
@@ -443,6 +455,12 @@ const routes = {
     pattern: '/pets/:id',
     tokens: [{"old":"/pets/:id","type":0,"val":"pets","end":""},{"old":"/pets/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['update_pet.execute']['types'],
+  },
+  'delete_pet.execute': {
+    methods: ["DELETE"],
+    pattern: '/pets/:id',
+    tokens: [{"old":"/pets/:id","type":0,"val":"pets","end":""},{"old":"/pets/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['delete_pet.execute']['types'],
   },
   'list_pets.api': {
     methods: ["GET","HEAD"],

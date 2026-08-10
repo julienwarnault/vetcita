@@ -12,6 +12,6 @@ export default class DeleteServiceController {
       return this.deleteService.execute({ id: params.id })
     })
 
-    return response.noContent()
+    return response.redirect().back()
   }
 }

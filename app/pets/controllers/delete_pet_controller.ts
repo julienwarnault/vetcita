@@ -12,6 +12,6 @@ export default class DeletePetController {
       return this.deletePet.execute({ id: params.id })
     })
 
-    return response.noContent()
+    return response.redirect().back()
   }
 }

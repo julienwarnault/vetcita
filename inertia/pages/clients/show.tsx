@@ -1,7 +1,9 @@
 import { Data } from '@generated/data'
+import { router } from '@inertiajs/core'
 import { useModalStack } from '@inertiaui/modal-react'
 import { PanelAppointments } from '~/components/client/panel_appointments'
 import { PanelDetails } from '~/components/client/panel_details'
+import { ConfirmDialog } from '~/components/ui/confirm_dialog'
 import { InertiaDrawer } from '~/components/inertia_drawer'
 import { PanelPets } from '~/components/client/panel_pets'
 import { Avatar } from '~/components/ui/avatar'
@@ -24,6 +26,20 @@ export default function ShowClient(props: PageProps) {
   const { client, appointments, pets } = props
 
   const { visitModal, closeAll } = useModalStack()
+
+  const handleDelete = async () => {
+    await ConfirmDialog.call({
+      title: 'Eliminar cliente',
+      mutationFn: async (call) => {
+        router.delete(urlFor('delete_client.execute', { id: client.id }), {
+          onSuccess: () => {
+            call.end(true)
+            closeAll()
+          },
+        })
+      },
+    })
+  }
 
   return (
     <InertiaDrawer>
@@ -58,6 +74,9 @@ export default function ShowClient(props: PageProps) {
                             }}
                           >
                             Editar
+                          </Menu.Item>
+                          <Menu.Item variant="destructive" onClick={handleDelete}>
+                            Eliminar cliente
                           </Menu.Item>
                         </Menu>
                         <Button
