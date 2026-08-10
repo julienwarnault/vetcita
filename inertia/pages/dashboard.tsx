@@ -14,7 +14,7 @@ import { sum } from '~/lib/utils'
 type PageProps = InertiaProps<{
   stats: {
     today: number
-    thisWeek: number
+    thisMonth: number
     noShowsThisMonth: number
     onlineThisMonth: number
   }
@@ -39,9 +39,9 @@ export default function Dashboard(props: PageProps) {
       description: 'Número de citas durante el día en curso.',
     },
     {
-      label: 'Citas de esta semana',
-      value: stats.thisWeek,
-      description: 'Número de citas durante la semana en curso.',
+      label: 'Citas de este mes',
+      value: stats.thisMonth,
+      description: 'Número de citas durante el mes en curso.',
     },
     {
       label: 'No presentados este mes',

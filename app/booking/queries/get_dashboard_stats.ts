@@ -16,7 +16,7 @@ export class GetDashboardStats {
   async execute(params: GetDashboardStatsParams) {
     const now = this.timeService.now()
 
-    const [today, thisWeek, noShowsThisMonth, onlineThisMonth] = await Promise.all([
+    const [today, thisMonth, noShowsThisMonth, onlineThisMonth] = await Promise.all([
       this.#countAppointments({
         tenantId: params.tenantId,
         from: now.startOf('day'),
@@ -25,8 +25,8 @@ export class GetDashboardStats {
       }),
       this.#countAppointments({
         tenantId: params.tenantId,
-        from: now.startOf('week'),
-        to: now.endOf('week'),
+        from: now.startOf('month'),
+        to: now.endOf('month'),
         excludedStatus: AppointmentStatus.CANCELLED,
       }),
       this.#countAppointments({
@@ -47,7 +47,7 @@ export class GetDashboardStats {
     return {
       stats: {
         today,
-        thisWeek,
+        thisMonth,
         noShowsThisMonth,
         onlineThisMonth,
       },
