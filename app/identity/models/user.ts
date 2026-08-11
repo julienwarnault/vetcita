@@ -13,6 +13,10 @@ const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
 })
 
 export default class User extends compose(UserSchema, AuthFinder, WithPrimaryUuid) {
+  get fullName() {
+    return (this.firstName + ' ' + this.lastName).trim()
+  }
+
   @hasOne(() => Agenda)
   declare agenda: HasOne<typeof Agenda>
 }

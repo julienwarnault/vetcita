@@ -7,4 +7,4 @@ router
     router.get('onboarding', [controllers.onboarding.ShowOnboarding, 'render'])
     router.post('onboarding', [controllers.onboarding.UpdateOnboarding, 'execute'])
   })
-  .use([middleware.auth(), middleware.requireTenant()])
+  .use([middleware.auth()])

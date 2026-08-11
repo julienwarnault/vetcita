@@ -13,7 +13,7 @@ export default class RequireTenantMiddleware {
     })
 
     if (!user.agenda) {
-      return ctx.response.redirect('/no-tenant')
+      return ctx.response.redirect().toRoute('show_onboarding.render')
     }
 
     ctx.tenantId = user.agenda.tenantId

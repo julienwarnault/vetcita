@@ -30,12 +30,6 @@ export default function Signup() {
           </div>
 
           <Form route="signup.execute" className="gap-6">
-            <Field name="tenantName">
-              <Field.Label>Nombre de la clínica</Field.Label>
-              <Input placeholder="Introduce un nombre" autoComplete="organization" />
-              <Field.Error />
-            </Field>
-
             <div className="flex flex-col gap-4 sm:flex-row">
               <Field name="firstName" className="w-full">
                 <Field.Label>Nombre</Field.Label>

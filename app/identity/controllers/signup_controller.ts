@@ -11,7 +11,6 @@ export default class SignupController {
     vine.object({
       firstName: vine.string(),
       lastName: vine.string(),
-      tenantName: vine.string(),
       email: emailSchema(),
       phone: vine.string().phone(),
       password: passwordSchema().confirmed({ confirmationField: 'passwordConfirmation' }),

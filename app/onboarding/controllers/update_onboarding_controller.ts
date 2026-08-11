@@ -23,11 +23,13 @@ export default class UpdateOnboardingController {
 
   constructor(private readonly completeOnboarding: CompleteOnboarding) {}
 
-  async execute({ request, response, tenantId }: HttpContext) {
+  async execute({ request, response, auth }: HttpContext) {
+    const user = auth.getUserOrFail()
+
     const payload = await request.validateUsing(UpdateOnboardingController.validator)
 
     await withTransaction(() => {
-      return this.completeOnboarding.execute({ tenantId, ...payload })
+      return this.completeOnboarding.execute({ userId: user.id, ...payload })
     })
 
     return response.redirect().toRoute('dashboard.render')

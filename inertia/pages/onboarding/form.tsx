@@ -8,7 +8,6 @@ import { StepAddress } from '~/components/onboarding/step_address'
 import { StepBasic } from '~/components/onboarding/step_basic'
 import { FormHeader } from '~/components/form_header'
 import { Popover } from '~/components/ui/popover'
-import usePageProps from '~/hooks/use_page_props'
 import { Button } from '~/components/ui/button'
 import { Avatar } from '~/components/ui/avatar'
 import MinimalLayout from '~/layouts/minimal'
@@ -18,18 +17,16 @@ import { Logo } from '~/components/logo'
 import { InertiaProps } from '~/types'
 
 type PageProps = InertiaProps<{
-  tenant: Data.Tenants.Tenant
-  services: Data.Services.Service[]
+  tenant?: Data.Tenants.Tenant
+  authUser: Data.Identity.User
 }>
 
 export default function OnboardingForm(props: PageProps) {
-  const { tenant, services } = props
-
-  const { user } = usePageProps()
+  const { tenant, authUser } = props
 
   const { form, step, stepIndex, isFirst, isLast, canContinue, actions, totalSteps } = useOnboardingForm({
     tenant,
-    services,
+    authUser,
     submitUrl: '/onboarding',
   })
 
@@ -47,7 +44,7 @@ export default function OnboardingForm(props: PageProps) {
             align="end"
             trigger={
               <button className="ml-2">
-                <Avatar fullName={user?.fullName ?? ''} />
+                <Avatar fullName={authUser?.fullName ?? ''} />
               </button>
             }
             sideOffset={16}
