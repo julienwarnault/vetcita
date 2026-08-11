@@ -6,6 +6,7 @@ import { SettingsHeader } from '~/components/settings_header'
 import { ConfirmDialog } from '~/components/ui/confirm_dialog'
 import { ViewHeader } from '~/components/view_header'
 import { FiltersBar } from '~/components/filters_bar'
+import usePageProps from '~/hooks/use_page_props'
 import { Avatar } from '~/components/ui/avatar'
 import { Button } from '~/components/ui/button'
 import { Empty } from '~/components/ui/empty'
@@ -21,6 +22,8 @@ type PageProps = InertiaProps<{
 
 export default function List(props: PageProps) {
   const { agendas } = props
+
+  const { user } = usePageProps()
 
   const { visitModal } = useModalStack()
 
@@ -71,7 +74,12 @@ export default function List(props: PageProps) {
               <div className="absolute top-4 right-4 z-10">
                 <Menu
                   trigger={
-                    <Button variant="tertiary" size="sm" onClick={(e) => e.stopPropagation()}>
+                    <Button
+                      variant="tertiary"
+                      size="sm"
+                      onClick={(e) => e.stopPropagation()}
+                      disabled={agenda.role === 'owner' || agenda.id == user?.agenda?.id}
+                    >
                       <MoreVerticalIcon size={16} />
                     </Button>
                   }
