@@ -10,7 +10,13 @@ export function InputPassword(props: React.ComponentProps<'input'>) {
     <InputGroup>
       <InputGroup.Input {...props} type={showPassword ? 'text' : 'password'} />
       <InputGroup.Addon align="end">
-        <Button type="button" size="icon-sm" variant="tertiary" onClick={() => setShowPassword(!showPassword)}>
+        <Button
+          type="button"
+          size="icon-sm"
+          variant="tertiary"
+          onClick={() => setShowPassword(!showPassword)}
+          tabIndex={-1}
+        >
           {showPassword ? <EyeOffIcon className="size-5" /> : <EyeIcon className="size-5" />}
         </Button>
       </InputGroup.Addon>
