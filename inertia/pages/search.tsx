@@ -59,6 +59,7 @@ export default function Search(props: PageProps) {
               className="text-5xl/16.5 font-medium border-b w-full outline-none"
               placeholder="¿Qué estás buscando?"
               onChange={(e) => handleSearchChange(e.target.value)}
+              autoFocus={true}
             />
           </div>
           <p className="text-[15px]/5 text-muted">
