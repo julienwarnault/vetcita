@@ -18,7 +18,11 @@ export class CreateAgenda {
   async execute(params: CreateAgendaParams) {
     const trx = transactionContext.get()
 
-    const tenant = await Tenant.findOrFail(params.tenantId, { client: trx })
+    const tenant = await Tenant.query({ client: trx }).where('id', params.tenantId).preload('location').firstOrFail()
+
+    if (!tenant.location) {
+      throw new Error('Business clinic is required to create an agenda')
+    }
 
     // Create agenda
     const agenda = await Agenda.create(
@@ -38,7 +42,7 @@ export class CreateAgenda {
 
     // Init working hours
     await WorkingHour.createMany(
-      tenant.openingHours
+      tenant.location.openingHours
         .map((day, dayOfWeek) => {
           return day.map(({ startTime, endTime }) => ({
             tenantId: params.tenantId,

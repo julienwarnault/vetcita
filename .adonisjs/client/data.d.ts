@@ -22,6 +22,7 @@ import type SchedulingShiftTransformer from '#app/scheduling/transformers/shift_
 import type SchedulingTimeOffTransformer from '#app/scheduling/transformers/time_off_transformer'
 import type SchedulingWorkingHourTransformer from '#app/scheduling/transformers/working_hour_transformer'
 import type ServicesServiceTransformer from '#app/services/transformers/service_transformer'
+import type TenantsLocationTransformer from '#app/tenants/transformers/location_transformer'
 import type TenantsTenantTransformer from '#app/tenants/transformers/tenant_transformer'
 import type InertiaMiddleware from '#shared/middleware/inertia_middleware'
 
@@ -109,6 +110,10 @@ export namespace Data {
     }
   }
   export namespace Tenants {
+    export type Location = InferData<TenantsLocationTransformer>
+    export namespace Location {
+      export type Variants = InferVariants<TenantsLocationTransformer>
+    }
     export type Tenant = InferData<TenantsTenantTransformer>
     export namespace Tenant {
       export type Variants = InferVariants<TenantsTenantTransformer>

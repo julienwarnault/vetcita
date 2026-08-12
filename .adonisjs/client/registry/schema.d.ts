@@ -19,7 +19,7 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/shared/controllers/dashboard_controller').default['render']>>>
     }
   }
-  'settings': {
+  'show_settings.render': {
     methods: ["GET","HEAD"]
     pattern: '/settings'
     types: {
@@ -27,8 +27,8 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: unknown
-      errorResponse: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#app/shared/controllers/show_settings_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/shared/controllers/show_settings_controller').default['render']>>>
     }
   }
   'signup.render': {
@@ -463,13 +463,37 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/tenants/controllers/update_tenant_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
+  'update_location.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/settings/location/edit'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/tenants/controllers/update_location_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/tenants/controllers/update_location_controller').default['render']>>>
+    }
+  }
+  'update_location.execute': {
+    methods: ["PUT"]
+    pattern: '/settings/location'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#app/tenants/controllers/update_location_controller').default)['validator']>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#app/tenants/controllers/update_location_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/tenants/controllers/update_location_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/tenants/controllers/update_location_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
   'book_appointment.render': {
     methods: ["GET","HEAD"]
-    pattern: '/:tenantId/booking'
+    pattern: '/:slug/booking'
     types: {
       body: {}
       paramsTuple: [ParamValue]
-      params: { tenantId: ParamValue }
+      params: { slug: ParamValue }
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#app/booking/controllers/book_appointment_controller').default['render']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/booking/controllers/book_appointment_controller').default['render']>>>
@@ -477,11 +501,11 @@ export interface Registry {
   }
   'book_appointment.execute': {
     methods: ["POST"]
-    pattern: '/:tenantId/booking'
+    pattern: '/:slug/booking'
     types: {
       body: ExtractBody<InferInput<(typeof import('#app/booking/controllers/book_appointment_controller').default)['validator']>>
       paramsTuple: [ParamValue]
-      params: { tenantId: ParamValue }
+      params: { slug: ParamValue }
       query: ExtractQuery<InferInput<(typeof import('#app/booking/controllers/book_appointment_controller').default)['validator']>>
       response: ExtractResponse<Awaited<ReturnType<import('#app/booking/controllers/book_appointment_controller').default['execute']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/booking/controllers/book_appointment_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
@@ -489,11 +513,11 @@ export interface Registry {
   }
   'confirm_appointment.render': {
     methods: ["GET","HEAD"]
-    pattern: '/:tenantId/booking/:appointmentId/confirm'
+    pattern: '/:slug/booking/:appointmentId/confirm'
     types: {
       body: {}
       paramsTuple: [ParamValue, ParamValue]
-      params: { tenantId: ParamValue; appointmentId: ParamValue }
+      params: { slug: ParamValue; appointmentId: ParamValue }
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#app/booking/controllers/confirm_appointment_controller').default['render']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/booking/controllers/confirm_appointment_controller').default['render']>>>

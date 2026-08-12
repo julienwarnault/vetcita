@@ -84,9 +84,11 @@ export const controllers = {
   },
   shared: {
     Dashboard: () => import('#app/shared/controllers/dashboard_controller'),
+    ShowSettings: () => import('#app/shared/controllers/show_settings_controller'),
   },
   tenants: {
     ShowTenant: () => import('#app/tenants/controllers/show_tenant_controller'),
+    UpdateLocation: () => import('#app/tenants/controllers/update_location_controller'),
     UpdateTenant: () => import('#app/tenants/controllers/update_tenant_controller'),
   },
 }

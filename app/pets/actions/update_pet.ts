@@ -40,7 +40,7 @@ export class UpdatePet {
       notes: params.notes || null,
     })
 
-    await pet.save()
+    await pet.useTransaction(trx!).save()
 
     return { pet }
   }

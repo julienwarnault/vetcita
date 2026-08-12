@@ -5,7 +5,9 @@ export interface ApiDefinition {
   dashboard: {
     render: typeof routes['dashboard.render']
   }
-  settings: typeof routes['settings']
+  showSettings: {
+    render: typeof routes['show_settings.render']
+  }
   signup: {
     render: typeof routes['signup.render']
     execute: typeof routes['signup.execute']
@@ -87,6 +89,10 @@ export interface ApiDefinition {
   updateTenant: {
     render: typeof routes['update_tenant.render']
     execute: typeof routes['update_tenant.execute']
+  }
+  updateLocation: {
+    render: typeof routes['update_location.render']
+    execute: typeof routes['update_location.execute']
   }
   bookAppointment: {
     render: typeof routes['book_appointment.render']

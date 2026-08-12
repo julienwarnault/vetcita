@@ -17,7 +17,15 @@ export function StepPetInfos({ species, form }: StepPetInfosProps) {
       <Field name="petSpeciesId" className="col-span-6">
         <Field.Label>Especie *</Field.Label>
         <InputSelect
-          items={species.map((s) => ({ label: s.name, value: s.id }))}
+          items={species.map((item) => ({
+            label: (
+              <div className="flex items-center gap-2">
+                <img src={item.illustrationUrl} className="size-7 rounded-full" />
+                <span>{item.name}</span>
+              </div>
+            ),
+            value: item.id,
+          }))}
           value={data.petSpeciesId}
           onValueChange={(value) => setData('petSpeciesId', value!)}
         />

@@ -70,6 +70,7 @@
     "@adonisjs/i18n": "^3.0.1",
     "@adonisjs/inertia": "^5.0.0",
     "@adonisjs/lucid": "^22.4.2",
+    "@adonisjs/lucid-slugify": "^4.0.0",
     "@adonisjs/mail": "^10.2.1",
     "@adonisjs/queue": "^0.6.1",
     "@adonisjs/redis": "^10.0.0",

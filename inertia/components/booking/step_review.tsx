@@ -9,12 +9,12 @@ interface StepReviewProps {
   form: BookingForm
   service?: Data.Services.Service
   species?: Data.Pets.Species
-  tenant: Data.Tenants.Tenant
+  location: Data.Tenants.Location
   stepKey: StepKey
 }
 
 export function StepReview(props: StepReviewProps) {
-  const { service, species, tenant, form, stepKey } = props
+  const { service, species, location, form, stepKey } = props
   const { data } = form
 
   const startDateTime = data.startDate ? DateTime.fromISO(data.startDate, { zone: DEFAULT_TIMEZONE }) : null
@@ -25,7 +25,7 @@ export function StepReview(props: StepReviewProps) {
     <Card shadow={false} className="divide-y">
       <div className="p-4">
         <div className="text-sm text-muted-foreground">Clínica</div>
-        <div className="font-semibold text-lg">{tenant.name}</div>
+        <div className="font-semibold text-lg">{location.name}</div>
       </div>
 
       {['datetime', 'infos', 'pet', 'review'].includes(stepKey) && (

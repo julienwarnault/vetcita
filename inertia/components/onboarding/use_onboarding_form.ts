@@ -18,7 +18,7 @@ export type OnboardingForm = InertiaFormProps<OnboardingData>
 export const STEPS = [
   {
     key: 'basic',
-    title: 'Empecemos por identificar tu clínica',
+    title: 'Empecemos por identificar tu negocio',
     description: 'Datos principales y ubicación.',
     fields: ['name', 'phone', 'email', 'address', 'city', 'state', 'postalCode', 'countryCode'] as string[],
     canContinue: (data: OnboardingData) => Boolean(data.name),
@@ -27,23 +27,22 @@ export const STEPS = [
 
 type UseOnboardingFormParams = {
   authUser: Data.Identity.User
-  tenant?: Data.Tenants.Tenant
   submitUrl: string
 }
 
 export function useOnboardingForm(params: UseOnboardingFormParams) {
-  const { tenant, authUser, submitUrl } = params
+  const { authUser, submitUrl } = params
   const [stepIndex, setStepIndex] = useState(0)
 
   const form = useForm<OnboardingData>({
-    name: tenant?.name ?? '',
-    email: tenant?.email ?? authUser?.email ?? '',
-    phone: tenant?.phone ?? authUser?.phone ?? '',
-    address: tenant?.address ?? '',
-    city: tenant?.city ?? '',
-    state: tenant?.state ?? '',
-    postalCode: tenant?.postalCode ?? '',
-    countryCode: tenant?.countryCode ?? 'MX',
+    name: '',
+    email: authUser?.email ?? '',
+    phone: authUser?.phone ?? '',
+    address: '',
+    city: '',
+    state: '',
+    postalCode: '',
+    countryCode: 'MX',
   })
 
   const step = STEPS[stepIndex]

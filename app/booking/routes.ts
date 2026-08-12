@@ -2,9 +2,9 @@ import router from '@adonisjs/core/services/router'
 import { controllers } from '#generated/controllers'
 import { middleware } from '#start/kernel'
 
-router.get(':tenantId/booking', [controllers.booking.BookAppointment, 'render'])
-router.post(':tenantId/booking', [controllers.booking.BookAppointment, 'execute'])
-router.get(':tenantId/booking/:appointmentId/confirm', [controllers.booking.ConfirmAppointment, 'render'])
+router.get(':slug/booking', [controllers.booking.BookAppointment, 'render'])
+router.post(':slug/booking', [controllers.booking.BookAppointment, 'execute'])
+router.get(':slug/booking/:appointmentId/confirm', [controllers.booking.ConfirmAppointment, 'render'])
 
 router
   .group(() => {

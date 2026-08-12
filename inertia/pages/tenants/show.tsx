@@ -18,12 +18,9 @@ export default function ShowTenant(props: PageProps) {
   return (
     <div className="flex-1 h-auto bg-background">
       <div className="container-lg pb-10">
-        <SettingsHeader title="Configuración de la clínica" />
+        <SettingsHeader title="Negocio" />
 
-        <ViewHeader
-          title="Configuración de la clínica"
-          subtitle="Consulta y actualiza los datos principales de la clínica."
-        >
+        <ViewHeader title="Negocio" subtitle="Consulta y actualiza los datos principales del negocio.">
           <ButtonLink route="update_tenant.render" size="lg" variant="secondary">
             Editar
           </ButtonLink>
@@ -31,21 +28,13 @@ export default function ShowTenant(props: PageProps) {
 
         <Card size="xl">
           <div className="flex flex-col gap-6 w-full">
-            <div className="text-[20px]/7 font-semibold">Información de la clínica</div>
+            <div className="text-[20px]/7 font-semibold">Información del negocio</div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <InfoItem label="Nombre de la clínica" value={tenant?.name} />
-              <InfoItem label="Identificador" value={tenant?.slug} />
+              <InfoItem label="Nombre del negocio" value={tenant?.name} />
               <InfoItem label="Correo electrónico" value={tenant?.email} />
               <InfoItem label="Teléfono" value={formatPhoneNumber(tenant.phone ?? '')} />
-              <InfoItem label="Sitio web" value={tenant.website} />
-              <InfoItem label="Creada el" value={parseDate(tenant?.createdAt)?.toFormat('d ccc. yyyy')} />
-              <hr className="md:col-span-2 my-2" />
-              <InfoItem label="Dirección" value={tenant?.address} className="md:col-span-2" />
-              <InfoItem label="Ciudad" value={tenant?.city} />
-              <InfoItem label="Estado" value={tenant?.state} />
-              <InfoItem label="Código postal" value={tenant?.postalCode} />
-              <InfoItem label="País" value={tenant?.countryCode} />
+              <InfoItem label="Creado el" value={parseDate(tenant?.createdAt)?.toFormat('d ccc. yyyy')} />
             </div>
           </div>
         </Card>

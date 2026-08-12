@@ -12,17 +12,22 @@ export default class AppointmentReminderNotification extends BaseMail {
   }
 
   prepare() {
-    const { id, client, tenant, pet, service, localStartDate, bookingRef, tenantId } = this.appointment
+    const { id, tenant, client, pet, service, localStartDate, bookingRef } = this.appointment
+    const { location } = tenant
 
     const formatedDate = localStartDate.toFormat('dd/MM/yyyy h:mma')
-    const confirmUrl = urlFor('confirm_appointment.render', { appointmentId: id, tenantId }, { prefixUrl: appUrl })
+    const confirmUrl = urlFor(
+      'confirm_appointment.render',
+      { appointmentId: id, slug: location.slug },
+      { prefixUrl: appUrl }
+    )
 
     this.message
       .to(this.to)
-      .subject(`Recordatorio de cita: su cita es el ${formatedDate}`)
+      .subject(`[${location.name}] Recordatorio de cita: su cita es el ${formatedDate}`)
       .htmlView('emails/appointment_reminder', {
         client,
-        tenantName: tenant.name,
+        locationName: location.name,
         petName: pet.name,
         service: service.name,
         startDate: formatedDate,

@@ -12,14 +12,8 @@ export default class UpdateTenantController {
   static validator = vine.create(
     vine.object({
       name: vine.string(),
+      phone: vine.string().phone(),
       email: emailSchema().optional(),
-      phone: vine.string().phone().optional(),
-      website: vine.string().url({ require_protocol: false }).optional(),
-      address: vine.string().optional(),
-      city: vine.string().optional(),
-      state: vine.string().optional(),
-      postalCode: vine.string().optional(),
-      countryCode: vine.string().fixedLength(2).optional(),
     })
   )
 

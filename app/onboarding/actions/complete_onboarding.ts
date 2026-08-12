@@ -1,7 +1,7 @@
 import { inject } from '@adonisjs/core'
-import string from '@adonisjs/core/helpers/string'
 import { transactionContext } from '#shared/contexts/transaction_context'
 import { CreateAgenda } from '#agendas/actions/create_agenda'
+import Location from '#tenants/models/location'
 import Service from '#services/models/service'
 import Tenant from '#tenants/models/tenant'
 import type { UUID } from '#shared/types'
@@ -10,8 +10,8 @@ import User from '#identity/models/user'
 interface CompleteOnboardingParams {
   userId: UUID
   name: string
+  phone: string
   email?: string
-  phone?: string
   website?: string
   address?: string
   city?: string
@@ -38,11 +38,27 @@ export class CompleteOnboarding {
     const tenant = await Tenant.create(
       {
         name: params.name,
-        slug: string.slug(params.name),
         email: params.email?.trim().toLowerCase() || null,
         phone: params.phone || null,
-        openingHours: openingHours,
         onboardingStatus: 'completed',
+      },
+      { client: trx }
+    )
+
+    // Create location
+    await Location.create(
+      {
+        tenantId: tenant.id,
+        name: params.name,
+        email: params.email?.trim().toLowerCase(),
+        phone: params.phone,
+        website: params.website,
+        address: params.address,
+        city: params.city,
+        state: params.state,
+        postalCode: params.postalCode,
+        countryCode: params.countryCode || 'MX',
+        openingHours: openingHours,
       },
       { client: trx }
     )

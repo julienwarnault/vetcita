@@ -12,7 +12,7 @@ export class GetVaccinesNeedingReminder {
       .where('next_due_date', '>=', reminderDateStart.toISODate()!)
       .where('next_due_date', '<', reminderDateEnd.toISODate()!)
       .whereNull('reminder_sent_at')
-      .preload('tenant')
+      .preload('tenant', (q) => q.preload('location'))
       .preload('pet', (q) => q.preload('owner'))
 
     return { vaccines }

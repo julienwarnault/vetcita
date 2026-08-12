@@ -9,7 +9,7 @@ router
 
     router
       .group(() => {
-        router.on('settings').renderInertia('settings/show', {}).as('settings')
+        router.get('settings', [controllers.shared.ShowSettings, 'render'])
       })
       .use([middleware.requireRole({ roles: ['owner'] })])
   })

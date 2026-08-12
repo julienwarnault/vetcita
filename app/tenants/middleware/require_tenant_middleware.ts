@@ -8,20 +8,33 @@ export default class RequireTenantMiddleware {
   async handle(ctx: HttpContext, next: NextFn) {
     const user = await ctx.auth.getUserOrFail()
 
-    await user.load('agenda', (query) => {
-      query.preload('tenant')
+    await user.load('agenda', (agendaQuery) => {
+      agendaQuery.preload('tenant', (tenantQuery) => tenantQuery.preload('location'))
     })
 
     if (!user.agenda) {
       return ctx.response.redirect().toRoute('show_onboarding.render')
     }
 
-    ctx.tenantId = user.agenda.tenantId
-    ctx.tenant = user.agenda.tenant
+    const tenant = user.agenda.tenant
+
+    if (!tenant) {
+      throw new Error('Business context is required for this route')
+    }
+
+    const location = tenant.location
+
+    if (!location) {
+      throw new Error('Business clinic context is required for this route')
+    }
+
+    ctx.tenantId = tenant.id
+    ctx.tenant = tenant
+    ctx.locationId = tenant.location.id
     ctx.agenda = user.agenda
 
     if (!ctx.tenant) {
-      throw new Error('Tenant context is required for this route')
+      throw new Error('Business context is required for this route')
     }
 
     if (ctx.tenant.onboardingStatus === 'pending' && !ctx.request.url().startsWith('/onboarding')) {
@@ -37,5 +50,6 @@ declare module '@adonisjs/core/http' {
     agenda: Agenda
     tenant: Tenant
     tenantId: UUID
+    locationId: UUID
   }
 }

@@ -17,15 +17,13 @@ import { Logo } from '~/components/logo'
 import { InertiaProps } from '~/types'
 
 type PageProps = InertiaProps<{
-  tenant?: Data.Tenants.Tenant
   authUser: Data.Identity.User
 }>
 
 export default function OnboardingForm(props: PageProps) {
-  const { tenant, authUser } = props
+  const { authUser } = props
 
   const { form, step, stepIndex, isFirst, isLast, canContinue, actions, totalSteps } = useOnboardingForm({
-    tenant,
     authUser,
     submitUrl: '/onboarding',
   })

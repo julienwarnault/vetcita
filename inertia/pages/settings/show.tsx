@@ -23,8 +23,8 @@ export default function Settings() {
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             <CardItem
               icon="building-2"
-              title="Configuración de la clínica"
-              description="Personaliza los datos de la clínica."
+              title="Configuración del negocio"
+              description="Personaliza los datos principales del negocio."
               href={urlFor('show_tenant.render')}
             />
             <CardItem
@@ -56,6 +56,11 @@ export default function Settings() {
           <div className="flex flex-col gap-4">
             <h2 className="text-2xl/8 font-semibold">Presencia online</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              <CardItem
+                title="Clínica"
+                description="Configura la dirección, los datos de contacto y la información pública de la clínica."
+                href={urlFor('update_location.render')}
+              />
               <CardItem
                 title="Enlace de reservas"
                 description="Comparte la página pública de reservas y su código QR."

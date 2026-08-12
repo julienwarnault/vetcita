@@ -29,7 +29,7 @@ export class UpdateClient {
       notes: params.notes || null,
     })
 
-    await client.save()
+    await client.useTransaction(trx!).save()
 
     return { client }
   }

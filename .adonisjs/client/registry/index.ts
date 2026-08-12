@@ -12,11 +12,11 @@ const routes = {
     tokens: [{"old":"/dashboard","type":0,"val":"dashboard","end":""}],
     types: placeholder as Registry['dashboard.render']['types'],
   },
-  'settings': {
+  'show_settings.render': {
     methods: ["GET","HEAD"],
     pattern: '/settings',
     tokens: [{"old":"/settings","type":0,"val":"settings","end":""}],
-    types: placeholder as Registry['settings']['types'],
+    types: placeholder as Registry['show_settings.render']['types'],
   },
   'signup.render': {
     methods: ["GET","HEAD"],
@@ -234,22 +234,34 @@ const routes = {
     tokens: [{"old":"/settings/tenant","type":0,"val":"settings","end":""},{"old":"/settings/tenant","type":0,"val":"tenant","end":""}],
     types: placeholder as Registry['update_tenant.execute']['types'],
   },
+  'update_location.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/settings/location/edit',
+    tokens: [{"old":"/settings/location/edit","type":0,"val":"settings","end":""},{"old":"/settings/location/edit","type":0,"val":"location","end":""},{"old":"/settings/location/edit","type":0,"val":"edit","end":""}],
+    types: placeholder as Registry['update_location.render']['types'],
+  },
+  'update_location.execute': {
+    methods: ["PUT"],
+    pattern: '/settings/location',
+    tokens: [{"old":"/settings/location","type":0,"val":"settings","end":""},{"old":"/settings/location","type":0,"val":"location","end":""}],
+    types: placeholder as Registry['update_location.execute']['types'],
+  },
   'book_appointment.render': {
     methods: ["GET","HEAD"],
-    pattern: '/:tenantId/booking',
-    tokens: [{"old":"/:tenantId/booking","type":1,"val":"tenantId","end":""},{"old":"/:tenantId/booking","type":0,"val":"booking","end":""}],
+    pattern: '/:slug/booking',
+    tokens: [{"old":"/:slug/booking","type":1,"val":"slug","end":""},{"old":"/:slug/booking","type":0,"val":"booking","end":""}],
     types: placeholder as Registry['book_appointment.render']['types'],
   },
   'book_appointment.execute': {
     methods: ["POST"],
-    pattern: '/:tenantId/booking',
-    tokens: [{"old":"/:tenantId/booking","type":1,"val":"tenantId","end":""},{"old":"/:tenantId/booking","type":0,"val":"booking","end":""}],
+    pattern: '/:slug/booking',
+    tokens: [{"old":"/:slug/booking","type":1,"val":"slug","end":""},{"old":"/:slug/booking","type":0,"val":"booking","end":""}],
     types: placeholder as Registry['book_appointment.execute']['types'],
   },
   'confirm_appointment.render': {
     methods: ["GET","HEAD"],
-    pattern: '/:tenantId/booking/:appointmentId/confirm',
-    tokens: [{"old":"/:tenantId/booking/:appointmentId/confirm","type":1,"val":"tenantId","end":""},{"old":"/:tenantId/booking/:appointmentId/confirm","type":0,"val":"booking","end":""},{"old":"/:tenantId/booking/:appointmentId/confirm","type":1,"val":"appointmentId","end":""},{"old":"/:tenantId/booking/:appointmentId/confirm","type":0,"val":"confirm","end":""}],
+    pattern: '/:slug/booking/:appointmentId/confirm',
+    tokens: [{"old":"/:slug/booking/:appointmentId/confirm","type":1,"val":"slug","end":""},{"old":"/:slug/booking/:appointmentId/confirm","type":0,"val":"booking","end":""},{"old":"/:slug/booking/:appointmentId/confirm","type":1,"val":"appointmentId","end":""},{"old":"/:slug/booking/:appointmentId/confirm","type":0,"val":"confirm","end":""}],
     types: placeholder as Registry['confirm_appointment.render']['types'],
   },
   'show_calendar.render': {

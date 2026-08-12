@@ -28,7 +28,7 @@ export default class SendAppointmentConfirmationJob extends Job<SendAppointmentC
       .preload('client')
       .preload('pet')
       .preload('service')
-      .preload('tenant')
+      .preload('tenant', (q) => q.preload('location'))
       .firstOrFail()
 
     await this.sendConfirmation.execute({ appointment })

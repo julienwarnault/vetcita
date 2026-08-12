@@ -35,7 +35,7 @@ const NAVIGATION = [
   },
   {
     name: 'Ajustes',
-    route: 'settings',
+    route: 'show_settings.render',
     navigationIcon: 'settings',
     roles: ['owner'],
   },

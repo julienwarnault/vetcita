@@ -1,7 +1,9 @@
 import vine from '@vinejs/vine'
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
+import LocationTransformer from '#tenants/transformers/location_transformer'
 import ServiceTransformer from '#services/transformers/service_transformer'
+import { GetLocationBySlug } from '#tenants/queries/get_location_by_slug'
 import TenantTransformer from '#tenants/transformers/tenant_transformer'
 import SpeciesTransformer from '#pets/transformers/species_transformer'
 import { BookAppointment } from '#booking/actions/book_appointment'
@@ -10,7 +12,6 @@ import { GetServices } from '#services/queries/get_services'
 import { GetTenant } from '#tenants/queries/get_tenant'
 import { GetSpecies } from '#pets/queries/get_species'
 import { uuidSchema } from '#shared/validators'
-import { UUID } from '#shared/types'
 
 @inject()
 export default class BookAppointmentController {
@@ -30,37 +31,45 @@ export default class BookAppointmentController {
 
   constructor(
     private readonly getTenant: GetTenant,
+    private readonly getLocationBySlug: GetLocationBySlug,
     private readonly getServices: GetServices,
     private readonly getSpecies: GetSpecies,
     private readonly bookAppointment: BookAppointment
   ) {}
 
   async render({ request, inertia }: HttpContext) {
-    const id = request.param('tenantId')
+    const slug = request.param('slug', null)
 
-    const { tenant } = await this.getTenant.execute({ id })
-    const { services } = await this.getServices.execute({ tenantId: id })
-    const { species } = await this.getSpecies.execute()
+    const { location } = await this.getLocationBySlug.execute({ slug })
+
+    const [{ tenant }, { services }, { species }] = await Promise.all([
+      this.getTenant.execute({ id: location.tenantId }),
+      this.getServices.execute({ tenantId: location.tenantId }),
+      this.getSpecies.execute(),
+    ])
 
     return inertia.render('booking/form', {
       tenant: TenantTransformer.transform(tenant),
+      location: LocationTransformer.transform(location),
       services: ServiceTransformer.transform(services),
       species: SpeciesTransformer.transform(species),
     })
   }
 
   async execute({ request, response }: HttpContext) {
+    const slug = request.param('slug', null)
+
     const payload = await request.validateUsing(BookAppointmentController.validator)
 
-    const id = request.param('tenantId') as UUID
+    const { location } = await this.getLocationBySlug.execute({ slug })
 
     const { appointment } = await withTransaction(() => {
-      return this.bookAppointment.execute({ ...payload, tenantId: id })
+      return this.bookAppointment.execute({ ...payload, tenantId: location.tenantId })
     })
 
     return response.redirect().toRoute('confirm_appointment.render', {
       appointmentId: appointment.id,
-      tenantId: appointment.tenantId,
+      slug,
     })
   }
 }

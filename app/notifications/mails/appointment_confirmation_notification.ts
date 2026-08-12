@@ -12,17 +12,21 @@ export default class AppointmentConfirmationNotification extends BaseMail {
   }
 
   prepare() {
-    const { id, client, tenant, pet, service, localStartDate, bookingRef, tenantId } = this.appointment
+    const { id, tenant, client, pet, service, localStartDate, bookingRef } = this.appointment
+    const { location } = tenant
 
     const formatedDate = localStartDate.toFormat('dd/MM/yyyy h:mma')
-    const confirmUrl = urlFor('confirm_appointment.render', { appointmentId: id, tenantId }, { prefixUrl: appUrl })
-
+    const confirmUrl = urlFor(
+      'confirm_appointment.render',
+      { appointmentId: id, slug: location.slug },
+      { prefixUrl: appUrl }
+    )
     this.message
       .to(this.to)
-      .subject(`Su cita está confirmada para el ${formatedDate}`)
+      .subject(`[${location.name}] Su cita está confirmada para el ${formatedDate}`)
       .htmlView('emails/appointment_confirmation', {
         client,
-        tenantName: tenant.name,
+        locationName: location.name,
         petName: pet.name,
         service: service.name,
         startDate: formatedDate,

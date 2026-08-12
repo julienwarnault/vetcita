@@ -12,8 +12,8 @@ export default class SilentAuthMiddleware {
     await ctx.auth.check()
 
     if (ctx.auth.user) {
-      await ctx.auth.user.load('agenda', (query) => {
-        query.preload('tenant')
+      await ctx.auth.user.load('agenda', (agendaQuery) => {
+        agendaQuery.preload('tenant', (tenantQuery) => tenantQuery.preload('location'))
       })
     }
     return next()

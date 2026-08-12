@@ -19,7 +19,6 @@ export default class CreateUser extends BaseCommand {
     const email = await this.prompt.ask('Email?')
     const password = await this.prompt.secure('Password?')
     const passwordConfirmation = await this.prompt.secure('Confirm password?')
-    const tenantName = await this.prompt.ask('Tenant name?')
 
     if (password !== passwordConfirmation) {
       this.logger.error('Passwords do not match')
@@ -35,7 +34,6 @@ export default class CreateUser extends BaseCommand {
           email,
           phone: '',
           password,
-          tenantName,
         })
       })
 

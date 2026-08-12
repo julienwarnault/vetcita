@@ -24,10 +24,10 @@ interface BookAppointmentParams {
 @inject()
 export class BookAppointment {
   constructor(
-    private findOrUpdateClient: FindOrUpdateClient,
-    private findOrUpdatePet: FindOrUpdatePet,
+    private readonly findOrUpdateClient: FindOrUpdateClient,
+    private readonly findOrUpdatePet: FindOrUpdatePet,
     private readonly checkSlotBookable: CheckSlotBookable,
-    private createAppointment: CreateAppointment
+    private readonly createAppointment: CreateAppointment
   ) {}
 
   async execute(params: BookAppointmentParams) {

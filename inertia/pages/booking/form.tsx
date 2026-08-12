@@ -17,16 +17,17 @@ import { urlFor } from '~/lib/tuyau'
 
 type PageProps = InertiaProps<{
   tenant: Data.Tenants.Tenant
+  location: Data.Tenants.Location
   services: Data.Services.Service[]
   species: Data.Pets.Species[]
 }>
 
 export default function ShowForm(props: PageProps) {
-  const { tenant, services, species } = props
+  const { tenant, location, services, species } = props
 
   const { form, step, isFirst, isLast, canContinue, actions } = useBookingForm({
     tenantId: tenant.id,
-    submitUrl: urlFor('book_appointment.execute', { tenantId: tenant.id }),
+    submitUrl: urlFor('book_appointment.execute', { slug: location.slug }),
   })
 
   function handleSubmit(e: SubmitEvent) {
@@ -39,7 +40,7 @@ export default function ShowForm(props: PageProps) {
 
   return (
     <>
-      <Head title={`${tenant.name} | Reserva`} />
+      <Head title={`${location.name} | Reserva`} />
 
       <FormHeader
         title={step.title}
@@ -68,7 +69,7 @@ export default function ShowForm(props: PageProps) {
                   form={form}
                   service={selectedService!}
                   species={selectedSpecies!}
-                  tenant={tenant}
+                  location={location}
                   stepKey="review"
                 />
               )}
@@ -77,22 +78,20 @@ export default function ShowForm(props: PageProps) {
           {step.key !== 'review' && (
             <aside className="hidden lg:block lg:w-111">
               <div className="sticky top-27 mt-9">
-                <StepReview form={form} service={selectedService} tenant={tenant} stepKey={step.key} />
+                <StepReview form={form} service={selectedService} location={location} stepKey={step.key} />
               </div>
             </aside>
           )}
         </div>
 
-        {canContinue && (
-          <div className="sticky bottom-0 h-20 flex bg-white border-t z-10">
-            <div className="container-sm flex items-center justify-end">
-              <Button type="submit" form="form" size="lg" disabled={form.processing}>
-                {isLast ? 'Confirmar' : 'Continuar'}
-                <ArrowRightIcon size={18} />
-              </Button>
-            </div>
+        <div className="sticky bottom-0 h-20 flex bg-white border-t z-10">
+          <div className="container-sm flex items-center justify-end">
+            <Button type="submit" form="form" size="lg" disabled={form.processing || !canContinue}>
+              {isLast ? 'Confirmar' : 'Continuar'}
+              <ArrowRightIcon size={18} />
+            </Button>
           </div>
-        )}
+        </div>
       </div>
     </>
   )

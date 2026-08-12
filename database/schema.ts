@@ -183,6 +183,41 @@ export class ConsultationSchema extends BaseModel {
   declare weight: number | null
 }
 
+export class LocationSchema extends BaseModel {
+  static $columns = ['address', 'city', 'countryCode', 'createdAt', 'email', 'id', 'name', 'openingHours', 'phone', 'postalCode', 'slug', 'state', 'tenantId', 'updatedAt', 'website'] as const
+  $columns = LocationSchema.$columns
+  @column()
+  declare address: string | null
+  @column()
+  declare city: string | null
+  @column()
+  declare countryCode: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare email: string | null
+  @column({ isPrimary: true })
+  declare id: UUID
+  @column()
+  declare name: string
+  @column()
+  declare openingHours: any
+  @column()
+  declare phone: string | null
+  @column()
+  declare postalCode: string | null
+  @column()
+  declare slug: string
+  @column()
+  declare state: string | null
+  @column()
+  declare tenantId: UUID
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare website: string | null
+}
+
 export class PetSchema extends BaseModel {
   static $columns = ['allergies', 'bloodType', 'breed', 'clientId', 'color', 'createdAt', 'dateOfBirth', 'gender', 'id', 'isNeutered', 'name', 'notes', 'speciesId', 'tenantId', 'updatedAt', 'weight'] as const
   $columns = PetSchema.$columns
@@ -303,14 +338,8 @@ export class SpeciesSchema extends BaseModel {
 }
 
 export class TenantSchema extends BaseModel {
-  static $columns = ['address', 'city', 'countryCode', 'createdAt', 'email', 'id', 'name', 'onboardingStatus', 'openingHours', 'phone', 'postalCode', 'slug', 'state', 'updatedAt', 'website'] as const
+  static $columns = ['createdAt', 'email', 'id', 'name', 'onboardingStatus', 'phone', 'updatedAt'] as const
   $columns = TenantSchema.$columns
-  @column()
-  declare address: string | null
-  @column()
-  declare city: string | null
-  @column()
-  declare countryCode: string
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
   @column()
@@ -322,19 +351,9 @@ export class TenantSchema extends BaseModel {
   @column()
   declare onboardingStatus: string
   @column()
-  declare openingHours: any
-  @column()
   declare phone: string | null
-  @column()
-  declare postalCode: string | null
-  @column()
-  declare slug: string
-  @column()
-  declare state: string | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
-  @column()
-  declare website: string | null
 }
 
 export class TimeOffSchema extends BaseModel {

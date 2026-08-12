@@ -1,6 +1,6 @@
 import { SearchIcon } from 'lucide-react'
-import { useModalStack } from '@inertiaui/modal-react'
 import { Link } from '@adonisjs/inertia/react'
+import { useModalStack } from '@inertiaui/modal-react'
 import { Popover } from './ui/popover'
 import { Avatar } from './ui/avatar'
 import { Button } from './ui/button'
@@ -9,11 +9,11 @@ import { Logo } from './logo'
 
 interface AppHeaderProps {
   fullName?: string
-  tenantName?: string
+  businessName?: string
 }
 
 export function AppHeader(props: AppHeaderProps) {
-  const { fullName, tenantName } = props
+  const { fullName, businessName } = props
 
   const { visitModal } = useModalStack()
 
@@ -47,7 +47,7 @@ export function AppHeader(props: AppHeaderProps) {
             <Avatar fullName={fullName} size="lg" />
             <div>
               <div className="text-[20px]/7 font-semibold">{fullName}</div>
-              <div className="text-muted text-[15px]/5">{tenantName}</div>
+              <div className="text-muted text-[15px]/5">{businessName}</div>
             </div>
           </div>
           <hr className="my-4" />

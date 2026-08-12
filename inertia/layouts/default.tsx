@@ -14,7 +14,7 @@ export default function Layout({ children }: { children: ReactElement }) {
   return (
     <>
       <div className="flex h-dvh flex-col overflow-hidden">
-        <AppHeader fullName={user?.agenda?.name ?? ''} tenantName={user?.agenda?.tenant?.name} />
+        <AppHeader fullName={user?.agenda?.name ?? ''} businessName={user?.agenda?.tenant?.name} />
         <div className="flex flex-1 overflow-hidden">
           <AppSidebar />
           <main className="flex flex-1 flex-col overflow-y-auto bg-white">{children}</main>
