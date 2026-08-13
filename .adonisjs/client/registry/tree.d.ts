@@ -222,4 +222,5 @@ export interface ApiDefinition {
   eventStream: typeof routes['event_stream']
   subscribe: typeof routes['subscribe']
   unsubscribe: typeof routes['unsubscribe']
+  attachments: typeof routes['attachments']
 }

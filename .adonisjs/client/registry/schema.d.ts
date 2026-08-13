@@ -1183,4 +1183,16 @@ export interface Registry {
       errorResponse: unknown
     }
   }
+  'attachments': {
+    methods: ["GET","HEAD"]
+    pattern: '/attachments/:key/:name?'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { key: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('@jrmc/adonis-attachment/controllers/attachments_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('@jrmc/adonis-attachment/controllers/attachments_controller').default['handle']>>>
+    }
+  }
 }

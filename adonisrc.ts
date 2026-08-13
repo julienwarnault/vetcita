@@ -32,6 +32,7 @@ export default defineConfig({
     () => import('@adonisjs/inertia/commands'),
     () => import('@adonisjs/mail/commands'),
     () => import('@adonisjs/queue/commands'),
+    () => import('@jrmc/adonis-attachment/commands'),
   ],
 
   /*
@@ -66,6 +67,8 @@ export default defineConfig({
     () => import('@adonisjs/queue/queue_provider'),
     () => import('@adonisjs/redis/redis_provider'),
     () => import('@adonisjs/i18n/i18n_provider'),
+    () => import('@jrmc/adonis-attachment/attachment_provider'),
+    () => import('@adonisjs/drive/drive_provider'),
   ],
 
   /*

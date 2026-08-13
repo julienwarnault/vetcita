@@ -184,7 +184,7 @@ export class ConsultationSchema extends BaseModel {
 }
 
 export class LocationSchema extends BaseModel {
-  static $columns = ['address', 'city', 'countryCode', 'createdAt', 'email', 'id', 'name', 'openingHours', 'phone', 'postalCode', 'slug', 'state', 'tenantId', 'updatedAt', 'website'] as const
+  static $columns = ['address', 'city', 'countryCode', 'cover', 'createdAt', 'email', 'id', 'logo', 'name', 'openingHours', 'phone', 'postalCode', 'slug', 'state', 'tenantId', 'updatedAt', 'website'] as const
   $columns = LocationSchema.$columns
   @column()
   declare address: string | null
@@ -192,12 +192,16 @@ export class LocationSchema extends BaseModel {
   declare city: string | null
   @column()
   declare countryCode: string
+  @column()
+  declare cover: any | null
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
   @column()
   declare email: string | null
   @column({ isPrimary: true })
   declare id: UUID
+  @column()
+  declare logo: any | null
   @column()
   declare name: string
   @column()

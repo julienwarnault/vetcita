@@ -1,7 +1,9 @@
 import { DateTime } from 'luxon'
 import { Data } from '@generated/data'
+import { MapPinIcon } from 'lucide-react'
 import { formatDuration, formatPhoneNumber } from '~/lib/utils'
 import { BookingForm, StepKey } from './use_booking_form'
+import { AspectRatio } from '../ui/aspect_ratio'
 import { DEFAULT_TIMEZONE } from '~/lib/date'
 import { Card } from '../ui/card'
 
@@ -11,61 +13,84 @@ interface StepReviewProps {
   species?: Data.Pets.Species
   location: Data.Tenants.Location
   stepKey: StepKey
+  showCover?: boolean
 }
 
 export function StepReview(props: StepReviewProps) {
-  const { service, species, location, form, stepKey } = props
+  const { service, species, location, form, stepKey, showCover = true } = props
   const { data } = form
 
   const startDateTime = data.startDate ? DateTime.fromISO(data.startDate, { zone: DEFAULT_TIMEZONE }) : null
   const formattedDate = startDateTime?.setLocale('es-MX').toFormat('EEEE, d MMMM yyyy')
   const formattedTime = startDateTime?.toFormat('hh:mma')
+  const locationAddress = [location.address, location.postalCode, location.city].filter(Boolean).join(', ')
 
   return (
-    <Card shadow={false} className="divide-y">
-      <div className="p-4">
-        <div className="text-sm text-muted-foreground">Clínica</div>
-        <div className="font-semibold text-lg">{location.name}</div>
-      </div>
+    <div className="flex flex-col gap-4">
+      <Card shadow={false} className="divide-y overflow-hidden" size="lg">
+        {showCover && location.coverUrl && (
+          <AspectRatio ratio={1.5} className="bg-accent-faded rounded-lg overflow-hidden">
+            <img src={location.coverUrl} alt="" className="size-full object-cover" />
+          </AspectRatio>
+        )}
 
-      {['datetime', 'infos', 'pet', 'review'].includes(stepKey) && (
-        <div className="flex flex-col p-4">
-          <div className="font-semibold text-lg">{service?.name}</div>
-          <div className="text-sm text-muted-foreground mt-1">Duración: {formatDuration(service?.duration || 0)}</div>
-        </div>
-      )}
-
-      {['infos', 'pet', 'review'].includes(stepKey) && (
-        <div className="flex flex-col p-4">
-          <div className="font-semibold text-lg capitalize">{formattedDate}</div>
-          <div className="text-sm text-muted-foreground mt-1">{formattedTime}</div>
-        </div>
-      )}
-
-      {['pet', 'review'].includes(stepKey) && (
         <div className="p-4">
-          <div className="font-semibold text-lg">
-            {data.firstName} {data.lastName}
-          </div>
-          <div className="flex flex-col gap-1 mt-2 text-sm">
-            <div className="text-muted-foreground">
-              <span className="font-medium">Teléfono:</span> {formatPhoneNumber(data.phone)}
+          <div className="text-sm text-muted-foreground">Clínica</div>
+          <div className="font-semibold text-lg">{location.name}</div>
+          {locationAddress && (
+            <div className="mt-2 flex items-start gap-1.5 text-sm text-muted-foreground">
+              <MapPinIcon className="mt-0.5 size-4 shrink-0" />
+              <span>{locationAddress}</span>
             </div>
-            {data.email && (
-              <div className="text-muted-foreground">
-                <span className="font-medium">Email:</span> {data.email}
-              </div>
-            )}
-          </div>
+          )}
         </div>
-      )}
 
-      {['review'].includes(stepKey) && (
-        <div className="flex flex-col p-4">
-          <div className="font-semibold text-lg">{data.petName}</div>
-          <div className="text-sm text-muted-foreground mt-1">{species?.name}</div>
-        </div>
-      )}
-    </Card>
+        {['datetime', 'infos', 'pet', 'review'].includes(stepKey) && (
+          <div className="flex flex-col p-4">
+            <div className="font-semibold text-lg">{service?.name}</div>
+            <div className="text-sm text-muted-foreground mt-1">Duración: {formatDuration(service?.duration || 0)}</div>
+          </div>
+        )}
+
+        {['infos', 'pet', 'review'].includes(stepKey) && (
+          <div className="flex flex-col p-4">
+            <div className="font-semibold text-lg capitalize">{formattedDate}</div>
+            <div className="text-sm text-muted-foreground mt-1">{formattedTime}</div>
+          </div>
+        )}
+
+        {['pet', 'review'].includes(stepKey) && (
+          <div className="p-4">
+            <div className="font-semibold text-lg">
+              {data.firstName} {data.lastName}
+            </div>
+            <div className="flex flex-col gap-1 mt-2 text-sm">
+              <div className="text-muted-foreground">
+                <span className="font-medium">Teléfono:</span> {formatPhoneNumber(data.phone)}
+              </div>
+              {data.email && (
+                <div className="text-muted-foreground">
+                  <span className="font-medium">Email:</span> {data.email}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {['review'].includes(stepKey) && (
+          <div className="flex flex-col p-4">
+            <div className="font-semibold text-lg">{data.petName}</div>
+            <div className="text-sm text-muted-foreground mt-1">{species?.name}</div>
+          </div>
+        )}
+      </Card>
+
+      <p className="px-1 text-center text-[12px]/5 text-muted">
+        ©{new Date().getFullYear()} · Servicio de{' '}
+        <a href="/" className="underline underline-offset-3 hover:text-accent">
+          Vetcita
+        </a>
+      </p>
+    </div>
   )
 }

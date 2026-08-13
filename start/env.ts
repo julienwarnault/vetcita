@@ -25,7 +25,7 @@ export default await Env.create(new URL('../', import.meta.url), {
   // Session
   SESSION_DRIVER: Env.schema.enum(['cookie', 'memory', 'database'] as const),
 
-  // Database
+  // Database-
   DB_HOST: Env.schema.string({ format: 'host' }),
   DB_PORT: Env.schema.number(),
   DB_USER: Env.schema.string(),
@@ -41,14 +41,19 @@ export default await Env.create(new URL('../', import.meta.url), {
   SMTP_USERNAME: Env.schema.string(),
   SMTP_PASSWORD: Env.schema.string(),
 
-  /*
-  |----------------------------------------------------------
-  | Variables for configuring @adonisjs/queue
-  |----------------------------------------------------------
-  */
+  // Queue
   QUEUE_DRIVER: Env.schema.enum(['redis', 'database', 'sync'] as const),
 
+  // Redis
   REDIS_HOST: Env.schema.string({ format: 'host' }),
   REDIS_PORT: Env.schema.number(),
   REDIS_PASSWORD: Env.schema.secret.optional(),
+
+  // Drive
+  DRIVE_DISK: Env.schema.enum(['r2'] as const),
+  R2_KEY: Env.schema.string(),
+  R2_SECRET: Env.schema.string(),
+  R2_BUCKET: Env.schema.string(),
+  R2_ENDPOINT: Env.schema.string(),
+  R2_PUBLIC_URL: Env.schema.string(),
 })

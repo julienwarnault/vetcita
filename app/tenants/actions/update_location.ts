@@ -1,3 +1,5 @@
+import { attachmentManager } from '@jrmc/adonis-attachment'
+import type { MultipartFile } from '@adonisjs/core/bodyparser'
 import { transactionContext } from '#shared/contexts/transaction_context'
 import Location from '#tenants/models/location'
 import type { UUID } from '#shared/types'
@@ -14,6 +16,10 @@ interface UpdateLocationParams {
   state?: string
   postalCode?: string
   countryCode?: string
+  cover?: MultipartFile | null
+  logo?: MultipartFile | null
+  removeCover?: boolean
+  removeLogo?: boolean
 }
 
 export class UpdateLocation {
@@ -37,6 +43,22 @@ export class UpdateLocation {
       countryCode: params.countryCode || 'MX',
       openingHours: location.openingHours,
     })
+
+    if (params.removeCover) {
+      location.cover = null
+    }
+
+    if (params.cover) {
+      location.cover = await attachmentManager.createFromFile(params.cover)
+    }
+
+    if (params.removeLogo) {
+      location.logo = null
+    }
+
+    if (params.logo) {
+      location.logo = await attachmentManager.createFromFile(params.logo)
+    }
 
     await location.useTransaction(trx!).save()
 

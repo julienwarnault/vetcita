@@ -14,11 +14,14 @@ export default class extends BaseSchema {
       table.string('email').nullable()
       table.string('phone').nullable()
       table.string('website').nullable()
+      table.json('logo').nullable()
+      table.json('cover').nullable()
       table.string('address').nullable()
       table.string('city').nullable()
       table.string('state').nullable()
       table.string('postal_code').nullable()
       table.string('country_code').notNullable().defaultTo('MX')
+
       table.jsonb('opening_hours').notNullable()
     })
   }

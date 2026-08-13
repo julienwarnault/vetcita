@@ -102,6 +102,7 @@ export type ScannedRoutes = {
     'event_stream': { paramsTuple?: []; params?: {} }
     'subscribe': { paramsTuple?: []; params?: {} }
     'unsubscribe': { paramsTuple?: []; params?: {} }
+    'attachments': { paramsTuple: [ParamValue,ParamValue?]; params: {'key': ParamValue,'name'?: ParamValue} }
   }
   GET: {
     'dashboard.render': { paramsTuple?: []; params?: {} }
@@ -158,6 +159,7 @@ export type ScannedRoutes = {
     'update_prescription.render': { paramsTuple: [ParamValue,ParamValue]; params: {'petId': ParamValue,'id': ParamValue} }
     'show_onboarding.render': { paramsTuple?: []; params?: {} }
     'event_stream': { paramsTuple?: []; params?: {} }
+    'attachments': { paramsTuple: [ParamValue,ParamValue?]; params: {'key': ParamValue,'name'?: ParamValue} }
   }
   HEAD: {
     'dashboard.render': { paramsTuple?: []; params?: {} }
@@ -214,6 +216,7 @@ export type ScannedRoutes = {
     'update_prescription.render': { paramsTuple: [ParamValue,ParamValue]; params: {'petId': ParamValue,'id': ParamValue} }
     'show_onboarding.render': { paramsTuple?: []; params?: {} }
     'event_stream': { paramsTuple?: []; params?: {} }
+    'attachments': { paramsTuple: [ParamValue,ParamValue?]; params: {'key': ParamValue,'name'?: ParamValue} }
   }
   POST: {
     'signup.execute': { paramsTuple?: []; params?: {} }

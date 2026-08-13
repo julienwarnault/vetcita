@@ -594,6 +594,12 @@ const routes = {
     tokens: [{"old":"/__transmit/unsubscribe","type":0,"val":"__transmit","end":""},{"old":"/__transmit/unsubscribe","type":0,"val":"unsubscribe","end":""}],
     types: placeholder as Registry['unsubscribe']['types'],
   },
+  'attachments': {
+    methods: ["GET","HEAD"],
+    pattern: '/attachments/:key/:name?',
+    tokens: [{"old":"/attachments/:key/:name?","type":0,"val":"attachments","end":""},{"old":"/attachments/:key/:name?","type":1,"val":"key","end":""},{"old":"/attachments/:key/:name?","type":3,"val":"name","end":""}],
+    types: placeholder as Registry['attachments']['types'],
+  },
 } as const satisfies Record<string, AdonisEndpoint>
 
 export { routes }
