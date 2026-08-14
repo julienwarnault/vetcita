@@ -38,7 +38,10 @@ export const controllers = {
     Login: () => import('#app/identity/controllers/login_controller'),
     Logout: () => import('#app/identity/controllers/logout_controller'),
     ResetPassword: () => import('#app/identity/controllers/reset_password_controller'),
+    ShowAccount: () => import('#app/identity/controllers/show_account_controller'),
     Signup: () => import('#app/identity/controllers/signup_controller'),
+    UpdateAccount: () => import('#app/identity/controllers/update_account_controller'),
+    UpdatePassword: () => import('#app/identity/controllers/update_password_controller'),
   },
   medicalRecords: {
     CreateConsultation: () => import('#app/medical_records/controllers/create_consultation_controller'),

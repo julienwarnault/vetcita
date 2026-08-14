@@ -3,6 +3,7 @@ import { DateTime } from 'luxon'
 import { inject } from '@adonisjs/core'
 import mail from '@adonisjs/mail/services/main'
 import PasswordResetTokenNotification from '#notifications/mails/password_reset_token_notification'
+import { dispatchAfterCommit } from '#shared/utils/dispatch_after_commit'
 import { transactionContext } from '#shared/contexts/transaction_context'
 import PasswordResetToken from '#identity/models/password_reset_token'
 import User from '#identity/models/user'
@@ -37,6 +38,8 @@ export class RequestPasswordReset {
       { client: trx }
     )
 
-    await mail.send(new PasswordResetTokenNotification(user, token))
+    await dispatchAfterCommit(async () => {
+      await mail.send(new PasswordResetTokenNotification(user, token))
+    })
   }
 }

@@ -24,6 +24,16 @@ export interface ApiDefinition {
     render: typeof routes['reset_password.render']
     execute: typeof routes['reset_password.execute']
   }
+  showAccount: {
+    render: typeof routes['show_account.render']
+  }
+  updateAccount: {
+    execute: typeof routes['update_account.execute']
+  }
+  updatePassword: {
+    render: typeof routes['update_password.render']
+    execute: typeof routes['update_password.execute']
+  }
   logout: {
     execute: typeof routes['logout.execute']
   }

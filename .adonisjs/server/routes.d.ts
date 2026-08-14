@@ -14,6 +14,10 @@ export type ScannedRoutes = {
     'forgot_password.execute': { paramsTuple?: []; params?: {} }
     'reset_password.render': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
     'reset_password.execute': { paramsTuple?: []; params?: {} }
+    'show_account.render': { paramsTuple?: []; params?: {} }
+    'update_account.execute': { paramsTuple?: []; params?: {} }
+    'update_password.render': { paramsTuple?: []; params?: {} }
+    'update_password.execute': { paramsTuple?: []; params?: {} }
     'logout.execute': { paramsTuple?: []; params?: {} }
     'list_agendas.render': { paramsTuple?: []; params?: {} }
     'create_agenda.render': { paramsTuple?: []; params?: {} }
@@ -115,6 +119,8 @@ export type ScannedRoutes = {
     'login.render': { paramsTuple?: []; params?: {} }
     'forgot_password.render': { paramsTuple?: []; params?: {} }
     'reset_password.render': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
+    'show_account.render': { paramsTuple?: []; params?: {} }
+    'update_password.render': { paramsTuple?: []; params?: {} }
     'list_agendas.render': { paramsTuple?: []; params?: {} }
     'create_agenda.render': { paramsTuple?: []; params?: {} }
     'update_agenda.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -174,6 +180,8 @@ export type ScannedRoutes = {
     'login.render': { paramsTuple?: []; params?: {} }
     'forgot_password.render': { paramsTuple?: []; params?: {} }
     'reset_password.render': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
+    'show_account.render': { paramsTuple?: []; params?: {} }
+    'update_password.render': { paramsTuple?: []; params?: {} }
     'list_agendas.render': { paramsTuple?: []; params?: {} }
     'create_agenda.render': { paramsTuple?: []; params?: {} }
     'update_agenda.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -251,6 +259,8 @@ export type ScannedRoutes = {
     'unsubscribe': { paramsTuple?: []; params?: {} }
   }
   PUT: {
+    'update_account.execute': { paramsTuple?: []; params?: {} }
+    'update_password.execute': { paramsTuple?: []; params?: {} }
     'update_agenda.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_service.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_appointment_status.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }

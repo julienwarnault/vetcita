@@ -51,6 +51,9 @@ export function AppHeader(props: AppHeaderProps) {
             </div>
           </div>
           <hr className="my-4" />
+          <Link route="show_account.render" className="block w-full rounded-md px-4 py-2 text-left hover:bg-background">
+            Mi cuenta
+          </Link>
           <Link route="logout.execute" className="w-full text-left py-2 px-4 rounded-md hover:bg-background">
             Cerrar sesión
           </Link>
