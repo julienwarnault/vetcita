@@ -23,6 +23,7 @@ export const controllers = {
     ChangeAppointmentStatus: () => import('#app/booking/controllers/change_appointment_status_controller'),
     ConfirmAppointment: () => import('#app/booking/controllers/confirm_appointment_controller'),
     CreateAppointment: () => import('#app/booking/controllers/create_appointment_controller'),
+    ListAppointments: () => import('#app/booking/controllers/list_appointments_controller'),
     ShowCalendar: () => import('#app/booking/controllers/show_calendar_controller'),
     UpdateAppointment: () => import('#app/booking/controllers/update_appointment_controller'),
   },

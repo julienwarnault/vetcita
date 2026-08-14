@@ -631,6 +631,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/booking/controllers/show_calendar_controller').default['render']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
+  'list_appointments.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/appointments'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: ExtractQueryForGet<InferInput<(typeof import('#app/booking/controllers/list_appointments_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/booking/controllers/list_appointments_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/booking/controllers/list_appointments_controller').default['render']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
   'create_appointment.render': {
     methods: ["GET","HEAD"]
     pattern: '/appointments/new'

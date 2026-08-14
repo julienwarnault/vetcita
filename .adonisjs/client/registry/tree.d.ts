@@ -122,6 +122,9 @@ export interface ApiDefinition {
   showCalendar: {
     render: typeof routes['show_calendar.render']
   }
+  listAppointments: {
+    render: typeof routes['list_appointments.render']
+  }
   createAppointment: {
     render: typeof routes['create_appointment.render']
     execute: typeof routes['create_appointment.execute']

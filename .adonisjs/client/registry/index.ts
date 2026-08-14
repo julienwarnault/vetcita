@@ -318,6 +318,12 @@ const routes = {
     tokens: [{"old":"/calendar","type":0,"val":"calendar","end":""}],
     types: placeholder as Registry['show_calendar.render']['types'],
   },
+  'list_appointments.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/appointments',
+    tokens: [{"old":"/appointments","type":0,"val":"appointments","end":""}],
+    types: placeholder as Registry['list_appointments.render']['types'],
+  },
   'create_appointment.render': {
     methods: ["GET","HEAD"],
     pattern: '/appointments/new',

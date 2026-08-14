@@ -9,6 +9,7 @@ router.get(':slug/booking/:appointmentId/confirm', [controllers.booking.ConfirmA
 router
   .group(() => {
     router.get('calendar', [controllers.booking.ShowCalendar, 'render'])
+    router.get('appointments', [controllers.booking.ListAppointments, 'render'])
     router.get('appointments/new', [controllers.booking.CreateAppointment, 'render'])
     router.post('appointments', [controllers.booking.CreateAppointment, 'execute'])
     router.get('appointments/edit/:id', [controllers.booking.UpdateAppointment, 'render'])
