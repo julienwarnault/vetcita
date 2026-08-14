@@ -222,6 +222,23 @@ export class LocationSchema extends BaseModel {
   declare website: string | null
 }
 
+export class PasswordResetTokenSchema extends BaseModel {
+  static $columns = ['createdAt', 'expiresAt', 'id', 'token', 'updatedAt', 'userId'] as const
+  $columns = PasswordResetTokenSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column.dateTime()
+  declare expiresAt: DateTime
+  @column({ isPrimary: true })
+  declare id: UUID
+  @column()
+  declare token: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare userId: UUID
+}
+
 export class PetSchema extends BaseModel {
   static $columns = ['allergies', 'bloodType', 'breed', 'clientId', 'color', 'createdAt', 'dateOfBirth', 'gender', 'id', 'isNeutered', 'name', 'notes', 'speciesId', 'tenantId', 'updatedAt', 'weight'] as const
   $columns = PetSchema.$columns

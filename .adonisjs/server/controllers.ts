@@ -34,8 +34,10 @@ export const controllers = {
     UpdateClient: () => import('#app/clients/controllers/update_client_controller'),
   },
   identity: {
+    ForgotPassword: () => import('#app/identity/controllers/forgot_password_controller'),
     Login: () => import('#app/identity/controllers/login_controller'),
     Logout: () => import('#app/identity/controllers/logout_controller'),
+    ResetPassword: () => import('#app/identity/controllers/reset_password_controller'),
     Signup: () => import('#app/identity/controllers/signup_controller'),
   },
   medicalRecords: {

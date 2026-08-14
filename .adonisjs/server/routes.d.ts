@@ -10,6 +10,10 @@ export type ScannedRoutes = {
     'signup.execute': { paramsTuple?: []; params?: {} }
     'login.render': { paramsTuple?: []; params?: {} }
     'login.execute': { paramsTuple?: []; params?: {} }
+    'forgot_password.render': { paramsTuple?: []; params?: {} }
+    'forgot_password.execute': { paramsTuple?: []; params?: {} }
+    'reset_password.render': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
+    'reset_password.execute': { paramsTuple?: []; params?: {} }
     'logout.execute': { paramsTuple?: []; params?: {} }
     'list_agendas.render': { paramsTuple?: []; params?: {} }
     'create_agenda.render': { paramsTuple?: []; params?: {} }
@@ -109,6 +113,8 @@ export type ScannedRoutes = {
     'show_settings.render': { paramsTuple?: []; params?: {} }
     'signup.render': { paramsTuple?: []; params?: {} }
     'login.render': { paramsTuple?: []; params?: {} }
+    'forgot_password.render': { paramsTuple?: []; params?: {} }
+    'reset_password.render': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
     'list_agendas.render': { paramsTuple?: []; params?: {} }
     'create_agenda.render': { paramsTuple?: []; params?: {} }
     'update_agenda.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -166,6 +172,8 @@ export type ScannedRoutes = {
     'show_settings.render': { paramsTuple?: []; params?: {} }
     'signup.render': { paramsTuple?: []; params?: {} }
     'login.render': { paramsTuple?: []; params?: {} }
+    'forgot_password.render': { paramsTuple?: []; params?: {} }
+    'reset_password.render': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
     'list_agendas.render': { paramsTuple?: []; params?: {} }
     'create_agenda.render': { paramsTuple?: []; params?: {} }
     'update_agenda.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -221,6 +229,8 @@ export type ScannedRoutes = {
   POST: {
     'signup.execute': { paramsTuple?: []; params?: {} }
     'login.execute': { paramsTuple?: []; params?: {} }
+    'forgot_password.execute': { paramsTuple?: []; params?: {} }
+    'reset_password.execute': { paramsTuple?: []; params?: {} }
     'logout.execute': { paramsTuple?: []; params?: {} }
     'create_agenda.execute': { paramsTuple?: []; params?: {} }
     'create_service.execute': { paramsTuple?: []; params?: {} }

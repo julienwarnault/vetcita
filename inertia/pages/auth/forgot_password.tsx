@@ -1,5 +1,4 @@
 import { Link } from '@adonisjs/inertia/react'
-import { InputPassword } from '~/components/ui/input_password'
 import { ButtonLink } from '~/components/ui/button_link'
 import { Button } from '~/components/ui/button'
 import { Field } from '~/components/ui/field'
@@ -8,7 +7,7 @@ import { Form } from '~/components/ui/form'
 import { Logo } from '~/components/logo'
 import AuthLayout from '~/layouts/auth'
 
-export default function Login() {
+export default function ForgotPassword() {
   return (
     <>
       <header className="px-6 py-6 lg:px-10">
@@ -16,8 +15,8 @@ export default function Login() {
           <Link href="/" aria-label="Ir al inicio">
             <Logo />
           </Link>
-          <ButtonLink route="signup.render" size="lg" variant="secondary">
-            Crear cuenta
+          <ButtonLink route="login.render" size="lg" variant="secondary">
+            Iniciar sesión
           </ButtonLink>
         </div>
       </header>
@@ -25,31 +24,22 @@ export default function Login() {
       <main className="flex flex-1 justify-center px-6 py-14">
         <div className="w-full max-w-120">
           <div className="pb-10 text-center">
-            <h1 className="text-[40px]/11 font-bold">Iniciar sesión</h1>
-            <p className="text-[16px] text-muted">Ingresa tus datos para acceder a tu cuenta</p>
+            <h1 className="text-[40px]/11 font-bold">Restablecer contraseña</h1>
+            <p className="text-[16px] text-muted">
+              Indica tu correo y te enviaremos un enlace para crear una nueva contraseña.
+            </p>
           </div>
 
-          <Form route="login.execute">
+          <Form route="forgot_password.execute">
             <Field name="email">
               <Field.Label htmlFor="email">Correo electrónico</Field.Label>
               <Input type="email" placeholder="Introduce tu correo" autoComplete="username" />
               <Field.Error />
             </Field>
 
-            <Field name="password">
-              <div className="flex items-center justify-between gap-3">
-                <Field.Label>Contraseña</Field.Label>
-                <Link route="forgot_password.render" className="text-[14px]/5 font-medium text-accent hover:underline">
-                  ¿Olvidaste tu contraseña?
-                </Link>
-              </div>
-              <InputPassword placeholder="Introduce tu contraseña" autoComplete="current-password" />
-              <Field.Error />
-            </Field>
-
             <div>
               <Button type="submit" size="lg" className="w-full mt-6">
-                Iniciar sesión
+                Enviar enlace
               </Button>
             </div>
           </Form>
@@ -59,4 +49,4 @@ export default function Login() {
   )
 }
 
-Login.layout = (page: React.ReactElement) => <AuthLayout>{page}</AuthLayout>
+ForgotPassword.layout = (page: React.ReactElement) => <AuthLayout>{page}</AuthLayout>
