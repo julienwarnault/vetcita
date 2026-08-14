@@ -11,7 +11,7 @@ import AuthLayout from '~/layouts/auth'
 export default function Login() {
   return (
     <>
-      <header className="px-6 py-6 lg:px-10">
+      <header className="absolute inset-x-0 top-0 z-10 px-6 py-6 lg:px-10">
         <div className="flex items-center justify-between">
           <Link href="/" aria-label="Ir al inicio">
             <Logo />
@@ -22,14 +22,14 @@ export default function Login() {
         </div>
       </header>
 
-      <main className="flex flex-1 justify-center px-6 py-14">
+      <main className="flex flex-1 items-center justify-center px-6 py-14">
         <div className="w-full max-w-120">
           <div className="pb-10 text-center">
             <h1 className="text-[40px]/11 font-bold">Iniciar sesión</h1>
             <p className="text-[16px] text-muted">Ingresa tus datos para acceder a tu cuenta</p>
           </div>
 
-          <Form route="login.execute">
+          <Form route="login.execute" className="gap-6">
             <Field name="email">
               <Field.Label htmlFor="email">Correo electrónico</Field.Label>
               <Input type="email" placeholder="Introduce tu correo" autoComplete="username" />

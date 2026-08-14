@@ -72,6 +72,9 @@ export default function Signup() {
               <Button type="submit" size="lg" className="w-full mt-6">
                 Crear una cuenta
               </Button>
+              <p className="mt-4 text-center text-[14px]/5 text-muted">
+                Al crear una cuenta, aceptas las condiciones de uso y la política de privacidad de Vetcita.
+              </p>
             </div>
           </Form>
         </div>

@@ -10,7 +10,7 @@ import AuthLayout from '~/layouts/auth'
 export default function ForgotPassword() {
   return (
     <>
-      <header className="px-6 py-6 lg:px-10">
+      <header className="absolute inset-x-0 top-0 z-10 px-6 py-6 lg:px-10">
         <div className="flex items-center justify-between">
           <Link href="/" aria-label="Ir al inicio">
             <Logo />
@@ -21,7 +21,7 @@ export default function ForgotPassword() {
         </div>
       </header>
 
-      <main className="flex flex-1 justify-center px-6 py-14">
+      <main className="flex flex-1 items-center justify-center px-6 py-14">
         <div className="w-full max-w-120">
           <div className="pb-10 text-center">
             <h1 className="text-[40px]/11 font-bold">Restablecer contraseña</h1>
@@ -30,7 +30,7 @@ export default function ForgotPassword() {
             </p>
           </div>
 
-          <Form route="forgot_password.execute">
+          <Form route="forgot_password.execute" className="gap-6">
             <Field name="email">
               <Field.Label htmlFor="email">Correo electrónico</Field.Label>
               <Input type="email" placeholder="Introduce tu correo" autoComplete="username" />

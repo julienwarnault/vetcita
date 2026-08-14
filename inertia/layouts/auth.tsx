@@ -11,8 +11,8 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
 
   return (
     <>
-      <div className="grid h-screen overflow-y-auto bg-white lg:grid-cols-[2fr_1fr]">
-        <div className="flex min-h-screen flex-col">{children}</div>
+      <div className="grid h-screen overflow-y-auto bg-white lg:grid-cols-[1.5fr_1fr]">
+        <div className="relative flex min-h-screen flex-col">{children}</div>
 
         <aside className="sticky top-0 hidden h-screen p-4 lg:block">
           <img src="/images/auth.jpg" alt="" className="h-full w-full rounded-3xl object-cover object-center" />
