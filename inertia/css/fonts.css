@@ -3,7 +3,7 @@
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url('/fonts/roobert_bold.woff2') format('woff2');
+  src: url('../assets/fonts/roobert_bold.woff2') format('woff2');
 }
 
 @font-face {
@@ -11,7 +11,7 @@
   font-style: normal;
   font-weight: 600;
   font-display: swap;
-  src: url('/fonts/roobert_semibold.woff2') format('woff2');
+  src: url('../assets/fonts/roobert_semibold.woff2') format('woff2');
 }
 
 @font-face {
@@ -19,7 +19,7 @@
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url('/fonts/roobert_medium.woff2') format('woff2');
+  src: url('../assets/fonts/roobert_medium.woff2') format('woff2');
 }
 
 @font-face {
@@ -27,5 +27,5 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('/fonts/roobert_regular.woff2') format('woff2');
+  src: url('../assets/fonts/roobert_regular.woff2') format('woff2');
 }
