@@ -20,11 +20,6 @@ router
 
 router
   .group(() => {
-    router.get('user/account', [controllers.identity.ShowAccount, 'render'])
-    router.put('user/account', [controllers.identity.UpdateAccount, 'execute'])
-    router.get('user/account/password', [controllers.identity.UpdatePassword, 'render'])
-    router.put('user/account/password', [controllers.identity.UpdatePassword, 'execute'])
-
     router.post('logout', [controllers.identity.Logout, 'execute'])
   })
   .use(middleware.auth())

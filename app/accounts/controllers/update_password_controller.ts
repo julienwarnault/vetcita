@@ -2,7 +2,7 @@ import vine from '@vinejs/vine'
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
 import { withTransaction } from '#shared/utils/with_transaction'
-import { UpdatePassword } from '#identity/actions/update_password'
+import { UpdatePassword } from '#accounts/actions/update_password'
 import { passwordSchema } from '#shared/validators'
 
 @inject()

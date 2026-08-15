@@ -135,20 +135,20 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#app/identity/controllers/show_account_controller').default['render']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/identity/controllers/show_account_controller').default['render']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/accounts/controllers/show_account_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/accounts/controllers/show_account_controller').default['render']>>>
     }
   }
   'update_account.execute': {
     methods: ["PUT"]
     pattern: '/user/account'
     types: {
-      body: ExtractBody<InferInput<(typeof import('#app/identity/controllers/update_account_controller').default)['validator']>>
+      body: ExtractBody<InferInput<(typeof import('#app/accounts/controllers/update_account_controller').default)['validator']>>
       paramsTuple: []
       params: {}
-      query: ExtractQuery<InferInput<(typeof import('#app/identity/controllers/update_account_controller').default)['validator']>>
-      response: ExtractResponse<Awaited<ReturnType<import('#app/identity/controllers/update_account_controller').default['execute']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/identity/controllers/update_account_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+      query: ExtractQuery<InferInput<(typeof import('#app/accounts/controllers/update_account_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/accounts/controllers/update_account_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/accounts/controllers/update_account_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'update_password.render': {
@@ -159,20 +159,20 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#app/identity/controllers/update_password_controller').default['render']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/identity/controllers/update_password_controller').default['render']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/accounts/controllers/update_password_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/accounts/controllers/update_password_controller').default['render']>>>
     }
   }
   'update_password.execute': {
     methods: ["PUT"]
     pattern: '/user/account/password'
     types: {
-      body: ExtractBody<InferInput<(typeof import('#app/identity/controllers/update_password_controller').default)['validator']>>
+      body: ExtractBody<InferInput<(typeof import('#app/accounts/controllers/update_password_controller').default)['validator']>>
       paramsTuple: []
       params: {}
-      query: ExtractQuery<InferInput<(typeof import('#app/identity/controllers/update_password_controller').default)['validator']>>
-      response: ExtractResponse<Awaited<ReturnType<import('#app/identity/controllers/update_password_controller').default['execute']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/identity/controllers/update_password_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+      query: ExtractQuery<InferInput<(typeof import('#app/accounts/controllers/update_password_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/accounts/controllers/update_password_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/accounts/controllers/update_password_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'logout.execute': {
