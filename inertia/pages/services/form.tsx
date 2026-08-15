@@ -135,8 +135,8 @@ export default function ShowForm(props: PageProps) {
                 getValue={(agenda) => agenda.id}
                 renderItem={(agenda) => (
                   <div className="flex items-center gap-3">
-                    <Avatar fullName={agenda.name} color={agenda.color} />
-                    <div className="text-[17px]/6 font-medium">{agenda.name}</div>
+                    <Avatar fullName={agenda.fullName} color={agenda.color} />
+                    <div className="text-[17px]/6 font-medium">{agenda.fullName}</div>
                   </div>
                 )}
                 defaultValue={service ? service.agendas!.map((agenda) => agenda.id) : agendas.map(({ id }) => id)}

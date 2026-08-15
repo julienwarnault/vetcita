@@ -208,8 +208,8 @@ export function PanelReview(props: PanelReviewProps) {
                   value={agenda?.id}
                   trigger={
                     <Button variant="secondary" className="pl-0.5 gap-3">
-                      <Avatar fullName={agenda?.name} color={agenda?.color} size="xs" />
-                      <span className="text-[14px]/4">{agenda?.name}</span>
+                      <Avatar fullName={agenda?.fullName} color={agenda?.color} size="xs" />
+                      <span className="text-[14px]/4">{agenda?.fullName}</span>
                       <Popover.TriggerIcon />
                     </Button>
                   }
@@ -217,9 +217,9 @@ export function PanelReview(props: PanelReviewProps) {
                     if (value) setData('agendaId', value)
                   }}
                   items={agendas?.map((item) => ({
-                    label: item.name,
+                    label: item.fullName,
                     value: item.id,
-                    leftElement: <Avatar fullName={item.name} color={item?.color} size="xs" />,
+                    leftElement: <Avatar fullName={item.fullName} color={item?.color} size="xs" />,
                   }))}
                 />
                 {isSelectedAgendaAvailable === false && (

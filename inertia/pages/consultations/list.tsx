@@ -41,7 +41,7 @@ export default function List(props: PageProps) {
     {
       header: 'Veterinario',
       width: '15%',
-      accessor: ({ agenda }) => agenda?.name ?? '-',
+      accessor: ({ agenda }) => agenda?.fullName ?? '-',
     },
     {
       header: 'Diagnóstico',

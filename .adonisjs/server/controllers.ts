@@ -4,6 +4,11 @@
  */
 
 export const controllers = {
+  accounts: {
+    ShowAccount: () => import('#app/accounts/controllers/show_account_controller'),
+    UpdateAccount: () => import('#app/accounts/controllers/update_account_controller'),
+    UpdatePassword: () => import('#app/accounts/controllers/update_password_controller'),
+  },
   agendas: {
     CreateAgenda: () => import('#app/agendas/controllers/create_agenda_controller'),
     DeleteAgenda: () => import('#app/agendas/controllers/delete_agenda_controller'),
@@ -23,9 +28,9 @@ export const controllers = {
     ChangeAppointmentStatus: () => import('#app/booking/controllers/change_appointment_status_controller'),
     ConfirmAppointment: () => import('#app/booking/controllers/confirm_appointment_controller'),
     CreateAppointment: () => import('#app/booking/controllers/create_appointment_controller'),
+    ListAppointments: () => import('#app/booking/controllers/list_appointments_controller'),
     ShowCalendar: () => import('#app/booking/controllers/show_calendar_controller'),
     UpdateAppointment: () => import('#app/booking/controllers/update_appointment_controller'),
-    ListAppointments: () => import('#app/booking/controllers/list_appointments_controller'),
   },
   clients: {
     CreateClient: () => import('#app/clients/controllers/create_client_controller'),
@@ -35,11 +40,11 @@ export const controllers = {
     UpdateClient: () => import('#app/clients/controllers/update_client_controller'),
   },
   identity: {
+    ForgotPassword: () => import('#app/identity/controllers/forgot_password_controller'),
     Login: () => import('#app/identity/controllers/login_controller'),
     Logout: () => import('#app/identity/controllers/logout_controller'),
-    Signup: () => import('#app/identity/controllers/signup_controller'),
-    ForgotPassword: () => import('#app/identity/controllers/forgot_password_controller'),
     ResetPassword: () => import('#app/identity/controllers/reset_password_controller'),
+    Signup: () => import('#app/identity/controllers/signup_controller'),
   },
   medicalRecords: {
     CreateConsultation: () => import('#app/medical_records/controllers/create_consultation_controller'),
@@ -93,10 +98,5 @@ export const controllers = {
     ShowTenant: () => import('#app/tenants/controllers/show_tenant_controller'),
     UpdateLocation: () => import('#app/tenants/controllers/update_location_controller'),
     UpdateTenant: () => import('#app/tenants/controllers/update_tenant_controller'),
-  },
-  accounts: {
-    ShowAccount: () => import('#app/accounts/controllers/show_account_controller'),
-    UpdateAccount: () => import('#app/accounts/controllers/update_account_controller'),
-    UpdatePassword: () => import('#app/accounts/controllers/update_password_controller'),
   },
 }

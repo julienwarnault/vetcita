@@ -24,6 +24,9 @@ export interface ApiDefinition {
     render: typeof routes['reset_password.render']
     execute: typeof routes['reset_password.execute']
   }
+  logout: {
+    execute: typeof routes['logout.execute']
+  }
   showAccount: {
     render: typeof routes['show_account.render']
   }
@@ -33,9 +36,6 @@ export interface ApiDefinition {
   updatePassword: {
     render: typeof routes['update_password.render']
     execute: typeof routes['update_password.execute']
-  }
-  logout: {
-    execute: typeof routes['logout.execute']
   }
   listAgendas: {
     render: typeof routes['list_agendas.render']

@@ -14,7 +14,7 @@ interface ShiftTableProps {
   dates: Array<DateTime>
   agendas: Array<{
     id: string
-    name: string
+    fullName: string
     color: string
   }>
   shifts: Array<{
@@ -114,9 +114,9 @@ export function ShiftTable(props: ShiftTableProps) {
               >
                 <div className="flex gap-2">
                   <div className="flex flex-1 items-center gap-3">
-                    <Avatar fullName={agenda.name} color={agenda.color} size="sm" />
+                    <Avatar fullName={agenda.fullName} color={agenda.color} size="sm" />
                     <div>
-                      <div className="text-[15px]/5 font-semibold">{agenda.name}</div>
+                      <div className="text-[15px]/5 font-semibold">{agenda.fullName}</div>
                     </div>
                   </div>
                   <Button size="icon-sm" variant="tertiary">

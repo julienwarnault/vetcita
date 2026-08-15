@@ -5,7 +5,9 @@ import Tenant from '#tenants/models/tenant'
 import type { UUID } from '#shared/types'
 
 interface CreateAgendaParams {
-  name: string
+  firstName: string
+  lastName?: string
+  phone?: string | null
   email?: string | null
   role: AgendaRole
   color: string
@@ -17,6 +19,7 @@ interface CreateAgendaParams {
 export class CreateAgenda {
   async execute(params: CreateAgendaParams) {
     const trx = transactionContext.get()
+    const phone = params.phone?.trim() || null
 
     const tenant = await Tenant.query({ client: trx }).where('id', params.tenantId).preload('location').firstOrFail()
 
@@ -27,7 +30,9 @@ export class CreateAgenda {
     // Create agenda
     const agenda = await Agenda.create(
       {
-        name: params.name,
+        firstName: params.firstName,
+        lastName: params.lastName,
+        phone,
         email: params.email,
         color: params.color,
         userId: params.userId,

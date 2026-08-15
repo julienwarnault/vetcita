@@ -50,7 +50,7 @@ export function PanelConsultations(props: PanelConsultationsProps) {
                   <div className="text-[17px]/6 font-semibold">Consulta</div>
                   <Badge>{consultation.recordType}</Badge>
                 </div>
-                <div className="text-[13px]/4 font-normal text-muted">{consultation.agenda?.name}</div>
+                <div className="text-[13px]/4 font-normal text-muted">{consultation.agenda?.fullName}</div>
               </div>
               <div>
                 <div className="text-[15px]/5 font-medium">

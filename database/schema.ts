@@ -22,7 +22,7 @@ export class AgendaServiceSchema extends BaseModel {
 }
 
 export class AgendaSchema extends BaseModel {
-  static $columns = ['color', 'createdAt', 'email', 'id', 'name', 'role', 'tenantId', 'updatedAt', 'userId'] as const
+  static $columns = ['color', 'createdAt', 'email', 'firstName', 'id', 'lastName', 'phone', 'role', 'tenantId', 'updatedAt', 'userId'] as const
   $columns = AgendaSchema.$columns
   @column()
   declare color: string
@@ -30,10 +30,14 @@ export class AgendaSchema extends BaseModel {
   declare createdAt: DateTime
   @column()
   declare email: string | null
+  @column()
+  declare firstName: string | null
   @column({ isPrimary: true })
   declare id: UUID
   @column()
-  declare name: string
+  declare lastName: string | null
+  @column()
+  declare phone: string | null
   @column()
   declare role: string
   @column()
@@ -412,7 +416,7 @@ export class UserSchema extends BaseModel {
   @column()
   declare email: string
   @column()
-  declare firstName: string | null
+  declare firstName: string
   @column({ isPrimary: true })
   declare id: UUID
   @column()

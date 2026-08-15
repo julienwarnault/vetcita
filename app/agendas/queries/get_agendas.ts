@@ -8,10 +8,18 @@ interface GetAgendasParams {
 
 export class GetAgendas {
   async execute(params: GetAgendasParams) {
-    const query = Agenda.query().where('tenantId', params.tenantId).orderBy('name')
+    const query = Agenda.query().where('tenantId', params.tenantId).orderBy('first_name')
 
     if (params.search) {
-      query.where((q) => q.whereILike('name', `%${params.search}%`))
+      const term = `%${params.search}%`
+
+      query.where((builder) => {
+        builder
+          .whereILike('phone', term)
+          .orWhereILike('email', term)
+          .orWhereRaw(`CONCAT(first_name, ' ', last_name) ILIKE ?`, [term])
+          .orWhereRaw(`CONCAT(last_name, ' ', first_name) ILIKE ?`, [term])
+      })
     }
 
     const agendas = await query

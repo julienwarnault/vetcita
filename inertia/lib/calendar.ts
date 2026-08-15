@@ -16,7 +16,7 @@ export type Event = {
     illustrationUrl: string
   }
   agenda: {
-    name: string
+    fullName: string
     color: string
   }
   status: {

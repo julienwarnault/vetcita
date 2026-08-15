@@ -11,7 +11,9 @@ import { emailSchema, uuidSchema } from '#shared/validators'
 export default class CreateAgendaController {
   static validator = vine.create(
     vine.object({
-      name: vine.string(),
+      firstName: vine.string(),
+      lastName: vine.string().optional(),
+      phone: vine.string().phone().nullable().optional(),
       email: emailSchema().optional().requiredWhen('role', '!=', 'none'),
       role: vine.enum(['owner', 'staff', 'none']),
       color: vine.string(),

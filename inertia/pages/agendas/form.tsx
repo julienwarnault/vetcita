@@ -26,18 +26,22 @@ export default function ShowForm(props: PageProps) {
   const modalRef = useRef<InertiaModalRef>(null)
 
   const isEdit = !!agenda
-  const title = agenda ? `Editar ${agenda.name}` : 'Añadir un veterinario'
+  const title = agenda ? `Editar ${agenda.fullName}` : 'Añadir un veterinario'
 
   const isOwner = agenda?.role === 'owner'
 
   const form = useForm<{
-    name: string
+    firstName: string
+    lastName?: string
+    phone?: string | null
     email: string
     role: string
     color: string
     serviceIds: string[]
   }>({
-    name: agenda?.name ?? '',
+    firstName: agenda?.firstName ?? '',
+    lastName: agenda?.lastName ?? '',
+    phone: agenda?.phone ?? null,
     email: agenda?.email ?? '',
     role: agenda?.role ?? 'none',
     color: agenda?.color ?? COLORS_LIGHT[0],
@@ -83,15 +87,30 @@ export default function ShowForm(props: PageProps) {
                 <p className="text-[15px]/5 text-muted">Gestiona los datos del veterinario.</p>
 
                 <div className="grid grid-cols-6 w-full gap-x-4 gap-y-6 pt-6">
-                  <Field name="name" className="col-span-3">
+                  <Field name="firstName" className="col-span-3">
                     <Field.Label>Nombre *</Field.Label>
-                    <Input value={form.data.name} onChange={(e) => form.setData('name', e.target.value)} />
+                    <Input value={form.data.firstName} onChange={(e) => form.setData('firstName', e.target.value)} />
+                    <Field.Error />
+                  </Field>
+
+                  <Field name="lastName" className="col-span-3">
+                    <Field.Label>Apellido</Field.Label>
+                    <Input value={form.data.lastName} onChange={(e) => form.setData('lastName', e.target.value)} />
                     <Field.Error />
                   </Field>
 
                   <Field name="email" className="col-span-3">
                     <Field.Label>Email{form.data.role !== 'none' ? ' *' : ''}</Field.Label>
                     <Input value={form.data.email} onChange={(e) => form.setData('email', e.target.value)} />
+                    <Field.Error />
+                  </Field>
+
+                  <Field name="phone" className="col-span-3">
+                    <Field.Label>Teléfono</Field.Label>
+                    <Input
+                      value={form.data.phone ?? ''}
+                      onChange={(e) => form.setData('phone', e.target.value || null)}
+                    />
                     <Field.Error />
                   </Field>
 

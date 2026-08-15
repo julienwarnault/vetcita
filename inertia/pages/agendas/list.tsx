@@ -98,10 +98,10 @@ export default function List(props: PageProps) {
                 </Menu>
               </div>
 
-              <Avatar size="4xl" fullName={agenda.name} color={agenda.color} />
+              <Avatar size="4xl" fullName={agenda.fullName} color={agenda.color} />
 
               <div className="flex flex-col gap-1">
-                <div className="text-[17px]/6 font-semibold">{agenda.name}</div>
+                <div className="text-[17px]/6 font-semibold">{agenda.fullName}</div>
                 <div className="text-[15px]/5 text-muted">{agenda.email || 'Sin correo electrónico'}</div>
               </div>
 

@@ -20,7 +20,7 @@ export default function WorkingHoursForm(props: PageProps) {
 
   const modalRef = useRef<InertiaModalRef>(null)
 
-  const title = 'Turnos recurrentes de ' + agenda.name
+  const title = 'Turnos recurrentes de ' + agenda.firstName
 
   const form = useForm({
     weekShifts: [...Array(7)].map((_, i) => [

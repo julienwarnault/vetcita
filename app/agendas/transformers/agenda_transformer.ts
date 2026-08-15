@@ -6,7 +6,19 @@ import type Agenda from '#agendas/models/agenda'
 export default class AgendaTransformer extends BaseTransformer<Agenda> {
   toObject() {
     return {
-      ...this.pick(this.resource, ['id', 'name', 'email', 'role', 'color', 'tenantId', 'createdAt', 'updatedAt']),
+      ...this.pick(this.resource, [
+        'id',
+        'fullName',
+        'firstName',
+        'lastName',
+        'phone',
+        'email',
+        'role',
+        'color',
+        'tenantId',
+        'createdAt',
+        'updatedAt',
+      ]),
       tenant: TenantTransformer.transform(this.whenLoaded(this.resource.tenant)),
       services: ServiceTransformer.transform(this.whenLoaded(this.resource.services)),
     }

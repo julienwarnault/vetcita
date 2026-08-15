@@ -4,7 +4,9 @@ import type { UUID } from '#shared/types'
 
 interface UpdateAgendaParams {
   id: UUID
-  name: string
+  firstName: string
+  lastName?: string
+  phone?: string | null
   email?: string | null
   role: AgendaRole
   color: string
@@ -15,11 +17,14 @@ interface UpdateAgendaParams {
 export class UpdateAgenda {
   async execute(params: UpdateAgendaParams) {
     const trx = transactionContext.get()
+    const phone = params.phone?.trim() || null
 
     const agenda = await Agenda.findOrFail(params.id, { client: trx })
 
     agenda.merge({
-      name: params.name,
+      firstName: params.firstName,
+      lastName: params.lastName,
+      phone,
       email: params.email ?? null,
       role: agenda.role === 'owner' ? agenda.role : params.role,
       color: params.color,

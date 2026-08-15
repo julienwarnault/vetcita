@@ -66,6 +66,12 @@ const routes = {
     tokens: [{"old":"/reset-password","type":0,"val":"reset-password","end":""}],
     types: placeholder as Registry['reset_password.execute']['types'],
   },
+  'logout.execute': {
+    methods: ["POST"],
+    pattern: '/logout',
+    tokens: [{"old":"/logout","type":0,"val":"logout","end":""}],
+    types: placeholder as Registry['logout.execute']['types'],
+  },
   'show_account.render': {
     methods: ["GET","HEAD"],
     pattern: '/user/account',
@@ -89,12 +95,6 @@ const routes = {
     pattern: '/user/account/password',
     tokens: [{"old":"/user/account/password","type":0,"val":"user","end":""},{"old":"/user/account/password","type":0,"val":"account","end":""},{"old":"/user/account/password","type":0,"val":"password","end":""}],
     types: placeholder as Registry['update_password.execute']['types'],
-  },
-  'logout.execute': {
-    methods: ["POST"],
-    pattern: '/logout',
-    tokens: [{"old":"/logout","type":0,"val":"logout","end":""}],
-    types: placeholder as Registry['logout.execute']['types'],
   },
   'list_agendas.render': {
     methods: ["GET","HEAD"],

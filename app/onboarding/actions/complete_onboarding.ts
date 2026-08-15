@@ -80,7 +80,8 @@ export class CompleteOnboarding {
     await this.createAgenda.execute({
       userId: user.id,
       tenantId: tenant.id,
-      name: user.fullName,
+      firstName: user.firstName,
+      lastName: user.lastName ?? undefined,
       email: user.email,
       role: 'owner',
       color: '#97c6f0',

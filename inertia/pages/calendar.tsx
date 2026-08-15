@@ -60,7 +60,7 @@ export default function ShowCalendar(props: PageProps) {
             color: appointment.service!.color,
             bookingRef: appointment.bookingRef,
             agenda: {
-              name: appointment.agenda!.name,
+              fullName: appointment.agenda!.fullName,
               color: appointment.agenda!.color,
             },
           }))}

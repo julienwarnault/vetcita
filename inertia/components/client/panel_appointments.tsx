@@ -63,7 +63,7 @@ export function PanelAppointments(props: PanelAppointmentsProps) {
                 </div>
                 <div>
                   <div className="flex text-[13px]/4 font-normal text-muted">
-                    <span>Veterinario : {appointment.agenda?.name}</span>
+                    <span>Veterinario : {appointment.agenda?.fullName}</span>
                   </div>
                 </div>
               </Card>

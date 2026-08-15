@@ -12,6 +12,10 @@ export type AgendaRole = 'owner' | 'staff' | 'none'
 export default class Agenda extends compose(AgendaSchema, WithPrimaryUuid) {
   static table = 'agendas'
 
+  get fullName() {
+    return (this.firstName + ' ' + this.lastName).trim()
+  }
+
   declare role: AgendaRole
 
   @belongsTo(() => Tenant)

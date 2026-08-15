@@ -38,7 +38,7 @@ export function CalendarAgendaSelector(props: CalendarAgendaSelectorProps) {
 
     if (localSelection.length === 1) {
       const selectedAgenda = agendas.find((agenda) => agenda.id === localSelection[0])
-      return selectedAgenda?.name ?? 'Agendas'
+      return selectedAgenda?.fullName ?? 'Agendas'
     }
 
     return 'Varias agendas'
@@ -96,8 +96,8 @@ export function CalendarAgendaSelector(props: CalendarAgendaSelectorProps) {
                 <CheckIcon size={14} strokeWidth={3} />
               </Checkbox.Indicator>
             </Checkbox.Root>
-            <Avatar fullName={agenda.name} color={agenda.color} className="size-7 text-[11px]" />
-            <span className="text-[15px]/5 font-medium">{agenda.name}</span>
+            <Avatar fullName={agenda.fullName} color={agenda.color} className="size-7 text-[11px]" />
+            <span className="text-[15px]/5 font-medium">{agenda.fullName}</span>
           </label>
         ))}
       </CheckboxGroup>

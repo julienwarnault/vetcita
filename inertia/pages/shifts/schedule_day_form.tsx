@@ -30,7 +30,7 @@ export default function ScheduleDayForm(props: PageProps) {
   const modalRef = useRef<InertiaModalRef>(null)
 
   const isEdit = !!scheduleDay
-  const title = `Turno de ${agenda.name} el ${DateTime.fromISO(date).setLocale(DEFAULT_LOCALE).toFormat('ccc, d LLL')}`
+  const title = `Turno de ${agenda.fullName} el ${DateTime.fromISO(date).setLocale(DEFAULT_LOCALE).toFormat('ccc, d LLL')}`
 
   const shifts = useMemo(() => {
     return scheduleDay && scheduleDay.shifts.length > 0

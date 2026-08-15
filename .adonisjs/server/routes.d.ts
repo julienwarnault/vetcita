@@ -14,11 +14,11 @@ export type ScannedRoutes = {
     'forgot_password.execute': { paramsTuple?: []; params?: {} }
     'reset_password.render': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
     'reset_password.execute': { paramsTuple?: []; params?: {} }
+    'logout.execute': { paramsTuple?: []; params?: {} }
     'show_account.render': { paramsTuple?: []; params?: {} }
     'update_account.execute': { paramsTuple?: []; params?: {} }
     'update_password.render': { paramsTuple?: []; params?: {} }
     'update_password.execute': { paramsTuple?: []; params?: {} }
-    'logout.execute': { paramsTuple?: []; params?: {} }
     'list_agendas.render': { paramsTuple?: []; params?: {} }
     'create_agenda.render': { paramsTuple?: []; params?: {} }
     'create_agenda.execute': { paramsTuple?: []; params?: {} }
