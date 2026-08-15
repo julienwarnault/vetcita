@@ -12,10 +12,10 @@ import { Card } from './ui/card'
 
 const clientSelector = tv({
   slots: {
-    group: 'relative has-[.autocomplete-clear]:[&>input]:pr-[calc(0.5rem+1.5rem*2)]',
+    group: 'group relative has-[.autocomplete-clear]:[&>input]:pr-[calc(0.5rem+1.5rem*2)]',
     input: [baseInput(), 'pr-10'],
     icons: 'absolute top-1/2 right-3 flex h-full -translate-y-1/2 items-center gap-2',
-    icon: 'flex items-center justify-center group-data-[popup-open]:rotate-180',
+    icon: 'flex items-center justify-center group-data-[popup-open]:rotate-180 group-data-disabled:hidden',
     positioner: 'z-110 outline-hidden',
     popup: 'w-[var(--anchor-width)] max-w-[var(--available-width)] max-h-[23rem]',
     item: 'flex min-h-10 items-center gap-3 rounded-lg px-3 py-2 -mx-3 text-[15px] font-medium cursor-pointer hover:bg-background data-[selected]:bg-background data-[highlighted]:bg-background [&_svg]:size-4',
@@ -49,7 +49,7 @@ export function ClientSelector(props: ClientSelectorProps) {
     )
   )
 
-  const clients = [...(data ?? []), ...(isEnabled && debouncedSearch.length > 3 ? [null] : [])]
+  const clients = [...(data ?? []), ...(isEnabled && debouncedSearch.length > 2 ? [null] : [])]
 
   function selectClient(client: any) {
     setLabel(client.fullName)
