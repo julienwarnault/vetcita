@@ -52,7 +52,7 @@ export default function ShowClient(props: PageProps) {
                   <div className="">
                     <div className="flex flex-col items-center px-8 pt-8 gap-6">
                       <div className="flex flex-col items-center">
-                        <Avatar size="4xl" className="mb-3" fullName={client.fullName} />
+                        <Avatar size="4xl" className="mb-3" color={client.color} fullName={client.fullName} />
                         <div className="text-[17px]/6 font-semibold pb-1">{client.fullName}</div>
                         {client.email && <div className="text-[15px]/5 text-muted">{client.email}</div>}
                         <div className="text-[15px]/5 text-muted">{formatPhoneNumber(client.phone)}</div>

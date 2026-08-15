@@ -23,7 +23,7 @@ export class GetShifts {
     const agendas = await Agenda.query()
       .where('tenant_id', params.tenantId)
       .if(params.agendaIds, (q) => q.whereIn('id', params.agendaIds!))
-      .orderBy('name')
+      .orderBy('first_name')
 
     const agendaIds = agendas.map((agenda) => agenda.id)
 

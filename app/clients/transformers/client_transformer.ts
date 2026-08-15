@@ -7,6 +7,7 @@ export default class ClientTransformer extends BaseTransformer<Client> {
     return {
       ...this.pick(this.resource, [
         'id',
+        'color',
         'firstName',
         'lastName',
         'fullName',

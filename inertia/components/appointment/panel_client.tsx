@@ -76,7 +76,7 @@ export function PanelClient(props: PanelClientProps) {
                       'flex items-center gap-3 px-8 py-2 bg-white hover:bg-background transition-colors text-left'
                     )}
                   >
-                    <Avatar size="lg" fullName={client.fullName} />
+                    <Avatar size="lg" color={client.color} fullName={client.fullName} />
                     <div className="flex-1 min-w-0">
                       <div className="text-[15px]/5 font-semibold truncate">{client.fullName}</div>
                       {client.phone && <div className="text-[15px]/5 text-muted truncate">{client.phone}</div>}

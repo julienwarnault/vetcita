@@ -2,12 +2,17 @@ import { hasMany } from '@adonisjs/lucid/orm'
 import { compose } from '@adonisjs/core/helpers'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
 import { WithPrimaryUuid } from '#shared/mixins/with_primary_uuid'
+import { ColorService } from '#shared/services/color_service'
 import { ClientSchema } from '#database/schema'
 import Pet from '#pets/models/pet'
 
 export default class Client extends compose(ClientSchema, WithPrimaryUuid) {
   get fullName() {
     return this.firstName + ' ' + this.lastName
+  }
+
+  get color() {
+    return ColorService.stringToColor(this.fullName)
   }
 
   @hasMany(() => Pet)
