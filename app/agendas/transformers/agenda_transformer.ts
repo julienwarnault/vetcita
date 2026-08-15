@@ -15,6 +15,7 @@ export default class AgendaTransformer extends BaseTransformer<Agenda> {
         'email',
         'role',
         'color',
+        'userId',
         'tenantId',
         'createdAt',
         'updatedAt',

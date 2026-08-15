@@ -1,5 +1,6 @@
 import { inject } from '@adonisjs/core'
 import { transactionContext } from '#shared/contexts/transaction_context'
+import Agenda from '#agendas/models/agenda'
 import type { UUID } from '#shared/types'
 import User from '#identity/models/user'
 
@@ -16,6 +17,7 @@ export class UpdateAccount {
   async execute(params: UpdateAccountParams): Promise<{ user: User }> {
     const trx = transactionContext.get()
     const email = params.email.trim().toLowerCase()
+    const phone = params.phone.trim()
 
     const emailAlreadyUsed = await User.query({ client: trx })
       .where('email', email)
@@ -32,10 +34,15 @@ export class UpdateAccount {
       firstName: params.firstName,
       lastName: params.lastName,
       email,
-      phone: params.phone,
+      phone,
     })
 
     await user.useTransaction(trx!).save()
+
+    await Agenda.query({ client: trx }).where('userId', user.id).update({
+      email,
+      phone,
+    })
 
     return { user }
   }

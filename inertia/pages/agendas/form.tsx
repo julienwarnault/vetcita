@@ -99,13 +99,13 @@ export default function ShowForm(props: PageProps) {
                     <Field.Error />
                   </Field>
 
-                  <Field name="email" className="col-span-3">
+                  <Field name="email" className="col-span-3" disabled={!!agenda?.userId}>
                     <Field.Label>Email{form.data.role !== 'none' ? ' *' : ''}</Field.Label>
                     <Input value={form.data.email} onChange={(e) => form.setData('email', e.target.value)} />
                     <Field.Error />
                   </Field>
 
-                  <Field name="phone" className="col-span-3">
+                  <Field name="phone" className="col-span-3" disabled={!!agenda?.userId}>
                     <Field.Label>Teléfono</Field.Label>
                     <Input
                       value={form.data.phone ?? ''}

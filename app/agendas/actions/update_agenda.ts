@@ -17,15 +17,16 @@ interface UpdateAgendaParams {
 export class UpdateAgenda {
   async execute(params: UpdateAgendaParams) {
     const trx = transactionContext.get()
-    const phone = params.phone?.trim() || null
+    const normalizedPhone = params.phone?.trim() || null
+    const normalizedEmail = params.email?.trim().toLowerCase() ?? null
 
     const agenda = await Agenda.findOrFail(params.id, { client: trx })
 
     agenda.merge({
       firstName: params.firstName,
       lastName: params.lastName,
-      phone,
-      email: params.email ?? null,
+      phone: normalizedPhone,
+      email: normalizedEmail,
       role: agenda.role === 'owner' ? agenda.role : params.role,
       color: params.color,
       userId: params.role === 'none' ? null : (params.userId ?? agenda.userId),

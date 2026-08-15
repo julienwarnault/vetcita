@@ -38,13 +38,13 @@ export default function Account(props: PageProps) {
                 <Form route="update_account.execute" className="gap-6">
                   <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <Field name="firstName">
-                      <Field.Label>Nombre</Field.Label>
+                      <Field.Label>Nombre *</Field.Label>
                       <Input defaultValue={user.firstName ?? ''} autoComplete="given-name" />
                       <Field.Error />
                     </Field>
 
                     <Field name="lastName">
-                      <Field.Label>Apellido</Field.Label>
+                      <Field.Label>Apellido *</Field.Label>
                       <Input defaultValue={user.lastName ?? ''} autoComplete="family-name" />
                       <Field.Error />
                     </Field>
@@ -52,13 +52,13 @@ export default function Account(props: PageProps) {
 
                   <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <Field name="email">
-                      <Field.Label>Correo electrónico</Field.Label>
+                      <Field.Label>Correo electrónico *</Field.Label>
                       <Input type="email" defaultValue={user.email} autoComplete="email" />
                       <Field.Error />
                     </Field>
 
                     <Field name="phone">
-                      <Field.Label>Teléfono</Field.Label>
+                      <Field.Label>Teléfono *</Field.Label>
                       <Input defaultValue={user.phone ?? ''} autoComplete="tel" />
                       <Field.Error />
                     </Field>

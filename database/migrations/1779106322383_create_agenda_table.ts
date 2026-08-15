@@ -11,11 +11,15 @@ export default class extends BaseSchema {
       table.string('first_name').nullable()
       table.string('last_name').nullable()
       table.string('phone').nullable()
-      table.string('email', 254).nullable().unique()
+      table.string('email', 254).nullable()
       table.string('color', 7).notNullable()
       table.string('role').notNullable()
       table.uuid('tenant_id').notNullable().references('id').inTable('tenants').onDelete('CASCADE')
       table.uuid('user_id').nullable().references('id').inTable('users').onDelete('SET NULL')
+      table.index(['email'])
+      table.index(['user_id'])
+      table.unique(['tenant_id', 'email'])
+      table.unique(['tenant_id', 'user_id'])
     })
   }
 

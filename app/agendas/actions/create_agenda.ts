@@ -19,7 +19,8 @@ interface CreateAgendaParams {
 export class CreateAgenda {
   async execute(params: CreateAgendaParams) {
     const trx = transactionContext.get()
-    const phone = params.phone?.trim() || null
+    const normalizedPhone = params.phone?.trim() || null
+    const normalizedEmail = params.email?.trim().toLowerCase() ?? null
 
     const tenant = await Tenant.query({ client: trx }).where('id', params.tenantId).preload('location').firstOrFail()
 
@@ -32,8 +33,8 @@ export class CreateAgenda {
       {
         firstName: params.firstName,
         lastName: params.lastName,
-        phone,
-        email: params.email,
+        phone: normalizedPhone,
+        email: normalizedEmail,
         color: params.color,
         userId: params.userId,
         tenantId: params.tenantId,
