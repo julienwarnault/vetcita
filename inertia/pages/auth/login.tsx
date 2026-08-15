@@ -32,19 +32,20 @@ export default function Login() {
           <Form route="login.execute" className="gap-6">
             <Field name="email">
               <Field.Label htmlFor="email">Correo electrónico</Field.Label>
-              <Input type="email" placeholder="Introduce tu correo" autoComplete="username" />
+              <Input name="email" type="email" placeholder="Introduce tu correo" autoComplete="username" />
               <Field.Error />
             </Field>
 
             <Field name="password">
-              <div className="flex items-center justify-between gap-3">
-                <Field.Label>Contraseña</Field.Label>
-                <Link route="forgot_password.render" className="text-[14px]/5 font-medium text-accent hover:underline">
-                  ¿Olvidaste tu contraseña?
-                </Link>
-              </div>
-              <InputPassword placeholder="Introduce tu contraseña" autoComplete="current-password" />
+              <Field.Label>Contraseña</Field.Label>
+              <InputPassword name="password" placeholder="Introduce tu contraseña" autoComplete="current-password" />
               <Field.Error />
+              <Link
+                route="forgot_password.render"
+                className="mt-2 self-start text-[14px]/5 hover:underline"
+              >
+                ¿Olvidaste tu contraseña?
+              </Link>
             </Field>
 
             <div>

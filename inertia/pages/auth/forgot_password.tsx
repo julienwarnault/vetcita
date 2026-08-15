@@ -33,7 +33,7 @@ export default function ForgotPassword() {
           <Form route="forgot_password.execute" className="gap-6">
             <Field name="email">
               <Field.Label htmlFor="email">Correo electrónico</Field.Label>
-              <Input type="email" placeholder="Introduce tu correo" autoComplete="username" />
+              <Input name="email" type="email" placeholder="Introduce tu correo" autoComplete="username" />
               <Field.Error />
             </Field>
 

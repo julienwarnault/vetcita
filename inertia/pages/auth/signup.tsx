@@ -33,38 +33,38 @@ export default function Signup() {
             <div className="flex flex-col gap-4 sm:flex-row">
               <Field name="firstName" className="w-full">
                 <Field.Label>Nombre</Field.Label>
-                <Input placeholder="Introduce un nombre" autoComplete="given-name" />
+                <Input name="firstName" placeholder="Introduce un nombre" autoComplete="given-name" />
                 <Field.Error />
               </Field>
 
               <Field name="lastName" className="w-full">
                 <Field.Label>Apellido</Field.Label>
-                <Input placeholder="Introduce un apellido" autoComplete="family-name" />
+                <Input name="lastName" placeholder="Introduce un apellido" autoComplete="family-name" />
                 <Field.Error />
               </Field>
             </div>
 
             <Field name="email">
               <Field.Label>Correo electrónico</Field.Label>
-              <Input placeholder="Introduce un correo" autoComplete="email" />
+              <Input name="email" type="email" placeholder="Introduce un correo" autoComplete="email" />
               <Field.Error />
             </Field>
 
             <Field name="phone">
               <Field.Label htmlFor="phone">Teléfono</Field.Label>
-              <Input placeholder="Introduce un teléfono" autoComplete="phone" />
+              <Input name="phone" type="tel" placeholder="Introduce un teléfono" autoComplete="tel" />
               <Field.Error />
             </Field>
 
             <Field name="password">
               <Field.Label>Contraseña</Field.Label>
-              <InputPassword placeholder="Introduce una contraseña" autoComplete="new-password" />
+              <InputPassword name="password" placeholder="Introduce una contraseña" autoComplete="new-password" />
               <Field.Error />
             </Field>
 
             <Field name="passwordConfirmation">
               <Field.Label>Confirmar contraseña</Field.Label>
-              <InputPassword placeholder="Confirma tu contraseña" autoComplete="new-password" />
+              <InputPassword name="passwordConfirmation" placeholder="Confirma tu contraseña" autoComplete="new-password" />
               <Field.Error />
             </Field>
 

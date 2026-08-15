@@ -34,18 +34,18 @@ export default function ResetPassword(props: PageProps) {
 
           <Form route="reset_password.execute" className="gap-6">
             <Field name="token" className="hidden">
-              <Input type="hidden" defaultValue={token} />
+              <Input name="token" type="hidden" defaultValue={token} />
             </Field>
 
             <Field name="password">
               <Field.Label>Contraseña</Field.Label>
-              <InputPassword placeholder="Introduce una contraseña" autoComplete="new-password" />
+              <InputPassword name="password" placeholder="Introduce una contraseña" autoComplete="new-password" />
               <Field.Error />
             </Field>
 
             <Field name="passwordConfirmation">
               <Field.Label>Confirmar contraseña</Field.Label>
-              <InputPassword placeholder="Confirma tu contraseña" autoComplete="new-password" />
+              <InputPassword name="passwordConfirmation" placeholder="Confirma tu contraseña" autoComplete="new-password" />
               <Field.Error />
             </Field>
 

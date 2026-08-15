@@ -34,7 +34,11 @@ export default function UpdatePassword() {
             <Form id="form" route="update_password.execute" className="gap-6 pb-24">
               <Field name="currentPassword">
                 <Field.Label>Contraseña actual</Field.Label>
-                <InputPassword placeholder="Introduce tu contraseña actual" autoComplete="current-password" />
+                <InputPassword
+                  name="currentPassword"
+                  placeholder="Introduce tu contraseña actual"
+                  autoComplete="current-password"
+                />
                 <Field.Description>
                   Si no recuerdas tu contraseña actual, cierra la sesión y utiliza el enlace de Contraseña olvidada en
                   la página de inicio de sesión para restablecer tu contraseña.
@@ -44,13 +48,13 @@ export default function UpdatePassword() {
 
               <Field name="password">
                 <Field.Label>Nueva contraseña</Field.Label>
-                <InputPassword placeholder="Introduce una nueva contraseña" autoComplete="new-password" />
+                <InputPassword name="password" placeholder="Introduce una nueva contraseña" autoComplete="new-password" />
                 <Field.Error />
               </Field>
 
               <Field name="passwordConfirmation">
                 <Field.Label>Confirmar nueva contraseña</Field.Label>
-                <InputPassword placeholder="Confirma la nueva contraseña" autoComplete="new-password" />
+                <InputPassword name="passwordConfirmation" placeholder="Confirma la nueva contraseña" autoComplete="new-password" />
                 <Field.Error />
               </Field>
             </Form>
