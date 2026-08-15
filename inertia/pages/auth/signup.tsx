@@ -1,4 +1,3 @@
-import { Link } from '@adonisjs/inertia/react'
 import { InputPassword } from '~/components/ui/input_password'
 import { ButtonLink } from '~/components/ui/button_link'
 import { Button } from '~/components/ui/button'
@@ -13,9 +12,7 @@ export default function Signup() {
     <>
       <header className="px-6 py-6 lg:px-10">
         <div className="flex items-center justify-between">
-          <Link href="/" aria-label="Ir al inicio">
-            <Logo />
-          </Link>
+          <Logo />
           <ButtonLink route="login.render" size="lg" variant="secondary">
             Iniciar sesión
           </ButtonLink>
@@ -64,7 +61,11 @@ export default function Signup() {
 
             <Field name="passwordConfirmation">
               <Field.Label>Confirmar contraseña</Field.Label>
-              <InputPassword name="passwordConfirmation" placeholder="Confirma tu contraseña" autoComplete="new-password" />
+              <InputPassword
+                name="passwordConfirmation"
+                placeholder="Confirma tu contraseña"
+                autoComplete="new-password"
+              />
               <Field.Error />
             </Field>
 

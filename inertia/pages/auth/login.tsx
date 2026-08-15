@@ -13,9 +13,7 @@ export default function Login() {
     <>
       <header className="absolute inset-x-0 top-0 z-10 px-6 py-6 lg:px-10">
         <div className="flex items-center justify-between">
-          <Link href="/" aria-label="Ir al inicio">
-            <Logo />
-          </Link>
+          <Logo />
           <ButtonLink route="signup.render" size="lg" variant="secondary">
             Crear cuenta
           </ButtonLink>
@@ -40,10 +38,7 @@ export default function Login() {
               <Field.Label>Contraseña</Field.Label>
               <InputPassword name="password" placeholder="Introduce tu contraseña" autoComplete="current-password" />
               <Field.Error />
-              <Link
-                route="forgot_password.render"
-                className="mt-2 self-start text-[14px]/5 hover:underline"
-              >
+              <Link route="forgot_password.render" className="mt-2 self-start text-[14px]/5 hover:underline">
                 ¿Olvidaste tu contraseña?
               </Link>
             </Field>

@@ -1,4 +1,3 @@
-import { Link } from '@adonisjs/inertia/react'
 import { ButtonLink } from '~/components/ui/button_link'
 import { Button } from '~/components/ui/button'
 import { Field } from '~/components/ui/field'
@@ -12,9 +11,7 @@ export default function ForgotPassword() {
     <>
       <header className="absolute inset-x-0 top-0 z-10 px-6 py-6 lg:px-10">
         <div className="flex items-center justify-between">
-          <Link href="/" aria-label="Ir al inicio">
-            <Logo />
-          </Link>
+          <Logo />
           <ButtonLink route="login.render" size="lg" variant="secondary">
             Iniciar sesión
           </ButtonLink>

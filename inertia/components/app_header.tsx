@@ -19,9 +19,8 @@ export function AppHeader(props: AppHeaderProps) {
 
   return (
     <header className="flex h-16 items-center justify-between border-b bg-surface px-4">
-      <Link route="dashboard.render">
-        <Logo />
-      </Link>
+      <Logo />
+
       <div className="flex items-center">
         <Button
           size="icon-lg"
