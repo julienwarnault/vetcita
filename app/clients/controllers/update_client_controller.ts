@@ -5,15 +5,25 @@ import ClientTransformer from '#clients/transformers/client_transformer'
 import { withTransaction } from '#shared/utils/with_transaction'
 import { UpdateClient } from '#clients/actions/update_client'
 import { GetClient } from '#clients/queries/get_client'
+import { UUID } from '#shared/types'
 
 @inject()
 export default class UpdateClientController {
-  static validator = vine.create(
+  static validator = vine.withMetaData<{ tenantId: UUID; clientId: UUID }>().create(
     vine.object({
       firstName: vine.string(),
       lastName: vine.string(),
       email: vine.string().email().optional(),
-      phone: vine.string().phone(),
+      phone: vine
+        .string()
+        .phone()
+        .unique({
+          table: 'clients',
+          filter: (db, _, field) => {
+            db.where('tenant_id', field.meta.tenantId)
+            db.andWhereNot('id', field.meta.clientId)
+          },
+        }),
       notes: vine.string().optional(),
     })
   )
@@ -32,7 +42,9 @@ export default class UpdateClientController {
   }
 
   async execute({ request, params, response, tenantId }: HttpContext) {
-    const payload = await request.validateUsing(UpdateClientController.validator)
+    const payload = await request.validateUsing(UpdateClientController.validator, {
+      meta: { tenantId, clientId: params.id },
+    })
     await withTransaction(() => {
       return this.updateClient.execute({ id: params.id, tenantId, ...payload })
     })

@@ -1,4 +1,5 @@
 import type { DateTime } from 'luxon'
+import { PetAlreadyExistsException } from '#pets/exceptions/pet_already_exists_exception'
 import { transactionContext } from '#shared/contexts/transaction_context'
 import type { UUID } from '#shared/types'
 import Pet from '#pets/models/pet'
@@ -22,10 +23,21 @@ interface CreatePetParams {
 export class CreatePet {
   async execute(params: CreatePetParams) {
     const trx = transactionContext.get()
+    const name = params.name.trim()
+
+    const existingPet = await Pet.query({ client: trx })
+      .where('tenant_id', params.tenantId)
+      .where('client_id', params.clientId)
+      .whereILike('name', name)
+      .first()
+
+    if (existingPet) {
+      throw new PetAlreadyExistsException()
+    }
 
     const pet = await Pet.create(
       {
-        name: params.name,
+        name,
         clientId: params.clientId,
         tenantId: params.tenantId,
         speciesId: params.speciesId,

@@ -8,15 +8,26 @@ import { UpdateAgenda } from '#agendas/actions/update_agenda'
 import { emailSchema, uuidSchema } from '#shared/validators'
 import { GetServices } from '#services/queries/get_services'
 import { GetAgenda } from '#agendas/queries/get_agenda'
+import { UUID } from '#shared/types'
 
 @inject()
 export default class UpdateAgendaController {
-  static validator = vine.create(
+  static validator = vine.withMetaData<{ tenantId: UUID; agendaId: UUID }>().create(
     vine.object({
       firstName: vine.string(),
       lastName: vine.string().optional(),
       phone: vine.string().phone().nullable().optional(),
-      email: emailSchema().optional().requiredWhen('role', '!=', 'none'),
+      email: emailSchema()
+        .unique({
+          table: 'agendas',
+          caseInsensitive: true,
+          filter: (db, _, field) => {
+            db.where('tenant_id', field.meta.tenantId)
+            db.andWhereNot('id', field.meta.agendaId)
+          },
+        })
+        .optional()
+        .requiredWhen('role', '!=', 'none'),
       role: vine.enum(['owner', 'staff', 'none']),
       color: vine.string(),
       serviceIds: vine.array(uuidSchema()).optional(),
@@ -39,11 +50,13 @@ export default class UpdateAgendaController {
     })
   }
 
-  async execute({ request, params, response }: HttpContext) {
-    const payload = await request.validateUsing(UpdateAgendaController.validator)
+  async execute({ request, params, response, tenantId }: HttpContext) {
+    const payload = await request.validateUsing(UpdateAgendaController.validator, {
+      meta: { tenantId, agendaId: params.id },
+    })
 
     await withTransaction(() => {
-      return this.updateAgenda.execute({ id: params.id, ...payload })
+      return this.updateAgenda.execute({ id: params.id, tenantId, ...payload })
     })
 
     return response.redirect().back()

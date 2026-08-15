@@ -8,12 +8,21 @@ import { GetSpecies } from '#pets/queries/get_species'
 import { UpdatePet } from '#pets/actions/update_pet'
 import { uuidSchema } from '#shared/validators'
 import { GetPet } from '#pets/queries/get_pet'
+import { UUID } from '#shared/types'
 
 @inject()
 export default class UpdatePetController {
-  static validator = vine.create(
+  static validator = vine.withMetaData<{ tenantId: UUID; petId: UUID }>().create(
     vine.object({
-      name: vine.string(),
+      name: vine.string().unique({
+        table: 'pets',
+        caseInsensitive: true,
+        filter: (db, _, field) => {
+          db.where('tenant_id', field.meta.tenantId)
+          db.andWhere('client_id', field.data.clientId)
+          db.andWhereNot('id', field.meta.petId)
+        },
+      }),
       clientId: uuidSchema(),
       dateOfBirth: vine.date().optional(),
       gender: vine.enum(['male', 'female', 'unknown']).optional(),
@@ -46,11 +55,11 @@ export default class UpdatePetController {
     })
   }
 
-  async execute({ request, params, response }: HttpContext) {
-    const payload = await request.validateUsing(UpdatePetController.validator)
+  async execute({ request, params, response, tenantId }: HttpContext) {
+    const payload = await request.validateUsing(UpdatePetController.validator, { meta: { tenantId, petId: params.id } })
 
     await withTransaction(() => {
-      return this.updatePet.execute({ id: params.id, ...payload })
+      return this.updatePet.execute({ id: params.id, tenantId, ...payload })
     })
 
     return response.redirect().back()

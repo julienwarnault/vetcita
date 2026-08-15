@@ -5,7 +5,9 @@
       "password": "contraseña",
       "passwordConfirmation": "confirmación de contraseña",
       "phone": "teléfono",
-      "website": "sitio web"
+      "website": "sitio web",
+      "client": "Dueño",
+      "pet": "Mascota"
     },
     "messages": {
       "required": "Este campo es obligatorio",
@@ -16,7 +18,8 @@
       "email": "Formato del correo no válido",
       "url": "Introduce una URL de {field} válida",
       "overlappingShift": "El turno coincide con otro",
-      "invalidShiftRange": "La hora de finalización debe ser posterior a la hora de inicio"
+      "invalidShiftRange": "La hora de finalización debe ser posterior a la hora de inicio",
+      "database.unique": "Este {field} ya está en uso"
     }
   }
 }

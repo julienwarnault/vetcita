@@ -22,6 +22,7 @@ export default class extends BaseSchema {
       table.string('allergies').nullable()
       table.text('notes').nullable()
       table.index(['tenant_id', 'client_id'])
+      table.unique(['tenant_id', 'client_id', 'name'])
     })
   }
 

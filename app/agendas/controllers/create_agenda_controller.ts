@@ -6,15 +6,25 @@ import { withTransaction } from '#shared/utils/with_transaction'
 import { CreateAgenda } from '#agendas/actions/create_agenda'
 import { GetServices } from '#services/queries/get_services'
 import { emailSchema, uuidSchema } from '#shared/validators'
+import { UUID } from '#shared/types'
 
 @inject()
 export default class CreateAgendaController {
-  static validator = vine.create(
+  static validator = vine.withMetaData<{ tenantId: UUID }>().create(
     vine.object({
       firstName: vine.string(),
       lastName: vine.string().optional(),
       phone: vine.string().phone().nullable().optional(),
-      email: emailSchema().optional().requiredWhen('role', '!=', 'none'),
+      email: emailSchema()
+        .unique({
+          table: 'agendas',
+          caseInsensitive: true,
+          filter: (db, _, field) => {
+            db.where('tenant_id', field.meta.tenantId)
+          },
+        })
+        .optional()
+        .requiredWhen('role', '!=', 'none'),
       role: vine.enum(['owner', 'staff', 'none']),
       color: vine.string(),
       serviceIds: vine.array(uuidSchema()).optional(),
@@ -35,7 +45,7 @@ export default class CreateAgendaController {
   }
 
   async execute({ request, response, tenantId }: HttpContext) {
-    const payload = await request.validateUsing(CreateAgendaController.validator)
+    const payload = await request.validateUsing(CreateAgendaController.validator, { meta: { tenantId } })
 
     await withTransaction(() => {
       return this.createAgenda.execute({ ...payload, tenantId })

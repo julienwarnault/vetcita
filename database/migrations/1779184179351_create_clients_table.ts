@@ -15,6 +15,7 @@ export default class extends BaseSchema {
       table.text('notes').nullable()
       table.uuid('tenant_id').notNullable().references('id').inTable('tenants').onDelete('CASCADE')
       table.index(['tenant_id'])
+      table.unique(['tenant_id', 'phone'])
     })
   }
 

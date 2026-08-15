@@ -4,15 +4,24 @@ import type { HttpContext } from '@adonisjs/core/http'
 import { withTransaction } from '#shared/utils/with_transaction'
 import ClientTransformer from '#clients/transformers/client_transformer'
 import { CreateClient } from '#clients/actions/create_client'
+import { UUID } from '#shared/types'
 
 @inject()
 export default class CreateClientController {
-  static validator = vine.create(
+  static validator = vine.withMetaData<{ tenantId: UUID }>().create(
     vine.object({
       firstName: vine.string(),
       lastName: vine.string(),
       email: vine.string().email().optional(),
-      phone: vine.string().phone(),
+      phone: vine
+        .string()
+        .phone()
+        .unique({
+          table: 'clients',
+          filter: (db, _, field) => {
+            db.where('tenant_id', field.meta.tenantId)
+          },
+        }),
       notes: vine.string().optional(),
     })
   )
@@ -28,7 +37,7 @@ export default class CreateClientController {
   }
 
   async execute({ request, response, tenantId, session, serialize }: HttpContext) {
-    const payload = await request.validateUsing(CreateClientController.validator)
+    const payload = await request.validateUsing(CreateClientController.validator, { meta: { tenantId } })
 
     const { client } = await withTransaction(() => {
       return this.createClient.execute({ ...payload, tenantId })

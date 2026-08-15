@@ -1,3 +1,4 @@
+import { AgendaAlreadyExistsException } from '#agendas/exceptions/agenda_already_exists_exception'
 import { transactionContext } from '#shared/contexts/transaction_context'
 import Agenda, { type AgendaRole } from '#agendas/models/agenda'
 import WorkingHour from '#scheduling/models/working_hour'
@@ -28,7 +29,17 @@ export class CreateAgenda {
       throw new Error('Business clinic is required to create an agenda')
     }
 
-    // Create agenda
+    if (normalizedEmail) {
+      const existingAgenda = await Agenda.query({ client: trx })
+        .where('tenant_id', params.tenantId)
+        .whereILike('email', normalizedEmail)
+        .first()
+
+      if (existingAgenda) {
+        throw new AgendaAlreadyExistsException()
+      }
+    }
+
     const agenda = await Agenda.create(
       {
         firstName: params.firstName,

@@ -1,10 +1,12 @@
 import type { DateTime } from 'luxon'
+import { PetAlreadyExistsException } from '#pets/exceptions/pet_already_exists_exception'
 import { transactionContext } from '#shared/contexts/transaction_context'
 import type { UUID } from '#shared/types'
 import Pet from '#pets/models/pet'
 
 interface UpdatePetParams {
   id: UUID
+  tenantId: UUID
   name: string
   clientId: UUID
   speciesId: UUID
@@ -22,11 +24,26 @@ interface UpdatePetParams {
 export class UpdatePet {
   async execute(params: UpdatePetParams) {
     const trx = transactionContext.get()
+    const name = params.name.trim()
 
-    const pet = await Pet.findOrFail(params.id, { client: trx })
+    const pet = await Pet.query({ client: trx })
+      .where('id', params.id)
+      .where('tenant_id', params.tenantId)
+      .firstOrFail()
+
+    const existingPet = await Pet.query({ client: trx })
+      .where('tenant_id', params.tenantId)
+      .where('client_id', params.clientId)
+      .whereILike('name', name)
+      .whereNot('id', pet.id)
+      .first()
+
+    if (existingPet) {
+      throw new PetAlreadyExistsException()
+    }
 
     pet.merge({
-      name: params.name,
+      name,
       clientId: params.clientId,
       speciesId: params.speciesId,
       breed: params.breed || null,

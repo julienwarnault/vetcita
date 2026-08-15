@@ -8,12 +8,20 @@ import { GetClient } from '#clients/queries/get_client'
 import { GetSpecies } from '#pets/queries/get_species'
 import { CreatePet } from '#pets/actions/create_pet'
 import { uuidSchema } from '#shared/validators'
+import { UUID } from '#shared/types'
 
 @inject()
 export default class CreatePetController {
-  static validator = vine.create(
+  static validator = vine.withMetaData<{ tenantId: UUID }>().create(
     vine.object({
-      name: vine.string(),
+      name: vine.string().unique({
+        table: 'pets',
+        caseInsensitive: true,
+        filter: (db, _, field) => {
+          db.where('tenant_id', field.meta.tenantId)
+          db.andWhere('client_id', field.data.clientId)
+        },
+      }),
       clientId: uuidSchema(),
       dateOfBirth: vine.date().optional(),
       gender: vine.enum(['male', 'female', 'unknown']).optional(),
@@ -49,7 +57,7 @@ export default class CreatePetController {
   }
 
   async execute({ request, response, tenantId, session }: HttpContext) {
-    const payload = await request.validateUsing(CreatePetController.validator)
+    const payload = await request.validateUsing(CreatePetController.validator, { meta: { tenantId } })
 
     const { pet } = await withTransaction(() => {
       return this.createPet.execute({ ...payload, tenantId })
