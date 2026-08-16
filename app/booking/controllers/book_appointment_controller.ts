@@ -5,17 +5,17 @@ import LocationTransformer from '#tenants/transformers/location_transformer'
 import ServiceTransformer from '#services/transformers/service_transformer'
 import { GetLocationBySlug } from '#tenants/queries/get_location_by_slug'
 import TenantTransformer from '#tenants/transformers/tenant_transformer'
+import { GetLocationSpecies } from '#pets/queries/get_location_species'
 import SpeciesTransformer from '#pets/transformers/species_transformer'
 import { BookAppointment } from '#booking/actions/book_appointment'
 import { withTransaction } from '#shared/utils/with_transaction'
 import { GetServices } from '#services/queries/get_services'
 import { GetTenant } from '#tenants/queries/get_tenant'
-import { GetSpecies } from '#pets/queries/get_species'
 import { uuidSchema } from '#shared/validators'
 
 @inject()
 export default class BookAppointmentController {
-  static validator = vine.create(
+  static validator = vine.withMetaData().create(
     vine.object({
       serviceId: uuidSchema(),
       agendaId: uuidSchema(),
@@ -26,6 +26,18 @@ export default class BookAppointmentController {
       email: vine.string().email(),
       petName: vine.string(),
       petSpeciesId: uuidSchema(),
+      tenantId: uuidSchema(),
+      locationId: uuidSchema(),
+
+      params: vine.object({
+        slug: vine.string().exists({
+          table: 'locations',
+          filter(db, _, field) {
+            db.where('id', field.data.locationId)
+            db.where('tenant_id', field.data.tenantId)
+          },
+        }),
+      }),
     })
   )
 
@@ -33,7 +45,7 @@ export default class BookAppointmentController {
     private readonly getTenant: GetTenant,
     private readonly getLocationBySlug: GetLocationBySlug,
     private readonly getServices: GetServices,
-    private readonly getSpecies: GetSpecies,
+    private readonly getLocationSpecies: GetLocationSpecies,
     private readonly bookAppointment: BookAppointment
   ) {}
 
@@ -45,7 +57,7 @@ export default class BookAppointmentController {
     const [{ tenant }, { services }, { species }] = await Promise.all([
       this.getTenant.execute({ id: location.tenantId }),
       this.getServices.execute({ tenantId: location.tenantId }),
-      this.getSpecies.execute(),
+      this.getLocationSpecies.execute({ tenantId: location.tenantId, locationId: location.id }),
     ])
 
     return inertia.render('booking/form', {
@@ -61,10 +73,8 @@ export default class BookAppointmentController {
 
     const payload = await request.validateUsing(BookAppointmentController.validator)
 
-    const { location } = await this.getLocationBySlug.execute({ slug })
-
     const { appointment } = await withTransaction(() => {
-      return this.bookAppointment.execute({ ...payload, tenantId: location.tenantId })
+      return this.bookAppointment.execute({ ...payload })
     })
 
     return response.redirect().toRoute('confirm_appointment.render', {

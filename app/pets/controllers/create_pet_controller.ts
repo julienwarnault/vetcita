@@ -3,9 +3,9 @@ import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
 import ClientTransformer from '#clients/transformers/client_transformer'
 import SpeciesTransformer from '#pets/transformers/species_transformer'
+import { GetTenantSpecies } from '#pets/queries/get_tenant_species'
 import { withTransaction } from '#shared/utils/with_transaction'
 import { GetClient } from '#clients/queries/get_client'
-import { GetSpecies } from '#pets/queries/get_species'
 import { CreatePet } from '#pets/actions/create_pet'
 import { uuidSchema } from '#shared/validators'
 import { UUID } from '#shared/types'
@@ -37,7 +37,7 @@ export default class CreatePetController {
   )
 
   constructor(
-    private readonly getSpecies: GetSpecies,
+    private readonly getTenantSpecies: GetTenantSpecies,
     private readonly getClient: GetClient,
     private readonly createPet: CreatePet
   ) {}
@@ -46,7 +46,7 @@ export default class CreatePetController {
     const clientId = request.input('clientId', null)
 
     const [{ species }, { client }] = await Promise.all([
-      this.getSpecies.execute(),
+      this.getTenantSpecies.execute({ tenantId }),
       clientId ? this.getClient.execute({ id: clientId, tenantId }) : { client: null },
     ])
 

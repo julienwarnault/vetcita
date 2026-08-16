@@ -350,12 +350,14 @@ export class ServiceSchema extends BaseModel {
 }
 
 export class SpeciesSchema extends BaseModel {
-  static $columns = ['id', 'illustrationUrl', 'name', 'order'] as const
+  static $columns = ['id', 'illustrationUrl', 'isDefault', 'name', 'order'] as const
   $columns = SpeciesSchema.$columns
   @column({ isPrimary: true })
   declare id: UUID
   @column()
   declare illustrationUrl: string
+  @column()
+  declare isDefault: boolean
   @column()
   declare name: string
   @column()

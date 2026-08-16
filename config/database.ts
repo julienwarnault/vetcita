@@ -22,6 +22,7 @@ const dbConfig = defineConfig({
       schemaGeneration: {
         enabled: true,
         rulesPaths: ['#database/schema_rules'],
+        excludeTables: ['location_species'],
       },
       debug: app.inDev,
     },

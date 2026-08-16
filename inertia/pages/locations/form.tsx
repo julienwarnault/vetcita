@@ -1,10 +1,12 @@
 import { Data } from '@generated/data'
 import { EarthIcon } from 'lucide-react'
+import { Checkbox, CheckboxGroup } from '@base-ui/react'
 import { NativeSelect } from '~/components/ui/native_select'
 import { InputGroup } from '~/components/ui/input_group'
 import { ButtonLink } from '~/components/ui/button_link'
 import { InputImage } from '~/components/ui/input_image'
 import { FormHeader } from '~/components/form_header'
+import { Avatar } from '~/components/ui/avatar'
 import { Button } from '~/components/ui/button'
 import MinimalLayout from '~/layouts/minimal'
 import { Input } from '~/components/ui/input'
@@ -15,10 +17,11 @@ import { InertiaProps } from '~/types'
 
 type PageProps = InertiaProps<{
   location: Data.Tenants.Location
+  species: Data.Pets.Species[]
 }>
 
 export default function ShowForm(props: PageProps) {
-  const { location } = props
+  const { location, species } = props
 
   const title = `Editar ${location.name}`
 
@@ -160,6 +163,36 @@ export default function ShowForm(props: PageProps) {
                       <Field.Error />
                     </Field>
                   </div>
+                </Card.Body>
+              </Card>
+
+              <Card size="none">
+                <Card.Header>
+                  <Card.Title>Especies atendidas</Card.Title>
+                  <Card.Description>Define qué especies pueden reservar cita en esta clínica.</Card.Description>
+                </Card.Header>
+
+                <Card.Body>
+                  <Field name="speciesIds[]">
+                    <CheckboxGroup
+                      allValues={species.map((item) => item.id)}
+                      defaultValue={location?.species?.map((item) => item.id)}
+                      className="grid grid-cols-2 gap-4"
+                    >
+                      {species.map((item) => (
+                        <label key={item.id}>
+                          <Checkbox.Root
+                            value={item.id}
+                            className="flex w-full cursor-pointer items-center gap-3 rounded-xl border bg-surface p-4 transition-colors hover:border-border-strong hover:bg-background data-checked:outline-2 data-checked:outline-accent data-checked:-outline-offset-1"
+                          >
+                            <Avatar src={item.illustrationUrl} />
+                            <span className="text-[17px]/6 font-semibold">{item.name}</span>
+                          </Checkbox.Root>
+                        </label>
+                      ))}
+                    </CheckboxGroup>
+                    <Field.Error />
+                  </Field>
                 </Card.Body>
               </Card>
             </div>

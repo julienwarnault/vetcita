@@ -20,6 +20,7 @@ interface UpdateLocationParams {
   logo?: MultipartFile | null
   removeCover?: boolean
   removeLogo?: boolean
+  speciesIds: UUID[]
 }
 
 export class UpdateLocation {
@@ -61,6 +62,8 @@ export class UpdateLocation {
     }
 
     await location.useTransaction(trx!).save()
+
+    await location.related('species').sync(params.speciesIds, true, trx)
 
     return { location }
   }

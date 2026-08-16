@@ -11,6 +11,7 @@ export type OnboardingData = {
   state: string
   postalCode: string
   countryCode: string
+  speciesIds: string[]
 }
 
 export type OnboardingForm = InertiaFormProps<OnboardingData>
@@ -23,15 +24,23 @@ export const STEPS = [
     fields: ['name', 'phone', 'email', 'address', 'city', 'state', 'postalCode', 'countryCode'] as string[],
     canContinue: (data: OnboardingData) => Boolean(data.name),
   },
+  {
+    key: 'species',
+    title: 'Especies atendidas',
+    description: 'Servicios de la clínica.',
+    fields: ['speciesIds'] as string[],
+    canContinue: (data: OnboardingData) => data.speciesIds.length > 0,
+  },
 ] as const
 
 type UseOnboardingFormParams = {
   authUser: Data.Identity.User
   submitUrl: string
+  defaultSpeciesIds: string[]
 }
 
 export function useOnboardingForm(params: UseOnboardingFormParams) {
-  const { authUser, submitUrl } = params
+  const { authUser, submitUrl, defaultSpeciesIds } = params
   const [stepIndex, setStepIndex] = useState(0)
 
   const form = useForm<OnboardingData>({
@@ -43,6 +52,7 @@ export function useOnboardingForm(params: UseOnboardingFormParams) {
     state: '',
     postalCode: '',
     countryCode: 'MX',
+    speciesIds: defaultSpeciesIds,
   })
 
   const step = STEPS[stepIndex]

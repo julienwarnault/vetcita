@@ -4,6 +4,7 @@ import { Form } from '@base-ui/react/form'
 import { Link } from '@adonisjs/inertia/react'
 import { ArrowLeftIcon, ArrowRightIcon, LogOutIcon } from 'lucide-react'
 import { useOnboardingForm } from '~/components/onboarding/use_onboarding_form'
+import { StepSpecies } from '~/components/onboarding/step_species'
 import { StepAddress } from '~/components/onboarding/step_address'
 import { StepBasic } from '~/components/onboarding/step_basic'
 import { FormHeader } from '~/components/form_header'
@@ -18,14 +19,16 @@ import { InertiaProps } from '~/types'
 
 type PageProps = InertiaProps<{
   authUser: Data.Identity.User
+  species: Data.Pets.Species[]
 }>
 
 export default function OnboardingForm(props: PageProps) {
-  const { authUser } = props
+  const { authUser, species } = props
 
   const { form, step, stepIndex, isFirst, isLast, canContinue, actions, totalSteps } = useOnboardingForm({
     authUser,
     submitUrl: '/onboarding',
+    defaultSpeciesIds: species.filter((s) => s.isDefault).map((s) => s.id),
   })
 
   function handleSubmit(e: SubmitEvent) {
@@ -73,6 +76,7 @@ export default function OnboardingForm(props: PageProps) {
                 <StepAddress form={form} />
               </>
             )}
+            {step.key === 'species' && <StepSpecies form={form} species={species} />}
           </Form>
         </div>
 

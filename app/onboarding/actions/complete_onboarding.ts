@@ -18,6 +18,7 @@ interface CompleteOnboardingParams {
   state?: string
   postalCode?: string
   countryCode?: string
+  speciesIds: UUID[]
 }
 
 @inject()
@@ -46,7 +47,7 @@ export class CompleteOnboarding {
     )
 
     // Create location
-    await Location.create(
+    const location = await Location.create(
       {
         tenantId: tenant.id,
         name: params.name,
@@ -62,6 +63,9 @@ export class CompleteOnboarding {
       },
       { client: trx }
     )
+
+    // Sync species
+    await location.related('species').sync(params.speciesIds, true, trx)
 
     // Create services
     const services = await Service.createMany(

@@ -8,6 +8,7 @@ export default class extends BaseSchema {
       table.uuid('id').primary()
       table.string('name').unique().notNullable()
       table.string('illustration_url').notNullable()
+      table.boolean('is_default').notNullable().defaultTo(false)
       table.smallint('order').notNullable()
     })
   }

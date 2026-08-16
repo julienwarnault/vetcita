@@ -1,4 +1,5 @@
 import { BaseTransformer } from '@adonisjs/core/transformers'
+import SpeciesTransformer from '#pets/transformers/species_transformer'
 import type Location from '#tenants/models/location'
 
 export default class LocationTransformer extends BaseTransformer<Location> {
@@ -23,6 +24,7 @@ export default class LocationTransformer extends BaseTransformer<Location> {
       ]),
       logoUrl: this.resource.logo ? await this.resource.logo.getUrl() : null,
       coverUrl: this.resource.cover ? await this.resource.cover.getUrl() : null,
+      species: SpeciesTransformer.transform(this.whenLoaded(this.resource.species)),
     }
   }
 }

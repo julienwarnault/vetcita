@@ -3,7 +3,7 @@ import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
 import { CompleteOnboarding } from '#onboarding/actions/complete_onboarding'
 import { withTransaction } from '#shared/utils/with_transaction'
-import { emailSchema } from '#shared/validators'
+import { emailSchema, uuidListSchema } from '#shared/validators'
 
 @inject()
 export default class UpdateOnboardingController {
@@ -18,6 +18,7 @@ export default class UpdateOnboardingController {
       state: vine.string().optional(),
       postalCode: vine.string().optional(),
       countryCode: vine.string().fixedLength(2).optional(),
+      speciesIds: uuidListSchema().minLength(1),
     })
   )
 

@@ -5,6 +5,7 @@ import { query, queryClient } from '~/lib/tuyau'
 
 type BookingData = {
   tenantId: string
+  locationId: string
   serviceId: string
   agendaId: string
   startDate: string
@@ -64,11 +65,12 @@ export type StepKey = (typeof STEPS)[number]['key']
 
 type UseBookingFormParams = {
   tenantId: string
+  locationId: string
   submitUrl: string
 }
 
 export function useBookingForm(params: UseBookingFormParams) {
-  const { submitUrl, tenantId } = params
+  const { submitUrl, tenantId, locationId } = params
 
   const [stepIndex, setStepIndex] = useState(0)
 
@@ -76,6 +78,7 @@ export function useBookingForm(params: UseBookingFormParams) {
 
   const form = useForm({
     tenantId: tenantId,
+    locationId: locationId,
     serviceId: '',
     agendaId: '',
     startDate: '',

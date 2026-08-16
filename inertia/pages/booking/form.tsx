@@ -26,6 +26,7 @@ export default function ShowForm(props: PageProps) {
 
   const { form, step, isFirst, isLast, canContinue, actions } = useBookingForm({
     tenantId: tenant.id,
+    locationId: location.id,
     submitUrl: urlFor('book_appointment.execute', { slug: location.slug }),
   })
 

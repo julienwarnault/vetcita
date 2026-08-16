@@ -2,9 +2,9 @@ import vine from '@vinejs/vine'
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
 import SpeciesTransformer from '#pets/transformers/species_transformer'
+import { GetTenantSpecies } from '#pets/queries/get_tenant_species'
 import { withTransaction } from '#shared/utils/with_transaction'
 import PetTransformer from '#pets/transformers/pet_transformer'
-import { GetSpecies } from '#pets/queries/get_species'
 import { UpdatePet } from '#pets/actions/update_pet'
 import { uuidSchema } from '#shared/validators'
 import { GetPet } from '#pets/queries/get_pet'
@@ -38,7 +38,7 @@ export default class UpdatePetController {
   )
 
   constructor(
-    private readonly getSpecies: GetSpecies,
+    private readonly getTenantSpecies: GetTenantSpecies,
     private readonly getPet: GetPet,
     private readonly updatePet: UpdatePet
   ) {}
@@ -46,12 +46,14 @@ export default class UpdatePetController {
   async render({ inertia, tenantId, params }: HttpContext) {
     const [{ pet }, { species }] = await Promise.all([
       this.getPet.execute({ id: params.id, tenantId }),
-      this.getSpecies.execute(),
+      this.getTenantSpecies.execute({ tenantId }),
     ])
+
+    const speciesOptions = species.some((item) => item.id === pet.speciesId) ? species : [...species, pet.species]
 
     return inertia.render('pets/form', {
       pet: PetTransformer.transform(pet),
-      species: SpeciesTransformer.transform(species),
+      species: SpeciesTransformer.transform(speciesOptions),
     })
   }
 
