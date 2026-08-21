@@ -94,7 +94,9 @@ export const controllers = {
   },
   shared: {
     Dashboard: () => import('#app/shared/controllers/dashboard_controller'),
+    ShowPrivacyPolicy: () => import('#app/shared/controllers/show_privacy_policy_controller'),
     ShowSettings: () => import('#app/shared/controllers/show_settings_controller'),
+    ShowTerms: () => import('#app/shared/controllers/show_terms_controller'),
   },
   tenants: {
     ShowTenant: () => import('#app/tenants/controllers/show_tenant_controller'),

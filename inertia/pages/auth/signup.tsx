@@ -1,3 +1,4 @@
+import { Link } from '@adonisjs/inertia/react'
 import { InputPassword } from '~/components/ui/input_password'
 import { ButtonLink } from '~/components/ui/button_link'
 import { Button } from '~/components/ui/button'
@@ -75,7 +76,15 @@ export default function Signup() {
                 Crear una cuenta
               </Button>
               <p className="mt-4 text-center text-[14px]/5 text-muted">
-                Al crear una cuenta, aceptas las condiciones de uso y la política de privacidad de {appName}.
+                Al crear una cuenta, aceptas los{' '}
+                <Link href="/terms" className="underline underline-offset-3 hover:text-foreground">
+                  términos y condiciones
+                </Link>{' '}
+                y la{' '}
+                <Link href="/privacy-policy" className="underline underline-offset-3 hover:text-foreground">
+                  política de privacidad
+                </Link>{' '}
+                de {appName}.
               </p>
             </div>
           </Form>

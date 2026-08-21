@@ -6,6 +6,18 @@ import type { ApiDefinition } from './tree.d.ts'
 const placeholder: any = {}
 
 const routes = {
+  'show_terms.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/terms',
+    tokens: [{"old":"/terms","type":0,"val":"terms","end":""}],
+    types: placeholder as Registry['show_terms.render']['types'],
+  },
+  'show_privacy_policy.render': {
+    methods: ["GET","HEAD"],
+    pattern: '/privacy-policy',
+    tokens: [{"old":"/privacy-policy","type":0,"val":"privacy-policy","end":""}],
+    types: placeholder as Registry['show_privacy_policy.render']['types'],
+  },
   'dashboard.render': {
     methods: ["GET","HEAD"],
     pattern: '/dashboard',

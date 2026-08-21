@@ -7,6 +7,30 @@ import type { InferInput, SimpleError } from '@vinejs/vine/types'
 export type ParamValue = string | number | bigint | boolean
 
 export interface Registry {
+  'show_terms.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/terms'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/shared/controllers/show_terms_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/shared/controllers/show_terms_controller').default['render']>>>
+    }
+  }
+  'show_privacy_policy.render': {
+    methods: ["GET","HEAD"]
+    pattern: '/privacy-policy'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/shared/controllers/show_privacy_policy_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/shared/controllers/show_privacy_policy_controller').default['render']>>>
+    }
+  }
   'dashboard.render': {
     methods: ["GET","HEAD"]
     pattern: '/dashboard'

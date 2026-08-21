@@ -1,4 +1,5 @@
 import { Data } from '@generated/data'
+import { Link } from '@adonisjs/inertia/react'
 import { InputPassword } from '~/components/ui/input_password'
 import { Button } from '~/components/ui/button'
 import { Field } from '~/components/ui/field'
@@ -93,7 +94,15 @@ export default function AcceptInvitation(props: PageProps) {
                 Activar acceso
               </Button>
               <p className="mt-4 text-center text-[14px]/5 text-muted">
-                Al crear una cuenta, aceptas las condiciones de uso y la política de privacidad de {appName}.
+                Al crear una cuenta, aceptas los{' '}
+                <Link href="/terms" className="underline underline-offset-3 hover:text-foreground">
+                  términos y condiciones
+                </Link>{' '}
+                y la{' '}
+                <Link href="/privacy-policy" className="underline underline-offset-3 hover:text-foreground">
+                  política de privacidad
+                </Link>{' '}
+                de {appName}.
               </p>
             </div>
           </Form>

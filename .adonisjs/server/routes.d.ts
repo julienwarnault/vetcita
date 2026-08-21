@@ -4,6 +4,8 @@ type ParamValue = string | number | bigint | boolean
 
 export type ScannedRoutes = {
   ALL: {
+    'show_terms.render': { paramsTuple?: []; params?: {} }
+    'show_privacy_policy.render': { paramsTuple?: []; params?: {} }
     'dashboard.render': { paramsTuple?: []; params?: {} }
     'show_settings.render': { paramsTuple?: []; params?: {} }
     'signup.render': { paramsTuple?: []; params?: {} }
@@ -117,6 +119,8 @@ export type ScannedRoutes = {
     'attachments': { paramsTuple: [ParamValue,ParamValue?]; params: {'key': ParamValue,'name'?: ParamValue} }
   }
   GET: {
+    'show_terms.render': { paramsTuple?: []; params?: {} }
+    'show_privacy_policy.render': { paramsTuple?: []; params?: {} }
     'dashboard.render': { paramsTuple?: []; params?: {} }
     'show_settings.render': { paramsTuple?: []; params?: {} }
     'signup.render': { paramsTuple?: []; params?: {} }
@@ -180,6 +184,8 @@ export type ScannedRoutes = {
     'attachments': { paramsTuple: [ParamValue,ParamValue?]; params: {'key': ParamValue,'name'?: ParamValue} }
   }
   HEAD: {
+    'show_terms.render': { paramsTuple?: []; params?: {} }
+    'show_privacy_policy.render': { paramsTuple?: []; params?: {} }
     'dashboard.render': { paramsTuple?: []; params?: {} }
     'show_settings.render': { paramsTuple?: []; params?: {} }
     'signup.render': { paramsTuple?: []; params?: {} }

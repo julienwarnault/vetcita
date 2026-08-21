@@ -2,6 +2,12 @@
 import type { routes } from './index.ts'
 
 export interface ApiDefinition {
+  showTerms: {
+    render: typeof routes['show_terms.render']
+  }
+  showPrivacyPolicy: {
+    render: typeof routes['show_privacy_policy.render']
+  }
   dashboard: {
     render: typeof routes['dashboard.render']
   }

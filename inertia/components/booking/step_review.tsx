@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
 import { Data } from '@generated/data'
 import { MapPinIcon } from 'lucide-react'
+import { Link } from '@adonisjs/inertia/react'
 import { formatDuration, formatPhoneNumber } from '~/lib/utils'
 import { BookingForm, StepKey } from './use_booking_form'
 import { AspectRatio } from '../ui/aspect_ratio'
@@ -87,10 +88,18 @@ export function StepReview(props: StepReviewProps) {
       </Card>
 
       <p className="px-1 text-center text-[12px]/5 text-muted">
-        ©{new Date().getFullYear()} · Servicio de{' '}
-        <a href="/" className="underline underline-offset-3 hover:text-accent">
+        ©{new Date().getFullYear()} ·{' '}
+        <Link href="/" className="underline underline-offset-3 hover:text-accent">
           {appName}
-        </a>
+        </Link>{' '}
+        ·{' '}
+        <Link href="/terms" className="underline underline-offset-3 hover:text-accent">
+          Términos y condiciones
+        </Link>{' '}
+        ·{' '}
+        <Link href="/privacy-policy" className="underline underline-offset-3 hover:text-accent">
+          Política de privacidad
+        </Link>
       </p>
     </div>
   )
