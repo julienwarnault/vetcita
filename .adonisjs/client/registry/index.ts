@@ -96,6 +96,18 @@ const routes = {
     tokens: [{"old":"/user/account/password","type":0,"val":"user","end":""},{"old":"/user/account/password","type":0,"val":"account","end":""},{"old":"/user/account/password","type":0,"val":"password","end":""}],
     types: placeholder as Registry['update_password.execute']['types'],
   },
+  'accept_invitation': {
+    methods: ["GET","HEAD"],
+    pattern: '/invitations/:token',
+    tokens: [{"old":"/invitations/:token","type":0,"val":"invitations","end":""},{"old":"/invitations/:token","type":1,"val":"token","end":""}],
+    types: placeholder as Registry['accept_invitation']['types'],
+  },
+  'accept_invitation.execute': {
+    methods: ["POST"],
+    pattern: '/invitations/:token',
+    tokens: [{"old":"/invitations/:token","type":0,"val":"invitations","end":""},{"old":"/invitations/:token","type":1,"val":"token","end":""}],
+    types: placeholder as Registry['accept_invitation.execute']['types'],
+  },
   'list_agendas.render': {
     methods: ["GET","HEAD"],
     pattern: '/settings/agendas',
@@ -125,6 +137,12 @@ const routes = {
     pattern: '/settings/agendas/:id',
     tokens: [{"old":"/settings/agendas/:id","type":0,"val":"settings","end":""},{"old":"/settings/agendas/:id","type":0,"val":"agendas","end":""},{"old":"/settings/agendas/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['update_agenda.execute']['types'],
+  },
+  'send_invitation.execute': {
+    methods: ["POST"],
+    pattern: '/settings/agendas/:id/invitation',
+    tokens: [{"old":"/settings/agendas/:id/invitation","type":0,"val":"settings","end":""},{"old":"/settings/agendas/:id/invitation","type":0,"val":"agendas","end":""},{"old":"/settings/agendas/:id/invitation","type":1,"val":"id","end":""},{"old":"/settings/agendas/:id/invitation","type":0,"val":"invitation","end":""}],
+    types: placeholder as Registry['send_invitation.execute']['types'],
   },
   'delete_agenda.execute': {
     methods: ["DELETE"],

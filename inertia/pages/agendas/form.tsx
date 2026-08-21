@@ -29,6 +29,7 @@ export default function ShowForm(props: PageProps) {
   const title = agenda ? `Editar ${agenda.fullName}` : 'Añadir un veterinario'
 
   const isOwner = agenda?.role === 'owner'
+  const hasUser = !!agenda?.userId
 
   const form = useForm<{
     firstName: string
@@ -43,7 +44,7 @@ export default function ShowForm(props: PageProps) {
     lastName: agenda?.lastName ?? '',
     phone: agenda?.phone ?? null,
     email: agenda?.email ?? '',
-    role: agenda?.role ?? 'none',
+    role: agenda?.role ?? 'staff',
     color: agenda?.color ?? COLORS_LIGHT[0],
     serviceIds: agenda ? agenda.services!.map((service) => service.id) : services.map(({ id }) => id),
   })
@@ -99,26 +100,31 @@ export default function ShowForm(props: PageProps) {
                     <Field.Error />
                   </Field>
 
-                  <Field name="email" className="col-span-3" disabled={!!agenda?.userId}>
+                  <Field name="email" className="col-span-3" disabled={hasUser}>
                     <Field.Label>Email{form.data.role !== 'none' ? ' *' : ''}</Field.Label>
-                    <Input value={form.data.email} onChange={(e) => form.setData('email', e.target.value)} />
+                    <Input
+                      value={form.data.email}
+                      disabled={hasUser}
+                      onChange={(e) => form.setData('email', e.target.value)}
+                    />
                     <Field.Error />
                   </Field>
 
-                  <Field name="phone" className="col-span-3" disabled={!!agenda?.userId}>
+                  <Field name="phone" className="col-span-3" disabled={hasUser}>
                     <Field.Label>Teléfono</Field.Label>
                     <Input
                       value={form.data.phone ?? ''}
+                      disabled={hasUser}
                       onChange={(e) => form.setData('phone', e.target.value || null)}
                     />
                     <Field.Error />
                   </Field>
 
-                  <Field name="role" className="col-span-3">
+                  <Field name="role" className="col-span-3" disabled={isOwner || hasUser}>
                     <Field.Label>Rol de permisos *</Field.Label>
                     <NativeSelect
                       value={form.data.role}
-                      disabled={isOwner}
+                      disabled={isOwner || hasUser}
                       onChange={(e) => form.setData('role', e.target.value)}
                     >
                       <NativeSelect.Option value="none">Sin acceso</NativeSelect.Option>

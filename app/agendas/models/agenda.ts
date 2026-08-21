@@ -13,7 +13,7 @@ export default class Agenda extends compose(AgendaSchema, WithPrimaryUuid) {
   static table = 'agendas'
 
   get fullName() {
-    return (this.firstName + ' ' + this.lastName).trim()
+    return (this.firstName + ' ' + (this.lastName || '')).trim()
   }
 
   declare role: AgendaRole

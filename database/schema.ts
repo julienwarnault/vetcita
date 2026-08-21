@@ -187,6 +187,33 @@ export class ConsultationSchema extends BaseModel {
   declare weight: number | null
 }
 
+export class InvitationSchema extends BaseModel {
+  static $columns = ['acceptedAt', 'agendaId', 'createdAt', 'email', 'expiresAt', 'id', 'invitedByUserId', 'status', 'tenantId', 'token', 'updatedAt'] as const
+  $columns = InvitationSchema.$columns
+  @column.dateTime()
+  declare acceptedAt: DateTime | null
+  @column()
+  declare agendaId: UUID
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare email: string
+  @column.dateTime()
+  declare expiresAt: DateTime
+  @column({ isPrimary: true })
+  declare id: UUID
+  @column()
+  declare invitedByUserId: UUID | null
+  @column()
+  declare status: string
+  @column()
+  declare tenantId: UUID
+  @column()
+  declare token: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class LocationSchema extends BaseModel {
   static $columns = ['address', 'city', 'countryCode', 'cover', 'createdAt', 'email', 'id', 'logo', 'name', 'openingHours', 'phone', 'postalCode', 'slug', 'state', 'tenantId', 'updatedAt', 'website'] as const
   $columns = LocationSchema.$columns

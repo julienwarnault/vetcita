@@ -1,0 +1,75 @@
+@mjml({
+  validationLevel: 'soft',
+})
+  <mjml>
+    <mj-head>
+      <mj-title>
+        Invitación a Vetcita
+      </mj-title>
+      <mj-preview>
+        {{ tenant.name }} te ha invitado a unirte a su equipo.
+      </mj-preview>
+      <mj-attributes>
+        <mj-all font-family="Arial, Helvetica, sans-serif" />
+        <mj-text color="#222222" font-size="16px" line-height="24px" padding="0" />
+        <mj-section padding="0" />
+        <mj-column padding="0" />
+        <mj-button
+          background-color="#0d0d0d"
+          color="#ffffff"
+          border-radius="999px"
+          font-size="16px"
+          font-weight="700"
+          line-height="20px"
+          inner-padding="14px 20px"
+          padding="0"
+        />
+      </mj-attributes>
+    </mj-head>
+
+    <mj-body background-color="#f9f9f9" width="560px">
+      <mj-section padding="32px 0 16px">
+        <mj-column>
+          <mj-image
+            src="{{ embedImage(app.makePath('public/images/logo.png')) }}"
+            alt="Vetcita"
+            width="160px"
+            height="42px"
+            align="left"
+            padding="0"
+          />
+        </mj-column>
+      </mj-section>
+
+      <mj-wrapper background-color="#ffffff" border="1px solid #e6e6e6" border-radius="18px" padding="32px">
+        <mj-section padding="0">
+          <mj-column>
+            <mj-text padding="0 0 12px" color="#222222" font-size="28px" line-height="34px" font-weight="700">
+              Activa tu acceso
+            </mj-text>
+
+            <mj-text padding="0 0 24px" color="#81817e" font-size="16px" line-height="24px">
+              Hola{{ agenda.firstName ? ' ' + agenda.firstName : '' }}, {{ tenant.name }} te ha invitado a formar parte de su equipo en Vetcita. Crea tu cuenta para acceder a su espacio de trabajo.
+            </mj-text>
+
+            <mj-button href="{{ invitationUrl }}" align="left">
+              Aceptar invitación
+            </mj-button>
+
+            <mj-text padding="24px 0 0" color="#81817e" font-size="14px" line-height="20px">
+              Este enlace es válido hasta el {{ expiresAtLabel }}. Si no esperabas esta invitación, puedes ignorar este email.
+            </mj-text>
+          </mj-column>
+        </mj-section>
+      </mj-wrapper>
+
+      <mj-section padding="18px 0 32px">
+        <mj-column>
+          <mj-text color="#81817e" font-size="12px" line-height="18px">
+            Has recibido este email porque {{ tenant.name }} te ha invitado a acceder a su espacio de trabajo en Vetcita.
+          </mj-text>
+        </mj-column>
+      </mj-section>
+    </mj-body>
+  </mjml>
+@end

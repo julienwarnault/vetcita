@@ -50,13 +50,18 @@ export default class UpdateAgendaController {
     })
   }
 
-  async execute({ request, params, response, tenantId }: HttpContext) {
+  async execute({ request, params, response, tenantId, auth }: HttpContext) {
     const payload = await request.validateUsing(UpdateAgendaController.validator, {
       meta: { tenantId, agendaId: params.id },
     })
 
     await withTransaction(() => {
-      return this.updateAgenda.execute({ id: params.id, tenantId, ...payload })
+      return this.updateAgenda.execute({
+        id: params.id,
+        tenantId,
+        invitedByUserId: auth.user!.id,
+        ...payload,
+      })
     })
 
     return response.redirect().back()

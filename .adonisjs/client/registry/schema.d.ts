@@ -187,6 +187,30 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/accounts/controllers/update_password_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
+  'accept_invitation': {
+    methods: ["GET","HEAD"]
+    pattern: '/invitations/:token'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { token: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/agendas/controllers/accept_invitation_controller').default['handle']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/agendas/controllers/accept_invitation_controller').default['handle']>>>
+    }
+  }
+  'accept_invitation.execute': {
+    methods: ["POST"]
+    pattern: '/invitations/:token'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#app/agendas/controllers/accept_invitation_controller').default)['validator']>>
+      paramsTuple: [ParamValue]
+      params: { token: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#app/agendas/controllers/accept_invitation_controller').default)['validator']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#app/agendas/controllers/accept_invitation_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/agendas/controllers/accept_invitation_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
   'list_agendas.render': {
     methods: ["GET","HEAD"]
     pattern: '/settings/agendas'
@@ -245,6 +269,18 @@ export interface Registry {
       query: ExtractQuery<InferInput<(typeof import('#app/agendas/controllers/update_agenda_controller').default)['validator']>>
       response: ExtractResponse<Awaited<ReturnType<import('#app/agendas/controllers/update_agenda_controller').default['execute']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/agendas/controllers/update_agenda_controller').default['execute']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'send_invitation.execute': {
+    methods: ["POST"]
+    pattern: '/settings/agendas/:id/invitation'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#app/agendas/controllers/send_invitation_controller').default['execute']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#app/agendas/controllers/send_invitation_controller').default['execute']>>>
     }
   }
   'delete_agenda.execute': {

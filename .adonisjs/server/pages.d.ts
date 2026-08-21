@@ -17,10 +17,7 @@ declare module '@adonisjs/inertia/types' {
     'appointment_statuses/form': ExtractProps<(typeof import('../../inertia/pages/appointment_statuses/form.tsx'))['default']>
     'appointment_statuses/list': ExtractProps<(typeof import('../../inertia/pages/appointment_statuses/list.tsx'))['default']>
     'appointments/form': ExtractProps<(typeof import('../../inertia/pages/appointments/form.tsx'))['default']>
-    'appointments/list': ExtractProps<(typeof import('../../inertia/pages/appointments/list.tsx'))['default']>
-    'auth/forgot_password': ExtractProps<(typeof import('../../inertia/pages/auth/forgot_password.tsx'))['default']>
     'auth/login': ExtractProps<(typeof import('../../inertia/pages/auth/login.tsx'))['default']>
-    'auth/reset_password': ExtractProps<(typeof import('../../inertia/pages/auth/reset_password.tsx'))['default']>
     'auth/signup': ExtractProps<(typeof import('../../inertia/pages/auth/signup.tsx'))['default']>
     'booking/confirm': ExtractProps<(typeof import('../../inertia/pages/booking/confirm.tsx'))['default']>
     'booking/form': ExtractProps<(typeof import('../../inertia/pages/booking/form.tsx'))['default']>
@@ -52,8 +49,12 @@ declare module '@adonisjs/inertia/types' {
     'shifts/working_hours_form': ExtractProps<(typeof import('../../inertia/pages/shifts/working_hours_form.tsx'))['default']>
     'tenants/form': ExtractProps<(typeof import('../../inertia/pages/tenants/form.tsx'))['default']>
     'tenants/show': ExtractProps<(typeof import('../../inertia/pages/tenants/show.tsx'))['default']>
+    'vaccines/forms': ExtractProps<(typeof import('../../inertia/pages/vaccines/forms.tsx'))['default']>
+    'auth/forgot_password': ExtractProps<(typeof import('../../inertia/pages/auth/forgot_password.tsx'))['default']>
+    'auth/reset_password': ExtractProps<(typeof import('../../inertia/pages/auth/reset_password.tsx'))['default']>
     'user/account': ExtractProps<(typeof import('../../inertia/pages/user/account.tsx'))['default']>
     'user/update_password': ExtractProps<(typeof import('../../inertia/pages/user/update_password.tsx'))['default']>
-    'vaccines/forms': ExtractProps<(typeof import('../../inertia/pages/vaccines/forms.tsx'))['default']>
+    'appointments/list': ExtractProps<(typeof import('../../inertia/pages/appointments/list.tsx'))['default']>
+    'invitations/accept_invitation': ExtractProps<(typeof import('../../inertia/pages/invitations/accept_invitation.tsx'))['default']>
   }
 }

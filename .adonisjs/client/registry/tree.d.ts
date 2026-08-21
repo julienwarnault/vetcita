@@ -37,6 +37,9 @@ export interface ApiDefinition {
     render: typeof routes['update_password.render']
     execute: typeof routes['update_password.execute']
   }
+  acceptInvitation: typeof routes['accept_invitation'] & {
+    execute: typeof routes['accept_invitation.execute']
+  }
   listAgendas: {
     render: typeof routes['list_agendas.render']
   }
@@ -47,6 +50,9 @@ export interface ApiDefinition {
   updateAgenda: {
     render: typeof routes['update_agenda.render']
     execute: typeof routes['update_agenda.execute']
+  }
+  sendInvitation: {
+    execute: typeof routes['send_invitation.execute']
   }
   deleteAgenda: {
     execute: typeof routes['delete_agenda.execute']

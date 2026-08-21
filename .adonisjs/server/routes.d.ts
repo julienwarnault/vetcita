@@ -19,11 +19,14 @@ export type ScannedRoutes = {
     'update_account.execute': { paramsTuple?: []; params?: {} }
     'update_password.render': { paramsTuple?: []; params?: {} }
     'update_password.execute': { paramsTuple?: []; params?: {} }
+    'accept_invitation': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
+    'accept_invitation.execute': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
     'list_agendas.render': { paramsTuple?: []; params?: {} }
     'create_agenda.render': { paramsTuple?: []; params?: {} }
     'create_agenda.execute': { paramsTuple?: []; params?: {} }
     'update_agenda.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'update_agenda.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'send_invitation.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'delete_agenda.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'list_services.render': { paramsTuple?: []; params?: {} }
     'create_service.render': { paramsTuple?: []; params?: {} }
@@ -122,6 +125,7 @@ export type ScannedRoutes = {
     'reset_password.render': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
     'show_account.render': { paramsTuple?: []; params?: {} }
     'update_password.render': { paramsTuple?: []; params?: {} }
+    'accept_invitation': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
     'list_agendas.render': { paramsTuple?: []; params?: {} }
     'create_agenda.render': { paramsTuple?: []; params?: {} }
     'update_agenda.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -184,6 +188,7 @@ export type ScannedRoutes = {
     'reset_password.render': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
     'show_account.render': { paramsTuple?: []; params?: {} }
     'update_password.render': { paramsTuple?: []; params?: {} }
+    'accept_invitation': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
     'list_agendas.render': { paramsTuple?: []; params?: {} }
     'create_agenda.render': { paramsTuple?: []; params?: {} }
     'update_agenda.render': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -243,7 +248,9 @@ export type ScannedRoutes = {
     'forgot_password.execute': { paramsTuple?: []; params?: {} }
     'reset_password.execute': { paramsTuple?: []; params?: {} }
     'logout.execute': { paramsTuple?: []; params?: {} }
+    'accept_invitation.execute': { paramsTuple: [ParamValue]; params: {'token': ParamValue} }
     'create_agenda.execute': { paramsTuple?: []; params?: {} }
+    'send_invitation.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'create_service.execute': { paramsTuple?: []; params?: {} }
     'create_appointment_status.execute': { paramsTuple?: []; params?: {} }
     'move_appointment_status.execute': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }

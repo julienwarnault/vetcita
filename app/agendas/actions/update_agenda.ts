@@ -1,6 +1,9 @@
+import { inject } from '@adonisjs/core'
 import { AgendaAlreadyExistsException } from '#agendas/exceptions/agenda_already_exists_exception'
 import { transactionContext } from '#shared/contexts/transaction_context'
+import { SendInvitation } from '#agendas/actions/send_invitation'
 import Agenda, { type AgendaRole } from '#agendas/models/agenda'
+import Invitation from '#agendas/models/invitation'
 import type { UUID } from '#shared/types'
 
 interface UpdateAgendaParams {
@@ -14,9 +17,13 @@ interface UpdateAgendaParams {
   userId?: UUID
   serviceIds?: UUID[]
   tenantId: UUID
+  invitedByUserId: UUID
 }
 
+@inject()
 export class UpdateAgenda {
+  constructor(private readonly sendInvitation: SendInvitation) {}
+
   async execute(params: UpdateAgendaParams) {
     const trx = transactionContext.get()
     const normalizedPhone = params.phone?.trim() || null
@@ -27,7 +34,7 @@ export class UpdateAgenda {
       .where('tenant_id', params.tenantId)
       .firstOrFail()
 
-    if (normalizedEmail) {
+    if (!agenda.userId && normalizedEmail) {
       const existingAgenda = await Agenda.query({ client: trx })
         .where('tenant_id', params.tenantId)
         .whereILike('email', normalizedEmail)
@@ -39,19 +46,40 @@ export class UpdateAgenda {
       }
     }
 
+    const role = agenda.role === 'owner' || agenda.userId ? agenda.role : params.role
+    const emailChanged = !agenda.userId && agenda.email !== normalizedEmail
+    const accessEnabled = agenda.role === 'none' && role !== 'none'
+    const accessDisabled = agenda.role !== 'none' && role === 'none'
+
     agenda.merge({
       firstName: params.firstName,
       lastName: params.lastName,
+      email: agenda.userId ? agenda.email : normalizedEmail,
       phone: normalizedPhone,
-      email: normalizedEmail,
-      role: agenda.role === 'owner' ? agenda.role : params.role,
+      role,
       color: params.color,
-      userId: params.role === 'none' ? null : (params.userId ?? agenda.userId),
+      userId: role === 'none' ? null : (params.userId ?? agenda.userId),
     })
 
     await agenda.useTransaction(trx!).save()
 
     await agenda.related('services').sync(params.serviceIds || [], true, trx)
+
+    if (accessDisabled) {
+      await Invitation.query({ client: trx })
+        .where('tenant_id', params.tenantId)
+        .where('agenda_id', agenda.id)
+        .where('status', 'pending')
+        .update({ status: 'revoked' })
+    }
+
+    if (role !== 'none' && !agenda.userId && (emailChanged || accessEnabled)) {
+      await this.sendInvitation.execute({
+        agendaId: agenda.id,
+        tenantId: params.tenantId,
+        invitedByUserId: params.invitedByUserId,
+      })
+    }
 
     return { agenda }
   }

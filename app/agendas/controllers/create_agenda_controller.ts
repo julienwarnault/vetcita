@@ -44,11 +44,15 @@ export default class CreateAgendaController {
     })
   }
 
-  async execute({ request, response, tenantId }: HttpContext) {
+  async execute({ request, response, tenantId, auth }: HttpContext) {
     const payload = await request.validateUsing(CreateAgendaController.validator, { meta: { tenantId } })
 
     await withTransaction(() => {
-      return this.createAgenda.execute({ ...payload, tenantId })
+      return this.createAgenda.execute({
+        ...payload,
+        tenantId,
+        invitedByUserId: auth.user!.id,
+      })
     })
 
     return response.redirect().back()

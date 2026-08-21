@@ -1,5 +1,7 @@
+import { inject } from '@adonisjs/core'
 import { AgendaAlreadyExistsException } from '#agendas/exceptions/agenda_already_exists_exception'
 import { transactionContext } from '#shared/contexts/transaction_context'
+import { SendInvitation } from '#agendas/actions/send_invitation'
 import Agenda, { type AgendaRole } from '#agendas/models/agenda'
 import WorkingHour from '#scheduling/models/working_hour'
 import Tenant from '#tenants/models/tenant'
@@ -15,9 +17,13 @@ interface CreateAgendaParams {
   userId?: UUID
   serviceIds?: UUID[]
   tenantId: UUID
+  invitedByUserId?: UUID
 }
 
+@inject()
 export class CreateAgenda {
+  constructor(private readonly sendInvitation: SendInvitation) {}
+
   async execute(params: CreateAgendaParams) {
     const trx = transactionContext.get()
     const normalizedPhone = params.phone?.trim() || null
@@ -72,6 +78,15 @@ export class CreateAgenda {
         .flat(),
       { client: trx }
     )
+
+    // Send invitation
+    if (params.role !== 'none' && params.invitedByUserId) {
+      await this.sendInvitation.execute({
+        agendaId: agenda.id,
+        tenantId: params.tenantId,
+        invitedByUserId: params.invitedByUserId,
+      })
+    }
 
     return { agenda }
   }

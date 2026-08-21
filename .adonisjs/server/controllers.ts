@@ -10,9 +10,11 @@ export const controllers = {
     UpdatePassword: () => import('#app/accounts/controllers/update_password_controller'),
   },
   agendas: {
+    AcceptInvitation: () => import('#app/agendas/controllers/accept_invitation_controller'),
     CreateAgenda: () => import('#app/agendas/controllers/create_agenda_controller'),
     DeleteAgenda: () => import('#app/agendas/controllers/delete_agenda_controller'),
     ListAgendas: () => import('#app/agendas/controllers/list_agendas_controller'),
+    SendInvitation: () => import('#app/agendas/controllers/send_invitation_controller'),
     UpdateAgenda: () => import('#app/agendas/controllers/update_agenda_controller'),
   },
   appointmentWorkflow: {

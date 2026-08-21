@@ -5,6 +5,7 @@ import { formatDuration, formatPhoneNumber } from '~/lib/utils'
 import { BookingForm, StepKey } from './use_booking_form'
 import { AspectRatio } from '../ui/aspect_ratio'
 import { DEFAULT_TIMEZONE } from '~/lib/date'
+import { appName } from '~/app/app'
 import { Card } from '../ui/card'
 
 interface StepReviewProps {
@@ -88,7 +89,7 @@ export function StepReview(props: StepReviewProps) {
       <p className="px-1 text-center text-[12px]/5 text-muted">
         ©{new Date().getFullYear()} · Servicio de{' '}
         <a href="/" className="underline underline-offset-3 hover:text-accent">
-          Vetcita
+          {appName}
         </a>
       </p>
     </div>
