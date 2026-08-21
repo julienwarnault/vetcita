@@ -11,9 +11,10 @@ const button = tv({
       secondary: 'border border-border bg-white hover:bg-background hover:border-input',
       tertiary: 'bg-transparent hover:bg-background',
       destructive: 'bg-destructive text-white hover:bg-destructive/90',
+      link: 'bg-transparent underline-offset-4 hover:underline',
     },
     size: {
-      'sm': 'h-9 px-4 text-[15px] font-medium [&_svg]:size-4',
+      'sm': 'h-9 px-4 text-[15px]/5 [&_svg]:size-4',
       'lg': 'h-12 px-5 text-[17px] font-semibold',
       'icon-sm': 'size-9 [&_svg]:size-4',
       'icon-lg': 'size-12',
@@ -22,11 +23,21 @@ const button = tv({
       full: 'rounded-full',
       lg: 'rounded-lg',
     },
+    color: {
+      primary: '',
+      accent: '',
+    },
   },
+  compoundVariants: [
+    { variant: 'link', color: 'primary', class: 'text-primary' },
+    { variant: 'link', color: 'accent', class: 'text-accent' },
+    { variant: 'link', size: ['sm', 'lg'], class: 'h-auto p-0' },
+  ],
   defaultVariants: {
     variant: 'primary',
     size: 'sm',
     rounded: 'full',
+    color: 'primary',
   },
 })
 
@@ -40,14 +51,14 @@ interface ButtonProps extends ButtonVariants {
 }
 
 export function Button(props: BaseButton.Props & ButtonProps) {
-  const { children, variant, size, rounded, type = 'button', disabled, className, onClick, ...rest } = props
+  const { children, variant, size, rounded, color, type = 'button', disabled, className, onClick, ...rest } = props
 
   return (
     <BaseButton
       type={type}
       disabled={disabled}
       onClick={onClick}
-      className={button({ variant, size, rounded, className })}
+      className={button({ variant, size, rounded, color, className })}
       {...rest}
     >
       {children}

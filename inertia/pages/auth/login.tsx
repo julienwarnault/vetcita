@@ -38,7 +38,7 @@ export default function Login() {
               <Field.Label>Contraseña</Field.Label>
               <InputPassword name="password" placeholder="Introduce tu contraseña" autoComplete="current-password" />
               <Field.Error />
-              <Link route="forgot_password.render" className="mt-2 self-start text-[14px]/5 hover:underline">
+              <Link route="forgot_password.render" className="mt-2 self-start text-[14px]/5 underline">
                 ¿Olvidaste tu contraseña?
               </Link>
             </Field>

@@ -3,6 +3,7 @@ import { useModalStack } from '@inertiaui/modal-react'
 import { Column, ListTable } from '~/components/ui/list_table'
 import { FiltersBar } from '~/components/filters_bar'
 import { ViewHeader } from '~/components/view_header'
+import { Button } from '~/components/ui/button'
 import { Empty } from '~/components/ui/empty'
 import { parseDate } from '~/lib/date'
 import { InertiaProps } from '~/types'
@@ -26,12 +27,44 @@ export default function List(props: PageProps) {
     {
       header: 'Mascota',
       width: '15%',
-      accessor: ({ pet }) => pet?.name ?? '-',
+      accessor: ({ pet }) => {
+        if (!pet) return '-'
+        return (
+          <Button
+            type="button"
+            variant="link"
+            color="accent"
+            onClick={(event) => {
+              event.stopPropagation()
+              closeAll(true)
+              visitModal(urlFor('get_pet.render', { id: pet.id }))
+            }}
+          >
+            {pet.name}{' '}
+          </Button>
+        )
+      },
     },
     {
-      header: 'Dueño',
+      header: 'Cliente',
       width: '20%',
-      accessor: ({ pet }) => pet?.client?.fullName ?? '-',
+      accessor: ({ pet }) => {
+        if (!pet?.client) return '-'
+        return (
+          <Button
+            type="button"
+            variant="link"
+            color="accent"
+            onClick={(event) => {
+              event.stopPropagation()
+              closeAll(true)
+              visitModal(urlFor('get_client.render', { id: pet.clientId }))
+            }}
+          >
+            {pet.client.fullName}
+          </Button>
+        )
+      },
     },
     {
       header: 'Tipo',

@@ -5,7 +5,6 @@ import { Column, ListTable } from '~/components/ui/list_table'
 import { DEFAULT_LOCALE, DEFAULT_TIMEZONE } from '~/lib/date'
 import { FiltersBar } from '~/components/filters_bar'
 import { ViewHeader } from '~/components/view_header'
-import { Avatar } from '~/components/ui/avatar'
 import { formatPhoneNumber } from '~/lib/utils'
 import { Button } from '~/components/ui/button'
 import { Empty } from '~/components/ui/empty'
@@ -23,16 +22,9 @@ export default function List(props: PageProps) {
 
   const columns: Column<Data.Clients.Client>[] = [
     {
-      header: 'Nombre del cliente',
+      header: 'Cliente',
       width: '34%',
-      accessor: (client) => {
-        return (
-          <div className="flex items-center gap-2">
-            <Avatar color={client.color} fullName={client.firstName} />
-            <div className="text-[15px]/5 font-semibold">{client.fullName}</div>
-          </div>
-        )
-      },
+      accessor: 'fullName',
     },
     {
       header: 'Número de teléfono',

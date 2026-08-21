@@ -6,7 +6,6 @@ import { DEFAULT_LOCALE, DEFAULT_TIMEZONE } from '~/lib/date'
 import { ViewHeader } from '~/components/view_header'
 import { FiltersBar } from '~/components/filters_bar'
 import { Button } from '~/components/ui/button'
-import { Avatar } from '~/components/ui/avatar'
 import { Empty } from '~/components/ui/empty'
 import { InertiaProps } from '~/types'
 import { urlFor } from '~/lib/tuyau'
@@ -22,21 +21,30 @@ export default function List(props: PageProps) {
 
   const columns: Column<Data.Pets.Pet>[] = [
     {
-      header: 'Nombre de la mascota',
+      header: 'Mascota',
       width: '20%',
-      accessor: (pet) => {
-        return (
-          <div className="flex items-center gap-2">
-            <Avatar src={pet.species?.illustrationUrl} />
-            <div className="text-[15px]/5 font-semibold">{pet.name}</div>
-          </div>
-        )
-      },
+      accessor: 'name',
     },
     {
       header: 'Cliente',
       width: '15%',
-      accessor: ({ client }) => client?.fullName,
+      accessor: ({ client }) => {
+        if (!client) return '-'
+        return (
+          <Button
+            type="button"
+            variant="link"
+            color="accent"
+            onClick={(event) => {
+              event.stopPropagation()
+              closeAll(true)
+              visitModal(urlFor('get_client.render', { id: client.id }))
+            }}
+          >
+            {client.fullName}
+          </Button>
+        )
+      },
     },
     {
       header: 'Especie',

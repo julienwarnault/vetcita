@@ -34,16 +34,17 @@ export default function List(props: PageProps) {
       header: 'Referencia',
       width: '12%',
       accessor: ({ id, bookingRef }) => (
-        <button
+        <Button
           type="button"
-          className="text-accent hover:text-accent-faded"
+          variant="link"
+          color="accent"
           onClick={() => {
             closeAll(true)
             visitModal(urlFor('update_appointment.render', { id }))
           }}
         >
           {bookingRef}
-        </button>
+        </Button>
       ),
     },
     {
@@ -56,11 +57,13 @@ export default function List(props: PageProps) {
     {
       header: 'Cliente',
       width: '16%',
-      accessor: ({ client }) =>
-        client ? (
-          <button
+      accessor: ({ client }) => {
+        if (!client) return '-'
+        return (
+          <Button
             type="button"
-            className="text-accent hover:text-accent-faded"
+            variant="link"
+            color="accent"
             onClick={(event) => {
               event.stopPropagation()
               closeAll(true)
@@ -68,30 +71,30 @@ export default function List(props: PageProps) {
             }}
           >
             {client.fullName}
-          </button>
-        ) : (
-          '-'
-        ),
+          </Button>
+        )
+      },
     },
     {
       header: 'Mascota',
       width: '15%',
-      accessor: ({ pet }) =>
-        pet ? (
-          <button
+      accessor: ({ pet }) => {
+        if (!pet) return '-'
+        return (
+          <Button
             type="button"
-            className="text-accent hover:text-accent-faded"
+            variant="link"
+            color="accent"
             onClick={(event) => {
               event.stopPropagation()
               closeAll(true)
               visitModal(urlFor('get_pet.render', { id: pet.id }))
             }}
           >
-            {pet.name}
-          </button>
-        ) : (
-          '-'
-        ),
+            {pet.name}{' '}
+          </Button>
+        )
+      },
     },
     {
       header: 'Servicio',
