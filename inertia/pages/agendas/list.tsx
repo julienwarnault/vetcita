@@ -30,6 +30,7 @@ export default function List(props: PageProps) {
 
   const roleLabels = {
     owner: 'Propietario',
+    admin: 'Administrador',
     staff: 'Empleado',
     none: 'Sin acceso',
   }
@@ -128,7 +129,7 @@ export default function List(props: PageProps) {
                 <div className="flex flex-col gap-2">
                   {invitation && <Badge variant="warning">Invitación pendiente</Badge>}
 
-                  <Badge variant={agenda.role === 'owner' ? 'accent' : 'secondary'}>
+                  <Badge variant={agenda.role === 'owner' || agenda.role === 'admin' ? 'accent' : 'secondary'}>
                     {roleLabels[agenda.role as keyof typeof roleLabels] ?? agenda.role}
                   </Badge>
                 </div>

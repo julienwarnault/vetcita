@@ -20,6 +20,6 @@ router
       .group(() => {
         router.get('settings/booking-link', [controllers.booking.BookingLink, 'render'])
       })
-      .use([middleware.requireRole({ roles: ['owner'] })])
+      .use([middleware.requireRole({ roles: ['owner', 'admin'] })])
   })
   .use([middleware.auth(), middleware.requireTenant()])

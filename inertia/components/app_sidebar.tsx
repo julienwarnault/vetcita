@@ -42,7 +42,7 @@ const NAVIGATION = [
     name: 'Ajustes',
     route: 'show_settings.render',
     navigationIcon: 'settings',
-    roles: ['owner'],
+    roles: ['owner', 'admin'],
   },
 ] as const
 

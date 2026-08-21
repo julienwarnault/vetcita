@@ -12,6 +12,6 @@ router
         router.get('settings/location/edit', [controllers.tenants.UpdateLocation, 'render'])
         router.put('settings/location', [controllers.tenants.UpdateLocation, 'execute'])
       })
-      .use([middleware.requireRole({ roles: ['owner'] })])
+      .use([middleware.requireRole({ roles: ['owner', 'admin'] })])
   })
   .use([middleware.auth(), middleware.requireTenant()])

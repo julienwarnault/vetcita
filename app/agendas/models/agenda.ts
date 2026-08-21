@@ -7,7 +7,7 @@ import { AgendaSchema } from '#database/schema'
 import Service from '#services/models/service'
 import Tenant from '#tenants/models/tenant'
 
-export type AgendaRole = 'owner' | 'staff' | 'none'
+export type AgendaRole = 'owner' | 'admin' | 'staff' | 'none'
 
 export default class Agenda extends compose(AgendaSchema, WithPrimaryUuid) {
   static table = 'agendas'

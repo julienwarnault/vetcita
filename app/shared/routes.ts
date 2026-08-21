@@ -11,6 +11,6 @@ router
       .group(() => {
         router.get('settings', [controllers.shared.ShowSettings, 'render'])
       })
-      .use([middleware.requireRole({ roles: ['owner'] })])
+      .use([middleware.requireRole({ roles: ['owner', 'admin'] })])
   })
   .use([middleware.auth(), middleware.requireTenant()])

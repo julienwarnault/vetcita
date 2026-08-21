@@ -25,7 +25,7 @@ router
         router.put('settings/schedule-days/:id', [controllers.scheduling.UpdateScheduleDay, 'execute'])
         router.delete('settings/schedule-days/:id', [controllers.scheduling.DeleteScheduleDay, 'execute'])
       })
-      .use([middleware.requireRole({ roles: ['owner'] })])
+      .use([middleware.requireRole({ roles: ['owner', 'admin'] })])
   })
   .use([middleware.auth(), middleware.requireTenant()])
 

@@ -120,15 +120,16 @@ export default function ShowForm(props: PageProps) {
                     <Field.Error />
                   </Field>
 
-                  <Field name="role" className="col-span-3" disabled={isOwner || hasUser}>
+                  <Field name="role" className="col-span-3" disabled={isOwner}>
                     <Field.Label>Rol de permisos *</Field.Label>
                     <NativeSelect
                       value={form.data.role}
-                      disabled={isOwner || hasUser}
+                      disabled={isOwner}
                       onChange={(e) => form.setData('role', e.target.value)}
                     >
                       <NativeSelect.Option value="none">Sin acceso</NativeSelect.Option>
                       {!isOwner && <NativeSelect.Option value="staff">Empleado</NativeSelect.Option>}
+                      {!isOwner && <NativeSelect.Option value="admin">Administrador</NativeSelect.Option>}
                       {isOwner && <NativeSelect.Option value="owner">Propietario</NativeSelect.Option>}
                     </NativeSelect>
                     <Field.Error />

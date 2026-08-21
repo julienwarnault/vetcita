@@ -17,6 +17,6 @@ router
         router.post('settings/agendas/:id/invitation', [controllers.agendas.SendInvitation, 'execute'])
         router.delete('settings/agendas/:id', [controllers.agendas.DeleteAgenda, 'execute'])
       })
-      .use([middleware.requireRole({ roles: ['owner'] })])
+      .use([middleware.requireRole({ roles: ['owner', 'admin'] })])
   })
   .use([middleware.auth(), middleware.requireTenant()])

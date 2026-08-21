@@ -28,7 +28,7 @@ export default class UpdateAgendaController {
         })
         .optional()
         .requiredWhen('role', '!=', 'none'),
-      role: vine.enum(['owner', 'staff', 'none']),
+      role: vine.enum(['owner', 'admin', 'staff', 'none']),
       color: vine.string(),
       serviceIds: vine.array(uuidSchema()).optional(),
     })

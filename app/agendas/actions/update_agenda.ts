@@ -46,7 +46,7 @@ export class UpdateAgenda {
       }
     }
 
-    const role = agenda.role === 'owner' || agenda.userId ? agenda.role : params.role
+    const role = agenda.role === 'owner' ? agenda.role : params.role
     const emailChanged = !agenda.userId && agenda.email !== normalizedEmail
     const accessEnabled = agenda.role === 'none' && role !== 'none'
     const accessDisabled = agenda.role !== 'none' && role === 'none'
@@ -58,7 +58,7 @@ export class UpdateAgenda {
       phone: normalizedPhone,
       role,
       color: params.color,
-      userId: role === 'none' ? null : (params.userId ?? agenda.userId),
+      userId: params.userId ?? agenda.userId,
     })
 
     await agenda.useTransaction(trx!).save()

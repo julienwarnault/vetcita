@@ -13,6 +13,6 @@ router
         router.put('settings/services/:id', [controllers.services.UpdateService, 'execute'])
         router.delete('settings/services/:id', [controllers.services.DeleteService, 'execute'])
       })
-      .use([middleware.requireRole({ roles: ['owner'] })])
+      .use([middleware.requireRole({ roles: ['owner', 'admin'] })])
   })
   .use([middleware.auth(), middleware.requireTenant()])

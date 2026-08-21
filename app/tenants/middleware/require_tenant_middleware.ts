@@ -16,6 +16,10 @@ export default class RequireTenantMiddleware {
       return ctx.response.redirect().toRoute('show_onboarding.render')
     }
 
+    if (user.agenda.role === 'none') {
+      return ctx.response.forbidden('Not authorized to access this tenant')
+    }
+
     const tenant = user.agenda.tenant
 
     if (!tenant) {
