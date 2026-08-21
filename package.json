@@ -41,7 +41,7 @@
     "#config/*": "./config/*.js"
   },
   "devDependencies": {
-    "@adonisjs/assembler": "^8.4.0",
+    "@adonisjs/assembler": "^8.5.0",
     "@adonisjs/eslint-config": "^3.0.0",
     "@adonisjs/prettier-config": "^1.4.5",
     "@adonisjs/tsconfig": "^2.0.0",
@@ -67,11 +67,11 @@
   },
   "dependencies": {
     "@adonisjs/auth": "^10.1.0",
-    "@adonisjs/core": "^7.3.1",
+    "@adonisjs/core": "^7.5.0",
     "@adonisjs/cors": "^3.0.0",
     "@adonisjs/drive": "^4.0.0",
     "@adonisjs/i18n": "^3.0.1",
-    "@adonisjs/inertia": "^5.0.0",
+    "@adonisjs/inertia": "^5.0.1",
     "@adonisjs/lucid": "^22.4.2",
     "@adonisjs/lucid-slugify": "^4.0.0",
     "@adonisjs/mail": "^10.2.1",
