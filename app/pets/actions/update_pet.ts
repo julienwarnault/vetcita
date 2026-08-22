@@ -1,6 +1,7 @@
 import type { DateTime } from 'luxon'
 import { PetAlreadyExistsException } from '#pets/exceptions/pet_already_exists_exception'
 import { transactionContext } from '#shared/contexts/transaction_context'
+import type { Gender } from '#pets/enums/gender'
 import type { UUID } from '#shared/types'
 import Pet from '#pets/models/pet'
 
@@ -11,7 +12,7 @@ interface UpdatePetParams {
   clientId: UUID
   speciesId: UUID
   dateOfBirth?: DateTime
-  gender?: 'male' | 'female' | 'unknown'
+  gender?: Gender
   isNeutered?: boolean
   breed?: string
   color?: string

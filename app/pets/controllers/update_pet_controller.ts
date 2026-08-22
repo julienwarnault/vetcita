@@ -8,6 +8,7 @@ import PetTransformer from '#pets/transformers/pet_transformer'
 import { UpdatePet } from '#pets/actions/update_pet'
 import { uuidSchema } from '#shared/validators'
 import { GetPet } from '#pets/queries/get_pet'
+import { Gender } from '#pets/enums/gender'
 import { UUID } from '#shared/types'
 
 @inject()
@@ -25,7 +26,7 @@ export default class UpdatePetController {
       }),
       clientId: uuidSchema(),
       dateOfBirth: vine.date().optional(),
-      gender: vine.enum(['male', 'female', 'unknown']).optional(),
+      gender: vine.enum(Gender).optional(),
       isNeutered: vine.boolean().optional(),
       speciesId: uuidSchema(),
       breed: vine.string().optional(),

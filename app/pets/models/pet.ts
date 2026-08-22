@@ -2,7 +2,7 @@ import { compose } from '@adonisjs/core/helpers'
 import { belongsTo, column } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import { WithPrimaryUuid } from '#shared/mixins/with_primary_uuid'
-import { GenderLabels } from '#pets/enums/gender'
+import { Gender, getGenderLabel } from '#pets/enums/gender'
 import { PetSchema } from '#database/schema'
 import Client from '#clients/models/client'
 import Tenant from '#tenants/models/tenant'
@@ -10,10 +10,10 @@ import Species from '#pets/models/species'
 
 export default class Pet extends compose(PetSchema, WithPrimaryUuid) {
   @column()
-  declare gender: 'male' | 'female' | 'unknown' | null
+  declare gender: Gender | null
 
   get genderLabel() {
-    return this.gender ? GenderLabels[this.gender] : null
+    return this.gender ? getGenderLabel(this.gender) : null
   }
 
   @belongsTo(() => Species)

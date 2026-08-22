@@ -8,6 +8,7 @@ import { withTransaction } from '#shared/utils/with_transaction'
 import { GetClient } from '#clients/queries/get_client'
 import { CreatePet } from '#pets/actions/create_pet'
 import { uuidSchema } from '#shared/validators'
+import { Gender } from '#pets/enums/gender'
 import { UUID } from '#shared/types'
 
 @inject()
@@ -24,7 +25,7 @@ export default class CreatePetController {
       }),
       clientId: uuidSchema(),
       dateOfBirth: vine.date().optional(),
-      gender: vine.enum(['male', 'female', 'unknown']).optional(),
+      gender: vine.enum(Gender).optional(),
       isNeutered: vine.boolean().optional(),
       speciesId: uuidSchema(),
       breed: vine.string().optional(),

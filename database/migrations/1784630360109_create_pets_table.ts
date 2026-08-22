@@ -1,4 +1,5 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
+import { Gender } from '#pets/enums/gender'
 
 export default class extends BaseSchema {
   protected tableName = 'pets'
@@ -14,7 +15,7 @@ export default class extends BaseSchema {
       table.uuid('species_id').notNullable().references('id').inTable('species')
       table.string('breed').nullable()
       table.date('date_of_birth').nullable()
-      table.enum('gender', ['male', 'female', 'unknown']).nullable()
+      table.enum('gender', Object.values(Gender)).nullable()
       table.boolean('is_neutered').notNullable().defaultTo(false)
       table.string('color').nullable()
       table.decimal('weight', 8, 2).nullable()
